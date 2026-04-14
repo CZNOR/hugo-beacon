@@ -343,78 +343,57 @@
     }
   }
 
-  // ── Arcs par-dessus le globe (comme MADE) — lents et fluides ──
-  const arcs = [
-    { latA: 0.3, lonA: -0.5, latB: 0.2, lonB: 0.7, height: 0.32, speed: 0.08, phase: 0 },
-    { latA: 0.4, lonA: -0.2, latB: 0.15, lonB: 0.9, height: 0.25, speed: 0.06, phase: 2.1 },
-    { latA: 0.5, lonA: -0.7, latB: 0.25, lonB: 0.4, height: 0.38, speed: 0.07, phase: 4.2 },
+  // ── 2 arcs simples, fixes (ne tournent PAS avec le globe) ──
+  // Positions en pixels relatifs au viewport — stables, pas de flickering
+  const arcsDef = [
+    { ax: 0.12, ay: 0.72, bx: 0.78, by: 0.55, h: 0.30, dur: 18 },  // arc 1 : ~18s pour traverser
+    { ax: 0.25, ay: 0.82, bx: 0.88, by: 0.62, h: 0.22, dur: 24 },  // arc 2 : ~24s
   ];
 
-  // Project 3D sphere point to 2D
-  function project(phi, theta, rotY, cx, cy) {
-    const sp = Math.sin(phi), cp = Math.cos(phi);
-    const ct = Math.cos(theta + rotY), st = Math.sin(theta + rotY);
-    const x3 = sp * ct;
-    const z3 = sp * st;
-    const y3 = cp;
-    return { x: cx + x3 * R, y: cy - y3 * R, z: z3 };
-  }
+  function drawArc(a, t) {
+    const x1 = a.ax * w, y1 = a.ay * h;
+    const x2 = a.bx * w, y2 = a.by * h;
+    const mx = (x1 + x2) / 2;
+    const my = (y1 + y2) / 2 - a.h * h;
 
-  // Draw a smooth bezier arc between two points — LENT et FLUIDE
-  function drawArc(arc, rotY, cx, cy, t) {
-    const pA = project(arc.latA * Math.PI, arc.lonA * Math.PI, rotY, cx, cy);
-    const pB = project(arc.latB * Math.PI, arc.lonB * Math.PI, rotY, cx, cy);
-
-    if (pA.z < -0.3 && pB.z < -0.3) return;
-
-    const midX = (pA.x + pB.x) / 2;
-    const midY = (pA.y + pB.y) / 2 - R * arc.height;
-    const vis = Math.max(pA.z, pB.z, 0);
-
-    // ── Ligne de l'arc — bien visible ──
+    // ── La ligne courbe — fine, visible ──
     ctx.beginPath();
-    ctx.moveTo(pA.x, pA.y);
-    ctx.quadraticCurveTo(midX, midY, pB.x, pB.y);
+    ctx.moveTo(x1, y1);
+    ctx.quadraticCurveTo(mx, my, x2, y2);
     ctx.strokeStyle = '#B691FE';
-    ctx.lineWidth = 1.2;
-    ctx.globalAlpha = 0.20 + vis * 0.30;
+    ctx.lineWidth = 1;
+    ctx.globalAlpha = 0.30;
     ctx.stroke();
 
-    // ── Points fixes aux extrémités (A et B) ──
-    [pA, pB].forEach(p => {
-      if (p.z < -0.1) return;
+    // ── Points A et B — petits cercles fixes ──
+    [{ x: x1, y: y1 }, { x: x2, y: y2 }].forEach(p => {
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
       ctx.fillStyle = '#B691FE';
-      ctx.globalAlpha = 0.35 + p.z * 0.3;
-      ctx.fill();
-      // Halo point fixe
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 7, 0, Math.PI * 2);
-      ctx.globalAlpha = 0.06 + p.z * 0.06;
+      ctx.globalAlpha = 0.45;
       ctx.fill();
     });
 
-    // ── Point lumineux qui voyage LENTEMENT de A à B ──
-    // Mouvement linéaire lent avec rebond doux (aller-retour)
-    const raw = (t * arc.speed + arc.phase) % (Math.PI * 2);
-    const tt = (Math.sin(raw) * 0.5 + 0.5); // 0→1→0 très lent et fluide
+    // ── Point lumineux : A → B en boucle, lent et fluide ──
+    const tt = ((t % a.dur) / a.dur); // 0 → 1 linéaire sur [dur] secondes
+    // Easing smooth (ease-in-out)
+    const e = tt < 0.5 ? 2 * tt * tt : 1 - Math.pow(-2 * tt + 2, 2) / 2;
 
-    const px = (1 - tt) * (1 - tt) * pA.x + 2 * (1 - tt) * tt * midX + tt * tt * pB.x;
-    const py = (1 - tt) * (1 - tt) * pA.y + 2 * (1 - tt) * tt * midY + tt * tt * pB.y;
+    const px = (1 - e) * (1 - e) * x1 + 2 * (1 - e) * e * mx + e * e * x2;
+    const py = (1 - e) * (1 - e) * y1 + 2 * (1 - e) * e * my + e * e * y2;
 
-    // Point principal
+    // Point blanc
     ctx.beginPath();
-    ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+    ctx.arc(px, py, 2, 0, Math.PI * 2);
     ctx.fillStyle = '#fff';
-    ctx.globalAlpha = 0.6 + vis * 0.3;
+    ctx.globalAlpha = 0.7;
     ctx.fill();
 
     // Halo doux
     ctx.beginPath();
-    ctx.arc(px, py, 10, 0, Math.PI * 2);
+    ctx.arc(px, py, 8, 0, Math.PI * 2);
     ctx.fillStyle = '#B691FE';
-    ctx.globalAlpha = 0.06 + vis * 0.06;
+    ctx.globalAlpha = 0.08;
     ctx.fill();
   }
 
@@ -423,7 +402,7 @@
 
     const cx = w / 2;
     const cy = h + R * 0.05;
-    const rotY = t * 0.025; // Rotation très lente et fluide
+    const rotY = t * 0.012; // Rotation quasi imperceptible
 
     // ── 1. Grille de points fond ──
     ctx.fillStyle = '#B691FE';
@@ -507,8 +486,8 @@
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
 
-    // ── 5. Arcs lumineux ──
-    arcs.forEach(arc => drawArc(arc, rotY, cx, cy, t));
+    // ── 5. Arcs lumineux — fixes, lents, fluides ──
+    arcsDef.forEach(arc => drawArc(arc, t));
 
     ctx.globalAlpha = 1;
     requestAnimationFrame(draw);
