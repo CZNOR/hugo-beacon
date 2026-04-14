@@ -307,102 +307,191 @@
 </section>
 
 <script>
-// ── Globe wireframe pointillé — style MADE ──
+// ── Globe 3D pointillé + grille + arcs — réplique exacte MADE ──
 (function() {
   const c = document.getElementById('globe');
   const ctx = c.getContext('2d');
   let w, h;
+  const dpr = window.devicePixelRatio || 1;
 
   function resize() {
-    w = c.width = window.innerWidth;
-    h = c.height = window.innerHeight;
+    w = window.innerWidth;
+    h = window.innerHeight;
+    c.width = w * dpr;
+    c.height = h * dpr;
+    c.style.width = w + 'px';
+    c.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   resize();
   window.addEventListener('resize', resize);
 
-  const isMobile = window.innerWidth <= 480;
-  // Globe centré en bas, le haut émerge — style MADE
-  const radius = isMobile ? Math.min(w * 1.2, 450) : Math.min(w * 0.6, 650);
-  const latLines = 20;   // lignes de latitude
-  const lonLines = 28;   // lignes de longitude
-  const dotsPerLine = 100; // points par ligne
+  const isMobile = w <= 480;
+
+  // ── Config globe — gros, en bas, style MADE ──
+  const R = isMobile ? Math.min(w * 1.4, 500) : Math.min(w * 0.58, 700);
+  const latCount = 24;
+  const lonCount = 36;
+  const dotsPerRing = 120;
+
+  // ── Grille de points fond (dot grid comme MADE) ──
+  const gridSpacing = isMobile ? 28 : 22;
+  const gridDots = [];
+  for (let gx = 0; gx < w + gridSpacing; gx += gridSpacing) {
+    for (let gy = 0; gy < h + gridSpacing; gy += gridSpacing) {
+      gridDots.push([gx, gy]);
+    }
+  }
+
+  // ── Arcs par-dessus le globe (comme MADE) ──
+  const arcs = [
+    { latA: 0.35, lonA: -0.6, latB: 0.25, lonB: 0.8, height: 0.35 },
+    { latA: 0.45, lonA: -0.3, latB: 0.15, lonB: 1.1, height: 0.28 },
+    { latA: 0.55, lonA: -0.8, latB: 0.3,  lonB: 0.5, height: 0.42 },
+  ];
+
+  // Project 3D sphere point to 2D
+  function project(phi, theta, rotY, cx, cy) {
+    const sp = Math.sin(phi), cp = Math.cos(phi);
+    const ct = Math.cos(theta + rotY), st = Math.sin(theta + rotY);
+    const x3 = sp * ct;
+    const z3 = sp * st;
+    const y3 = cp;
+    return { x: cx + x3 * R, y: cy - y3 * R, z: z3 };
+  }
+
+  // Draw a quadratic bezier arc between two points on the globe
+  function drawArc(arc, rotY, cx, cy, t) {
+    const pA = project(arc.latA * Math.PI, arc.lonA * Math.PI, rotY, cx, cy);
+    const pB = project(arc.latB * Math.PI, arc.lonB * Math.PI, rotY, cx, cy);
+
+    // Only draw if at least one endpoint is on the visible side
+    if (pA.z < -0.3 && pB.z < -0.3) return;
+
+    const midX = (pA.x + pB.x) / 2;
+    const midY = (pA.y + pB.y) / 2 - R * arc.height;
+    const vis = Math.max(pA.z, pB.z, 0);
+
+    ctx.beginPath();
+    ctx.moveTo(pA.x, pA.y);
+    ctx.quadraticCurveTo(midX, midY, pB.x, pB.y);
+    ctx.strokeStyle = '#B691FE';
+    ctx.lineWidth = 1.5;
+    ctx.globalAlpha = 0.15 + vis * 0.35;
+    ctx.stroke();
+
+    // Glowing point animé sur l'arc
+    const progress = (Math.sin(t * 0.4 + arc.height * 5) * 0.5 + 0.5);
+    const tt = progress;
+    const px = (1 - tt) * (1 - tt) * pA.x + 2 * (1 - tt) * tt * midX + tt * tt * pB.x;
+    const py = (1 - tt) * (1 - tt) * pA.y + 2 * (1 - tt) * tt * midY + tt * tt * pB.y;
+
+    ctx.beginPath();
+    ctx.arc(px, py, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#B691FE';
+    ctx.globalAlpha = 0.5 + vis * 0.4;
+    ctx.fill();
+
+    // Halo
+    ctx.beginPath();
+    ctx.arc(px, py, 8, 0, Math.PI * 2);
+    ctx.fillStyle = '#B691FE';
+    ctx.globalAlpha = 0.08 + vis * 0.08;
+    ctx.fill();
+  }
 
   function draw(t) {
     ctx.clearRect(0, 0, w, h);
 
     const cx = w / 2;
-    const cy = h + radius * 0.15; // centre légèrement sous le viewport → grosse portion visible
-    const rotY = t * 0.06; // rotation lente autour de Y
+    const cy = h + R * 0.05; // Globe plus visible — on voit ~40% du haut
+    const rotY = t * 0.05;
 
-    // ── Dessiner les lignes de latitude (cercles horizontaux) ──
-    for (let i = 1; i < latLines; i++) {
-      const phi = (Math.PI * i) / latLines; // 0 à PI
-      const sinPhi = Math.sin(phi);
-      const cosPhi = Math.cos(phi);
-      const ringRadius = radius * sinPhi;
+    // ── 1. Grille de points fond ──
+    ctx.fillStyle = '#B691FE';
+    for (let i = 0; i < gridDots.length; i++) {
+      const gd = gridDots[i];
+      // Vérifier si le point est dans le globe (pour le rendre plus sombre dedans)
+      const dx = gd[0] - cx, dy = gd[1] - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const insideGlobe = dist < R * 0.98;
 
-      for (let j = 0; j < dotsPerLine; j++) {
-        const theta = (2 * Math.PI * j) / dotsPerLine + rotY;
-        const cosTheta = Math.cos(theta);
-        const sinTheta = Math.sin(theta);
+      ctx.globalAlpha = insideGlobe ? 0.03 : 0.06;
+      ctx.beginPath();
+      ctx.arc(gd[0], gd[1], 0.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
-        // Position 3D → 2D
-        const x3d = sinPhi * cosTheta;
-        const z3d = sinPhi * sinTheta;
-        const y3d = cosPhi;
+    // ── 2. Globe points (latitude) ──
+    for (let i = 1; i < latCount; i++) {
+      const phi = (Math.PI * i) / latCount;
+      const sp = Math.sin(phi), cp = Math.cos(phi);
 
-        // Seulement la face visible (z > 0 = face avant)
-        if (z3d < -0.1) continue;
+      for (let j = 0; j < dotsPerRing; j++) {
+        const theta = (2 * Math.PI * j) / dotsPerRing;
+        const ct = Math.cos(theta + rotY), st = Math.sin(theta + rotY);
+        const x3 = sp * ct, z3 = sp * st, y3 = cp;
 
-        const x = cx + x3d * radius;
-        const y = cy - y3d * radius;
+        if (z3 < -0.05) continue;
 
-        // Opacité basée sur la profondeur Z (face = lumineux, bord = fondu)
-        const depthOp = 0.08 + z3d * 0.30;
-        if (depthOp <= 0) continue;
+        const x = cx + x3 * R;
+        const y = cy - y3 * R;
+        if (y > h + 5) continue; // hors viewport
 
-        const dotR = isMobile ? 1.0 + z3d * 0.8 : 1.2 + z3d * 1.0;
+        // Opacité : profondeur Z + atténuation aux bords
+        const edge = 1 - Math.pow(1 - z3, 2);
+        const op = 0.06 + edge * 0.28;
+
+        const r = isMobile ? 0.7 + z3 * 0.7 : 0.9 + z3 * 0.9;
 
         ctx.beginPath();
-        ctx.arc(x, y, Math.max(dotR, 0.4), 0, Math.PI * 2);
+        ctx.arc(x, y, Math.max(r, 0.3), 0, Math.PI * 2);
         ctx.fillStyle = '#B691FE';
-        ctx.globalAlpha = depthOp;
+        ctx.globalAlpha = op;
         ctx.fill();
       }
     }
 
-    // ── Dessiner les lignes de longitude (méridiens) ──
-    for (let i = 0; i < lonLines; i++) {
-      const theta = (2 * Math.PI * i) / lonLines + rotY;
-      const cosTheta = Math.cos(theta);
-      const sinTheta = Math.sin(theta);
+    // ── 3. Globe points (longitude / méridiens) ──
+    for (let i = 0; i < lonCount; i++) {
+      const theta = (2 * Math.PI * i) / lonCount;
+      const ct = Math.cos(theta + rotY), st = Math.sin(theta + rotY);
 
-      for (let j = 1; j < dotsPerLine; j++) {
-        const phi = (Math.PI * j) / dotsPerLine;
-        const sinPhi = Math.sin(phi);
-        const cosPhi = Math.cos(phi);
+      for (let j = 1; j < dotsPerRing; j++) {
+        const phi = (Math.PI * j) / dotsPerRing;
+        const sp = Math.sin(phi), cp = Math.cos(phi);
+        const x3 = sp * ct, z3 = sp * st, y3 = cp;
 
-        const x3d = sinPhi * cosTheta;
-        const z3d = sinPhi * sinTheta;
-        const y3d = cosPhi;
+        if (z3 < -0.05) continue;
 
-        if (z3d < -0.1) continue;
+        const x = cx + x3 * R;
+        const y = cy - y3 * R;
+        if (y > h + 5) continue;
 
-        const x = cx + x3d * radius;
-        const y = cy - y3d * radius;
+        const edge = 1 - Math.pow(1 - z3, 2);
+        const op = 0.04 + edge * 0.20;
 
-        const depthOp = 0.06 + z3d * 0.22;
-        if (depthOp <= 0) continue;
-
-        const dotR = isMobile ? 0.8 + z3d * 0.6 : 1.0 + z3d * 0.8;
+        const r = isMobile ? 0.6 + z3 * 0.5 : 0.7 + z3 * 0.7;
 
         ctx.beginPath();
-        ctx.arc(x, y, Math.max(dotR, 0.3), 0, Math.PI * 2);
+        ctx.arc(x, y, Math.max(r, 0.3), 0, Math.PI * 2);
         ctx.fillStyle = '#B691FE';
-        ctx.globalAlpha = depthOp;
+        ctx.globalAlpha = op;
         ctx.fill();
       }
     }
+
+    // ── 4. Halo / glow autour du globe ──
+    const grad = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, R * 1.15);
+    grad.addColorStop(0, 'rgba(182,145,254,0)');
+    grad.addColorStop(0.5, 'rgba(182,145,254,0.03)');
+    grad.addColorStop(1, 'rgba(182,145,254,0)');
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    // ── 5. Arcs lumineux ──
+    arcs.forEach(arc => drawArc(arc, rotY, cx, cy, t));
 
     ctx.globalAlpha = 1;
     requestAnimationFrame(draw);
