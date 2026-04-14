@@ -482,34 +482,41 @@
     const tInCycle = ((t - arc.offset) % arc.cycle + arc.cycle) % arc.cycle;
     const progress = tInCycle / arc.dur;
 
-    // ── Point DÉPART (toujours visible, violet) ──
+    // Points et traînée visibles uniquement pendant le transit + fadeout après
+    const fadeAfter = 0.8; // secondes de fadeout après atterrissage
+    const fadeEnd = arc.dur + fadeAfter;
+    if (tInCycle > fadeEnd) return; // totalement invisible après fadeout
+
+    // Calcul opacité globale (1 pendant transit, fade vers 0 après)
+    const globalFade = tInCycle > arc.dur ? 1 - (tInCycle - arc.dur) / fadeAfter : 1;
+
+    // ── Point DÉPART (visible face avant, fade après atterrissage) ──
     const pA = projLL(arc.latA, arc.lonA, rotY, cx, cy);
-    if (pA.z > -0.1) {
-      const opA = Math.max(0.3 + pA.z * 0.5, 0.1);
-      ctx.beginPath();
-      ctx.arc(pA.x, pA.y, mob ? 2.5 : 3.5, 0, PI2);
+    if (pA.z > 0.15) {
+      const opA = (0.2 + pA.z * 0.55) * globalFade;
       ctx.fillStyle = '#B691FE';
+      ctx.beginPath();
+      ctx.arc(pA.x, pA.y, mob ? 2 : 3, 0, PI2);
       ctx.globalAlpha = opA;
       ctx.fill();
-      // Halo départ
       ctx.beginPath();
-      ctx.arc(pA.x, pA.y, mob ? 6 : 9, 0, PI2);
-      ctx.globalAlpha = opA * 0.15;
+      ctx.arc(pA.x, pA.y, mob ? 5 : 8, 0, PI2);
+      ctx.globalAlpha = opA * 0.12;
       ctx.fill();
     }
 
-    // ── Point ARRIVÉE (toujours visible, violet) ──
+    // ── Point ARRIVÉE (visible face avant, fade après atterrissage) ──
     const pB = projLL(arc.latB, arc.lonB, rotY, cx, cy);
-    if (pB.z > -0.1) {
-      const opB = Math.max(0.3 + pB.z * 0.5, 0.1);
-      ctx.beginPath();
-      ctx.arc(pB.x, pB.y, mob ? 2.5 : 3.5, 0, PI2);
+    if (pB.z > 0.15) {
+      const opB = (0.2 + pB.z * 0.55) * globalFade;
       ctx.fillStyle = '#B691FE';
+      ctx.beginPath();
+      ctx.arc(pB.x, pB.y, mob ? 2 : 3, 0, PI2);
       ctx.globalAlpha = opB;
       ctx.fill();
       ctx.beginPath();
-      ctx.arc(pB.x, pB.y, mob ? 6 : 9, 0, PI2);
-      ctx.globalAlpha = opB * 0.15;
+      ctx.arc(pB.x, pB.y, mob ? 5 : 8, 0, PI2);
+      ctx.globalAlpha = opB * 0.12;
       ctx.fill();
     }
 
