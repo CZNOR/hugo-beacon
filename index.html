@@ -179,8 +179,7 @@
   </header>
 
   <nav class="links">
-    <!-- URL_COACHING : remplacer href="#coaching" -->
-    <a class="btn" href="#coaching" target="_blank" rel="noopener noreferrer">
+    <a class="btn" href="https://cal.com/team/made-academie/decouverte-e-com" target="_blank" rel="noopener noreferrer">
       <div class="btn__icon">
         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- Shopify bag -->
@@ -215,7 +214,7 @@
   <footer class="footer">hugo.bnls &copy; 2025</footer>
 </main>
 
-<!-- Three.js r158 -->
+<!-- Three.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function () {
@@ -224,191 +223,184 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0x0D0A0E, 1);
+  renderer.sortObjects = true;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0D0A0E, 0.035);
+  scene.fog = new THREE.FogExp2(0x0D0A0E, 0.028);
 
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
   camera.position.set(0, 0, 18);
 
-  /* ── Lighting ── */
-  const ambient = new THREE.AmbientLight(0xB691FE, 0.3);
-  scene.add(ambient);
+  /* ── Lights ── */
+  scene.add(new THREE.AmbientLight(0xB691FE, 0.25));
+  const pl1 = new THREE.PointLight(0xC9A8FF, 3, 80);
+  pl1.position.set(-8, 10, 8);
+  scene.add(pl1);
+  const pl2 = new THREE.PointLight(0x6B3FCF, 2, 60);
+  pl2.position.set(10, -8, 4);
+  scene.add(pl2);
 
-  const point1 = new THREE.PointLight(0xB691FE, 2.5, 60);
-  point1.position.set(-10, 12, 10);
-  scene.add(point1);
+  /* ── Canvas texture: "S" neon ── */
+  function makeStexture() {
+    const c = document.createElement('canvas');
+    c.width = 512; c.height = 512;
+    const ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, 512, 512);
+    // outer glow
+    ctx.shadowColor = '#B691FE';
+    ctx.shadowBlur = 60;
+    ctx.fillStyle = '#D4B0FF';
+    ctx.font = '700 310px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('S', 256, 268);
+    // bright core
+    ctx.shadowBlur = 20;
+    ctx.fillStyle = '#F0E0FF';
+    ctx.font = '700 290px Georgia, serif';
+    ctx.fillText('S', 256, 268);
+    return new THREE.CanvasTexture(c);
+  }
+  const sTex = makeStexture();
 
-  const point2 = new THREE.PointLight(0x6B3FCF, 1.8, 50);
-  point2.position.set(12, -8, 5);
-  scene.add(point2);
+  /* ── Bag builder ── */
+  function makeNeonBag(opacity) {
+    const g = new THREE.Group();
 
-  /* ── Materials ── */
-  const solidMat = new THREE.MeshPhongMaterial({
-    color: 0xB691FE,
-    emissive: 0x3A1B6E,
-    transparent: true,
-    opacity: 0.13,
-    shininess: 80,
-  });
-  const wireMat = new THREE.MeshBasicMaterial({
-    color: 0xB691FE,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.22,
-  });
-  const edgeMat = new THREE.LineBasicMaterial({
-    color: 0xB691FE,
-    transparent: true,
-    opacity: 0.35,
-  });
+    // — Bag body via ExtrudeGeometry (trapezoidal front face) —
+    const shape = new THREE.Shape();
+    shape.moveTo(-0.85, -1.10);
+    shape.lineTo( 0.85, -1.10);
+    shape.lineTo( 0.95,  0.90);
+    shape.lineTo(-0.95,  0.90);
+    shape.closePath();
 
-  /* ── Shopify bag builder ── */
-  function makeShopifyBag(scale) {
-    const group = new THREE.Group();
+    const extCfg = { depth: 0.55, bevelEnabled: true, bevelThickness: 0.04, bevelSize: 0.04, bevelSegments: 2 };
+    const bodyGeo = new THREE.ExtrudeGeometry(shape, extCfg);
+    bodyGeo.center();
 
-    // Body
-    const bodyGeo = new THREE.BoxGeometry(1.6, 1.8, 0.45);
-    // Round corners via sphere trick (cheap)
-    const body = new THREE.Mesh(bodyGeo, solidMat.clone());
-    const bodyWire = new THREE.Mesh(bodyGeo.clone(), wireMat.clone());
-    group.add(body);
-    group.add(bodyWire);
-
-    // Handle arc
-    const handleGeo = new THREE.TorusGeometry(0.52, 0.09, 10, 24, Math.PI);
-    const handleMat = new THREE.MeshPhongMaterial({
-      color: 0xB691FE, emissive: 0x3A1B6E,
-      transparent: true, opacity: 0.5, shininess: 100,
+    // solid fill (very transparent)
+    const fillMat = new THREE.MeshPhongMaterial({
+      color: 0x2A0A50, emissive: 0x1A063A,
+      transparent: true, opacity: opacity * 0.55, side: THREE.FrontSide,
     });
-    const handle = new THREE.Mesh(handleGeo, handleMat);
-    handle.position.y = 1.1;
-    handle.rotation.z = Math.PI;
-    group.add(handle);
+    g.add(new THREE.Mesh(bodyGeo, fillMat));
 
-    // "S" emboss on face — circle + line approximation
-    const sGeo = new THREE.TorusGeometry(0.32, 0.05, 8, 20);
-    const sMat = new THREE.MeshBasicMaterial({ color: 0xB691FE, transparent: true, opacity: 0.45 });
-    const sCircle = new THREE.Mesh(sGeo, sMat);
-    sCircle.position.z = 0.23;
-    group.add(sCircle);
+    // neon edge lines
+    const edges = new THREE.EdgesGeometry(bodyGeo);
+    const edgeLine = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
+      color: 0xC9A0FF, transparent: true, opacity: opacity,
+    }));
+    g.add(edgeLine);
 
-    group.scale.setScalar(scale);
-    return group;
+    // outer glow shell (slightly bigger, additive)
+    const glowMat = new THREE.MeshBasicMaterial({
+      color: 0xB691FE, transparent: true, opacity: opacity * 0.07,
+      side: THREE.BackSide,
+    });
+    const glowShell = new THREE.Mesh(bodyGeo, glowMat);
+    glowShell.scale.setScalar(1.12);
+    g.add(glowShell);
+
+    // — "S" plane on front face —
+    const sPlaneMat = new THREE.MeshBasicMaterial({
+      map: sTex, transparent: true,
+      opacity: opacity * 0.92, depthWrite: false,
+    });
+    const sPlane = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 1.3), sPlaneMat);
+    sPlane.position.set(0, -0.05, 0.32);
+    g.add(sPlane);
+
+    // — Handle (two separate rope arcs) —
+    function makeHandle(xOffset) {
+      const hGeo = new THREE.TorusGeometry(0.30, 0.055, 10, 24, Math.PI);
+      const hMat = new THREE.MeshPhongMaterial({
+        color: 0xD4B0FF, emissive: 0x8B5CF6,
+        emissiveIntensity: 1.2,
+        transparent: true, opacity: opacity * 0.95,
+        shininess: 200,
+      });
+      const h = new THREE.Mesh(hGeo, hMat);
+      h.position.set(xOffset, 0.78, 0.0);
+      h.rotation.z = Math.PI;
+      // glow ring around handle
+      const hGlow = new THREE.Mesh(
+        new THREE.TorusGeometry(0.30, 0.14, 6, 24, Math.PI),
+        new THREE.MeshBasicMaterial({ color: 0xB691FE, transparent: true, opacity: opacity * 0.12 })
+      );
+      hGlow.position.copy(h.position);
+      hGlow.rotation.copy(h.rotation);
+      g.add(hGlow);
+      g.add(h);
+    }
+    makeHandle(-0.30);
+    makeHandle( 0.30);
+
+    return g;
   }
 
-  /* ── Place multiple bags ── */
+  /* ── Spawn bags ── */
   const bags = [];
-  const bagConfigs = [
-    { x: -9,  y:  5,  z: -8, scale: 1.6, rotSpeed: 0.003, floatAmp: 0.8, floatSpeed: 0.5 },
-    { x:  8,  y: -4,  z: -5, scale: 1.1, rotSpeed: 0.005, floatAmp: 1.0, floatSpeed: 0.7 },
-    { x: -5,  y: -7,  z: -12,scale: 2.2, rotSpeed: 0.002, floatAmp: 1.2, floatSpeed: 0.3 },
-    { x:  11, y:  8,  z: -15,scale: 2.8, rotSpeed: 0.0015,floatAmp: 0.6, floatSpeed: 0.4 },
-    { x:  2,  y:  10, z: -10,scale: 1.4, rotSpeed: 0.004, floatAmp: 0.9, floatSpeed: 0.6 },
-    { x: -12, y: -2,  z: -18,scale: 3.0, rotSpeed: 0.001, floatAmp: 1.4, floatSpeed: 0.25},
+  const bagCfgs = [
+    { x: -8,  y:  4,  z: -7,  s: 1.7,  op: 0.75, rs: 0.0030, fa: 0.9, fs: 0.45 },
+    { x:  7,  y: -3,  z: -5,  s: 1.2,  op: 0.65, rs: 0.0045, fa: 1.0, fs: 0.60 },
+    { x: -4,  y: -8,  z: -11, s: 2.1,  op: 0.55, rs: 0.0020, fa: 1.2, fs: 0.30 },
+    { x: 10,  y:  7,  z: -14, s: 2.6,  op: 0.45, rs: 0.0015, fa: 0.7, fs: 0.38 },
+    { x:  2,  y:  9,  z: -9,  s: 1.3,  op: 0.60, rs: 0.0035, fa: 0.8, fs: 0.55 },
+    { x:-12,  y: -1,  z: -17, s: 3.0,  op: 0.35, rs: 0.0010, fa: 1.5, fs: 0.22 },
+    { x:  5,  y: -11, z: -13, s: 1.5,  op: 0.50, rs: 0.0025, fa: 1.1, fs: 0.40 },
   ];
 
-  bagConfigs.forEach(cfg => {
-    const bag = makeShopifyBag(cfg.scale);
+  bagCfgs.forEach(cfg => {
+    const bag = makeNeonBag(cfg.op);
+    bag.scale.setScalar(cfg.s);
     bag.position.set(cfg.x, cfg.y, cfg.z);
     bag.rotation.set(
-      Math.random() * Math.PI,
-      Math.random() * Math.PI,
-      Math.random() * Math.PI
+      (Math.random() - 0.5) * 0.6,
+      (Math.random() - 0.5) * 1.2,
+      (Math.random() - 0.5) * 0.3
     );
     bag.userData = { ...cfg, originY: cfg.y, phase: Math.random() * Math.PI * 2 };
     scene.add(bag);
     bags.push(bag);
   });
 
-  /* ── Floating geometric accents ── */
-  const accents = [];
-  const accentGeos = [
-    new THREE.IcosahedronGeometry(0.7, 0),
-    new THREE.OctahedronGeometry(0.6, 0),
-    new THREE.TetrahedronGeometry(0.8, 0),
-    new THREE.IcosahedronGeometry(0.5, 0),
-    new THREE.OctahedronGeometry(0.9, 0),
-    new THREE.TetrahedronGeometry(0.55, 0),
-    new THREE.IcosahedronGeometry(1.0, 0),
-  ];
-  const accentPositions = [
-    [-7, 3, -3], [6, 7, -4], [-3, -9, -6],
-    [9, -6, -8], [-11, 9, -10], [4, -3, -2], [-6, -5, -14],
-  ];
-
-  accentPositions.forEach((pos, i) => {
-    const geo = accentGeos[i % accentGeos.length];
-
-    const solid = new THREE.Mesh(geo, new THREE.MeshPhongMaterial({
-      color: 0xB691FE, emissive: 0x2A0D5E,
-      transparent: true, opacity: 0.08 + Math.random() * 0.08,
-      shininess: 120,
-    }));
-    const wire = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({
-      color: 0xB691FE, wireframe: true,
-      transparent: true, opacity: 0.20 + Math.random() * 0.15,
-    }));
-
-    solid.position.set(...pos);
-    wire.position.set(...pos);
-
-    const speed = 0.003 + Math.random() * 0.006;
-    const phase = Math.random() * Math.PI * 2;
-    solid.userData = { rotX: speed, rotY: speed * 1.3, rotZ: speed * 0.7, floatAmp: 0.4 + Math.random() * 0.6, floatSpeed: 0.3 + Math.random() * 0.4, phase, originY: pos[1] };
-    wire.userData = solid.userData;
-
-    scene.add(solid);
-    scene.add(wire);
-    accents.push(solid, wire);
-  });
-
   /* ── Particle field ── */
-  const particleCount = 280;
-  const pPositions = new Float32Array(particleCount * 3);
-  for (let i = 0; i < particleCount; i++) {
-    pPositions[i * 3]     = (Math.random() - 0.5) * 80;
-    pPositions[i * 3 + 1] = (Math.random() - 0.5) * 60;
-    pPositions[i * 3 + 2] = (Math.random() - 0.5) * 60 - 10;
+  const pCount = 320;
+  const pPos = new Float32Array(pCount * 3);
+  for (let i = 0; i < pCount; i++) {
+    pPos[i*3]   = (Math.random()-0.5)*90;
+    pPos[i*3+1] = (Math.random()-0.5)*70;
+    pPos[i*3+2] = (Math.random()-0.5)*70 - 10;
   }
   const pGeo = new THREE.BufferGeometry();
-  pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
-  const pMat = new THREE.PointsMaterial({
-    color: 0xB691FE,
-    size: 0.12,
-    transparent: true,
-    opacity: 0.45,
-    sizeAttenuation: true,
-  });
-  const particles = new THREE.Points(pGeo, pMat);
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({
+    color: 0xC9A8FF, size: 0.10, transparent: true, opacity: 0.50, sizeAttenuation: true,
+  }));
   scene.add(particles);
 
-  /* ── Gradient plane (back wall) ── */
-  const gradGeo = new THREE.PlaneGeometry(80, 60);
+  /* ── Animated gradient bg plane ── */
   const gradMat = new THREE.ShaderMaterial({
     uniforms: { uTime: { value: 0 } },
-    vertexShader: `
-      varying vec2 vUv;
-      void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
-    `,
+    vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
     fragmentShader: `
-      uniform float uTime;
-      varying vec2 vUv;
-      void main() {
-        vec2 uv = vUv;
-        float n1 = sin(uv.x * 3.0 + uTime * 0.3) * 0.5 + 0.5;
-        float n2 = cos(uv.y * 2.5 - uTime * 0.2) * 0.5 + 0.5;
-        float glow = n1 * n2;
-        vec3 dark  = vec3(0.051, 0.039, 0.055); // #0D0A0E
-        vec3 mid   = vec3(0.18, 0.10, 0.30);    // purple mid
-        vec3 col   = mix(dark, mid, glow * 0.55);
+      uniform float uTime; varying vec2 vUv;
+      void main(){
+        float g1 = sin(vUv.x*2.8 + uTime*0.25)*0.5+0.5;
+        float g2 = cos(vUv.y*2.2 - uTime*0.18)*0.5+0.5;
+        float spot1 = exp(-length(vUv - vec2(0.15+sin(uTime*0.12)*0.1, 0.75+cos(uTime*0.09)*0.1))*3.5);
+        float spot2 = exp(-length(vUv - vec2(0.82+cos(uTime*0.08)*0.1, 0.25+sin(uTime*0.11)*0.1))*4.0);
+        vec3 dark = vec3(0.051,0.039,0.055);
+        vec3 purple = vec3(0.18,0.09,0.32);
+        vec3 col = mix(dark, purple, (g1*g2)*0.40 + spot1*0.50 + spot2*0.40);
         gl_FragColor = vec4(col, 1.0);
       }
     `,
     depthWrite: false,
   });
-  const gradPlane = new THREE.Mesh(gradGeo, gradMat);
-  gradPlane.position.z = -28;
+  const gradPlane = new THREE.Mesh(new THREE.PlaneGeometry(90, 70), gradMat);
+  gradPlane.position.z = -30;
   scene.add(gradPlane);
 
   /* ── Mouse parallax ── */
@@ -425,40 +417,26 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  /* ── Animate ── */
+  /* ── Loop ── */
   let t = 0;
   function animate() {
     requestAnimationFrame(animate);
-    t += 0.012;
-
-    // Background shader
+    t += 0.010;
     gradMat.uniforms.uTime.value = t;
 
-    // Camera subtle drift
-    camera.position.x += (mouseX * 1.5 - camera.position.x) * 0.03;
-    camera.position.y += (-mouseY * 1.0 - camera.position.y) * 0.03;
+    camera.position.x += (mouseX * 1.8 - camera.position.x) * 0.025;
+    camera.position.y += (-mouseY * 1.2 - camera.position.y) * 0.025;
     camera.lookAt(0, 0, 0);
 
-    // Bags
     bags.forEach(bag => {
       const d = bag.userData;
-      bag.rotation.x += d.rotSpeed;
-      bag.rotation.y += d.rotSpeed * 1.4;
-      bag.position.y = d.originY + Math.sin(t * d.floatSpeed + d.phase) * d.floatAmp;
+      bag.rotation.y += d.rs;
+      bag.rotation.x += d.rs * 0.3;
+      bag.position.y = d.originY + Math.sin(t * d.fs + d.phase) * d.fa;
     });
 
-    // Accents
-    accents.forEach(obj => {
-      const d = obj.userData;
-      obj.rotation.x += d.rotX;
-      obj.rotation.y += d.rotY;
-      obj.rotation.z += d.rotZ;
-      obj.position.y = d.originY + Math.sin(t * d.floatSpeed + d.phase) * d.floatAmp;
-    });
-
-    // Particles slow drift
-    particles.rotation.y = t * 0.015;
-    particles.rotation.x = t * 0.008;
+    particles.rotation.y = t * 0.012;
+    particles.rotation.x = t * 0.006;
 
     renderer.render(scene, camera);
   }
