@@ -574,19 +574,20 @@
     ctx.arc(cx, cy, R * 1.01, 0, Math.PI * 2);
     ctx.clip();
 
-    // 3. Globe — continents en pointillé gris clair
+    // 3. Globe — continents en pointillé avec effet 3D sphère
     for (let i = 0; i < globeDots.length; i++) {
       const d = globeDots[i];
       const p = proj(d.phi, d.theta, rotY, cx, cy);
-      if (p.z < -0.05) continue;
-      if (p.y > cy + 5) continue;
+      if (p.z < -0.05) continue; // face arrière cachée
 
-      const edge = 1 - Math.pow(1 - Math.max(p.z, 0), 2);
-      const op = 0.15 + edge * 0.55;
-      const r = mob ? 0.8 + p.z * 0.6 : 0.8 + p.z * 0.7;
+      // Effet 3D sphère : centre lumineux, bords sombres
+      const zn = Math.max(p.z, 0); // 0=bord, 1=face
+      const falloff = Math.pow(zn, 1.5); // assombrissement progressif sur les bords
+      const op = 0.06 + falloff * 0.65; // 0.06 aux bords → 0.71 au centre
+      const r = mob ? 0.5 + zn * 0.8 : 0.5 + zn * 0.9; // points plus petits sur les bords
 
       ctx.beginPath();
-      ctx.arc(p.x, p.y, Math.max(r, 0.5), 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, Math.max(r, 0.3), 0, Math.PI * 2);
       ctx.fillStyle = '#ccc';
       ctx.globalAlpha = op;
       ctx.fill();
