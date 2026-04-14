@@ -10,8 +10,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000">
   <title>hugo.bnls</title>
-  <link rel="preconnect" href="https://fonts.bunny.net">
-  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+  <link rel="preload" href="sac1.png?v=2" as="image">
+  <link href="https://fonts.bunny.net/css?family=inter:400,600,700,800&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,6 +49,31 @@
       }
     }
 
+    /* ── Intro splash bag ── */
+    .intro-splash {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      background: #000;
+      pointer-events: none;
+      animation: introFadeOut 0.4s 1.1s forwards ease-in;
+    }
+    .intro-splash img {
+      width: 120px; height: auto;
+      animation: introSac 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+    @keyframes introSac {
+      0%   { opacity: 0; transform: scale(0) rotate(-30deg); }
+      30%  { opacity: 1; transform: scale(1.15) rotate(5deg); }
+      50%  { opacity: 1; transform: scale(0.95) rotate(-2deg); }
+      65%  { opacity: 1; transform: scale(1.02) rotate(0deg); }
+      80%  { opacity: 1; transform: scale(1) rotate(0deg); }
+      100% { opacity: 0; transform: scale(2.5) rotate(8deg); filter: blur(6px); }
+    }
+    @keyframes introFadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
     /* ── Floating bags ── */
     .scene {
       position: fixed; inset: 0; z-index: 0;
@@ -55,7 +81,7 @@
     }
     .bag {
       position: absolute;
-      will-change: transform;
+      will-change: transform, opacity;
     }
     .bag img {
       display: block; width: 100%; height: auto;
@@ -120,13 +146,13 @@
       to { opacity: 1; transform: scale(1); }
     }
     .anim { opacity: 0; animation-fill-mode: forwards; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
-    .avatar-wrap.anim { animation: scaleIn 0.8s 0.1s forwards cubic-bezier(0.16, 1, 0.3, 1); }
-    .name.anim { animation: fadeUp 0.7s 0.25s forwards cubic-bezier(0.16, 1, 0.3, 1); }
-    .tagline.anim { animation: fadeUp 0.7s 0.4s forwards cubic-bezier(0.16, 1, 0.3, 1); }
-    .partner-badge.anim { animation: fadeIn 0.6s 0.5s forwards; }
-    .ctas .cta:first-child { opacity: 0; animation: fadeUp 0.7s 0.55s forwards cubic-bezier(0.16, 1, 0.3, 1); }
-    .urgency.anim { animation: fadeUp 0.6s 0.7s forwards cubic-bezier(0.16, 1, 0.3, 1); }
-    .ctas .cta:last-child { opacity: 0; animation: fadeUp 0.7s 0.85s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .avatar-wrap.anim { animation: scaleIn 0.8s 1.2s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .name.anim { animation: fadeUp 0.7s 1.35s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .tagline.anim { animation: fadeUp 0.7s 1.5s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .partner-badge.anim { animation: fadeIn 0.6s 1.6s forwards; }
+    .ctas .cta:first-child { opacity: 0; animation: fadeUp 0.7s 1.65s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .urgency.anim { animation: fadeUp 0.6s 1.8s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .ctas .cta:last-child { opacity: 0; animation: fadeUp 0.7s 1.95s forwards cubic-bezier(0.16, 1, 0.3, 1); }
 
     /* ── CTA buttons — liquid glass ── */
     .ctas { margin-top: 48px; width: 100%; display: flex; flex-direction: column; gap: 16px; }
@@ -320,6 +346,11 @@
   </style>
 </head>
 <body>
+
+<!-- ── Intro splash ── -->
+<div class="intro-splash" id="introSplash">
+  <img src="sac1.png?v=2" alt="">
+</div>
 
 <!-- ── Background ── -->
 <div class="bg-depth"></div>
@@ -855,6 +886,12 @@
   }
   requestAnimationFrame(tick);
 })();
+
+// ── Cleanup intro splash ──
+setTimeout(function() {
+  var s = document.getElementById('introSplash');
+  if (s) s.remove();
+}, 1600);
 </script>
 
 </body>
