@@ -420,26 +420,28 @@
         grid.push([x, y]);
   }
 
-  // ── Arcs-traînée : pool de 5 routes, 1-3 visibles en même temps ──
+  // ── Arcs-traînée : 7 routes couvrant toutes les longitudes ──
   const routes = [
     { latA: 48.8, lonA: 2.3, latB: 40.7, lonB: -74 },      // Paris → New York
     { latA: 35.6, lonA: 139.7, latB: -33.8, lonB: 151.2 },  // Tokyo → Sydney
     { latA: 51.5, lonA: -0.1, latB: 1.3, lonB: 103.8 },     // London → Singapore
     { latA: 55.7, lonA: 37.6, latB: 25.2, lonB: 55.3 },     // Moscou → Dubai
     { latA: -23.5, lonA: -46.6, latB: 48.8, lonB: 2.3 },    // São Paulo → Paris
+    { latA: 34, lonA: -118, latB: 35.6, lonB: 139.7 },      // LA → Tokyo
+    { latA: 28.6, lonA: 77.2, latB: -1.3, lonB: 36.8 },     // Delhi → Nairobi
   ];
 
-  // Chaque arc a un cycle de vie : apparaît, traverse (1.5s), disparaît, pause aléatoire
+  // Cycles décalés pour couvrir en permanence
   const arcStates = routes.map((r, i) => ({
     ...r,
-    dur: 1.5 + Math.random() * 0.8,   // 1.5 à 2.3 secondes pour traverser
-    trail: 0.6 + Math.random() * 0.3,  // longueur traînée (60-90% du chemin)
-    offset: i * 2.5 + Math.random() * 3, // décalage de départ (pas tous en même temps)
-    cycle: 4 + Math.random() * 5,      // cycle complet : traverse + pause = 4-9s
+    dur: 2 + Math.random() * 0.8,     // 2-2.8s pour traverser (un peu plus lent)
+    trail: 0.5 + Math.random() * 0.3,  // longueur traînée
+    offset: i * 1.8,                   // décalage régulier
+    cycle: 5 + Math.random() * 3,     // cycle 5-8s
   }));
 
-  // Projette un point sphère → 2D (axe incliné ~23° comme la Terre)
-  const TILT = 0.4; // ~23 degrés d'inclinaison
+  // Projette un point sphère → 2D (axe incliné ~30° pour voir plus de terre)
+  const TILT = 0.52; // ~30° — montre plus de continents à chaque rotation
   const cosT = Math.cos(TILT), sinT = Math.sin(TILT);
   function proj(phi, theta, rotY, cx, cy) {
     const sp = Math.sin(phi), cp = Math.cos(phi);
@@ -477,58 +479,85 @@
   }
 
   function drawTrailArc(arc, rotY, cx, cy, t) {
-    // Calcul du timing : traverse rapide + pause
     const tInCycle = ((t - arc.offset) % arc.cycle + arc.cycle) % arc.cycle;
-    const progress = tInCycle / arc.dur; // 0 → 1+ (>1 = en pause, invisible)
-    if (progress > 1.05) return; // en pause → on dessine rien
+    const progress = tInCycle / arc.dur;
 
+    // ── Point DÉPART (toujours visible, violet) ──
+    const pA = projLL(arc.latA, arc.lonA, rotY, cx, cy);
+    if (pA.z > -0.1) {
+      const opA = Math.max(0.3 + pA.z * 0.5, 0.1);
+      ctx.beginPath();
+      ctx.arc(pA.x, pA.y, mob ? 2.5 : 3.5, 0, PI2);
+      ctx.fillStyle = '#B691FE';
+      ctx.globalAlpha = opA;
+      ctx.fill();
+      // Halo départ
+      ctx.beginPath();
+      ctx.arc(pA.x, pA.y, mob ? 6 : 9, 0, PI2);
+      ctx.globalAlpha = opA * 0.15;
+      ctx.fill();
+    }
+
+    // ── Point ARRIVÉE (toujours visible, violet) ──
+    const pB = projLL(arc.latB, arc.lonB, rotY, cx, cy);
+    if (pB.z > -0.1) {
+      const opB = Math.max(0.3 + pB.z * 0.5, 0.1);
+      ctx.beginPath();
+      ctx.arc(pB.x, pB.y, mob ? 2.5 : 3.5, 0, PI2);
+      ctx.fillStyle = '#B691FE';
+      ctx.globalAlpha = opB;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(pB.x, pB.y, mob ? 6 : 9, 0, PI2);
+      ctx.globalAlpha = opB * 0.15;
+      ctx.fill();
+    }
+
+    // ── Traînée (visible seulement pendant le transit) ──
+    if (progress > 1.05) return;
     const p = Math.min(progress, 1.0);
-    const segments = 50;
+    const segments = 40;
     const trailStart = Math.max(0, p - arc.trail);
 
-    // Dessiner la traînée
+    ctx.fillStyle = '#B691FE';
     for (let i = 0; i <= segments; i++) {
       const frac = trailStart + (p - trailStart) * (i / segments);
       if (frac < 0 || frac > 1) continue;
 
       const gc = greatCirclePt(arc.latA, arc.lonA, arc.latB, arc.lonB, frac);
-      const mid = 1 - Math.pow(2 * frac - 1, 2);
-      const elev = 1 + mid * 0.12;
-
+      const elev = 1 + (1 - Math.pow(2 * frac - 1, 2)) * 0.1;
       const pt = projLL(gc.lat, gc.lon, rotY, cx, cy);
+      if (pt.z < -0.1) continue;
+
+      const along = i / segments;
+      const zFactor = Math.max(0.2 + pt.z * 0.8, 0.05);
+      const op = along * along * zFactor * 0.85;
+      const dotR = mob ? 0.8 + along * 1.5 : 1 + along * 2;
+
+      ctx.globalAlpha = op;
       const x = cx + (pt.x - cx) * elev;
       const y = cy + (pt.y - cy) * elev;
-
-      if (pt.z < -0.15) continue;
-
-      const along = i / segments; // 0=queue 1=tête
-      const op = along * along * (0.35 + pt.z * 0.55);
-      const dotR = mob ? 1 + along * 1.2 : 1.2 + along * 1.8;
-
       ctx.beginPath();
-      ctx.arc(x, y, dotR, 0, Math.PI * 2);
-      ctx.fillStyle = '#B691FE';
-      ctx.globalAlpha = Math.max(op, 0);
+      ctx.arc(x, y, dotR, 0, PI2);
       ctx.fill();
     }
 
-    // Tête lumineuse
+    // ── Tête lumineuse ──
     const hgc = greatCirclePt(arc.latA, arc.lonA, arc.latB, arc.lonB, p);
-    const hm = 1 - Math.pow(2 * p - 1, 2);
     const hp = projLL(hgc.lat, hgc.lon, rotY, cx, cy);
-    const hx = cx + (hp.x - cx) * (1 + hm * 0.12);
-    const hy = cy + (hp.y - cy) * (1 + hm * 0.12);
-
     if (hp.z > -0.1) {
+      const he = 1 + (1 - Math.pow(2 * p - 1, 2)) * 0.1;
+      const hx = cx + (hp.x - cx) * he;
+      const hy = cy + (hp.y - cy) * he;
       ctx.beginPath();
-      ctx.arc(hx, hy, mob ? 2 : 3, 0, Math.PI * 2);
+      ctx.arc(hx, hy, mob ? 2.5 : 3.5, 0, PI2);
       ctx.fillStyle = '#fff';
-      ctx.globalAlpha = 0.8 + hp.z * 0.2;
+      ctx.globalAlpha = Math.max(0.7 + hp.z * 0.3, 0.2);
       ctx.fill();
       ctx.beginPath();
-      ctx.arc(hx, hy, mob ? 6 : 10, 0, Math.PI * 2);
+      ctx.arc(hx, hy, mob ? 7 : 11, 0, PI2);
       ctx.fillStyle = '#B691FE';
-      ctx.globalAlpha = 0.12;
+      ctx.globalAlpha = 0.18;
       ctx.fill();
     }
   }
