@@ -150,6 +150,18 @@
     }
     .cta:hover .cta__arrow { transform: translateX(4px); }
 
+    /* ── Shopify Partner badge ── */
+    .partner-badge {
+      margin-top: 24px;
+      opacity: 0.45;
+      transition: opacity .3s;
+    }
+    .partner-badge:hover { opacity: 0.70; }
+    .partner-badge img {
+      height: 22px; width: auto;
+      display: block;
+    }
+
     @media (max-width: 480px) {
       .page { padding: 140px 20px 80px; }
       .name { font-size: 36px; }
@@ -205,6 +217,10 @@
     Ne lance pas ta marque au hasard.<br>
     Récupère ta stratégie ici.
   </p>
+
+  <div class="partner-badge">
+    <img src="shopify-partner.png" alt="Shopify Partners">
+  </div>
 
   <nav class="ctas">
     <a class="cta" href="https://cal.com/team/made-academie/decouverte-e-com" target="_blank" rel="noopener noreferrer">
