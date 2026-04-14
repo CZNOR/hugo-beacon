@@ -387,8 +387,8 @@
 
   // ── Arcs-traînée : A → B sur la surface, la traînée s'efface derrière ──
   const arcs = [
-    { latA: 48, lonA: 2, latB: 40, lonB: -74, dur: 22, trail: 0.25 },   // Paris → New York
-    { latA: 35, lonA: 139, latB: -33, lonB: 151, dur: 28, trail: 0.20 }, // Tokyo → Sydney
+    { latA: 48, lonA: 2, latB: 40, lonB: -74, dur: 40, trail: 0.25 },   // Paris → New York (~40s)
+    { latA: 35, lonA: 139, latB: -33, lonB: 151, dur: 50, trail: 0.20 }, // Tokyo → Sydney (~50s)
   ];
 
   // Projette un point sphère → 2D
@@ -477,11 +477,12 @@
     }
   }
 
-  function draw(t) {
+  function draw(ms) {
+    const t = ms / 1000; // convertir ms → secondes
     ctx.clearRect(0, 0, w, h);
     const cx = w / 2;
     const cy = h + R * 0.08;
-    const rotY = t * 0.003; // Ultra lent — 1 tour complet en ~35 minutes
+    const rotY = t * 0.015; // Ultra lent — 1 tour en ~7 minutes
 
     // 1. Grille fond
     ctx.fillStyle = '#888';
@@ -495,20 +496,20 @@
       ctx.fill();
     }
 
-    // 2. Globe — continents en points gris
+    // 2. Globe — continents BIEN VISIBLES en pointillé gris clair
     for (let i = 0; i < globeDots.length; i++) {
       const d = globeDots[i];
       const p = proj(d.phi, d.theta, rotY, cx, cy);
       if (p.z < -0.05) continue;
       if (p.y > h + 5) continue;
 
-      const edge = 1 - Math.pow(1 - Math.max(p.z, 0), 2.5);
-      const op = 0.08 + edge * 0.45;
-      const r = mob ? 0.8 + p.z * 0.7 : 1.1 + p.z * 1.0;
+      const edge = 1 - Math.pow(1 - Math.max(p.z, 0), 2);
+      const op = 0.15 + edge * 0.55;
+      const r = mob ? 1.0 + p.z * 0.8 : 1.4 + p.z * 1.2;
 
       ctx.beginPath();
-      ctx.arc(p.x, p.y, Math.max(r, 0.4), 0, Math.PI * 2);
-      ctx.fillStyle = '#aaa';
+      ctx.arc(p.x, p.y, Math.max(r, 0.5), 0, Math.PI * 2);
+      ctx.fillStyle = '#ccc';
       ctx.globalAlpha = op;
       ctx.fill();
     }
