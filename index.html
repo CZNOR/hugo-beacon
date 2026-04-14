@@ -241,88 +241,95 @@
 
 <script>
 (function () {
-  // ── SVG sac neon violet 3D ──
+  // ── SVG sac neon violet 3D — silhouette nette, glow via CSS drop-shadow uniquement ──
   function makeBagSVG(id) {
     return `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
   <defs>
-    <filter id="og${id}" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur1"/>
-      <feColorMatrix in="blur1" type="matrix"
-        values="1 0 0 0 0  0 0.55 0 0 0  0 1 0 0 0  0 0 0 1 0" result="vg"/>
-      <feMerge><feMergeNode in="vg"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="sg${id}" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="14" result="blur"/>
-      <feColorMatrix type="matrix"
-        values="1 0 0 0 0  0 0.4 0 0 0  0 1 0 0 0  0 0 0 0.8 0"/>
+    <!-- Uniquement pour l'ombre au sol — blur très localisé -->
+    <filter id="gnd${id}" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="10"/>
     </filter>
     <linearGradient id="bf${id}" x1="120" y1="110" x2="390" y2="430" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#B388FF"/>
       <stop offset="45%" stop-color="#8B5CF6"/>
       <stop offset="100%" stop-color="#5B21B6"/>
     </linearGradient>
-    <linearGradient id="bs${id}" x1="360" y1="140" x2="445" y2="390" gradientUnits="userSpaceOnUse">
+    <linearGradient id="bs${id}" x1="356" y1="150" x2="418" y2="384" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#7C3AED"/>
-      <stop offset="100%" stop-color="#4C1D95"/>
+      <stop offset="100%" stop-color="#3B1285"/>
     </linearGradient>
     <linearGradient id="eg${id}" x1="100" y1="100" x2="420" y2="420" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#F5E9FF"/>
+      <stop offset="0%" stop-color="#F0E6FF"/>
       <stop offset="100%" stop-color="#C084FC"/>
     </linearGradient>
   </defs>
-  <ellipse cx="256" cy="430" rx="130" ry="24" fill="#8B5CF6" opacity="0.35" filter="url(#sg${id})"/>
-  <path d="M190 145C190 105 215 78 256 78C297 78 322 105 322 145"
-        stroke="#E9D5FF" stroke-width="14" stroke-linecap="round" opacity="0.55" filter="url(#og${id})"/>
-  <path d="M170 165C170 112 204 84 256 84C308 84 342 112 342 165"
-        stroke="url(#eg${id})" stroke-width="16" stroke-linecap="round" filter="url(#og${id})"/>
-  <path d="M190 145V186" stroke="url(#eg${id})" stroke-width="16" stroke-linecap="round" filter="url(#og${id})"/>
-  <path d="M322 145V186" stroke="url(#eg${id})" stroke-width="16" stroke-linecap="round" filter="url(#og${id})"/>
-  <path d="M356 150L418 182L406 382L350 350L356 150Z"
-        fill="url(#bs${id})" stroke="url(#eg${id})" stroke-width="4" filter="url(#og${id})"/>
-  <path d="M140 150H356L350 350H108L140 150Z"
-        fill="url(#bf${id})" stroke="url(#eg${id})" stroke-width="4" filter="url(#og${id})"/>
-  <path d="M108 350L350 350L406 382L156 382L108 350Z"
-        fill="#6D28D9" opacity="0.9" stroke="url(#eg${id})" stroke-width="3" filter="url(#og${id})"/>
-  <path d="M140 150L108 350" stroke="#E9D5FF" opacity="0.28" stroke-width="2"/>
-  <path d="M356 150L350 350" stroke="#E9D5FF" opacity="0.22" stroke-width="2"/>
-  <path d="M153 166H341L336 337H122L153 166Z" fill="#A855F7" opacity="0.18"/>
-  <text x="228" y="285" text-anchor="middle" font-size="150"
+  <!-- ombre sol -->
+  <ellipse cx="250" cy="436" rx="112" ry="15" fill="#6D28D9" opacity="0.40" filter="url(#gnd${id})"/>
+  <!-- poignée arrière (ombre) -->
+  <path d="M198 147C198 111 219 83 256 83C293 83 314 111 314 147"
+        stroke="#7C3AED" stroke-width="11" stroke-linecap="round" opacity="0.40"/>
+  <!-- poignée avant (neon rim) -->
+  <path d="M176 167C176 116 207 87 256 87C305 87 336 116 336 167"
+        stroke="url(#eg${id})" stroke-width="13" stroke-linecap="round" opacity="0.95"/>
+  <path d="M198 147V187" stroke="url(#eg${id})" stroke-width="13" stroke-linecap="round" opacity="0.95"/>
+  <path d="M314 147V187" stroke="url(#eg${id})" stroke-width="13" stroke-linecap="round" opacity="0.95"/>
+  <!-- face latérale droite -->
+  <path d="M354 150L416 181L404 383L348 352L354 150Z" fill="url(#bs${id})"/>
+  <!-- arêtes latérales -->
+  <path d="M354 150L416 181" stroke="#E9D5FF" stroke-width="1.5" opacity="0.65"/>
+  <path d="M416 181L404 383" stroke="#A78BFA" stroke-width="1" opacity="0.40"/>
+  <path d="M348 352L404 383" stroke="#A78BFA" stroke-width="1" opacity="0.35"/>
+  <!-- face avant -->
+  <path d="M144 150H354L348 352H110L144 150Z" fill="url(#bf${id})"/>
+  <!-- arêtes face avant — neon rim light -->
+  <path d="M144 150H354" stroke="#F0E6FF" stroke-width="2" opacity="0.80"/>
+  <path d="M110 352H348" stroke="#C4B5FD" stroke-width="1.5" opacity="0.55"/>
+  <path d="M144 150L110 352" stroke="#C4B5FD" stroke-width="1.5" opacity="0.50"/>
+  <path d="M354 150L348 352" stroke="#C4B5FD" stroke-width="1.5" opacity="0.50"/>
+  <!-- fond du sac -->
+  <path d="M110 352L348 352L404 383L158 383L110 352Z" fill="#4C1D95" opacity="0.95"/>
+  <path d="M110 352L158 383" stroke="#A78BFA" stroke-width="1" opacity="0.40"/>
+  <path d="M348 352L404 383" stroke="#A78BFA" stroke-width="1" opacity="0.40"/>
+  <!-- reflet intérieur subtil -->
+  <path d="M157 167H336L330 338H126L157 167Z" fill="#A855F7" opacity="0.08"/>
+  <!-- S blanc net -->
+  <text x="228" y="285" text-anchor="middle" font-size="148"
         font-family="Inter, Arial, sans-serif" font-weight="800"
-        fill="#FFFFFF" filter="url(#og${id})">S</text>
+        fill="#FFFFFF" opacity="0.95">S</text>
 </svg>`;
   }
 
-  // ── Config de chaque sac : position, taille, rotation 3D, animation ──
+  // ── Config : angles vraiment variés — front / 3/4 / top / bottom / profil / incliné ──
   const bags = [
-    // [left%, top%, width_px, ry_deg, rx_deg, rz_deg, float_anim, duration_s, delay_s, opacity, blur_px]
-    [ -4,   8,  220, -22,   8, -6,  'float-a', 7.0, 0.0, 0.90, 0   ],
-    [ 66,   4,  180,  18,  -6,  8,  'float-b', 6.5, 0.8, 0.85, 0   ],
-    [ 78,  52,  140,  20,  10, -3,  'float-c', 8.0, 1.5, 0.75, 0   ],
-    [ -6,  55,  160, -18,   6,  5,  'float-d', 7.5, 2.2, 0.80, 0   ],
-    [ 30,  72,  110, -12,   4, -4,  'float-a', 9.0, 1.0, 0.70, 0   ],
-    [ 55,  70,   90,  15,  -4,  6,  'float-b', 8.5, 3.0, 0.65, 0   ],
-    [ 82,  18,  100, -25,  12, -8,  'float-c', 7.0, 0.5, 0.60, 2   ],
-    [ 10,  82,   80,  10,   6,  3,  'float-d', 9.5, 2.0, 0.55, 2   ],
+    // [left%, top%, width_px, ry_deg, rx_deg, rz_deg, anim, dur, delay, opacity, bgBlur]
+    [ -3,   4,  210,    2,    6,    1,  'float-a', 7.0, 0.0, 0.88, 0   ],  // quasi face
+    [ 66,   2,  172,   42,   -7,    5,  'float-b', 6.5, 0.8, 0.82, 0   ],  // 3/4 droite fort
+    [ 76,  50,  150,  -44,    9,   -4,  'float-c', 8.0, 1.5, 0.76, 0   ],  // 3/4 gauche fort
+    [ -4,  52,  158,  -16,  -32,    4,  'float-d', 7.5, 2.2, 0.80, 0   ],  // vue du dessus
+    [ 28,  70,  120,   14,   28,   -4,  'float-a', 9.0, 1.0, 0.70, 0   ],  // vue du dessous
+    [ 54,  67,   98,   56,   -5,    8,  'float-b', 8.5, 3.0, 0.62, 1.5 ],  // presque profil droite
+    [ 80,  14,  110,  -20,   14,  -18,  'float-c', 7.0, 0.5, 0.60, 1.5 ],  // incliné dramatique
+    [ 11,  80,   90,    8,  -16,   22,  'float-d', 9.5, 2.0, 0.56, 1.5 ],  // rotation inverse
   ];
 
   const scene = document.getElementById('scene');
 
-  bags.forEach(([l, t, w, ry, rx, rz, anim, dur, delay, op, blur], i) => {
+  bags.forEach(([l, t, w, ry, rx, rz, anim, dur, delay, op, bgBlur], i) => {
     const wrap = document.createElement('div');
     wrap.className = 'bag-wrap';
-    wrap.style.cssText = `
-      left: ${l}%;
-      top: ${t}%;
-      animation: ${anim} ${dur}s ${delay}s ease-in-out infinite;
-    `;
+    wrap.style.cssText = `left:${l}%;top:${t}%;animation:${anim} ${dur}s ${delay}s ease-in-out infinite;`;
 
     const inner = document.createElement('div');
     inner.className = 'bag-svg';
+    // glow neon propre : drop-shadow CSS = silhouette nette + halo contrôlé
+    const glow = bgBlur > 0
+      ? `blur(${bgBlur}px) drop-shadow(0 0 2px #C084FC) drop-shadow(0 0 6px rgba(124,58,237,0.30))`
+      : `drop-shadow(0 0 3px #DDD6FE) drop-shadow(0 0 10px rgba(139,92,246,0.45))`;
     inner.style.cssText = `
-      width: ${w}px;
-      transform: perspective(700px) rotateY(${ry}deg) rotateX(${rx}deg) rotateZ(${rz}deg);
-      opacity: ${op};
-      ${blur > 0 ? `filter: blur(${blur}px);` : ''}
+      width:${w}px;
+      transform:perspective(900px) rotateY(${ry}deg) rotateX(${rx}deg) rotateZ(${rz}deg);
+      opacity:${op};
+      filter:${glow};
     `;
     inner.innerHTML = makeBagSVG(i);
 
@@ -330,7 +337,6 @@
     scene.appendChild(wrap);
   });
 
-  // Parallaxe souris subtile
   let mx = 0, my = 0;
   document.addEventListener('mousemove', e => {
     mx = (e.clientX / window.innerWidth  - 0.5);
@@ -338,15 +344,12 @@
   });
 
   const wraps = scene.querySelectorAll('.bag-wrap');
-  let raf;
   function tick() {
     wraps.forEach((w, i) => {
       const depth = 0.4 + (i % 3) * 0.3;
-      const dx = mx * 18 * depth;
-      const dy = my * 12 * depth;
-      w.style.transform = `translate(${dx}px, ${dy}px)`;
+      w.style.transform = `translate(${mx * 18 * depth}px,${my * 12 * depth}px)`;
     });
-    raf = requestAnimationFrame(tick);
+    requestAnimationFrame(tick);
   }
   tick();
 })();
