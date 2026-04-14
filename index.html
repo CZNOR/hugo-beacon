@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════╗
+  ║  hugo.bnls — Link in Bio  |  Charte MADE Agency     ║
+  ╠══════════════════════════════════════════════════════╣
+  ║  PERSONNALISATION :                                  ║
+  ║  1. Photo de profil  → remplacer src="" dans        ║
+  ║     <div class="avatar"> (chercher "PHOTO_PROFIL")  ║
+  ║  2. Image de fond    → décommenter la ligne         ║
+  ║     /* background-image: url('bg.jpg') */           ║
+  ║     dans body { } (chercher "BG_IMAGE")             ║
+  ║  3. URL Coaching     → remplacer href="#coaching"   ║
+  ║     dans le bouton .btn--coaching (chercher "URL_COACHING") ║
+  ╚══════════════════════════════════════════════════════╝
+-->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0D0A0E">
+  <title>hugo.bnls</title>
+
+  <!-- Bunny Fonts — Inter (fallback PP Neue Montreal) -->
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Reset ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── Variables ─── */
+    :root {
+      --baltic-sea:      #2D232E;
+      --abstract-grey:   #534B52;
+      --bright-lavender: #B691FE;
+      --tofu:            #F1F0EA;
+      --full-white:      #FFFFFF;
+      --bg-deep:         #0D0A0E;
+
+      --font-base: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    /* ─── Base ─── */
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font-base);
+      background-color: var(--bg-deep);
+
+      /* BG_IMAGE — décommenter pour activer l'image de fond */
+      /* background-image: url('bg.jpg'); background-size: cover; background-position: center; background-attachment: fixed; */
+
+      color: var(--tofu);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ─── Decorative blobs ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -220px;
+      right: -220px;
+      width: 560px;
+      height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(182, 145, 254, 0.10) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -180px;
+      left: -180px;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(182, 145, 254, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── Page wrapper ─── */
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px 40px;
+      gap: 0;
+    }
+
+    /* ─── Header ─── */
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 36px;
+      text-align: center;
+    }
+
+    /* Avatar */
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid rgba(182, 145, 254, 0.40);
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 4px rgba(182, 145, 254, 0.08);
+    }
+
+    /* PHOTO_PROFIL — remplacer src="" ci-dessous par votre URL d'image */
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Placeholder SVG si pas d'image */
+    .avatar svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .header__name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--full-white);
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
+      line-height: 1.1;
+    }
+
+    .header__tagline {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--tofu);
+      opacity: 0.70;
+      line-height: 1.5;
+      max-width: 300px;
+    }
+
+    /* ─── Buttons stack ─── */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    /* ─── Individual link card ─── */
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      padding: 16px 20px;
+      background: rgba(45, 35, 46, 0.85);
+      border: 1px solid rgba(182, 145, 254, 0.20);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: rgba(182, 145, 254, 0.10);
+      border-color: rgba(182, 145, 254, 0.50);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 32px rgba(182, 145, 254, 0.08);
+      outline: none;
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    /* Icon container */
+    .btn__icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(182, 145, 254, 0.15);
+      border: 1px solid rgba(182, 145, 254, 0.30);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn__icon svg {
+      width: 20px;
+      height: 20px;
+      color: var(--bright-lavender);
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* Text block */
+    .btn__text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .btn__title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--full-white);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn__sub {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--tofu);
+      opacity: 0.60;
+      margin-top: 2px;
+      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Chevron */
+    .btn__arrow {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      color: rgba(182, 145, 254, 0.35);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn:hover .btn__arrow {
+      color: rgba(182, 145, 254, 0.70);
+      transform: translateX(2px);
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      margin-top: auto;
+      padding-top: 36px;
+      font-size: 0.65rem;
+      color: rgba(241, 240, 234, 0.20);
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── Responsive fine-tuning ─── */
+    @media (max-width: 375px) {
+      .page { padding: 48px 16px 32px; }
+      .btn__title { font-size: 0.88rem; }
+      .btn__sub   { font-size: 0.74rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="page" role="main">
+
+    <!-- ── Header ── -->
+    <header class="header">
+
+      <div class="avatar">
+        <!-- PHOTO_PROFIL -->
+        <img src="avatar.jpg" alt="hugo.bnls">
+      </div>
+
+      <h1 class="header__name">hugo.bnls</h1>
+
+      <p class="header__tagline">
+        Ne lance pas ta marque au hasard.<br>
+        Récupère ta stratégie ici.
+      </p>
+    </header>
+
+    <!-- ── Link cards ── -->
+    <nav class="links" aria-label="Liens">
+
+      <!-- URL_COACHING : remplacer href="#coaching" par l'URL réelle du coaching -->
+      <a class="btn btn--coaching" href="#coaching" target="_blank" rel="noopener noreferrer">
+        <div class="btn__icon" aria-hidden="true">
+          <!-- Icône éclair / boost -->
+          <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 2L4 11h6l-1 7 7-9h-6l1-7z" fill="#B691FE"/>
+          </svg>
+        </div>
+        <div class="btn__text">
+          <span class="btn__title">Réserve et découvre notre coaching E-com</span>
+          <span class="btn__sub">Postule pour rejoindre nos programmes</span>
+        </div>
+        <svg class="btn__arrow" viewBox="0 0 16 16" aria-hidden="true">
+          <polyline points="6 3 11 8 6 13"/>
+        </svg>
+      </a>
+
+      <a class="btn btn--instagram" href="https://instagram.com/hugo.bnls" target="_blank" rel="noopener noreferrer">
+        <div class="btn__icon" aria-hidden="true">
+          <!-- Icône Instagram officielle (simplified) -->
+          <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect x="2" y="2" width="16" height="16" rx="5" stroke="#B691FE" stroke-width="1.7"/>
+            <circle cx="10" cy="10" r="3.2" stroke="#B691FE" stroke-width="1.7"/>
+            <circle cx="14.8" cy="5.2" r="1" fill="#B691FE"/>
+          </svg>
+        </div>
+        <div class="btn__text">
+          <span class="btn__title">Suis mon quotidien</span>
+          <span class="btn__sub">Rejoins-moi sur Instagram (Off &amp; Uncut)</span>
+        </div>
+        <svg class="btn__arrow" viewBox="0 0 16 16" aria-hidden="true">
+          <polyline points="6 3 11 8 6 13"/>
+        </svg>
+      </a>
+
+    </nav>
+
+    <!-- ── Footer ── -->
+    <footer class="footer">
+      hugo.bnls &copy; 2025
+    </footer>
+
+  </main>
+
+</body>
+</html>
