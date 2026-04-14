@@ -216,7 +216,6 @@
 
 <!-- Three.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/SVGLoader.js"></script>
 <script>
 (function () {
   const canvas = document.getElementById('bg-canvas');
@@ -224,120 +223,145 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0x0D0A0E, 1);
-  renderer.sortObjects = true;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0D0A0E, 0.025);
+  scene.fog = new THREE.FogExp2(0x0D0A0E, 0.022);
 
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
   camera.position.set(0, 0, 18);
 
   /* ── Lights ── */
-  scene.add(new THREE.AmbientLight(0xB691FE, 0.3));
-  const pl1 = new THREE.PointLight(0xC9A8FF, 4, 90);
-  pl1.position.set(-8, 10, 8); scene.add(pl1);
-  const pl2 = new THREE.PointLight(0x7B4FDF, 2.5, 70);
-  pl2.position.set(12, -8, 4); scene.add(pl2);
-  const pl3 = new THREE.PointLight(0xB691FE, 3, 50);
-  pl3.position.set(0, 0, 12); scene.add(pl3);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.15));
+  const pl1 = new THREE.PointLight(0xC9A8FF, 5, 100);
+  pl1.position.set(-10, 12, 10); scene.add(pl1);
+  const pl2 = new THREE.PointLight(0x9060FF, 3, 80);
+  pl2.position.set(14, -10, 6); scene.add(pl2);
+  const pl3 = new THREE.PointLight(0xB691FE, 4, 60);
+  pl3.position.set(0, 2, 14); scene.add(pl3);
 
-  /* ── Build Shopify logo from SVG paths (inline) ── */
-  const SVG_W = 197.9, SVG_H = 225;
+  /* ── Face texture: Shopify S ── */
+  function makeFaceTex() {
+    const c = document.createElement('canvas');
+    c.width = 512; c.height = 512;
+    const x = c.getContext('2d');
+    // Gradient fill
+    const g = x.createLinearGradient(0, 0, 0, 512);
+    g.addColorStop(0, '#4A1A90'); g.addColorStop(1, '#240A60');
+    x.fillStyle = g; x.fillRect(0, 0, 512, 512);
+    // Edge highlight strip (top)
+    x.fillStyle = 'rgba(182,145,254,0.18)';
+    x.fillRect(0, 0, 512, 12);
+    // Glow pass
+    x.shadowColor = '#D4B0FF'; x.shadowBlur = 55;
+    x.fillStyle = '#EED8FF';
+    x.font = '800 310px Arial Black, Arial, sans-serif';
+    x.textAlign = 'center'; x.textBaseline = 'middle';
+    x.fillText('S', 256, 275);
+    // Sharp core
+    x.shadowBlur = 0;
+    x.fillStyle = '#FFFFFF';
+    x.font = '800 290px Arial Black, Arial, sans-serif';
+    x.fillText('S', 256, 275);
+    return new THREE.CanvasTexture(c);
+  }
+  const FACE_TEX = makeFaceTex();
 
-  // SVG path data inlined — exact logo from file
-  const pathData = [
-    // cls-1 dark purple shade
-    "M153.46,219.55l-23.28,5.45h-1.73l9.43-198.14c.94.12,2.22.61,3.13,1.53l12.3,12.4.15,178.76Z",
-    // cls-2 light face / S shape
-    "M65.4,110.64c-1.39,7.73,10.04,13.52,18.02,19.52-.04.5.48,1.39.87,1.69,17.05,13.17,13.01,41.95.21,51.26-.5.37-.74,1.29-.99,1.86-16.82,11.15-39.16,6.72-53.14-7.46l5.86-19.51c9.15,7.17,21.9,13.72,28,7.22,2.33-2.5,3-6.33,1.75-9.86-3.42-9.66-18.87-14.34-22.76-27.25-4.49-14.93,1-31.44,13.06-41.18,8.01-6.47,17.58-9.29,27.41-9.85,6.76-.35,13.76.21,21.08,3.15l-8.66,25.78c-4.78-2.17-8.51-3.39-12.41-3.95-8.81-.9-16.99,1.3-18.3,8.58Z",
-    // cls-4 main bag body
-    "M128.16,28.85c-2.41-7.63-6.14-13.83-12-18.5-3.76-3-8.02-2.86-12.34-4.27-2.92-.95-5.33-5.05-8.37-6.08h-9.69c-.75.87-1.5.99-2.37,1.21-20.89,5.31-33.24,31.56-38.64,53.27l-23.33,7.52c-1.92.62-3.62,1.89-3.93,4.33L0,201.02l82.24,15.33,40.34,7.55c.99.09,1.58.6,1.87,1.1h4l9.43-198.14c-3.05-.41-5.88.81-9.72,1.99ZM99.98,15.92c2.26,7.09,2.94,13.85,2.59,20.9l-19.47,6.05c-.83.26-1.55.39-2.64.05l3.71-10.7c3.92-6.9,8.35-13.4,15.81-16.3ZM82.48,9.87c.38-.09.79-.59,1.03-.92,3.58-.81,7.12-2.18,11.58.13-4.78,2.23-7.56,4.95-10.81,7.96-.02.75-.51,1.31-1.01,1.85-6.54,7.21-9.6,17.04-11.81,27.38l-17.82,5.55c4.16-15.26,15.97-39.06,28.84-41.95ZM96.11,106.01c-4.78-2.17-8.51-3.39-12.41-3.95-8.81-.9-16.99,1.3-18.3,8.58-1.39,7.73,10.04,13.52,18.02,19.52-.04.5.48,1.39.87,1.69,17.05,13.17,13.01,41.95.21,51.26-.5.37-.74,1.29-.99,1.86-16.82,11.15-39.16,6.72-53.14-7.46l5.86-19.51c9.15,7.17,21.9,13.72,28,7.22,2.33-2.5,3-6.33,1.75-9.86-3.42-9.66-18.87-14.34-22.76-27.25-4.49-14.93,1-31.44,13.06-41.18,8.01-6.47,17.58-9.29,27.41-9.85,6.76-.35,13.76.21,21.08,3.15l-8.66,25.78ZM110.37,34.36c.08-7.15-.55-12.84-2.47-19.52,3.71.12,5.53,2.15,7.41,4.26,2.57,3.52,4.21,6.69,6.1,11.81l-11.04,3.45Z",
-    // cls-3 right shade
-    "M197.9,210.02l-44.44,9.53-.15-178.76c6.41.24,12.83.58,19.79,1.7l24.8,167.53Z"
-  ];
+  /* ── Bag builder ── */
+  function makeShopifyBag() {
+    const g = new THREE.Group();
+    const W = 2.0, H = 2.2, D = 0.85;
 
-  // Parse SVG paths using THREE.SVGLoader
-  const svgLoader = new THREE.SVGLoader();
-
-  // Build ONE complete logo group (reused as template via cloning)
-  function buildLogoGroup(depth, opacity) {
-    const root = new THREE.Group();
-    // Flip Y: SVG coords have Y down, Three.js has Y up
-    root.scale.set(1, -1, 1);
-
-    pathData.forEach((d, idx) => {
-      const paths = svgLoader.parse(`<svg viewBox="0 0 ${SVG_W} ${SVG_H}"><path d="${d}"/></svg>`).paths;
-      paths.forEach(path => {
-        const shapes = THREE.SVGLoader.createShapes(path);
-        shapes.forEach(shape => {
-          // Extruded solid
-          const extGeo = new THREE.ExtrudeGeometry(shape, {
-            depth,
-            bevelEnabled: true,
-            bevelThickness: depth * 0.06,
-            bevelSize: depth * 0.04,
-            bevelSegments: 3,
-          });
-
-          // Fill — dark violet base
-          const fillMat = new THREE.MeshPhongMaterial({
-            color: idx === 1 ? 0xE0C8FF : 0x3A1260,
-            emissive: idx === 1 ? 0xB691FE : 0x5B1FA0,
-            emissiveIntensity: idx === 1 ? 0.9 : 0.5,
-            transparent: true,
-            opacity: opacity * (idx === 1 ? 0.85 : 0.65),
-            shininess: 220,
-            side: THREE.FrontSide,
-          });
-          root.add(new THREE.Mesh(extGeo, fillMat));
-
-          // Neon edge lines
-          const edgesGeo = new THREE.EdgesGeometry(extGeo, 15);
-          const edgeMat = new THREE.LineBasicMaterial({
-            color: idx === 1 ? 0xFFEEFF : 0xC9A8FF,
-            transparent: true,
-            opacity: opacity * (idx === 1 ? 1.0 : 0.7),
-          });
-          root.add(new THREE.LineSegments(edgesGeo, edgeMat));
-
-          // Outer glow shell
-          const glowMesh = new THREE.Mesh(extGeo, new THREE.MeshBasicMaterial({
-            color: 0xB691FE, transparent: true,
-            opacity: opacity * 0.06, side: THREE.BackSide,
-          }));
-          glowMesh.scale.setScalar(1.08);
-          root.add(glowMesh);
-        });
-      });
+    // Body materials per face: +x,-x,+y,-y, front(+z), back(-z)
+    const side = new THREE.MeshPhongMaterial({
+      color: 0x3D1275, emissive: 0x1A0848, emissiveIntensity: 0.7, shininess: 160,
+    });
+    const top = new THREE.MeshPhongMaterial({
+      color: 0x4A1A8A, emissive: 0x200A55, emissiveIntensity: 0.6, shininess: 130,
+    });
+    const bot = new THREE.MeshPhongMaterial({
+      color: 0x2A0A58, emissive: 0x120430, emissiveIntensity: 0.5, shininess: 100,
+    });
+    const front = new THREE.MeshPhongMaterial({
+      map: FACE_TEX, emissive: 0x2A1050, emissiveIntensity: 0.25, shininess: 220,
+    });
+    const back = new THREE.MeshPhongMaterial({
+      color: 0x2E0E62, emissive: 0x140640, emissiveIntensity: 0.55, shininess: 120,
     });
 
-    // Center on SVG canvas origin
-    root.position.set(-SVG_W / 2, SVG_H / 2, 0);
-    return root;
+    const bodyGeo = new THREE.BoxGeometry(W, H, D);
+    g.add(new THREE.Mesh(bodyGeo, [side, side, top, bot, front, back]));
+
+    // Neon edges
+    g.add(new THREE.LineSegments(
+      new THREE.EdgesGeometry(bodyGeo),
+      new THREE.LineBasicMaterial({ color: 0xC9A8FF, transparent: true, opacity: 0.92 })
+    ));
+
+    // Outer glow shell
+    g.add(Object.assign(
+      new THREE.Mesh(
+        new THREE.BoxGeometry(W*1.07, H*1.07, D*1.07),
+        new THREE.MeshBasicMaterial({ color: 0xB691FE, transparent: true, opacity: 0.055, side: THREE.BackSide })
+      )
+    ));
+
+    // Crease line (bottom fold)
+    const crease = new THREE.Mesh(
+      new THREE.BoxGeometry(W * 0.98, 0.04, D * 1.01),
+      new THREE.MeshBasicMaterial({ color: 0xB691FE, transparent: true, opacity: 0.55 })
+    );
+    crease.position.y = -H / 2 + 0.22;
+    g.add(crease);
+
+    // Handles — CatmullRom tube
+    [-0.50, 0.50].forEach(xOff => {
+      const pts = [
+        new THREE.Vector3(xOff - 0.25, H/2,        0),
+        new THREE.Vector3(xOff - 0.10, H/2 + 0.58, 0.05),
+        new THREE.Vector3(xOff,        H/2 + 0.78, 0),
+        new THREE.Vector3(xOff + 0.10, H/2 + 0.58,-0.05),
+        new THREE.Vector3(xOff + 0.25, H/2,        0),
+      ];
+      const curve = new THREE.CatmullRomCurve3(pts);
+
+      // Tube solid
+      g.add(new THREE.Mesh(
+        new THREE.TubeGeometry(curve, 24, 0.060, 10, false),
+        new THREE.MeshPhongMaterial({
+          color: 0xD4B0FF, emissive: 0xA870FF,
+          emissiveIntensity: 1.1, shininess: 240,
+        })
+      ));
+      // Tube glow halo
+      g.add(new THREE.Mesh(
+        new THREE.TubeGeometry(curve, 24, 0.175, 8, false),
+        new THREE.MeshBasicMaterial({ color: 0xB691FE, transparent: true, opacity: 0.07 })
+      ));
+    });
+
+    return g;
   }
 
-  // Scale factor: SVG is ~200px wide → normalize to ~1 unit
-  const NORM = 1 / 100;
-
+  /* ── Spawn bags ── */
   const bagCfgs = [
-    { x: -8,  y:  4,  z: -7,  s: 1.8,  op: 0.82, rs: 0.0028, fa: 0.9,  fs: 0.45 },
-    { x:  7,  y: -3,  z: -5,  s: 1.3,  op: 0.72, rs: 0.0042, fa: 1.0,  fs: 0.60 },
-    { x: -4,  y: -8,  z: -12, s: 2.0,  op: 0.60, rs: 0.0018, fa: 1.2,  fs: 0.30 },
-    { x: 10,  y:  7,  z: -15, s: 2.5,  op: 0.50, rs: 0.0014, fa: 0.7,  fs: 0.38 },
-    { x:  2,  y:  9,  z: -9,  s: 1.4,  op: 0.65, rs: 0.0032, fa: 0.8,  fs: 0.55 },
-    { x:-12,  y: -1,  z: -18, s: 2.9,  op: 0.40, rs: 0.0010, fa: 1.5,  fs: 0.22 },
-    { x:  5,  y:-11,  z: -13, s: 1.6,  op: 0.55, rs: 0.0024, fa: 1.1,  fs: 0.40 },
+    { x: -8,  y:  4,  z: -7,  s: 1.7,  rs: 0.0028, fa: 0.9,  fs: 0.45 },
+    { x:  7,  y: -3,  z: -5,  s: 1.2,  rs: 0.0042, fa: 1.0,  fs: 0.60 },
+    { x: -4,  y: -8,  z: -12, s: 2.0,  rs: 0.0018, fa: 1.2,  fs: 0.30 },
+    { x: 10,  y:  7,  z: -15, s: 2.4,  rs: 0.0013, fa: 0.7,  fs: 0.38 },
+    { x:  2,  y:  9,  z: -9,  s: 1.3,  rs: 0.0032, fa: 0.8,  fs: 0.55 },
+    { x:-12,  y: -1,  z: -17, s: 2.8,  rs: 0.0010, fa: 1.5,  fs: 0.22 },
+    { x:  5,  y:-11,  z: -13, s: 1.5,  rs: 0.0024, fa: 1.1,  fs: 0.40 },
   ];
 
   const bags = [];
   bagCfgs.forEach(cfg => {
-    const bag = buildLogoGroup(18, cfg.op);
-    bag.scale.setScalar(NORM * cfg.s);
+    const bag = makeShopifyBag();
+    bag.scale.setScalar(cfg.s);
     bag.position.set(cfg.x, cfg.y, cfg.z);
     bag.rotation.set(
       (Math.random() - 0.5) * 0.5,
-      (Math.random() - 0.5) * 1.0,
-      (Math.random() - 0.5) * 0.25
+      (Math.random() - 0.5) * 1.2,
+      (Math.random() - 0.5) * 0.2
     );
     bag.userData = { ...cfg, originY: cfg.y, phase: Math.random() * Math.PI * 2 };
     scene.add(bag);
