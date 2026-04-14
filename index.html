@@ -98,8 +98,30 @@
       line-height: 1.5; color: rgba(241,240,234,0.65);
     }
 
+    /* ── Entrance animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.7); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .anim { opacity: 0; animation-fill-mode: forwards; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+    .avatar-wrap.anim { animation: scaleIn 0.8s 0.1s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .name.anim { animation: fadeUp 0.7s 0.25s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .tagline.anim { animation: fadeUp 0.7s 0.4s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .partner-badge.anim { animation: fadeIn 0.6s 0.5s forwards; }
+    .ctas .cta:first-child { opacity: 0; animation: fadeUp 0.7s 0.55s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .urgency.anim { animation: fadeUp 0.6s 0.7s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .ctas .cta:last-child { opacity: 0; animation: fadeUp 0.7s 0.85s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+
     /* ── CTA buttons ── */
-    .ctas { margin-top: 48px; width: 100%; display: flex; flex-direction: column; gap: 20px; }
+    .ctas { margin-top: 48px; width: 100%; display: flex; flex-direction: column; gap: 16px; }
 
     .cta {
       display: flex; align-items: center; gap: 16px;
@@ -194,10 +216,10 @@
     }
 
     @media (max-width: 480px) {
-      .page { padding: 100px 20px 60px; }
+      .page { padding: 60px 20px 180px; min-height: auto; }
       .name { font-size: 34px; }
       .tagline { font-size: 15px; margin-top: 14px; }
-      .ctas { margin-top: 32px; gap: 14px; }
+      .ctas { margin-top: 28px; gap: 12px; }
       .cta { padding: 16px; border-radius: 20px; }
       .cta__icon { width: 50px; height: 50px; border-radius: 14px; }
       .cta__icon svg { width: 20px; height: 20px; }
@@ -249,21 +271,21 @@
 
 <!-- ── Page content ── -->
 <section class="page">
-  <div class="avatar-wrap">
+  <div class="avatar-wrap anim">
     <div class="avatar-glow"></div>
     <div class="avatar">
       <img src="avatar.jpg" alt="hugo.bnls">
     </div>
   </div>
 
-  <h1 class="name">hugo.bnls</h1>
+  <h1 class="name anim">hugo.bnls</h1>
 
-  <p class="tagline">
+  <p class="tagline anim">
     Ne lance pas ta marque au hasard.<br>
     Récupère ta stratégie ici.
   </p>
 
-  <div class="partner-badge">
+  <div class="partner-badge anim">
     <img src="shopify-partner.png" alt="Shopify Partners">
   </div>
 
@@ -281,7 +303,7 @@
       </div>
       <svg class="cta__arrow" viewBox="0 0 24 24"><polyline points="9 5 16 12 9 19"/></svg>
     </a>
-    <div class="urgency" style="margin-top: -14px;">
+    <div class="urgency anim" style="margin-top: -8px;">
       <div class="urgency__top">
         <span class="urgency__dot"></span>
         5 places / mois disponibles
@@ -310,7 +332,7 @@
 // ── Globe mappemonde + arcs-traînée — style MADE ──
 (function() {
   const c = document.getElementById('globe');
-  const ctx = c.getContext('2d');
+  const ctx = c.getContext('2d', { willReadFrequently: false });
   let w, h;
   const dpr = window.devicePixelRatio || 1;
 
@@ -355,7 +377,7 @@
 
   // ── Pré-calculer les points du globe — haute densité ──
   const globeDots = [];
-  const step = mob ? 1.8 : 0.7; // ultra dense — contours très nets
+  const step = mob ? 1.5 : 0.7; // dense — contours nets, perf optimisée
   for (let lat = -90; lat <= 90; lat += step) {
     for (let lon = -180; lon < 180; lon += step) {
       if (isLand(lat, lon)) {
@@ -494,7 +516,7 @@
     const t = ms / 1000; // convertir ms → secondes
     ctx.clearRect(0, 0, w, h);
     const cx = w / 2;
-    const cy = h + R * 0.08;
+    const cy = mob ? h * 0.82 : h + R * 0.08;
     const rotY = t * 0.015; // Ultra lent — 1 tour en ~7 minutes
 
     // 0. Étoiles scintillantes
