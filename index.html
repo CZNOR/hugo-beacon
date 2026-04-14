@@ -307,7 +307,7 @@
 </section>
 
 <script>
-// ── Globe 3D pointillé + grille + arcs — réplique exacte MADE ──
+// ── Globe mappemonde + arcs-traînée — style MADE ──
 (function() {
   const c = document.getElementById('globe');
   const ctx = c.getContext('2d');
@@ -315,179 +315,216 @@
   const dpr = window.devicePixelRatio || 1;
 
   function resize() {
-    w = window.innerWidth;
-    h = window.innerHeight;
-    c.width = w * dpr;
-    c.height = h * dpr;
-    c.style.width = w + 'px';
-    c.style.height = h + 'px';
+    w = window.innerWidth; h = window.innerHeight;
+    c.width = w * dpr; c.height = h * dpr;
+    c.style.width = w + 'px'; c.style.height = h + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   resize();
   window.addEventListener('resize', resize);
 
-  const isMobile = w <= 480;
+  const mob = w <= 480;
+  const R = mob ? Math.min(w * 1.3, 480) : Math.min(w * 0.55, 680);
 
-  // ── Config globe — gros, en bas, style MADE ──
-  const R = isMobile ? Math.min(w * 1.4, 500) : Math.min(w * 0.58, 700);
-  const latCount = 24;
-  const lonCount = 36;
-  const dotsPerRing = 120;
+  // ── Mappemonde — continents simplifiés ──
+  function isLand(lat, lon) {
+    // North America + Greenland
+    if (lat>48&&lat<83&&lon>-168&&lon<-55) return true;
+    if (lat>25&&lat<50&&lon>-130&&lon<-65) return true;
+    if (lat>15&&lat<32&&lon>-118&&lon<-85) return true;
+    if (lat>7&&lat<18&&lon>-92&&lon<-77) return true;
+    if (lat>60&&lat<84&&lon>-60&&lon<-15) return true;
+    // South America
+    if (lat>-5&&lat<13&&lon>-82&&lon<-34) return true;
+    if (lat>-24&&lat<0&&lon>-78&&lon<-34) return true;
+    if (lat>-38&&lat<-18&&lon>-72&&lon<-38) return true;
+    if (lat>-56&&lat<-33&&lon>-76&&lon<-62) return true;
+    // Europe
+    if (lat>36&&lat<72&&lon>-12&&lon<42) return true;
+    // Africa
+    if (lat>-2&&lat<37&&lon>-18&&lon<52) return true;
+    if (lat>-35&&lat<2&&lon>12&&lon<52) return true;
+    // Russia / N Asia
+    if (lat>45&&lat<75&&lon>40&&lon<180) return true;
+    // Central + E Asia
+    if (lat>25&&lat<48&&lon>42&&lon<145) return true;
+    // India
+    if (lat>8&&lat<28&&lon>68&&lon<88) return true;
+    // SE Asia
+    if (lat>5&&lat<25&&lon>92&&lon<110) return true;
+    if (lat>22&&lat<42&&lon>100&&lon<125) return true;
+    // Japan
+    if (lat>30&&lat<46&&lon>129&&lon<146) return true;
+    // Indonesia
+    if (lat>-8&&lat<6&&lon>95&&lon<141) return true;
+    // Australia
+    if (lat>-38&&lat<-11&&lon>113&&lon<154) return true;
+    // NZ
+    if (lat>-47&&lat<-34&&lon>166&&lon<178) return true;
+    // Antarctica
+    if (lat<-62) return true;
+    return false;
+  }
 
-  // ── Grille de points fond (dot grid comme MADE) ──
-  const gridSpacing = isMobile ? 28 : 22;
-  const gridDots = [];
-  for (let gx = 0; gx < w + gridSpacing; gx += gridSpacing) {
-    for (let gy = 0; gy < h + gridSpacing; gy += gridSpacing) {
-      gridDots.push([gx, gy]);
+  // ── Pré-calculer les points du globe ──
+  const globeDots = [];
+  const step = mob ? 3.5 : 2.5; // degrés entre chaque point
+  for (let lat = -90; lat <= 90; lat += step) {
+    for (let lon = -180; lon < 180; lon += step) {
+      if (isLand(lat, lon)) {
+        const phi = (90 - lat) * Math.PI / 180;
+        const theta = lon * Math.PI / 180;
+        globeDots.push({ phi, theta, lat, lon });
+      }
     }
   }
 
-  // ── 2 arcs simples, fixes (ne tournent PAS avec le globe) ──
-  // Positions en pixels relatifs au viewport — stables, pas de flickering
-  const arcsDef = [
-    { ax: 0.12, ay: 0.72, bx: 0.78, by: 0.55, h: 0.30, dur: 18 },  // arc 1 : ~18s pour traverser
-    { ax: 0.25, ay: 0.82, bx: 0.88, by: 0.62, h: 0.22, dur: 24 },  // arc 2 : ~24s
+  // ── Grille de points fond ──
+  const gs = mob ? 26 : 20;
+  const grid = [];
+  for (let x = 0; x < w + gs; x += gs)
+    for (let y = 0; y < h + gs; y += gs)
+      grid.push([x, y]);
+
+  // ── Arcs-traînée : A → B sur la surface, la traînée s'efface derrière ──
+  const arcs = [
+    { latA: 48, lonA: 2, latB: 40, lonB: -74, dur: 22, trail: 0.25 },   // Paris → New York
+    { latA: 35, lonA: 139, latB: -33, lonB: 151, dur: 28, trail: 0.20 }, // Tokyo → Sydney
   ];
 
-  function drawArc(a, t) {
-    const x1 = a.ax * w, y1 = a.ay * h;
-    const x2 = a.bx * w, y2 = a.by * h;
-    const mx = (x1 + x2) / 2;
-    const my = (y1 + y2) / 2 - a.h * h;
+  // Projette un point sphère → 2D
+  function proj(phi, theta, rotY, cx, cy) {
+    const sp = Math.sin(phi), cp = Math.cos(phi);
+    const ct = Math.cos(theta + rotY), st = Math.sin(theta + rotY);
+    return { x: cx + sp * ct * R, y: cy - cp * R, z: sp * st };
+  }
 
-    // ── La ligne courbe — fine, visible ──
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.quadraticCurveTo(mx, my, x2, y2);
-    ctx.strokeStyle = '#B691FE';
-    ctx.lineWidth = 1;
-    ctx.globalAlpha = 0.30;
-    ctx.stroke();
+  // Projette un lat/lon en degrés
+  function projLL(lat, lon, rotY, cx, cy) {
+    const phi = (90 - lat) * Math.PI / 180;
+    const theta = lon * Math.PI / 180;
+    return proj(phi, theta, rotY, cx, cy);
+  }
 
-    // ── Points A et B — petits cercles fixes ──
-    [{ x: x1, y: y1 }, { x: x2, y: y2 }].forEach(p => {
+  // Point sur un great-circle arc (fraction t de A à B)
+  function greatCirclePt(latA, lonA, latB, lonB, t) {
+    const toR = Math.PI / 180;
+    const la = latA * toR, lb = latB * toR;
+    const dlon = (lonB - lonA) * toR;
+    const d = Math.acos(Math.sin(la)*Math.sin(lb) + Math.cos(la)*Math.cos(lb)*Math.cos(dlon));
+    if (d < 0.001) return { lat: latA, lon: lonA };
+    const A = Math.sin((1-t)*d) / Math.sin(d);
+    const B = Math.sin(t*d) / Math.sin(d);
+    const x = A*Math.cos(la)*Math.cos(lonA*toR) + B*Math.cos(lb)*Math.cos(lonB*toR);
+    const y = A*Math.cos(la)*Math.sin(lonA*toR) + B*Math.cos(lb)*Math.sin(lonB*toR);
+    const z = A*Math.sin(la) + B*Math.sin(lb);
+    return { lat: Math.atan2(z, Math.sqrt(x*x+y*y))/toR, lon: Math.atan2(y,x)/toR };
+  }
+
+  function drawTrailArc(arc, rotY, cx, cy, t) {
+    const progress = (t % arc.dur) / arc.dur; // 0→1 lent
+    const segments = 60;
+
+    // Dessiner la traînée : du début de la traînée jusqu'à la tête
+    const trailStart = Math.max(0, progress - arc.trail);
+
+    for (let i = 0; i <= segments; i++) {
+      const frac = trailStart + (progress - trailStart) * (i / segments);
+      if (frac < 0 || frac > 1) continue;
+
+      const gc = greatCirclePt(arc.latA, arc.lonA, arc.latB, arc.lonB, frac);
+      // Élever le point au-dessus de la surface (arc parabolique)
+      const mid = 1 - Math.pow(2 * frac - 1, 2); // 0 aux bords, 1 au milieu
+      const elev = 1 + mid * 0.15; // monte de 15% au milieu de l'arc
+
+      const p = projLL(gc.lat, gc.lon, rotY, cx, cy);
+      const x = cx + (p.x - cx) * elev;
+      const y = cy + (p.y - cy) * elev;
+
+      if (p.z < -0.15) continue;
+
+      // Opacité : forte en tête, s'efface vers la queue
+      const along = (i / segments); // 0=queue, 1=tête
+      const op = along * along * (0.25 + p.z * 0.5);
+
+      const dotR = mob ? 1.2 + along * 1 : 1.5 + along * 1.5;
+
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+      ctx.arc(x, y, dotR, 0, Math.PI * 2);
       ctx.fillStyle = '#B691FE';
-      ctx.globalAlpha = 0.45;
+      ctx.globalAlpha = Math.max(op, 0);
       ctx.fill();
-    });
+    }
 
-    // ── Point lumineux : A → B en boucle, lent et fluide ──
-    const tt = ((t % a.dur) / a.dur); // 0 → 1 linéaire sur [dur] secondes
-    // Easing smooth (ease-in-out)
-    const e = tt < 0.5 ? 2 * tt * tt : 1 - Math.pow(-2 * tt + 2, 2) / 2;
+    // Point de tête lumineux
+    const headGC = greatCirclePt(arc.latA, arc.lonA, arc.latB, arc.lonB, progress);
+    const hmid = 1 - Math.pow(2 * progress - 1, 2);
+    const headP = projLL(headGC.lat, headGC.lon, rotY, cx, cy);
+    const hx = cx + (headP.x - cx) * (1 + hmid * 0.15);
+    const hy = cy + (headP.y - cy) * (1 + hmid * 0.15);
 
-    const px = (1 - e) * (1 - e) * x1 + 2 * (1 - e) * e * mx + e * e * x2;
-    const py = (1 - e) * (1 - e) * y1 + 2 * (1 - e) * e * my + e * e * y2;
-
-    // Point blanc
-    ctx.beginPath();
-    ctx.arc(px, py, 2, 0, Math.PI * 2);
-    ctx.fillStyle = '#fff';
-    ctx.globalAlpha = 0.7;
-    ctx.fill();
-
-    // Halo doux
-    ctx.beginPath();
-    ctx.arc(px, py, 8, 0, Math.PI * 2);
-    ctx.fillStyle = '#B691FE';
-    ctx.globalAlpha = 0.08;
-    ctx.fill();
+    if (headP.z > -0.1) {
+      ctx.beginPath();
+      ctx.arc(hx, hy, mob ? 2 : 3, 0, Math.PI * 2);
+      ctx.fillStyle = '#fff';
+      ctx.globalAlpha = 0.7 + headP.z * 0.25;
+      ctx.fill();
+      // Halo
+      ctx.beginPath();
+      ctx.arc(hx, hy, mob ? 6 : 10, 0, Math.PI * 2);
+      ctx.fillStyle = '#B691FE';
+      ctx.globalAlpha = 0.10;
+      ctx.fill();
+    }
   }
 
   function draw(t) {
     ctx.clearRect(0, 0, w, h);
-
     const cx = w / 2;
-    const cy = h + R * 0.05;
-    const rotY = t * 0.012; // Rotation quasi imperceptible
+    const cy = h + R * 0.08;
+    const rotY = t * 0.012;
 
-    // ── 1. Grille de points fond ──
-    ctx.fillStyle = '#B691FE';
-    for (let i = 0; i < gridDots.length; i++) {
-      const gd = gridDots[i];
-      // Vérifier si le point est dans le globe (pour le rendre plus sombre dedans)
-      const dx = gd[0] - cx, dy = gd[1] - cy;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const insideGlobe = dist < R * 0.98;
-
-      ctx.globalAlpha = insideGlobe ? 0.03 : 0.06;
+    // 1. Grille fond
+    ctx.fillStyle = '#888';
+    for (let i = 0; i < grid.length; i++) {
+      const g = grid[i];
+      const dx = g[0] - cx, dy = g[1] - cy;
+      const inside = Math.sqrt(dx*dx+dy*dy) < R * 0.97;
+      ctx.globalAlpha = inside ? 0.025 : 0.05;
       ctx.beginPath();
-      ctx.arc(gd[0], gd[1], 0.6, 0, Math.PI * 2);
+      ctx.arc(g[0], g[1], 0.5, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // ── 2. Globe points (latitude) — BIEN VISIBLES ──
-    for (let i = 1; i < latCount; i++) {
-      const phi = (Math.PI * i) / latCount;
-      const sp = Math.sin(phi), cp = Math.cos(phi);
+    // 2. Globe — continents en points gris
+    for (let i = 0; i < globeDots.length; i++) {
+      const d = globeDots[i];
+      const p = proj(d.phi, d.theta, rotY, cx, cy);
+      if (p.z < -0.05) continue;
+      if (p.y > h + 5) continue;
 
-      for (let j = 0; j < dotsPerRing; j++) {
-        const theta = (2 * Math.PI * j) / dotsPerRing;
-        const ct = Math.cos(theta + rotY), st = Math.sin(theta + rotY);
-        const x3 = sp * ct, z3 = sp * st, y3 = cp;
+      const edge = 1 - Math.pow(1 - Math.max(p.z, 0), 2.5);
+      const op = 0.08 + edge * 0.45;
+      const r = mob ? 0.8 + p.z * 0.7 : 1.1 + p.z * 1.0;
 
-        if (z3 < -0.05) continue;
-
-        const x = cx + x3 * R;
-        const y = cy - y3 * R;
-        if (y > h + 5) continue;
-
-        const edge = 1 - Math.pow(1 - z3, 2);
-        const op = 0.10 + edge * 0.40;
-
-        const r = isMobile ? 1.0 + z3 * 1.0 : 1.3 + z3 * 1.2;
-
-        ctx.beginPath();
-        ctx.arc(x, y, Math.max(r, 0.5), 0, Math.PI * 2);
-        ctx.fillStyle = '#B691FE';
-        ctx.globalAlpha = op;
-        ctx.fill();
-      }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, Math.max(r, 0.4), 0, Math.PI * 2);
+      ctx.fillStyle = '#aaa';
+      ctx.globalAlpha = op;
+      ctx.fill();
     }
 
-    // ── 3. Globe points (longitude / méridiens) ──
-    for (let i = 0; i < lonCount; i++) {
-      const theta = (2 * Math.PI * i) / lonCount;
-      const ct = Math.cos(theta + rotY), st = Math.sin(theta + rotY);
-
-      for (let j = 1; j < dotsPerRing; j++) {
-        const phi = (Math.PI * j) / dotsPerRing;
-        const sp = Math.sin(phi), cp = Math.cos(phi);
-        const x3 = sp * ct, z3 = sp * st, y3 = cp;
-
-        if (z3 < -0.05) continue;
-
-        const x = cx + x3 * R;
-        const y = cy - y3 * R;
-        if (y > h + 5) continue;
-
-        const edge = 1 - Math.pow(1 - z3, 2);
-        const op = 0.08 + edge * 0.30;
-
-        const r = isMobile ? 0.8 + z3 * 0.8 : 1.0 + z3 * 1.0;
-
-        ctx.beginPath();
-        ctx.arc(x, y, Math.max(r, 0.4), 0, Math.PI * 2);
-        ctx.fillStyle = '#B691FE';
-        ctx.globalAlpha = op;
-        ctx.fill();
-      }
-    }
-
-    // ── 4. Halo / glow autour du globe ──
-    const grad = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, R * 1.15);
-    grad.addColorStop(0, 'rgba(182,145,254,0)');
-    grad.addColorStop(0.5, 'rgba(182,145,254,0.03)');
-    grad.addColorStop(1, 'rgba(182,145,254,0)');
+    // 3. Halo globe
+    const grad = ctx.createRadialGradient(cx, cy, R*0.65, cx, cy, R*1.1);
+    grad.addColorStop(0, 'rgba(150,150,170,0)');
+    grad.addColorStop(0.6, 'rgba(150,150,170,0.02)');
+    grad.addColorStop(1, 'rgba(150,150,170,0)');
     ctx.globalAlpha = 1;
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
 
-    // ── 5. Arcs lumineux — fixes, lents, fluides ──
-    arcsDef.forEach(arc => drawArc(arc, t));
+    // 4. Arcs-traînée
+    arcs.forEach(a => drawTrailArc(a, rotY, cx, cy, t));
 
     ctx.globalAlpha = 1;
     requestAnimationFrame(draw);
