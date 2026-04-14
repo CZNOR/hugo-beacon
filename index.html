@@ -256,6 +256,41 @@
       display: block;
     }
 
+    /* ── Proof stats ── */
+    .proof {
+      display: flex; gap: 8px;
+      width: 100%; margin-top: 28px;
+    }
+    .proof.anim { animation: fadeUp 0.7s 1.55s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .proof__item {
+      flex: 1;
+      text-align: center;
+      padding: 14px 6px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .proof__num {
+      font-size: 20px; font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      line-height: 1;
+    }
+    .proof__num .proof__plus {
+      color: rgba(182,145,254,0.8);
+      font-weight: 700;
+    }
+    .proof__label {
+      margin-top: 4px;
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.3;
+    }
+
     /* ── Urgence badge — premium ambre ── */
     .urgency {
       position: relative;
@@ -334,6 +369,10 @@
       .urgency__icon { width: 34px; height: 34px; border-radius: 10px; }
       .urgency__title { font-size: 11.5px; }
       .urgency__text { font-size: 11px; }
+      .proof { gap: 6px; margin-top: 22px; }
+      .proof__item { padding: 12px 4px; border-radius: 14px; }
+      .proof__num { font-size: 17px; }
+      .proof__label { font-size: 9px; }
 
       /* Sacs gérés par JS en mobile */
     }
@@ -385,6 +424,21 @@
 
   <div class="partner-badge anim">
     <img src="shopify-partner.png" alt="Shopify Partners">
+  </div>
+
+  <div class="proof anim">
+    <div class="proof__item">
+      <div class="proof__num"><span class="proof__plus">+</span><span data-count="120">0</span></div>
+      <div class="proof__label">Projets<br>accompagnés</div>
+    </div>
+    <div class="proof__item">
+      <div class="proof__num"><span data-count="7">0</span><span class="proof__label" style="display:inline;text-transform:none;font-size:inherit;color:rgba(255,255,255,0.5);font-weight:600;margin:0;letter-spacing:0"> ans</span></div>
+      <div class="proof__label">D'expérience<br>e-commerce</div>
+    </div>
+    <div class="proof__item">
+      <div class="proof__num"><span class="proof__plus">+</span><span data-count="20">0</span><span style="font-size:0.7em;color:rgba(255,255,255,0.5);font-weight:600">M€</span></div>
+      <div class="proof__label">Générés<br>par nos clients</div>
+    </div>
   </div>
 
   <nav class="ctas">
@@ -891,6 +945,22 @@
 setTimeout(function() {
   var s = document.getElementById('introSplash');
   if (s) s.remove();
+}, 1600);
+
+// ── Count-up animation on proof stats ──
+setTimeout(function() {
+  document.querySelectorAll('[data-count]').forEach(function(el) {
+    var target = parseInt(el.dataset.count, 10);
+    var dur = 1200, start = performance.now();
+    function step(now) {
+      var p = Math.min((now - start) / dur, 1);
+      // ease-out cubic
+      var ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(ease * target);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
 }, 1600);
 </script>
 
