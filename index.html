@@ -39,6 +39,14 @@
     .bg-globe {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
     }
+    @media (max-width: 480px) {
+      .bg-globe {
+        position: relative;
+        width: 100%;
+        height: 360px;
+        margin-top: -40px;
+      }
+    }
 
     /* ── Floating bags ── */
     .scene {
@@ -216,7 +224,7 @@
     }
 
     @media (max-width: 480px) {
-      .page { padding: 60px 20px 180px; min-height: auto; }
+      .page { padding: 60px 20px 30px; min-height: auto; }
       .name { font-size: 34px; }
       .tagline { font-size: 15px; margin-top: 14px; }
       .ctas { margin-top: 28px; gap: 12px; }
@@ -257,7 +265,6 @@
 
 <!-- ── Background ── -->
 <div class="bg-depth"></div>
-<canvas class="bg-globe" id="globe"></canvas>
 
 <!-- ── Floating 3D bags ── -->
 <div class="scene" id="scene">
@@ -328,6 +335,8 @@
   </nav>
 </section>
 
+<canvas class="bg-globe" id="globe"></canvas>
+
 <script>
 // ── Globe mappemonde + arcs-traînée — style MADE ──
 (function() {
@@ -336,8 +345,17 @@
   let w, h;
   const dpr = window.devicePixelRatio || 1;
 
+  const mob = window.innerWidth <= 480;
+
   function resize() {
-    w = window.innerWidth; h = window.innerHeight;
+    if (mob) {
+      // Mobile : petit globe dans son conteneur
+      w = c.parentElement ? c.offsetWidth || window.innerWidth : window.innerWidth;
+      h = 360;
+    } else {
+      w = window.innerWidth;
+      h = window.innerHeight;
+    }
     c.width = w * dpr; c.height = h * dpr;
     c.style.width = w + 'px'; c.style.height = h + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -345,8 +363,7 @@
   resize();
   window.addEventListener('resize', resize);
 
-  const mob = w <= 480;
-  const R = mob ? Math.min(w * 1.3, 480) : Math.min(w * 0.55, 680);
+  const R = mob ? Math.min(w * 0.55, 200) : Math.min(w * 0.55, 680);
 
   // ── Données côtières réelles (Natural Earth 110m simplifié) ──
   // Format : chaque tableau = polygone, coordonnées [lat*10, lon*10, ...] en paires
@@ -516,7 +533,7 @@
     const t = ms / 1000; // convertir ms → secondes
     ctx.clearRect(0, 0, w, h);
     const cx = w / 2;
-    const cy = mob ? h * 0.82 : h + R * 0.08;
+    const cy = mob ? h * 0.55 : h + R * 0.08;
     const rotY = t * 0.015; // Ultra lent — 1 tour en ~7 minutes
 
     // 0. Étoiles scintillantes
