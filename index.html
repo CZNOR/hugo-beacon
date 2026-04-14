@@ -580,11 +580,11 @@
       const p = proj(d.phi, d.theta, rotY, cx, cy);
       if (p.z < -0.05) continue; // face arrière cachée
 
-      // Effet 3D sphère : centre lumineux, bords sombres
+      // Effet 3D sphère profond : centre lumineux, bords très sombres
       const zn = Math.max(p.z, 0); // 0=bord, 1=face
-      const falloff = Math.pow(zn, 1.5); // assombrissement progressif sur les bords
-      const op = 0.06 + falloff * 0.65; // 0.06 aux bords → 0.71 au centre
-      const r = mob ? 0.5 + zn * 0.8 : 0.5 + zn * 0.9; // points plus petits sur les bords
+      const falloff = Math.pow(zn, 2.5); // assombrissement très prononcé sur les bords
+      const op = 0.02 + falloff * 0.7; // 0.02 aux bords → 0.72 au centre
+      const r = mob ? 0.3 + zn * 0.9 : 0.3 + zn * 1.0; // quasi invisible sur les bords
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, Math.max(r, 0.3), 0, Math.PI * 2);
@@ -598,13 +598,7 @@
 
     ctx.restore();
 
-    // 5. Contour du globe
-    ctx.beginPath();
-    ctx.arc(cx, cy, R, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(182,145,254,0.18)';
-    ctx.lineWidth = 1.2;
-    ctx.globalAlpha = 1;
-    ctx.stroke();
+    // 5. Pas de contour
 
     // 6. Halo subtil
     const grad = ctx.createRadialGradient(cx, cy, R*0.65, cx, cy, R*1.1);
