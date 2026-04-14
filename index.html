@@ -343,11 +343,11 @@
     }
   }
 
-  // ── Arcs par-dessus le globe (comme MADE) ──
+  // ── Arcs par-dessus le globe (comme MADE) — lents et fluides ──
   const arcs = [
-    { latA: 0.35, lonA: -0.6, latB: 0.25, lonB: 0.8, height: 0.35 },
-    { latA: 0.45, lonA: -0.3, latB: 0.15, lonB: 1.1, height: 0.28 },
-    { latA: 0.55, lonA: -0.8, latB: 0.3,  lonB: 0.5, height: 0.42 },
+    { latA: 0.3, lonA: -0.5, latB: 0.2, lonB: 0.7, height: 0.32, speed: 0.08, phase: 0 },
+    { latA: 0.4, lonA: -0.2, latB: 0.15, lonB: 0.9, height: 0.25, speed: 0.06, phase: 2.1 },
+    { latA: 0.5, lonA: -0.7, latB: 0.25, lonB: 0.4, height: 0.38, speed: 0.07, phase: 4.2 },
   ];
 
   // Project 3D sphere point to 2D
@@ -360,43 +360,61 @@
     return { x: cx + x3 * R, y: cy - y3 * R, z: z3 };
   }
 
-  // Draw a quadratic bezier arc between two points on the globe
+  // Draw a smooth bezier arc between two points — LENT et FLUIDE
   function drawArc(arc, rotY, cx, cy, t) {
     const pA = project(arc.latA * Math.PI, arc.lonA * Math.PI, rotY, cx, cy);
     const pB = project(arc.latB * Math.PI, arc.lonB * Math.PI, rotY, cx, cy);
 
-    // Only draw if at least one endpoint is on the visible side
     if (pA.z < -0.3 && pB.z < -0.3) return;
 
     const midX = (pA.x + pB.x) / 2;
     const midY = (pA.y + pB.y) / 2 - R * arc.height;
     const vis = Math.max(pA.z, pB.z, 0);
 
+    // ── Ligne de l'arc — bien visible ──
     ctx.beginPath();
     ctx.moveTo(pA.x, pA.y);
     ctx.quadraticCurveTo(midX, midY, pB.x, pB.y);
     ctx.strokeStyle = '#B691FE';
-    ctx.lineWidth = 1.5;
-    ctx.globalAlpha = 0.15 + vis * 0.35;
+    ctx.lineWidth = 1.2;
+    ctx.globalAlpha = 0.20 + vis * 0.30;
     ctx.stroke();
 
-    // Glowing point animé sur l'arc
-    const progress = (Math.sin(t * 0.4 + arc.height * 5) * 0.5 + 0.5);
-    const tt = progress;
+    // ── Points fixes aux extrémités (A et B) ──
+    [pA, pB].forEach(p => {
+      if (p.z < -0.1) return;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = '#B691FE';
+      ctx.globalAlpha = 0.35 + p.z * 0.3;
+      ctx.fill();
+      // Halo point fixe
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 7, 0, Math.PI * 2);
+      ctx.globalAlpha = 0.06 + p.z * 0.06;
+      ctx.fill();
+    });
+
+    // ── Point lumineux qui voyage LENTEMENT de A à B ──
+    // Mouvement linéaire lent avec rebond doux (aller-retour)
+    const raw = (t * arc.speed + arc.phase) % (Math.PI * 2);
+    const tt = (Math.sin(raw) * 0.5 + 0.5); // 0→1→0 très lent et fluide
+
     const px = (1 - tt) * (1 - tt) * pA.x + 2 * (1 - tt) * tt * midX + tt * tt * pB.x;
     const py = (1 - tt) * (1 - tt) * pA.y + 2 * (1 - tt) * tt * midY + tt * tt * pB.y;
 
+    // Point principal
     ctx.beginPath();
-    ctx.arc(px, py, 3, 0, Math.PI * 2);
-    ctx.fillStyle = '#B691FE';
-    ctx.globalAlpha = 0.5 + vis * 0.4;
+    ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.globalAlpha = 0.6 + vis * 0.3;
     ctx.fill();
 
-    // Halo
+    // Halo doux
     ctx.beginPath();
-    ctx.arc(px, py, 8, 0, Math.PI * 2);
+    ctx.arc(px, py, 10, 0, Math.PI * 2);
     ctx.fillStyle = '#B691FE';
-    ctx.globalAlpha = 0.08 + vis * 0.08;
+    ctx.globalAlpha = 0.06 + vis * 0.06;
     ctx.fill();
   }
 
@@ -404,8 +422,8 @@
     ctx.clearRect(0, 0, w, h);
 
     const cx = w / 2;
-    const cy = h + R * 0.05; // Globe plus visible — on voit ~40% du haut
-    const rotY = t * 0.05;
+    const cy = h + R * 0.05;
+    const rotY = t * 0.025; // Rotation très lente et fluide
 
     // ── 1. Grille de points fond ──
     ctx.fillStyle = '#B691FE';
@@ -422,7 +440,7 @@
       ctx.fill();
     }
 
-    // ── 2. Globe points (latitude) ──
+    // ── 2. Globe points (latitude) — BIEN VISIBLES ──
     for (let i = 1; i < latCount; i++) {
       const phi = (Math.PI * i) / latCount;
       const sp = Math.sin(phi), cp = Math.cos(phi);
@@ -436,16 +454,15 @@
 
         const x = cx + x3 * R;
         const y = cy - y3 * R;
-        if (y > h + 5) continue; // hors viewport
+        if (y > h + 5) continue;
 
-        // Opacité : profondeur Z + atténuation aux bords
         const edge = 1 - Math.pow(1 - z3, 2);
-        const op = 0.06 + edge * 0.28;
+        const op = 0.10 + edge * 0.40;
 
-        const r = isMobile ? 0.7 + z3 * 0.7 : 0.9 + z3 * 0.9;
+        const r = isMobile ? 1.0 + z3 * 1.0 : 1.3 + z3 * 1.2;
 
         ctx.beginPath();
-        ctx.arc(x, y, Math.max(r, 0.3), 0, Math.PI * 2);
+        ctx.arc(x, y, Math.max(r, 0.5), 0, Math.PI * 2);
         ctx.fillStyle = '#B691FE';
         ctx.globalAlpha = op;
         ctx.fill();
@@ -469,12 +486,12 @@
         if (y > h + 5) continue;
 
         const edge = 1 - Math.pow(1 - z3, 2);
-        const op = 0.04 + edge * 0.20;
+        const op = 0.08 + edge * 0.30;
 
-        const r = isMobile ? 0.6 + z3 * 0.5 : 0.7 + z3 * 0.7;
+        const r = isMobile ? 0.8 + z3 * 0.8 : 1.0 + z3 * 1.0;
 
         ctx.beginPath();
-        ctx.arc(x, y, Math.max(r, 0.3), 0, Math.PI * 2);
+        ctx.arc(x, y, Math.max(r, 0.4), 0, Math.PI * 2);
         ctx.fillStyle = '#B691FE';
         ctx.globalAlpha = op;
         ctx.fill();
