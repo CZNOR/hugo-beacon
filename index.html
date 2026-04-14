@@ -318,6 +318,8 @@
   <div class="bag" data-depth="0.85"><img src="sac4.png?v=2" alt=""></div>
   <div class="bag" data-depth="0.3"><img src="sac1.png?v=2" alt=""></div>
   <div class="bag" data-depth="0.25"><img src="sac3.png?v=2" alt=""></div>
+  <div class="bag" data-depth="0.6"><img src="sac2.png?v=2" alt=""></div>
+  <div class="bag" data-depth="0.45"><img src="sac4.png?v=2" alt=""></div>
 </div>
 
 <!-- ── Page content ── -->
@@ -709,16 +711,27 @@
   const gCX = vw / 2;
   const gCY = mob ? vh + 200 : vh + gR * 0.08; // approx
 
-  // Layout : [index, left%, top%, size, type:'float'|'orbit', extraConfig]
-  const configs = [
-    // Flottants haut — élégants, lents, subtils
-    { idx: 0, left: -4, top: 3, size: mob?130:240, type:'float', depth: 0.8 },
-    { idx: 1, left: 70, top: 1, size: mob?110:200, type:'float', depth: 0.65 },
-    { idx: 5, left: 74, top: 14, size: mob?0:100, type:'float', depth: 0.35 },
-    // Orbitants bas — tournent autour du globe
-    { idx: 2, type:'orbit', angle: 0, orbitR: 0.8, speed: 0.04, size: mob?70:150 },
-    { idx: 3, type:'orbit', angle: 2.4, orbitR: 0.9, speed: 0.03, size: mob?90:180 },
-    { idx: 4, type:'orbit', angle: 4.5, orbitR: 0.7, speed: 0.05, size: mob?55:110 },
+  // Layout — sacs répartis partout sur la page, tous visibles mobile
+  const configs = mob ? [
+    // Mobile : 8 sacs petits répartis partout
+    { idx: 0, left: -8, top: 1, size: 100, type:'float', depth: 0.8 },
+    { idx: 1, left: 72, top: 0, size: 85, type:'float', depth: 0.65 },
+    { idx: 2, left: -5, top: 28, size: 65, type:'float', depth: 0.4 },
+    { idx: 3, left: 78, top: 35, size: 70, type:'float', depth: 0.55 },
+    { idx: 4, left: 60, top: 58, size: 55, type:'float', depth: 0.3 },
+    { idx: 5, left: -3, top: 52, size: 50, type:'float', depth: 0.25 },
+    { idx: 6, left: 30, top: 72, size: 45, type:'float', depth: 0.35 },
+    { idx: 7, left: 75, top: 75, size: 55, type:'float', depth: 0.5 },
+  ] : [
+    // Desktop : flottants haut + orbitants bas
+    { idx: 0, left: -4, top: 3, size: 220, type:'float', depth: 0.8 },
+    { idx: 1, left: 72, top: 1, size: 190, type:'float', depth: 0.65 },
+    { idx: 5, left: 78, top: 18, size: 90, type:'float', depth: 0.35 },
+    { idx: 6, left: -2, top: 40, size: 100, type:'float', depth: 0.3 },
+    { idx: 7, left: 82, top: 55, size: 80, type:'float', depth: 0.25 },
+    { idx: 2, type:'orbit', angle: 0, orbitR: 0.8, speed: 0.04, size: 140 },
+    { idx: 3, type:'orbit', angle: 2.4, orbitR: 0.9, speed: 0.03, size: 170 },
+    { idx: 4, type:'orbit', angle: 4.5, orbitR: 0.7, speed: 0.05, size: 100 },
   ];
 
   const floats = [];
