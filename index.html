@@ -26,13 +26,14 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Background depth — noir profond style MADE ── */
+    /* ── Background depth — espace violet-noir ── */
     .bg-depth {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 60% 45% at 10% 5%, rgba(182,145,254,0.06) 0%, transparent 50%),
-        radial-gradient(ellipse 45% 50% at 90% 85%, rgba(182,145,254,0.04) 0%, transparent 45%),
-        radial-gradient(ellipse 80% 40% at 50% 50%, rgba(45,35,46,0.15) 0%, transparent 60%);
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(90,40,130,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 85% 80%, rgba(70,30,110,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 80% at 50% 40%, rgba(30,10,50,0.25) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 70% 20%, rgba(100,50,150,0.06) 0%, transparent 50%);
     }
     /* Globe wireframe */
     .bg-globe {
@@ -325,145 +326,212 @@
   const mob = w <= 480;
   const R = mob ? Math.min(w * 1.3, 480) : Math.min(w * 0.55, 680);
 
-  // ── Mappemonde détaillée — formes réalistes des continents ──
+  // ── Mappemonde réaliste — contours courbes, diagonales, tapering ──
   function isLand(lat, lon) {
-    // ── NORTH AMERICA ──
-    // Alaska
-    if (lat>54&&lat<72&&lon>-170&&lon<-140) return true;
-    if (lat>58&&lat<66&&lon>-170&&lon<-155) return true; // Aleutians
-    // Canada — wide tapered
-    if (lat>60&&lat<83&&lon>-140&&lon<-60) return true;
-    if (lat>48&&lat<62&&lon>-140&&lon<-55) return true;
-    // US mainland — tapers at coasts
-    if (lat>30&&lat<49&&lon>-125&&lon<-67) return true;
-    if (lat>25&&lat<35&&lon>-100&&lon<-80) return true; // S US / Florida approach
-    // Florida
-    if (lat>24&&lat<31&&lon>-88&&lon<-79) return true;
-    // Mexico — tapers south
-    if (lat>22&&lat<33&&lon>-118&&lon<-95) return true;
-    if (lat>15&&lat<24&&lon>-108&&lon<-92) return true;
-    // Central America — narrow
-    if (lat>7&&lat<18&&lon>-92&&lon<-77) return true;
-    // Caribbean — Cuba, Hispaniola
-    if (lat>19&&lat<24&&lon>-85&&lon<-74) return true;
-    // Greenland
-    if (lat>60&&lat<84&&lon>-58&&lon<-15) return true;
+    // Helper : point dans ellipse
+    function inEllipse(la,lo,cla,clo,rlat,rlon){return((la-cla)/rlat)**2+((lo-clo)/rlon)**2<1}
+    // Helper : côté d'une droite (pour tailler des diagonales)
+    function above(la,lo,la1,lo1,la2,lo2){return(lo-lo1)*(la2-la1)-(la-la1)*(lo2-lo1)>0}
 
-    // ── SOUTH AMERICA ──
-    // Colombia/Venezuela
-    if (lat>2&&lat<13&&lon>-79&&lon<-60) return true;
-    // Guyana/Suriname
-    if (lat>1&&lat<9&&lon>-62&&lon<-50) return true;
-    // Brazil — large, tapers south
-    if (lat>-5&&lat<5&&lon>-75&&lon<-34) return true;
-    if (lat>-15&&lat<0&&lon>-72&&lon<-35) return true;
-    if (lat>-25&&lat<-10&&lon>-60&&lon<-35) return true;
-    if (lat>-22&&lat<-5&&lon>-65&&lon<-40) return true;
-    // Peru/Bolivia/Ecuador
-    if (lat>-18&&lat<2&&lon>-82&&lon<-65) return true;
-    // Argentina/Chile — narrows going south
-    if (lat>-40&&lat<-18&&lon>-72&&lon<-55) return true;
-    if (lat>-35&&lat<-22&&lon>-72&&lon<-48) return true;
-    // Patagonia/Chile
-    if (lat>-56&&lat<-35&&lon>-76&&lon<-62) return true;
+    // ── GREENLAND — ellipse inclinée ──
+    if (inEllipse(lat,lon,72,-42,14,22)) return true;
+
+    // ── NORTH AMERICA ──
+    // Alaska body
+    if (lat>58&&lat<72&&lon>-168&&lon<-140) return true;
+    if (lat>54&&lat<62&&lon>-168&&lon<-150) return true;
+    // Canada + US — forme avec côte est diagonale et côte ouest
+    if (lat>48&&lat<83&&lon>-140&&lon<-60) {
+      // Exclure Hudson Bay
+      if (inEllipse(lat,lon,60,-85,8,12)) return false;
+      return true;
+    }
+    // US mainland — côte est en diagonale (NE→SE)
+    if (lat>25&&lat<49&&lon>-125&&lon<-67) {
+      // Côte ouest suit ~-124 au nord, ~-117 au sud
+      const wCoast = -125 + (49 - lat) * 0.2;
+      if (lon < wCoast) return false;
+      // Côte est : diagonale de Maine (-67,45) à Florida (-80,25)
+      const eCoast = -67 - (45 - lat) * 0.65;
+      if (lon > Math.min(-67, eCoast) && lat < 45) return false;
+      return true;
+    }
+    // Floride — péninsule
+    if (lat>24&&lat<31&&lon>-88&&lon<-79.5) return true;
+    // Mexico — taper vers le sud
+    if (lat>14&&lat<33) {
+      const mxW = -118 + (33 - lat) * 0.7;
+      const mxE = -95 + (33 - lat) * 0.5;
+      if (lon>mxW&&lon<mxE&&lat>14) return true;
+    }
+    // Central America — étroit, diagonal
+    if (lat>7&&lat<18&&lon>-92&&lon<-77) {
+      const w = -92 + (18 - lat) * 0.6;
+      if (lon > w) return true;
+    }
+    // Cuba
+    if (lat>19.5&&lat<23.5&&lon>-85&&lon<-74) return true;
+
+    // ── SOUTH AMERICA — triangle qui pointe vers le sud ──
+    // Nord large (Venezuela/Colombia/Guyana)
+    if (lat>0&&lat<13&&lon>-80&&lon<-50) return true;
+    // Brésil — côte est en diagonale
+    if (lat>-15&&lat<2&&lon>-75&&lon<-34) return true;
+    if (lat>-24&&lat<-10) {
+      // Brésil se rétrécit : côte ouest ~-58, côte est diagonale
+      const brE = -34 - (lat + 10) * 0.4;
+      if (lon>-62&&lon<brE) return true;
+    }
+    // Pérou/Bolivie
+    if (lat>-20&&lat<0&&lon>-82&&lon<-65) return true;
+    // Cone sud — taper progressif
+    if (lat>-56&&lat<-20) {
+      const coneW = -76 + (-20 - lat) * 0.25;
+      const coneE = -48 + (-20 - lat) * 0.45;
+      if (lon>coneW&&lon<coneE) return true;
+    }
 
     // ── EUROPE ──
-    // Scandinavia
-    if (lat>55&&lat<72&&lon>4&&lon<32) return true;
-    // UK/Ireland
-    if (lat>50&&lat<60&&lon>-11&&lon<2) return true;
-    // Iceland
-    if (lat>63&&lat<67&&lon>-25&&lon<-13) return true;
-    // W Europe (France, Germany, etc)
-    if (lat>42&&lat<55&&lon>-5&&lon<15) return true;
-    // Iberian Peninsula
+    // Islande — ellipse
+    if (inEllipse(lat,lon,65,-19,2,6)) return true;
+    // UK — ellipse
+    if (inEllipse(lat,lon,54,-2,5,4)) return true;
+    // Irlande — ellipse
+    if (inEllipse(lat,lon,53.5,-8,2,2.5)) return true;
+    // Scandinavie — forme allongée
+    if (lat>57&&lat<72&&lon>4&&lon<32) {
+      const scW = 4 + (lat - 57) * 0.5;
+      if (lon > scW) return true;
+    }
+    // Europe continentale — forme organique
+    if (lat>42&&lat<58&&lon>-5&&lon<25) return true;
+    // Ibérie — péninsule
     if (lat>36&&lat<44&&lon>-10&&lon<4) return true;
-    // Italy
-    if (lat>37&&lat<47&&lon>6&&lon<19) return true;
-    // Balkans/Greece
-    if (lat>35&&lat<47&&lon>13&&lon<30) return true;
-    // E Europe — Poland to Ukraine
-    if (lat>45&&lat<58&&lon>14&&lon<42) return true;
+    // Italie — botte diagonale
+    if (lat>36&&lat<47&&lon>7&&lon<19) {
+      if (lat<42) { // Botte : diagonale SO→NE
+        const itW = 12 + (42 - lat) * 0.6;
+        const itE = 19 - (42 - lat) * 0.8;
+        if (lon>itW&&lon<itE) return true;
+        // Sicile
+        if (inEllipse(lat,lon,37.5,14,1,1.5)) return true;
+        return false;
+      }
+      return true;
+    }
+    // Balkans/Grèce
+    if (lat>35&&lat<47&&lon>19&&lon<30) return true;
+    // E Europe
+    if (lat>44&&lat<58&&lon>20&&lon<42) return true;
 
-    // ── RUSSIA ──
-    if (lat>50&&lat<75&&lon>28&&lon<180) return true;
+    // ── RUSSIE ── longue bande
+    if (lat>50&&lat<75&&lon>28&&lon<180) {
+      // La bande se rétrécit vers l'est en haut
+      const nEdge = 75 - (lon - 28) * 0.02;
+      if (lat < nEdge) return true;
+    }
     if (lat>45&&lat<55&&lon>40&&lon<90) return true;
-    // Kamchatka
-    if (lat>50&&lat<62&&lon>155&&lon<165) return true;
 
-    // ── AFRICA ──
-    // North Africa (wide)
-    if (lat>20&&lat<37&&lon>-18&&lon<35) return true;
-    // NE Africa / Egypt
-    if (lat>22&&lat<32&&lon>24&&lon<38) return true;
-    // West Africa bulge
-    if (lat>4&&lat<22&&lon>-18&&lon<16) return true;
-    // Central Africa
+    // ── AFRIQUE — triangle inversé ──
+    // Nord : large bande (Sahara)
+    if (lat>18&&lat<37&&lon>-18&&lon<35) return true;
+    // NE / Egypte / Corne
+    if (lat>3&&lat<35&&lon>28&&lon<52) {
+      // Corne de l'Afrique pointe vers l'est
+      if (lat>3&&lat<12&&lon>40) {
+        const hornE = 42 + (12 - lat) * 1.2;
+        if (lon < hornE) return true;
+      }
+      if (lat>10&&lon<42) return true;
+      if (lat>20) return true;
+    }
+    // Afrique de l'Ouest — renflement
+    if (lat>4&&lat<20&&lon>-18&&lon<16) {
+      const bulge = -18 + (15 - lat) * 0.3;
+      if (lon > Math.min(bulge, -18)) return true;
+    }
+    // Afrique centrale
     if (lat>-5&&lat<10&&lon>8&&lon<32) return true;
-    // East Africa / Horn
-    if (lat>-2&&lat<15&&lon>28&&lon<52) return true;
-    if (lat>2&&lat<12&&lon>40&&lon<51) return true; // Somalia horn
-    // SE Africa
-    if (lat>-27&&lat<0&&lon>25&&lon<42) return true;
-    // South Africa — tapers
-    if (lat>-35&&lat<-22&&lon>16&&lon<34) return true;
-    // Madagascar
-    if (lat>-26&&lat<-12&&lon>43&&lon<50) return true;
+    // Afrique du Sud — taper vers le bas
+    if (lat>-35&&lat<-5&&lon>15&&lon<42) {
+      const saW = 15 + (-5 - lat) * 0.05;
+      const saE = 42 - (-5 - lat) * 0.30;
+      if (lon>saW&&lon<saE) return true;
+    }
+    // Madagascar — ellipse
+    if (inEllipse(lat,lon,-19,47,7,3)) return true;
 
-    // ── MIDDLE EAST ──
-    if (lat>12&&lat<38&&lon>34&&lon<52) return true;
-    // Arabian Peninsula
-    if (lat>12&&lat<28&&lon>35&&lon<60) return true;
-    // Iran/Afghanistan
-    if (lat>24&&lat<40&&lon>44&&lon<70) return true;
+    // ── ARABIE / MOYEN-ORIENT ──
+    // Péninsule arabique — triangle
+    if (lat>12&&lat<30&&lon>34&&lon<56) {
+      const arE = 56 - (30 - lat) * 0.5;
+      if (lon < arE) return true;
+    }
+    // Iran
+    if (lat>25&&lat<40&&lon>44&&lon<63) return true;
+    // Afghanistan/Pakistan
+    if (lat>24&&lat<38&&lon>60&&lon<72) return true;
 
-    // ── INDIA ──
-    // Main body — triangle tapering south
-    if (lat>20&&lat<30&&lon>68&&lon<90) return true;
-    if (lat>12&&lat<22&&lon>72&&lon<88) return true;
-    if (lat>8&&lat<15&&lon>74&&lon<82) return true; // Southern tip
+    // ── INDE — triangle pointe vers le sud ──
+    if (lat>8&&lat<35&&lon>68&&lon<90) {
+      // Base large en haut, pointe en bas
+      const indW = 68 + Math.max(0, (22 - lat) * 0.6);
+      const indE = 90 - Math.max(0, (22 - lat) * 0.8);
+      if (lon>indW&&lon<indE) return true;
+    }
     // Sri Lanka
-    if (lat>6&&lat<10&&lon>79&&lon<82) return true;
+    if (inEllipse(lat,lon,7.5,80.5,1.5,1)) return true;
 
-    // ── SOUTHEAST ASIA ──
-    // Myanmar/Thailand/Vietnam
+    // ── ASIE DU SUD-EST ──
+    // Myanmar/Thailand/Vietnam — forme en S
     if (lat>10&&lat<28&&lon>92&&lon<110) return true;
-    // Malay Peninsula
-    if (lat>1&&lat<12&&lon>98&&lon<105) return true;
-    // Philippines
-    if (lat>5&&lat<20&&lon>117&&lon<127) return true;
+    // Péninsule malaise — étroite
+    if (lat>1&&lat<10&&lon>99&&lon<105) return true;
+    // Philippines — archipel
+    if (lat>5&&lat<19&&lon>118&&lon<127) return true;
 
-    // ── CHINA / KOREA / JAPAN ──
-    if (lat>22&&lat<45&&lon>100&&lon<125) return true;
-    if (lat>18&&lat<24&&lon>107&&lon<115) return true; // S China
-    // Mongolia
+    // ── CHINE — forme large ──
+    if (lat>22&&lat<45&&lon>98&&lon<123) return true;
+    if (lat>18&&lat<24&&lon>107&&lon<115) return true;
+    // Mongolie
     if (lat>42&&lat<52&&lon>88&&lon<120) return true;
-    // Korean Peninsula
-    if (lat>33&&lat<43&&lon>124&&lon<131) return true;
-    // Japan
-    if (lat>30&&lat<46&&lon>129&&lon<146) return true;
+    // Corée
+    if (lat>33&&lat<43&&lon>124&&lon<130) return true;
+    // Japon — archipel en arc
+    if (lat>30&&lat<35&&lon>129&&lon<134) return true; // Kyushu/Shikoku
+    if (lat>34&&lat<42&&lon>132&&lon<141) return true; // Honshu
+    if (lat>41&&lat<46&&lon>139&&lon<146) return true; // Hokkaido
     // Taiwan
-    if (lat>22&&lat<26&&lon>120&&lon<122) return true;
+    if (inEllipse(lat,lon,23.5,121,2,1)) return true;
 
-    // ── INDONESIA ──
-    if (lat>-3&&lat<6&&lon>95&&lon<106) return true; // Sumatra
-    if (lat>-8&&lat<-5&&lon>105&&lon<115) return true; // Java
-    if (lat>-5&&lat<3&&lon>108&&lon<118) return true; // Borneo
-    if (lat>-5&&lat<2&&lon>119&&lon<126) return true; // Sulawesi
-    if (lat>-9&&lat<0&&lon>130&&lon<141) return true; // Papua
+    // ── INDONÉSIE — archipel ──
+    // Sumatra — ellipse diagonale
+    if (inEllipse(lat,lon,0.5,101,4,5)) return true;
+    // Java — ellipse fine
+    if (inEllipse(lat,lon,-7.5,110,1.5,5)) return true;
+    // Bornéo — ellipse
+    if (inEllipse(lat,lon,-0.5,114,4,4.5)) return true;
+    // Sulawesi
+    if (inEllipse(lat,lon,-1.5,122,3,2.5)) return true;
+    // Papouasie — ellipse
+    if (inEllipse(lat,lon,-5,138,4,5)) return true;
 
-    // ── AUSTRALIA ──
-    // Main body
-    if (lat>-38&&lat<-12&&lon>114&&lon<153) return true;
-    // Exclude interior slightly? No, keep it simple but shape it
-    // Tasmania
-    if (lat>-44&&lat<-40&&lon>144&&lon<149) return true;
+    // ── AUSTRALIE — forme avec le golfe de Carpentaria ──
+    if (lat>-39&&lat<-11&&lon>114&&lon<154) {
+      // Creuser le golfe de Carpentaria
+      if (inEllipse(lat,lon,-13,137,4,5)) return false;
+      // Creuser la Great Australian Bight
+      if (inEllipse(lat,lon,-36,130,3,8)) return false;
+      return true;
+    }
+    // Tasmanie
+    if (inEllipse(lat,lon,-42,146.5,2,1.5)) return true;
 
-    // ── NEW ZEALAND ──
-    if (lat>-42&&lat<-34&&lon>170&&lon<179) return true; // North Island
-    if (lat>-47&&lat<-41&&lon>166&&lon<175) return true; // South Island
+    // ── NOUVELLE-ZÉLANDE ──
+    if (inEllipse(lat,lon,-38,176,3,2)) return true; // Île du Nord
+    if (inEllipse(lat,lon,-44,170,3,2.5)) return true; // Île du Sud
 
-    // ── ANTARCTICA ──
+    // ── ANTARCTIQUE ── bande du bas
     if (lat<-65) return true;
 
     return false;
@@ -480,6 +548,19 @@
         globeDots.push({ phi, theta });
       }
     }
+  }
+
+  // ── Étoiles espace ──
+  const stars = [];
+  for (let i = 0; i < (mob ? 80 : 200); i++) {
+    stars.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: 0.3 + Math.random() * 1.2,
+      twinkleSpeed: 0.5 + Math.random() * 2,
+      twinklePhase: Math.random() * Math.PI * 2,
+      baseAlpha: 0.15 + Math.random() * 0.55,
+    });
   }
 
   // ── Grille de points fond ──
@@ -600,6 +681,17 @@
     const cy = h + R * 0.08;
     const rotY = t * 0.015; // Ultra lent — 1 tour en ~7 minutes
 
+    // 0. Étoiles scintillantes
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      const twinkle = 0.5 + 0.5 * Math.sin(t * s.twinkleSpeed + s.twinklePhase);
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = '#fff';
+      ctx.globalAlpha = s.baseAlpha * twinkle;
+      ctx.fill();
+    }
+
     // 1. Grille fond
     ctx.fillStyle = '#888';
     for (let i = 0; i < grid.length; i++) {
@@ -648,92 +740,135 @@
   requestAnimationFrame(draw);
 })();
 
-// ── Sacs flottants ──
+// ── Sacs flottants (haut) + orbitants (bas autour du globe) ──
 (function() {
   const isMobile = window.innerWidth <= 480;
+  const vw = window.innerWidth, vh = window.innerHeight;
   const bags = document.querySelectorAll('.bag');
 
-  // Config initiale par sac : [left%, top%, baseSize_px]
-  const layout = [
-    [-6, 2, 280],   // sac1 haut gauche
-    [68, 0, 240],   // sac2 haut droite
-    [-2, 50, 200],  // sac3 milieu gauche
-    [70, 65, 260],  // sac4 bas droite
-    [25, 78, 140],  // sac1 petit bas centre
-    [72, 12, 120],  // sac3 petit haut droite
+  // Globe center (must match globe draw function)
+  const globeR = isMobile ? Math.min(vw * 1.3, 480) : Math.min(vw * 0.55, 680);
+  const globeCX = vw / 2;
+  const globeCY = vh + globeR * 0.08;
+
+  // ── FLOTTANTS (haut) : sacs 0, 1, 5 ──
+  const floatLayout = [
+    { idx: 0, left: -6, top: 2, size: 280 },
+    { idx: 1, left: 68, top: 0, size: 240 },
+    { idx: 5, left: 72, top: 12, size: 120 },
   ];
 
-  // Chaque sac a son propre « moteur » de mouvement aléatoire
-  const states = [];
-  bags.forEach((bag, i) => {
-    const depth = parseFloat(bag.dataset.depth) || 0.5;
-    const cfg = layout[i] || [50, 50, 150];
-    const sz = isMobile ? cfg[2] * 0.55 : cfg[2];
+  // ── ORBITANTS (bas, autour du globe) : sacs 2, 3, 4 ──
+  const orbitLayout = [
+    { idx: 2, angle: 0, orbitR: 0.75, speed: 0.06, size: 180, vertOff: -0.15 },
+    { idx: 3, angle: 2.2, orbitR: 0.85, speed: 0.045, size: 220, vertOff: -0.05 },
+    { idx: 4, angle: 4.2, orbitR: 0.65, speed: 0.07, size: 130, vertOff: -0.25 },
+  ];
 
-    // Position initiale
-    bag.style.left = cfg[0] + '%';
-    bag.style.top = cfg[1] + '%';
+  const floatStates = [];
+  const orbitStates = [];
+
+  // Init floating bags
+  floatLayout.forEach(cfg => {
+    const bag = bags[cfg.idx];
+    if (!bag) return;
+    const sz = isMobile ? cfg.size * 0.55 : cfg.size;
+    bag.style.left = cfg.left + '%';
+    bag.style.top = cfg.top + '%';
     bag.style.width = sz + 'px';
 
-    // Cacher les 2 derniers en mobile
-    if (isMobile && i >= 4) { bag.style.display = 'none'; return; }
+    if (isMobile && cfg.idx >= 4) { bag.style.display = 'none'; return; }
 
-    // Paramètres de mouvement uniques par sac
-    states.push({
+    floatStates.push({
       el: bag,
-      depth: depth,
-      // 3 fréquences sinusoïdales aléatoires par axe
+      depth: parseFloat(bag.dataset.depth) || 0.5,
       fx: [0.3 + Math.random() * 0.4, 0.15 + Math.random() * 0.3, 0.05 + Math.random() * 0.15],
       fy: [0.25 + Math.random() * 0.35, 0.12 + Math.random() * 0.25, 0.04 + Math.random() * 0.12],
-      fz: [0.1 + Math.random() * 0.2],  // fréquence zoom
-      // Amplitudes
+      fz: [0.1 + Math.random() * 0.2],
       ax: [15 + Math.random() * 25, 8 + Math.random() * 15, 20 + Math.random() * 30],
       ay: [12 + Math.random() * 20, 6 + Math.random() * 12, 15 + Math.random() * 25],
-      az: [0.08 + Math.random() * 0.15], // amplitude zoom (scale)
-      // Phases aléatoires
+      az: [0.08 + Math.random() * 0.15],
       px: [Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2],
       py: [Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2],
       pz: [Math.random() * Math.PI * 2],
     });
   });
 
+  // Init orbiting bags
+  orbitLayout.forEach(cfg => {
+    const bag = bags[cfg.idx];
+    if (!bag) return;
+    const sz = isMobile ? cfg.size * 0.45 : cfg.size;
+    bag.style.width = sz + 'px';
+    bag.style.position = 'absolute';
+    bag.style.left = '0';
+    bag.style.top = '0';
+
+    if (isMobile && cfg.idx >= 4) { bag.style.display = 'none'; return; }
+
+    orbitStates.push({
+      el: bag,
+      angle: cfg.angle,
+      orbitR: cfg.orbitR * globeR,
+      speed: cfg.speed,
+      vertOff: cfg.vertOff * globeR,
+      sz: sz,
+    });
+  });
+
   // Parallaxe souris
   let mx = 0, my = 0;
   document.addEventListener('mousemove', e => {
-    mx = e.clientX / window.innerWidth - 0.5;
-    my = e.clientY / window.innerHeight - 0.5;
+    mx = e.clientX / vw - 0.5;
+    my = e.clientY / vh - 0.5;
   });
 
   const start = performance.now();
 
   function tick(now) {
-    const t = (now - start) / 1000; // temps en secondes
+    const t = (now - start) / 1000;
 
-    states.forEach(s => {
-      // Somme de sinusoïdes = mouvement organique aléatoire
+    // ── Floating bags (haut) ──
+    floatStates.forEach(s => {
       let dx = 0, dy = 0, sc = 1;
       for (let j = 0; j < s.fx.length; j++) {
         dx += Math.sin(t * s.fx[j] + s.px[j]) * s.ax[j];
         dy += Math.sin(t * s.fy[j] + s.py[j]) * s.ay[j];
       }
-      // Zoom oscillant
       sc = 1 + Math.sin(t * s.fz[0] + s.pz[0]) * s.az[0];
-
-      // Parallaxe souris
       dx += mx * 24 * s.depth;
       dy += my * 16 * s.depth;
 
-      // Blur & opacity selon profondeur + zoom
-      // Quand scale < 1 (loin) = blur + opacity basse
-      // Quand scale > 1 (près) = net + opacity haute
-      const closeness = (sc - 1 + s.az[0]) / (s.az[0] * 2); // 0=loin 1=près
-      const blur = (1 - closeness) * 4 * (1 - s.depth); // max 4px quand loin + faible depth
-      const baseOp = 0.45 + s.depth * 0.5; // 0.45 - 0.95
+      const closeness = (sc - 1 + s.az[0]) / (s.az[0] * 2);
+      const blur = (1 - closeness) * 4 * (1 - s.depth);
+      const baseOp = 0.45 + s.depth * 0.5;
       const op = baseOp * (0.7 + closeness * 0.3);
 
       s.el.style.transform = `translate(${dx}px, ${dy}px) scale(${sc.toFixed(3)})`;
       s.el.style.filter = blur > 0.3 ? `blur(${blur.toFixed(1)}px)` : 'none';
       s.el.style.opacity = op.toFixed(2);
+    });
+
+    // ── Orbiting bags (bas, autour du globe) ──
+    orbitStates.forEach(s => {
+      const a = s.angle + t * s.speed;
+      // Ellipse : large en X, écrasée en Y (vue de face, orbite inclinée)
+      const ox = Math.cos(a) * s.orbitR;
+      const oy = Math.sin(a) * s.orbitR * 0.35 + s.vertOff;
+
+      // Z-depth : devant quand sin(a) < 0 (haut de l'ellipse), derrière quand > 0
+      const zDepth = Math.sin(a);
+      const sc = 0.6 + (1 - zDepth) * 0.25; // plus gros devant
+      const op = zDepth > 0.3 ? 0.15 + (1 - zDepth) * 0.3 : 0.45 + (-zDepth + 0.3) * 0.35;
+      const zIdx = zDepth > 0.2 ? -1 : 12; // derrière ou devant le contenu
+
+      const px = globeCX + ox - s.sz / 2;
+      const py = globeCY + oy - s.sz / 2;
+
+      s.el.style.transform = `translate(${px}px, ${py}px) scale(${sc.toFixed(3)})`;
+      s.el.style.opacity = Math.max(0.08, Math.min(op, 0.75)).toFixed(2);
+      s.el.style.zIndex = zIdx;
+      s.el.style.filter = zDepth > 0.2 ? 'blur(2px)' : 'none';
     });
 
     requestAnimationFrame(tick);
