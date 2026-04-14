@@ -325,55 +325,159 @@
   const mob = w <= 480;
   const R = mob ? Math.min(w * 1.3, 480) : Math.min(w * 0.55, 680);
 
-  // ── Mappemonde — continents simplifiés ──
+  // ── Mappemonde détaillée — formes réalistes des continents ──
   function isLand(lat, lon) {
-    // North America + Greenland
-    if (lat>48&&lat<83&&lon>-168&&lon<-55) return true;
-    if (lat>25&&lat<50&&lon>-130&&lon<-65) return true;
-    if (lat>15&&lat<32&&lon>-118&&lon<-85) return true;
+    // ── NORTH AMERICA ──
+    // Alaska
+    if (lat>54&&lat<72&&lon>-170&&lon<-140) return true;
+    if (lat>58&&lat<66&&lon>-170&&lon<-155) return true; // Aleutians
+    // Canada — wide tapered
+    if (lat>60&&lat<83&&lon>-140&&lon<-60) return true;
+    if (lat>48&&lat<62&&lon>-140&&lon<-55) return true;
+    // US mainland — tapers at coasts
+    if (lat>30&&lat<49&&lon>-125&&lon<-67) return true;
+    if (lat>25&&lat<35&&lon>-100&&lon<-80) return true; // S US / Florida approach
+    // Florida
+    if (lat>24&&lat<31&&lon>-88&&lon<-79) return true;
+    // Mexico — tapers south
+    if (lat>22&&lat<33&&lon>-118&&lon<-95) return true;
+    if (lat>15&&lat<24&&lon>-108&&lon<-92) return true;
+    // Central America — narrow
     if (lat>7&&lat<18&&lon>-92&&lon<-77) return true;
-    if (lat>60&&lat<84&&lon>-60&&lon<-15) return true;
-    // South America
-    if (lat>-5&&lat<13&&lon>-82&&lon<-34) return true;
-    if (lat>-24&&lat<0&&lon>-78&&lon<-34) return true;
-    if (lat>-38&&lat<-18&&lon>-72&&lon<-38) return true;
-    if (lat>-56&&lat<-33&&lon>-76&&lon<-62) return true;
-    // Europe
-    if (lat>36&&lat<72&&lon>-12&&lon<42) return true;
-    // Africa
-    if (lat>-2&&lat<37&&lon>-18&&lon<52) return true;
-    if (lat>-35&&lat<2&&lon>12&&lon<52) return true;
-    // Russia / N Asia
-    if (lat>45&&lat<75&&lon>40&&lon<180) return true;
-    // Central + E Asia
-    if (lat>25&&lat<48&&lon>42&&lon<145) return true;
-    // India
-    if (lat>8&&lat<28&&lon>68&&lon<88) return true;
-    // SE Asia
-    if (lat>5&&lat<25&&lon>92&&lon<110) return true;
-    if (lat>22&&lat<42&&lon>100&&lon<125) return true;
+    // Caribbean — Cuba, Hispaniola
+    if (lat>19&&lat<24&&lon>-85&&lon<-74) return true;
+    // Greenland
+    if (lat>60&&lat<84&&lon>-58&&lon<-15) return true;
+
+    // ── SOUTH AMERICA ──
+    // Colombia/Venezuela
+    if (lat>2&&lat<13&&lon>-79&&lon<-60) return true;
+    // Guyana/Suriname
+    if (lat>1&&lat<9&&lon>-62&&lon<-50) return true;
+    // Brazil — large, tapers south
+    if (lat>-5&&lat<5&&lon>-75&&lon<-34) return true;
+    if (lat>-15&&lat<0&&lon>-72&&lon<-35) return true;
+    if (lat>-25&&lat<-10&&lon>-60&&lon<-35) return true;
+    if (lat>-22&&lat<-5&&lon>-65&&lon<-40) return true;
+    // Peru/Bolivia/Ecuador
+    if (lat>-18&&lat<2&&lon>-82&&lon<-65) return true;
+    // Argentina/Chile — narrows going south
+    if (lat>-40&&lat<-18&&lon>-72&&lon<-55) return true;
+    if (lat>-35&&lat<-22&&lon>-72&&lon<-48) return true;
+    // Patagonia/Chile
+    if (lat>-56&&lat<-35&&lon>-76&&lon<-62) return true;
+
+    // ── EUROPE ──
+    // Scandinavia
+    if (lat>55&&lat<72&&lon>4&&lon<32) return true;
+    // UK/Ireland
+    if (lat>50&&lat<60&&lon>-11&&lon<2) return true;
+    // Iceland
+    if (lat>63&&lat<67&&lon>-25&&lon<-13) return true;
+    // W Europe (France, Germany, etc)
+    if (lat>42&&lat<55&&lon>-5&&lon<15) return true;
+    // Iberian Peninsula
+    if (lat>36&&lat<44&&lon>-10&&lon<4) return true;
+    // Italy
+    if (lat>37&&lat<47&&lon>6&&lon<19) return true;
+    // Balkans/Greece
+    if (lat>35&&lat<47&&lon>13&&lon<30) return true;
+    // E Europe — Poland to Ukraine
+    if (lat>45&&lat<58&&lon>14&&lon<42) return true;
+
+    // ── RUSSIA ──
+    if (lat>50&&lat<75&&lon>28&&lon<180) return true;
+    if (lat>45&&lat<55&&lon>40&&lon<90) return true;
+    // Kamchatka
+    if (lat>50&&lat<62&&lon>155&&lon<165) return true;
+
+    // ── AFRICA ──
+    // North Africa (wide)
+    if (lat>20&&lat<37&&lon>-18&&lon<35) return true;
+    // NE Africa / Egypt
+    if (lat>22&&lat<32&&lon>24&&lon<38) return true;
+    // West Africa bulge
+    if (lat>4&&lat<22&&lon>-18&&lon<16) return true;
+    // Central Africa
+    if (lat>-5&&lat<10&&lon>8&&lon<32) return true;
+    // East Africa / Horn
+    if (lat>-2&&lat<15&&lon>28&&lon<52) return true;
+    if (lat>2&&lat<12&&lon>40&&lon<51) return true; // Somalia horn
+    // SE Africa
+    if (lat>-27&&lat<0&&lon>25&&lon<42) return true;
+    // South Africa — tapers
+    if (lat>-35&&lat<-22&&lon>16&&lon<34) return true;
+    // Madagascar
+    if (lat>-26&&lat<-12&&lon>43&&lon<50) return true;
+
+    // ── MIDDLE EAST ──
+    if (lat>12&&lat<38&&lon>34&&lon<52) return true;
+    // Arabian Peninsula
+    if (lat>12&&lat<28&&lon>35&&lon<60) return true;
+    // Iran/Afghanistan
+    if (lat>24&&lat<40&&lon>44&&lon<70) return true;
+
+    // ── INDIA ──
+    // Main body — triangle tapering south
+    if (lat>20&&lat<30&&lon>68&&lon<90) return true;
+    if (lat>12&&lat<22&&lon>72&&lon<88) return true;
+    if (lat>8&&lat<15&&lon>74&&lon<82) return true; // Southern tip
+    // Sri Lanka
+    if (lat>6&&lat<10&&lon>79&&lon<82) return true;
+
+    // ── SOUTHEAST ASIA ──
+    // Myanmar/Thailand/Vietnam
+    if (lat>10&&lat<28&&lon>92&&lon<110) return true;
+    // Malay Peninsula
+    if (lat>1&&lat<12&&lon>98&&lon<105) return true;
+    // Philippines
+    if (lat>5&&lat<20&&lon>117&&lon<127) return true;
+
+    // ── CHINA / KOREA / JAPAN ──
+    if (lat>22&&lat<45&&lon>100&&lon<125) return true;
+    if (lat>18&&lat<24&&lon>107&&lon<115) return true; // S China
+    // Mongolia
+    if (lat>42&&lat<52&&lon>88&&lon<120) return true;
+    // Korean Peninsula
+    if (lat>33&&lat<43&&lon>124&&lon<131) return true;
     // Japan
     if (lat>30&&lat<46&&lon>129&&lon<146) return true;
-    // Indonesia
-    if (lat>-8&&lat<6&&lon>95&&lon<141) return true;
-    // Australia
-    if (lat>-38&&lat<-11&&lon>113&&lon<154) return true;
-    // NZ
-    if (lat>-47&&lat<-34&&lon>166&&lon<178) return true;
-    // Antarctica
-    if (lat<-62) return true;
+    // Taiwan
+    if (lat>22&&lat<26&&lon>120&&lon<122) return true;
+
+    // ── INDONESIA ──
+    if (lat>-3&&lat<6&&lon>95&&lon<106) return true; // Sumatra
+    if (lat>-8&&lat<-5&&lon>105&&lon<115) return true; // Java
+    if (lat>-5&&lat<3&&lon>108&&lon<118) return true; // Borneo
+    if (lat>-5&&lat<2&&lon>119&&lon<126) return true; // Sulawesi
+    if (lat>-9&&lat<0&&lon>130&&lon<141) return true; // Papua
+
+    // ── AUSTRALIA ──
+    // Main body
+    if (lat>-38&&lat<-12&&lon>114&&lon<153) return true;
+    // Exclude interior slightly? No, keep it simple but shape it
+    // Tasmania
+    if (lat>-44&&lat<-40&&lon>144&&lon<149) return true;
+
+    // ── NEW ZEALAND ──
+    if (lat>-42&&lat<-34&&lon>170&&lon<179) return true; // North Island
+    if (lat>-47&&lat<-41&&lon>166&&lon<175) return true; // South Island
+
+    // ── ANTARCTICA ──
+    if (lat<-65) return true;
+
     return false;
   }
 
-  // ── Pré-calculer les points du globe ──
+  // ── Pré-calculer les points du globe — haute densité ──
   const globeDots = [];
-  const step = mob ? 3.5 : 2.5; // degrés entre chaque point
+  const step = mob ? 2.5 : 1.5; // résolution fine pour formes détaillées
   for (let lat = -90; lat <= 90; lat += step) {
     for (let lon = -180; lon < 180; lon += step) {
       if (isLand(lat, lon)) {
         const phi = (90 - lat) * Math.PI / 180;
         const theta = lon * Math.PI / 180;
-        globeDots.push({ phi, theta, lat, lon });
+        globeDots.push({ phi, theta });
       }
     }
   }
@@ -385,11 +489,23 @@
     for (let y = 0; y < h + gs; y += gs)
       grid.push([x, y]);
 
-  // ── Arcs-traînée : A → B sur la surface, la traînée s'efface derrière ──
-  const arcs = [
-    { latA: 48, lonA: 2, latB: 40, lonB: -74, dur: 40, trail: 0.25 },   // Paris → New York (~40s)
-    { latA: 35, lonA: 139, latB: -33, lonB: 151, dur: 50, trail: 0.20 }, // Tokyo → Sydney (~50s)
+  // ── Arcs-traînée : pool de 5 routes, 1-3 visibles en même temps ──
+  const routes = [
+    { latA: 48.8, lonA: 2.3, latB: 40.7, lonB: -74 },      // Paris → New York
+    { latA: 35.6, lonA: 139.7, latB: -33.8, lonB: 151.2 },  // Tokyo → Sydney
+    { latA: 51.5, lonA: -0.1, latB: 1.3, lonB: 103.8 },     // London → Singapore
+    { latA: 55.7, lonA: 37.6, latB: 25.2, lonB: 55.3 },     // Moscou → Dubai
+    { latA: -23.5, lonA: -46.6, latB: 48.8, lonB: 2.3 },    // São Paulo → Paris
   ];
+
+  // Chaque arc a un cycle de vie : apparaît, traverse (1.5s), disparaît, pause aléatoire
+  const arcStates = routes.map((r, i) => ({
+    ...r,
+    dur: 1.5 + Math.random() * 0.8,   // 1.5 à 2.3 secondes pour traverser
+    trail: 0.6 + Math.random() * 0.3,  // longueur traînée (60-90% du chemin)
+    offset: i * 2.5 + Math.random() * 3, // décalage de départ (pas tous en même temps)
+    cycle: 4 + Math.random() * 5,      // cycle complet : traverse + pause = 4-9s
+  }));
 
   // Projette un point sphère → 2D
   function proj(phi, theta, rotY, cx, cy) {
@@ -421,32 +537,33 @@
   }
 
   function drawTrailArc(arc, rotY, cx, cy, t) {
-    const progress = (t % arc.dur) / arc.dur; // 0→1 lent
-    const segments = 60;
+    // Calcul du timing : traverse rapide + pause
+    const tInCycle = ((t - arc.offset) % arc.cycle + arc.cycle) % arc.cycle;
+    const progress = tInCycle / arc.dur; // 0 → 1+ (>1 = en pause, invisible)
+    if (progress > 1.05) return; // en pause → on dessine rien
 
-    // Dessiner la traînée : du début de la traînée jusqu'à la tête
-    const trailStart = Math.max(0, progress - arc.trail);
+    const p = Math.min(progress, 1.0);
+    const segments = 50;
+    const trailStart = Math.max(0, p - arc.trail);
 
+    // Dessiner la traînée
     for (let i = 0; i <= segments; i++) {
-      const frac = trailStart + (progress - trailStart) * (i / segments);
+      const frac = trailStart + (p - trailStart) * (i / segments);
       if (frac < 0 || frac > 1) continue;
 
       const gc = greatCirclePt(arc.latA, arc.lonA, arc.latB, arc.lonB, frac);
-      // Élever le point au-dessus de la surface (arc parabolique)
-      const mid = 1 - Math.pow(2 * frac - 1, 2); // 0 aux bords, 1 au milieu
-      const elev = 1 + mid * 0.15; // monte de 15% au milieu de l'arc
+      const mid = 1 - Math.pow(2 * frac - 1, 2);
+      const elev = 1 + mid * 0.12;
 
-      const p = projLL(gc.lat, gc.lon, rotY, cx, cy);
-      const x = cx + (p.x - cx) * elev;
-      const y = cy + (p.y - cy) * elev;
+      const pt = projLL(gc.lat, gc.lon, rotY, cx, cy);
+      const x = cx + (pt.x - cx) * elev;
+      const y = cy + (pt.y - cy) * elev;
 
-      if (p.z < -0.15) continue;
+      if (pt.z < -0.15) continue;
 
-      // Opacité : forte en tête, s'efface vers la queue
-      const along = (i / segments); // 0=queue, 1=tête
-      const op = along * along * (0.25 + p.z * 0.5);
-
-      const dotR = mob ? 1.2 + along * 1 : 1.5 + along * 1.5;
+      const along = i / segments; // 0=queue 1=tête
+      const op = along * along * (0.35 + pt.z * 0.55);
+      const dotR = mob ? 1 + along * 1.2 : 1.2 + along * 1.8;
 
       ctx.beginPath();
       ctx.arc(x, y, dotR, 0, Math.PI * 2);
@@ -455,24 +572,23 @@
       ctx.fill();
     }
 
-    // Point de tête lumineux
-    const headGC = greatCirclePt(arc.latA, arc.lonA, arc.latB, arc.lonB, progress);
-    const hmid = 1 - Math.pow(2 * progress - 1, 2);
-    const headP = projLL(headGC.lat, headGC.lon, rotY, cx, cy);
-    const hx = cx + (headP.x - cx) * (1 + hmid * 0.15);
-    const hy = cy + (headP.y - cy) * (1 + hmid * 0.15);
+    // Tête lumineuse
+    const hgc = greatCirclePt(arc.latA, arc.lonA, arc.latB, arc.lonB, p);
+    const hm = 1 - Math.pow(2 * p - 1, 2);
+    const hp = projLL(hgc.lat, hgc.lon, rotY, cx, cy);
+    const hx = cx + (hp.x - cx) * (1 + hm * 0.12);
+    const hy = cy + (hp.y - cy) * (1 + hm * 0.12);
 
-    if (headP.z > -0.1) {
+    if (hp.z > -0.1) {
       ctx.beginPath();
       ctx.arc(hx, hy, mob ? 2 : 3, 0, Math.PI * 2);
       ctx.fillStyle = '#fff';
-      ctx.globalAlpha = 0.7 + headP.z * 0.25;
+      ctx.globalAlpha = 0.8 + hp.z * 0.2;
       ctx.fill();
-      // Halo
       ctx.beginPath();
       ctx.arc(hx, hy, mob ? 6 : 10, 0, Math.PI * 2);
       ctx.fillStyle = '#B691FE';
-      ctx.globalAlpha = 0.10;
+      ctx.globalAlpha = 0.12;
       ctx.fill();
     }
   }
@@ -523,8 +639,8 @@
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
 
-    // 4. Arcs-traînée
-    arcs.forEach(a => drawTrailArc(a, rotY, cx, cy, t));
+    // 4. Arcs-traînée (1-3 visibles, pas tous en même temps)
+    arcStates.forEach(a => drawTrailArc(a, rotY, cx, cy, t));
 
     ctx.globalAlpha = 1;
     requestAnimationFrame(draw);
