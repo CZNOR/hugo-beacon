@@ -559,12 +559,25 @@
       ctx.fill();
     }
 
-    // 2. Globe — continents BIEN VISIBLES en pointillé gris clair
+    // 2. Clip demi-globe (hémisphère visible)
+    ctx.save();
+    ctx.beginPath();
+    if (mob) {
+      // Mobile : demi-cercle (haut du globe)
+      ctx.arc(cx, cy, R * 1.01, Math.PI, 0); // demi-cercle haut
+      ctx.closePath();
+    } else {
+      // Desktop : cercle complet
+      ctx.arc(cx, cy, R * 1.01, 0, Math.PI * 2);
+    }
+    ctx.clip();
+
+    // 3. Globe — continents en pointillé gris clair
     for (let i = 0; i < globeDots.length; i++) {
       const d = globeDots[i];
       const p = proj(d.phi, d.theta, rotY, cx, cy);
       if (p.z < -0.05) continue;
-      if (p.y > h + 5) continue;
+      if (p.y > cy + 5) continue;
 
       const edge = 1 - Math.pow(1 - Math.max(p.z, 0), 2);
       const op = 0.15 + edge * 0.55;
@@ -577,7 +590,24 @@
       ctx.fill();
     }
 
-    // 3. Halo globe
+    // 4. Arcs-traînée (1-3 visibles, pas tous en même temps)
+    arcStates.forEach(a => drawTrailArc(a, rotY, cx, cy, t));
+
+    ctx.restore();
+
+    // 5. Contour du globe
+    ctx.beginPath();
+    if (mob) {
+      ctx.arc(cx, cy, R, Math.PI, 0); // demi-cercle
+    } else {
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    }
+    ctx.strokeStyle = 'rgba(182,145,254,0.18)';
+    ctx.lineWidth = 1.2;
+    ctx.globalAlpha = 1;
+    ctx.stroke();
+
+    // 6. Halo subtil
     const grad = ctx.createRadialGradient(cx, cy, R*0.65, cx, cy, R*1.1);
     grad.addColorStop(0, 'rgba(150,150,170,0)');
     grad.addColorStop(0.6, 'rgba(150,150,170,0.02)');
@@ -585,9 +615,6 @@
     ctx.globalAlpha = 1;
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
-
-    // 4. Arcs-traînée (1-3 visibles, pas tous en même temps)
-    arcStates.forEach(a => drawTrailArc(a, rotY, cx, cy, t));
 
     ctx.globalAlpha = 1;
     requestAnimationFrame(draw);
