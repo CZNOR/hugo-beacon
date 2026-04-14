@@ -471,7 +471,7 @@
 
   // ── Pré-calculer les points du globe — haute densité ──
   const globeDots = [];
-  const step = mob ? 2.5 : 1.5; // résolution fine pour formes détaillées
+  const step = mob ? 1.8 : 0.7; // ultra dense — contours très nets
   for (let lat = -90; lat <= 90; lat += step) {
     for (let lon = -180; lon < 180; lon += step) {
       if (isLand(lat, lon)) {
@@ -621,7 +621,7 @@
 
       const edge = 1 - Math.pow(1 - Math.max(p.z, 0), 2);
       const op = 0.15 + edge * 0.55;
-      const r = mob ? 1.0 + p.z * 0.8 : 1.4 + p.z * 1.2;
+      const r = mob ? 0.8 + p.z * 0.6 : 0.8 + p.z * 0.7;
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, Math.max(r, 0.5), 0, Math.PI * 2);
