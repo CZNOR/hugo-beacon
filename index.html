@@ -440,8 +440,8 @@
     cycle: 5 + Math.random() * 3,     // cycle 5-8s
   }));
 
-  // Projette un point sphère → 2D (axe incliné ~30° pour voir plus de terre)
-  const TILT = 0.52; // ~30° — montre plus de continents à chaque rotation
+  // Projette un point sphère → 2D (axe incliné ~40° pour maximiser la visibilité des terres)
+  const TILT = 0.7; // ~40° — vue plongeante, continents toujours visibles
   const cosT = Math.cos(TILT), sinT = Math.sin(TILT);
   function proj(phi, theta, rotY, cx, cy) {
     const sp = Math.sin(phi), cp = Math.cos(phi);
@@ -617,9 +617,9 @@
       const y2 = y * cosT - z * sinT;
 
       const zn = z2 > 0 ? z2 : 0;
-      const falloff = zn * zn * Math.sqrt(zn); // pow(zn, 2.5) optimisé
-      ctx.globalAlpha = 0.02 + falloff * 0.7;
-      const r = 0.3 + zn * (mob ? 0.9 : 1.0);
+      const falloff = zn * zn; // pow(zn, 2) — moins agressif, bords plus visibles
+      ctx.globalAlpha = 0.08 + falloff * 0.62; // 0.08 aux bords → 0.70 au centre
+      const r = 0.4 + zn * (mob ? 0.8 : 0.9);
       ctx.fillRect(cx + x * R - r, cy + y2 * R - r, r * 2, r * 2);
     }
 
