@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <!--
   hugo.bnls — Link in Bio | MADE Agency
-  ─────────────────────────────────────
-  1. PHOTO_PROFIL  → src="avatar.jpg" (déjà en place)
-  2. BG_IMAGE      → fond animé Three.js (en place)
-  3. URL_COACHING  → remplacer href="#coaching"
+  1. PHOTO_PROFIL → src="avatar.jpg"
+  2. URL_COACHING  → href="https://cal.com/team/made-academie/decouverte-e-com"
 -->
 <html lang="fr">
 <head>
@@ -21,7 +19,6 @@
     :root {
       --lavender: #B691FE;
       --bg:       #0D0A0E;
-      --baltic:   #2D232E;
       --tofu:     #F1F0EA;
       --white:    #FFFFFF;
       --font:     'Inter', 'Helvetica Neue', Arial, sans-serif;
@@ -31,27 +28,70 @@
 
     body {
       font-family: var(--font);
-      background: var(--bg);
+      background: #0D0A0E;
       color: var(--tofu);
       min-height: 100vh;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Three.js canvas full screen ── */
-    #bg-canvas {
+    /* ── Fond dégradé animé ── */
+    .bg-gradient {
       position: fixed;
       inset: 0;
-      width: 100%;
-      height: 100%;
       z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 80%, rgba(124,58,237,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 85% 20%, rgba(124,58,237,0.12) 0%, transparent 70%),
+        #0D0A0E;
       pointer-events: none;
+    }
+
+    /* ── Scène SVG bags ── */
+    .scene {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bag-wrap {
+      position: absolute;
+      transform-origin: center center;
+      will-change: transform;
+    }
+
+    .bag-svg {
+      display: block;
+      transform-origin: center center;
+    }
+
+    /* Animations floating — 8 variantes */
+    @keyframes float-a {
+      0%,100% { transform: translateY(0px) translateX(0px); }
+      40%     { transform: translateY(-22px) translateX(6px); }
+      70%     { transform: translateY(-10px) translateX(-4px); }
+    }
+    @keyframes float-b {
+      0%,100% { transform: translateY(0px) translateX(0px); }
+      35%     { transform: translateY(-18px) translateX(-8px); }
+      65%     { transform: translateY(-8px) translateX(5px); }
+    }
+    @keyframes float-c {
+      0%,100% { transform: translateY(0px) translateX(0px); }
+      50%     { transform: translateY(-28px) translateX(3px); }
+    }
+    @keyframes float-d {
+      0%,100% { transform: translateY(0px) translateX(0px); }
+      45%     { transform: translateY(-16px) translateX(-6px); }
+      75%     { transform: translateY(-24px) translateX(8px); }
     }
 
     /* ── Page layout ── */
     .page {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       width: 100%;
       max-width: 480px;
       min-height: 100vh;
@@ -73,48 +113,38 @@
     }
 
     .avatar {
-      width: 80px;
-      height: 80px;
+      width: 80px; height: 80px;
       border-radius: 50%;
       border: 2px solid rgba(182,145,254,0.45);
       overflow: hidden;
-      box-shadow: 0 0 0 4px rgba(182,145,254,0.08), 0 0 32px rgba(182,145,254,0.15);
+      box-shadow: 0 0 0 4px rgba(182,145,254,0.08), 0 0 32px rgba(182,145,254,0.18);
     }
     .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .header__name {
-      font-size: 1.4rem;
-      font-weight: 700;
+      font-size: 1.4rem; font-weight: 700;
       color: var(--white);
       letter-spacing: -0.04em;
       text-transform: lowercase;
     }
-
     .header__tagline {
-      font-size: 0.85rem;
-      color: var(--tofu);
-      opacity: 0.70;
-      line-height: 1.5;
-      max-width: 300px;
+      font-size: 0.85rem; color: var(--tofu);
+      opacity: 0.70; line-height: 1.5; max-width: 300px;
     }
 
     /* ── Cards ── */
     .links { display: flex; flex-direction: column; gap: 12px; width: 100%; }
 
     .btn {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-      padding: 16px 20px;
-      background: rgba(45,35,46,0.75);
+      display: flex; align-items: center; gap: 16px;
+      width: 100%; padding: 16px 20px;
+      background: rgba(45,35,46,0.80);
       border: 1px solid rgba(182,145,254,0.20);
       border-radius: 14px;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      text-decoration: none;
-      cursor: pointer;
-      transition: background .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+      text-decoration: none; cursor: pointer;
+      transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
     }
     .btn:hover {
       background: rgba(182,145,254,0.10);
@@ -125,15 +155,13 @@
     .btn:active { transform: translateY(0); }
 
     .btn__icon {
-      flex-shrink: 0;
-      width: 44px; height: 44px;
+      flex-shrink: 0; width: 44px; height: 44px;
       border-radius: 10px;
       background: rgba(182,145,254,0.15);
       border: 1px solid rgba(182,145,254,0.30);
       display: flex; align-items: center; justify-content: center;
     }
     .btn__icon svg { width: 20px; height: 20px; }
-
     .btn__text { flex: 1; min-width: 0; }
     .btn__title {
       font-size: 0.95rem; font-weight: 600;
@@ -143,13 +171,12 @@
       font-size: 0.78rem; color: var(--tofu);
       opacity: 0.60; margin-top: 2px; line-height: 1.4;
     }
-
     .btn__arrow {
       flex-shrink: 0; width: 16px; height: 16px;
       color: rgba(182,145,254,0.35); fill: none;
       stroke: currentColor; stroke-width: 2;
       stroke-linecap: round; stroke-linejoin: round;
-      transition: color .2s ease, transform .2s ease;
+      transition: color .2s, transform .2s;
     }
     .btn:hover .btn__arrow { color: rgba(182,145,254,.7); transform: translateX(2px); }
 
@@ -160,14 +187,13 @@
       text-align: center; letter-spacing: 0.02em;
     }
 
-    @media (max-width: 375px) {
-      .page { padding: 48px 16px 32px; }
-    }
+    @media (max-width: 375px) { .page { padding: 48px 16px 32px; } }
   </style>
 </head>
 <body>
 
-<canvas id="bg-canvas"></canvas>
+<div class="bg-gradient"></div>
+<div class="scene" id="scene"></div>
 
 <main class="page">
   <header class="header">
@@ -182,7 +208,6 @@
     <a class="btn" href="https://cal.com/team/made-academie/decouverte-e-com" target="_blank" rel="noopener noreferrer">
       <div class="btn__icon">
         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Shopify bag -->
           <rect x="3" y="7" width="14" height="11" rx="2" stroke="#B691FE" stroke-width="1.6"/>
           <path d="M7 7C7 4.79086 8.34315 3 10 3C11.6569 3 13 4.79086 13 7" stroke="#B691FE" stroke-width="1.6" stroke-linecap="round"/>
           <path d="M8 11.5C8 11.5 8.8 13 10 13C11.2 13 12 11.5 12 11.5" stroke="#B691FE" stroke-width="1.4" stroke-linecap="round"/>
@@ -214,190 +239,122 @@
   <footer class="footer">hugo.bnls &copy; 2025</footer>
 </main>
 
-<!-- Three.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function () {
-  const canvas = document.getElementById('bg-canvas');
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0x0D0A0E, 1);
+  // ── SVG Shopify bag : paths exacts du logo officiel, recolorisés violet ──
+  function makeBagSVG(id) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.9 225">
+  <defs>
+    <!-- Filtre neon glow violet intensifié -->
+    <filter id="neon${id}" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="b2"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="22" result="b3"/>
+      <feColorMatrix in="b1" type="matrix"
+        values="0 0 0 0 0.49  0 0 0 0 0.23  0 0 0 0 0.93  0 0 0 2.5 0" result="g1"/>
+      <feColorMatrix in="b2" type="matrix"
+        values="0 0 0 0 0.49  0 0 0 0 0.23  0 0 0 0 0.93  0 0 0 1.5 0" result="g2"/>
+      <feColorMatrix in="b3" type="matrix"
+        values="0 0 0 0 0.49  0 0 0 0 0.23  0 0 0 0 0.93  0 0 0 0.8 0" result="g3"/>
+      <feMerge>
+        <feMergeNode in="g3"/>
+        <feMergeNode in="g2"/>
+        <feMergeNode in="g1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Glow doux pour le S -->
+    <filter id="sglow${id}" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="sg"/>
+      <feMerge><feMergeNode in="sg"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Dégradé face avant -->
+    <linearGradient id="faceGrad${id}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#5B21B6"/>
+    </linearGradient>
+    <!-- Dégradé panneau droit clair -->
+    <linearGradient id="rightGrad${id}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </linearGradient>
+  </defs>
 
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0D0A0E, 0.022);
+  <!-- Corps principal du sac (face avant + structure) -->
+  <path filter="url(#neon${id})" fill="url(#faceGrad${id})"
+    d="M128.16,28.85c-2.41-7.63-6.14-13.83-12-18.5-3.76-3-8.02-2.86-12.34-4.27-2.92-.95-5.33-5.05-8.37-6.08h-9.69c-.75.87-1.5.99-2.37,1.21-20.89,5.31-33.24,31.56-38.64,53.27l-23.33,7.52c-1.92.62-3.62,1.89-3.93,4.33L0,201.02l82.24,15.33,40.34,7.55c.99.09,1.58.6,1.87,1.1h4l9.43-198.14c-3.05-.41-5.88.81-9.72,1.99ZM99.98,15.92c2.26,7.09,2.94,13.85,2.59,20.9l-19.47,6.05c-.83.26-1.55.39-2.64.05l3.71-10.7c3.92-6.9,8.35-13.4,15.81-16.3ZM82.48,9.87c.38-.09.79-.59,1.03-.92,3.58-.81,7.12-2.18,11.58.13-4.78,2.23-7.56,4.95-10.81,7.96-.02.75-.51,1.31-1.01,1.85-6.54,7.21-9.6,17.04-11.81,27.38l-17.82,5.55c4.16-15.26,15.97-39.06,28.84-41.95ZM96.11,106.01c-4.78-2.17-8.51-3.39-12.41-3.95-8.81-.9-16.99,1.3-18.3,8.58-1.39,7.73,10.04,13.52,18.02,19.52-.04.5.48,1.39.87,1.69,17.05,13.17,13.01,41.95.21,51.26-.5.37-.74,1.29-.99,1.86-16.82,11.15-39.16,6.72-53.14-7.46l5.86-19.51c9.15,7.17,21.9,13.72,28,7.22,2.33-2.5,3-6.33,1.75-9.86-3.42-9.66-18.87-14.34-22.76-27.25-4.49-14.93,1-31.44,13.06-41.18,8.01-6.47,17.58-9.29,27.41-9.85,6.76-.35,13.76.21,21.08,3.15l-8.66,25.78ZM110.37,34.36c.08-7.15-.55-12.84-2.47-19.52,3.71.12,5.53,2.15,7.41,4.26,2.57,3.52,4.21,6.69,6.1,11.81l-11.04,3.45Z"/>
 
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
-  camera.position.set(0, 0, 18);
+  <!-- Panneau ombre droite (profondeur) -->
+  <path fill="#3B0F8C" opacity="0.9"
+    d="M153.46,219.55l-23.28,5.45h-1.73l9.43-198.14c.94.12,2.22.61,3.13,1.53l12.3,12.4.15,178.76Z"/>
 
-  /* ── Lights ── */
-  scene.add(new THREE.AmbientLight(0xB691FE, 0.45));
-  const pl1 = new THREE.PointLight(0xB691FE, 2.5, 100);
-  pl1.position.set(-10, 12, 10); scene.add(pl1);
-  const pl2 = new THREE.PointLight(0x7040C0, 1.8, 80);
-  pl2.position.set(14, -10, 6); scene.add(pl2);
-  const pl3 = new THREE.PointLight(0xffffff, 1.5, 50);
-  pl3.position.set(0, 2, 16); scene.add(pl3);
+  <!-- Panneau brillant droit -->
+  <path fill="url(#rightGrad${id})" opacity="0.85"
+    d="M197.9,210.02l-44.44,9.53-.15-178.76c6.41.24,12.83.58,19.79,1.7l24.8,167.53Z"/>
 
-  /* ── Texture : S Shopify propre, fond violet uni ── */
-  function makeFaceTex() {
-    const c = document.createElement('canvas');
-    c.width = 512; c.height = 512;
-    const ctx = c.getContext('2d');
-    ctx.fillStyle = '#5520AA';
-    ctx.fillRect(0, 0, 512, 512);
-    // S blanc net
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = '800 310px Arial Black, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('S', 256, 265);
-    return new THREE.CanvasTexture(c);
-  }
-  const FACE_TEX = makeFaceTex();
-
-  /* ── Couleurs uniformes violet — pas de rose ── */
-  const C_FRONT = new THREE.MeshLambertMaterial({ map: FACE_TEX });
-  const C_SIDE  = new THREE.MeshLambertMaterial({ color: 0x4A1A9A });
-  const C_DARK  = new THREE.MeshLambertMaterial({ color: 0x33107A });
-  const C_TOP   = new THREE.MeshLambertMaterial({ color: 0x5A20A8 });
-  const C_BACK  = new THREE.MeshLambertMaterial({ color: 0x3A1288 });
-
-  /* ── Bag builder ── */
-  function makeShopifyBag() {
-    const g = new THREE.Group();
-    const W = 2.0, H = 2.0, D = 0.65;
-
-    const bodyGeo = new THREE.BoxGeometry(W, H, D);
-    // BoxGeometry face order: +x, -x, +y(top), -y(bot), +z(front), -z(back)
-    g.add(new THREE.Mesh(bodyGeo, [C_SIDE, C_DARK, C_TOP, C_DARK, C_FRONT, C_BACK]));
-
-    // Arêtes subtiles
-    g.add(new THREE.LineSegments(
-      new THREE.EdgesGeometry(bodyGeo),
-      new THREE.LineBasicMaterial({ color: 0xC8A4FF, transparent: true, opacity: 0.55 })
-    ));
-
-    // Anses — deux boucles symétriques
-    [-0.47, 0.47].forEach(xOff => {
-      const hY = H / 2;
-      const pts = [
-        new THREE.Vector3(xOff - 0.20, hY,        0),
-        new THREE.Vector3(xOff - 0.08, hY + 0.48, 0),
-        new THREE.Vector3(xOff,        hY + 0.62, 0),
-        new THREE.Vector3(xOff + 0.08, hY + 0.48, 0),
-        new THREE.Vector3(xOff + 0.20, hY,        0),
-      ];
-      g.add(new THREE.Mesh(
-        new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 24, 0.048, 10, false),
-        new THREE.MeshLambertMaterial({ color: 0xEEDDFF })
-      ));
-    });
-
-    return g;
+  <!-- Logo S officiel Shopify — blanc avec glow -->
+  <path filter="url(#sglow${id})" fill="#FFFFFF"
+    d="M65.4,110.64c-1.39,7.73,10.04,13.52,18.02,19.52-.04.5.48,1.39.87,1.69,17.05,13.17,13.01,41.95.21,51.26-.5.37-.74,1.29-.99,1.86-16.82,11.15-39.16,6.72-53.14-7.46l5.86-19.51c9.15,7.17,21.9,13.72,28,7.22,2.33-2.5,3-6.33,1.75-9.86-3.42-9.66-18.87-14.34-22.76-27.25-4.49-14.93,1-31.44,13.06-41.18,8.01-6.47,17.58-9.29,27.41-9.85,6.76-.35,13.76.21,21.08,3.15l-8.66,25.78c-4.78-2.17-8.51-3.39-12.41-3.95-8.81-.9-16.99,1.3-18.3,8.58Z"/>
+</svg>`;
   }
 
-  /* ── Spawn bags ── */
-  const bagCfgs = [
-    { x: -8,  y:  4,  z: -7,  s: 1.7,  rs: 0.0028, fa: 0.9,  fs: 0.45 },
-    { x:  7,  y: -3,  z: -5,  s: 1.2,  rs: 0.0042, fa: 1.0,  fs: 0.60 },
-    { x: -4,  y: -8,  z: -12, s: 2.0,  rs: 0.0018, fa: 1.2,  fs: 0.30 },
-    { x: 10,  y:  7,  z: -15, s: 2.4,  rs: 0.0013, fa: 0.7,  fs: 0.38 },
-    { x:  2,  y:  9,  z: -9,  s: 1.3,  rs: 0.0032, fa: 0.8,  fs: 0.55 },
-    { x:-12,  y: -1,  z: -17, s: 2.8,  rs: 0.0010, fa: 1.5,  fs: 0.22 },
-    { x:  5,  y:-11,  z: -13, s: 1.5,  rs: 0.0024, fa: 1.1,  fs: 0.40 },
+  // ── Config de chaque sac : position, taille, rotation 3D, animation ──
+  const bags = [
+    // [left%, top%, width_px, ry_deg, rx_deg, rz_deg, float_anim, duration_s, delay_s, opacity, blur_px]
+    [ -4,   8,  220, -22,   8, -6,  'float-a', 7.0, 0.0, 0.90, 0   ],
+    [ 66,   4,  180,  18,  -6,  8,  'float-b', 6.5, 0.8, 0.85, 0   ],
+    [ 78,  52,  140,  20,  10, -3,  'float-c', 8.0, 1.5, 0.75, 0   ],
+    [ -6,  55,  160, -18,   6,  5,  'float-d', 7.5, 2.2, 0.80, 0   ],
+    [ 30,  72,  110, -12,   4, -4,  'float-a', 9.0, 1.0, 0.70, 0   ],
+    [ 55,  70,   90,  15,  -4,  6,  'float-b', 8.5, 3.0, 0.65, 0   ],
+    [ 82,  18,  100, -25,  12, -8,  'float-c', 7.0, 0.5, 0.60, 2   ],
+    [ 10,  82,   80,  10,   6,  3,  'float-d', 9.5, 2.0, 0.55, 2   ],
   ];
 
-  const bags = [];
-  bagCfgs.forEach(cfg => {
-    const bag = makeShopifyBag();
-    bag.scale.setScalar(cfg.s);
-    bag.position.set(cfg.x, cfg.y, cfg.z);
-    bag.rotation.set(
-      (Math.random() - 0.5) * 0.5,
-      (Math.random() - 0.5) * 1.2,
-      (Math.random() - 0.5) * 0.2
-    );
-    bag.userData = { ...cfg, originY: cfg.y, phase: Math.random() * Math.PI * 2 };
-    scene.add(bag);
-    bags.push(bag);
+  const scene = document.getElementById('scene');
+
+  bags.forEach(([l, t, w, ry, rx, rz, anim, dur, delay, op, blur], i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'bag-wrap';
+    wrap.style.cssText = `
+      left: ${l}%;
+      top: ${t}%;
+      animation: ${anim} ${dur}s ${delay}s ease-in-out infinite;
+    `;
+
+    const inner = document.createElement('div');
+    inner.className = 'bag-svg';
+    inner.style.cssText = `
+      width: ${w}px;
+      transform: perspective(700px) rotateY(${ry}deg) rotateX(${rx}deg) rotateZ(${rz}deg);
+      opacity: ${op};
+      ${blur > 0 ? `filter: blur(${blur}px);` : ''}
+    `;
+    inner.innerHTML = makeBagSVG(i);
+
+    wrap.appendChild(inner);
+    scene.appendChild(wrap);
   });
 
-  /* ── Particles ── */
-  const pCount = 350;
-  const pPos = new Float32Array(pCount * 3);
-  for (let i = 0; i < pCount; i++) {
-    pPos[i*3]   = (Math.random()-0.5)*100;
-    pPos[i*3+1] = (Math.random()-0.5)*80;
-    pPos[i*3+2] = (Math.random()-0.5)*80 - 12;
-  }
-  const pGeo = new THREE.BufferGeometry();
-  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({
-    color: 0xC9A8FF, size: 0.09, transparent: true, opacity: 0.50, sizeAttenuation: true,
-  }));
-  scene.add(particles);
-
-  /* ── Animated gradient bg ── */
-  const gradMat = new THREE.ShaderMaterial({
-    uniforms: { uTime: { value: 0 } },
-    vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
-    fragmentShader: `
-      uniform float uTime; varying vec2 vUv;
-      void main(){
-        float spot1 = exp(-length(vUv - vec2(0.15+sin(uTime*0.11)*0.12, 0.78+cos(uTime*0.09)*0.10))*3.2);
-        float spot2 = exp(-length(vUv - vec2(0.82+cos(uTime*0.08)*0.10, 0.22+sin(uTime*0.10)*0.12))*3.8);
-        float wave  = sin(vUv.x*2.5+uTime*0.2)*cos(vUv.y*2.0-uTime*0.15)*0.5+0.5;
-        vec3 dark   = vec3(0.051,0.039,0.055);
-        vec3 purple = vec3(0.20,0.08,0.35);
-        vec3 col    = mix(dark, purple, spot1*0.55 + spot2*0.45 + wave*0.18);
-        gl_FragColor = vec4(col, 1.0);
-      }
-    `,
-    depthWrite: false,
-  });
-  const gradPlane = new THREE.Mesh(new THREE.PlaneGeometry(100, 80), gradMat);
-  gradPlane.position.z = -32;
-  scene.add(gradPlane);
-
-  /* ── Mouse ── */
-  let mouseX = 0, mouseY = 0;
+  // Parallaxe souris subtile
+  let mx = 0, my = 0;
   document.addEventListener('mousemove', e => {
-    mouseX = (e.clientX / window.innerWidth  - 0.5) * 2;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    mx = (e.clientX / window.innerWidth  - 0.5);
+    my = (e.clientY / window.innerHeight - 0.5);
   });
 
-  /* ── Resize ── */
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-
-  /* ── Loop ── */
-  let t = 0;
-  function animate() {
-    requestAnimationFrame(animate);
-    t += 0.010;
-    gradMat.uniforms.uTime.value = t;
-
-    camera.position.x += (mouseX * 1.8 - camera.position.x) * 0.025;
-    camera.position.y += (-mouseY * 1.2 - camera.position.y) * 0.025;
-    camera.lookAt(0, 0, 0);
-
-    bags.forEach(bag => {
-      const d = bag.userData;
-      bag.rotation.y += d.rs;
-      bag.rotation.x += d.rs * 0.3;
-      bag.position.y = d.originY + Math.sin(t * d.fs + d.phase) * d.fa;
+  const wraps = scene.querySelectorAll('.bag-wrap');
+  let raf;
+  function tick() {
+    wraps.forEach((w, i) => {
+      const depth = 0.4 + (i % 3) * 0.3;
+      const dx = mx * 18 * depth;
+      const dy = my * 12 * depth;
+      w.style.transform = `translate(${dx}px, ${dy}px)`;
     });
-
-    particles.rotation.y = t * 0.012;
-    particles.rotation.x = t * 0.006;
-
-    renderer.render(scene, camera);
+    raf = requestAnimationFrame(tick);
   }
-  animate();
+  tick();
 })();
 </script>
 </body>
