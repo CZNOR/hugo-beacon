@@ -43,8 +43,8 @@
       .bg-globe {
         position: relative;
         width: 100%;
-        height: 360px;
-        margin-top: -40px;
+        height: 440px;
+        margin-top: -20px;
       }
     }
 
@@ -349,9 +349,9 @@
 
   function resize() {
     if (mob) {
-      // Mobile : petit globe dans son conteneur
+      // Mobile : globe entier dans son conteneur
       w = c.parentElement ? c.offsetWidth || window.innerWidth : window.innerWidth;
-      h = 360;
+      h = 440;
     } else {
       w = window.innerWidth;
       h = window.innerHeight;
@@ -443,11 +443,20 @@
     cycle: 4 + Math.random() * 5,      // cycle complet : traverse + pause = 4-9s
   }));
 
-  // Projette un point sphère → 2D
+  // Projette un point sphère → 2D (axe incliné ~23° comme la Terre)
+  const TILT = 0.4; // ~23 degrés d'inclinaison
+  const cosT = Math.cos(TILT), sinT = Math.sin(TILT);
   function proj(phi, theta, rotY, cx, cy) {
     const sp = Math.sin(phi), cp = Math.cos(phi);
     const ct = Math.cos(theta + rotY), st = Math.sin(theta + rotY);
-    return { x: cx + sp * ct * R, y: cy - cp * R, z: sp * st };
+    // Coordonnées 3D sur la sphère
+    const x = sp * ct;
+    const y = -cp;
+    const z = sp * st;
+    // Rotation autour de l'axe X = inclinaison diagonale
+    const y2 = y * cosT - z * sinT;
+    const z2 = y * sinT + z * cosT;
+    return { x: cx + x * R, y: cy + y2 * R, z: z2 };
   }
 
   // Projette un lat/lon en degrés
@@ -533,7 +542,7 @@
     const t = ms / 1000; // convertir ms → secondes
     ctx.clearRect(0, 0, w, h);
     const cx = w / 2;
-    const cy = mob ? h * 0.55 : h + R * 0.08;
+    const cy = mob ? h * 0.5 : h + R * 0.08;
     const rotY = t * 0.015; // Ultra lent — 1 tour en ~7 minutes
 
     // 0. Étoiles scintillantes
@@ -559,17 +568,10 @@
       ctx.fill();
     }
 
-    // 2. Clip demi-globe (hémisphère visible)
+    // 2. Clip globe (cercle complet)
     ctx.save();
     ctx.beginPath();
-    if (mob) {
-      // Mobile : demi-cercle (haut du globe)
-      ctx.arc(cx, cy, R * 1.01, Math.PI, 0); // demi-cercle haut
-      ctx.closePath();
-    } else {
-      // Desktop : cercle complet
-      ctx.arc(cx, cy, R * 1.01, 0, Math.PI * 2);
-    }
+    ctx.arc(cx, cy, R * 1.01, 0, Math.PI * 2);
     ctx.clip();
 
     // 3. Globe — continents en pointillé gris clair
@@ -597,11 +599,7 @@
 
     // 5. Contour du globe
     ctx.beginPath();
-    if (mob) {
-      ctx.arc(cx, cy, R, Math.PI, 0); // demi-cercle
-    } else {
-      ctx.arc(cx, cy, R, 0, Math.PI * 2);
-    }
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
     ctx.strokeStyle = 'rgba(182,145,254,0.18)';
     ctx.lineWidth = 1.2;
     ctx.globalAlpha = 1;
