@@ -687,7 +687,9 @@
       const falloff = zn * zn; // pow(zn, 2) — moins agressif, bords plus visibles
       ctx.globalAlpha = 0.08 + falloff * 0.62; // 0.08 aux bords → 0.70 au centre
       const r = 0.4 + zn * (mob ? 0.8 : 0.9);
-      ctx.fillRect(cx + x * R - r, cy + y2 * R - r, r * 2, r * 2);
+      ctx.beginPath();
+      ctx.arc(cx + x * R, cy + y2 * R, r, 0, PI2);
+      ctx.fill();
     }
 
     // 4. Arcs-traînée
