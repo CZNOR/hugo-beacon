@@ -241,23 +241,13 @@
       .urgency__top { font-size: 12px; }
       .urgency__text { font-size: 11.5px; }
 
-      /* Sacs mobile : plus petits, mieux répartis */
-      .bag:nth-child(1) { width: 160px !important; left: -12% !important; top: 1% !important; opacity: 0.75 !important; }
-      .bag:nth-child(2) { width: 140px !important; right: -8% !important; top: 0% !important; opacity: 0.70 !important; }
-      .bag:nth-child(3) { width: 120px !important; left: -8% !important; top: 55% !important; opacity: 0.60 !important; }
-      .bag:nth-child(4) { width: 150px !important; right: -6% !important; bottom: 3% !important; opacity: 0.65 !important; }
-      /* Cacher les 2 petits sacs en mobile */
-      .bag:nth-child(5),
-      .bag:nth-child(6) { display: none !important; }
+      /* Sacs gérés par JS en mobile */
     }
     @media (max-width: 375px) {
       .page { padding: 80px 16px 48px; }
       .name { font-size: 30px; }
       .avatar { width: 84px; height: 84px; }
-      .bag:nth-child(1) { width: 130px !important; }
-      .bag:nth-child(2) { width: 115px !important; }
-      .bag:nth-child(3) { width: 100px !important; }
-      .bag:nth-child(4) { width: 120px !important; }
+      /* Sacs gérés par JS */
     }
   </style>
 </head>
@@ -615,135 +605,127 @@
   requestAnimationFrame(draw);
 })();
 
-// ── Sacs flottants (haut) + orbitants (bas autour du globe) ──
+// ── Sacs flottants harmonisés ──
 (function() {
-  const isMobile = window.innerWidth <= 480;
+  const mob = window.innerWidth <= 480;
   const vw = window.innerWidth, vh = window.innerHeight;
   const bags = document.querySelectorAll('.bag');
 
-  // Globe center (must match globe draw function)
-  const globeR = isMobile ? Math.min(vw * 1.3, 480) : Math.min(vw * 0.55, 680);
-  const globeCX = vw / 2;
-  const globeCY = vh + globeR * 0.08;
+  // Globe dimensions (doit matcher le globe canvas)
+  const gR = mob ? Math.min(vw * 0.55, 200) : Math.min(vw * 0.55, 680);
+  const gCX = vw / 2;
+  const gCY = mob ? vh + 200 : vh + gR * 0.08; // approx
 
-  // ── FLOTTANTS (haut) : sacs 0, 1, 5 ──
-  const floatLayout = [
-    { idx: 0, left: -6, top: 2, size: 280 },
-    { idx: 1, left: 68, top: 0, size: 240 },
-    { idx: 5, left: 72, top: 12, size: 120 },
+  // Layout : [index, left%, top%, size, type:'float'|'orbit', extraConfig]
+  const configs = [
+    // Flottants haut — élégants, lents, subtils
+    { idx: 0, left: -4, top: 3, size: mob?130:240, type:'float', depth: 0.8 },
+    { idx: 1, left: 70, top: 1, size: mob?110:200, type:'float', depth: 0.65 },
+    { idx: 5, left: 74, top: 14, size: mob?0:100, type:'float', depth: 0.35 },
+    // Orbitants bas — tournent autour du globe
+    { idx: 2, type:'orbit', angle: 0, orbitR: 0.8, speed: 0.04, size: mob?70:150 },
+    { idx: 3, type:'orbit', angle: 2.4, orbitR: 0.9, speed: 0.03, size: mob?90:180 },
+    { idx: 4, type:'orbit', angle: 4.5, orbitR: 0.7, speed: 0.05, size: mob?55:110 },
   ];
 
-  // ── ORBITANTS (bas, autour du globe) : sacs 2, 3, 4 ──
-  const orbitLayout = [
-    { idx: 2, angle: 0, orbitR: 0.75, speed: 0.06, size: 180, vertOff: -0.15 },
-    { idx: 3, angle: 2.2, orbitR: 0.85, speed: 0.045, size: 220, vertOff: -0.05 },
-    { idx: 4, angle: 4.2, orbitR: 0.65, speed: 0.07, size: 130, vertOff: -0.25 },
-  ];
+  const floats = [];
+  const orbits = [];
 
-  const floatStates = [];
-  const orbitStates = [];
-
-  // Init floating bags
-  floatLayout.forEach(cfg => {
+  configs.forEach(cfg => {
     const bag = bags[cfg.idx];
-    if (!bag) return;
-    const sz = isMobile ? cfg.size * 0.55 : cfg.size;
-    bag.style.left = cfg.left + '%';
-    bag.style.top = cfg.top + '%';
-    bag.style.width = sz + 'px';
+    if (!bag || cfg.size <= 0) { if(bag) bag.style.display='none'; return; }
 
-    if (isMobile && cfg.idx >= 4) { bag.style.display = 'none'; return; }
+    bag.style.width = cfg.size + 'px';
 
-    floatStates.push({
-      el: bag,
-      depth: parseFloat(bag.dataset.depth) || 0.5,
-      fx: [0.3 + Math.random() * 0.4, 0.15 + Math.random() * 0.3, 0.05 + Math.random() * 0.15],
-      fy: [0.25 + Math.random() * 0.35, 0.12 + Math.random() * 0.25, 0.04 + Math.random() * 0.12],
-      fz: [0.1 + Math.random() * 0.2],
-      ax: [15 + Math.random() * 25, 8 + Math.random() * 15, 20 + Math.random() * 30],
-      ay: [12 + Math.random() * 20, 6 + Math.random() * 12, 15 + Math.random() * 25],
-      az: [0.08 + Math.random() * 0.15],
-      px: [Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2],
-      py: [Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2],
-      pz: [Math.random() * Math.PI * 2],
-    });
+    if (cfg.type === 'float') {
+      bag.style.left = cfg.left + '%';
+      bag.style.top = cfg.top + '%';
+      floats.push({
+        el: bag, depth: cfg.depth,
+        // Fréquences très lentes = mouvement doux et élégant
+        fx: [0.08 + Math.random()*0.12, 0.04 + Math.random()*0.06],
+        fy: [0.06 + Math.random()*0.10, 0.03 + Math.random()*0.05],
+        fr: [0.03 + Math.random()*0.04], // rotation lente
+        fz: [0.05 + Math.random()*0.07], // respiration scale
+        // Amplitudes douces
+        ax: [8 + Math.random()*12, 5 + Math.random()*8],
+        ay: [6 + Math.random()*10, 4 + Math.random()*7],
+        ar: [3 + Math.random()*5], // degrés de rotation
+        az: [0.03 + Math.random()*0.05], // scale amplitude
+        // Phases
+        px: [Math.random()*6.28, Math.random()*6.28],
+        py: [Math.random()*6.28, Math.random()*6.28],
+        pr: [Math.random()*6.28],
+        pz: [Math.random()*6.28],
+      });
+    } else {
+      bag.style.position = 'absolute';
+      bag.style.left = '0'; bag.style.top = '0';
+      orbits.push({
+        el: bag, angle: cfg.angle, sz: cfg.size,
+        orbitR: cfg.orbitR * gR,
+        speed: cfg.speed,
+      });
+    }
   });
 
-  // Init orbiting bags
-  orbitLayout.forEach(cfg => {
-    const bag = bags[cfg.idx];
-    if (!bag) return;
-    const sz = isMobile ? cfg.size * 0.45 : cfg.size;
-    bag.style.width = sz + 'px';
-    bag.style.position = 'absolute';
-    bag.style.left = '0';
-    bag.style.top = '0';
-
-    if (isMobile && cfg.idx >= 4) { bag.style.display = 'none'; return; }
-
-    orbitStates.push({
-      el: bag,
-      angle: cfg.angle,
-      orbitR: cfg.orbitR * globeR,
-      speed: cfg.speed,
-      vertOff: cfg.vertOff * globeR,
-      sz: sz,
-    });
-  });
-
-  // Parallaxe souris
+  // Parallaxe souris douce
   let mx = 0, my = 0;
   document.addEventListener('mousemove', e => {
     mx = e.clientX / vw - 0.5;
     my = e.clientY / vh - 0.5;
   });
 
-  const start = performance.now();
+  const t0 = performance.now();
 
   function tick(now) {
-    const t = (now - start) / 1000;
+    const t = (now - t0) / 1000;
 
-    // ── Floating bags (haut) ──
-    floatStates.forEach(s => {
-      let dx = 0, dy = 0, sc = 1;
+    // ── Sacs flottants — mouvement lent, organique, subtil ──
+    floats.forEach(s => {
+      let dx = 0, dy = 0;
       for (let j = 0; j < s.fx.length; j++) {
         dx += Math.sin(t * s.fx[j] + s.px[j]) * s.ax[j];
         dy += Math.sin(t * s.fy[j] + s.py[j]) * s.ay[j];
       }
-      sc = 1 + Math.sin(t * s.fz[0] + s.pz[0]) * s.az[0];
-      dx += mx * 24 * s.depth;
-      dy += my * 16 * s.depth;
+      const rot = Math.sin(t * s.fr[0] + s.pr[0]) * s.ar[0];
+      const sc = 1 + Math.sin(t * s.fz[0] + s.pz[0]) * s.az[0];
 
-      const closeness = (sc - 1 + s.az[0]) / (s.az[0] * 2);
-      const blur = (1 - closeness) * 4 * (1 - s.depth);
-      const baseOp = 0.45 + s.depth * 0.5;
-      const op = baseOp * (0.7 + closeness * 0.3);
+      // Parallaxe souris
+      dx += mx * 15 * s.depth;
+      dy += my * 10 * s.depth;
 
-      s.el.style.transform = `translate(${dx}px, ${dy}px) scale(${sc.toFixed(3)})`;
-      s.el.style.filter = blur > 0.3 ? `blur(${blur.toFixed(1)}px)` : 'none';
-      s.el.style.opacity = op.toFixed(2);
+      // Opacité subtile qui respire
+      const breathe = 0.5 + 0.5 * Math.sin(t * 0.4 + s.pz[0]);
+      const op = (0.18 + s.depth * 0.25) * (0.8 + breathe * 0.2);
+      const blur = (1 - s.depth) * 2.5;
+
+      s.el.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) rotate(${rot.toFixed(1)}deg) scale(${sc.toFixed(3)})`;
+      s.el.style.filter = blur > 0.5 ? `blur(${blur.toFixed(1)}px)` : 'none';
+      s.el.style.opacity = op.toFixed(3);
     });
 
-    // ── Orbiting bags (bas, autour du globe) ──
-    orbitStates.forEach(s => {
+    // ── Sacs orbitants — rotation douce autour du globe ──
+    orbits.forEach(s => {
       const a = s.angle + t * s.speed;
-      // Ellipse : large en X, écrasée en Y (vue de face, orbite inclinée)
       const ox = Math.cos(a) * s.orbitR;
-      const oy = Math.sin(a) * s.orbitR * 0.35 + s.vertOff;
+      const oy = Math.sin(a) * s.orbitR * 0.3;
 
-      // Z-depth : devant quand sin(a) < 0 (haut de l'ellipse), derrière quand > 0
-      const zDepth = Math.sin(a);
-      const sc = 0.6 + (1 - zDepth) * 0.25; // plus gros devant
-      const op = zDepth > 0.3 ? 0.15 + (1 - zDepth) * 0.3 : 0.45 + (-zDepth + 0.3) * 0.35;
-      const zIdx = zDepth > 0.2 ? -1 : 12; // derrière ou devant le contenu
+      // Profondeur 3D
+      const zDepth = Math.sin(a); // -1=devant, +1=derrière
+      const sc = 0.55 + (1 - zDepth) * 0.2;
+      const op = zDepth > 0.15 ? 0.05 + (1 - zDepth) * 0.15 : 0.25 + (-zDepth) * 0.18;
+      const blur = zDepth > 0.15 ? 2.5 + zDepth * 2 : 0;
+      const zIdx = zDepth > 0.15 ? -1 : 5;
 
-      const px = globeCX + ox - s.sz / 2;
-      const py = globeCY + oy - s.sz / 2;
+      const px = gCX + ox - s.sz / 2;
+      const py = gCY + oy - s.sz / 2;
+      const rot = Math.sin(a * 0.5) * 8; // légère rotation en orbite
 
-      s.el.style.transform = `translate(${px}px, ${py}px) scale(${sc.toFixed(3)})`;
-      s.el.style.opacity = Math.max(0.08, Math.min(op, 0.75)).toFixed(2);
+      s.el.style.transform = `translate(${px.toFixed(0)}px, ${py.toFixed(0)}px) rotate(${rot.toFixed(1)}deg) scale(${sc.toFixed(3)})`;
+      s.el.style.opacity = Math.max(0.04, Math.min(op, 0.45)).toFixed(3);
       s.el.style.zIndex = zIdx;
-      s.el.style.filter = zDepth > 0.2 ? 'blur(2px)' : 'none';
+      s.el.style.filter = blur > 0.5 ? `blur(${blur.toFixed(1)}px)` : 'none';
     });
 
     requestAnimationFrame(tick);
