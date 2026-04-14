@@ -151,8 +151,7 @@
     .tagline.anim { animation: fadeUp 0.7s 1.5s forwards cubic-bezier(0.16, 1, 0.3, 1); }
     .partner-badge.anim { animation: fadeIn 0.6s 1.6s forwards; }
     .ctas .cta:first-child { opacity: 0; animation: fadeUp 0.7s 1.65s forwards cubic-bezier(0.16, 1, 0.3, 1); }
-    .urgency.anim { animation: fadeUp 0.6s 1.8s forwards cubic-bezier(0.16, 1, 0.3, 1); }
-    .ctas .cta:last-child { opacity: 0; animation: fadeUp 0.7s 1.95s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    .ctas .cta:last-child { opacity: 0; animation: fadeUp 0.7s 1.85s forwards cubic-bezier(0.16, 1, 0.3, 1); }
 
     /* ── CTA buttons — liquid glass ── */
     .ctas { margin-top: 48px; width: 100%; display: flex; flex-direction: column; gap: 16px; }
@@ -243,6 +242,57 @@
       transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1), stroke .3s;
     }
     .cta:hover .cta__arrow { transform: translateX(4px); stroke: rgba(182,145,254,0.65); }
+
+    /* ── Coaching CTA merged with urgency ── */
+    .cta--coaching {
+      flex-direction: column;
+      padding: 0;
+      gap: 0;
+    }
+    .cta--coaching .cta__main {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 20px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    .cta__urgency {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 10px 16px;
+      background: linear-gradient(135deg, rgba(251,191,36,0.08) 0%, rgba(120,83,9,0.04) 100%);
+      border-top: 1px solid rgba(251,191,36,0.10);
+      border-radius: 0 0 28px 28px;
+      position: relative;
+      z-index: 1;
+    }
+    .cta__urgency-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #f59e0b;
+      box-shadow: 0 0 8px rgba(245,158,11,0.50);
+      animation: pulse-dot 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .cta__urgency-text {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #fbbf24;
+    }
+    .cta__urgency-sep {
+      color: rgba(255,255,255,0.15);
+      font-size: 10px;
+    }
+    .cta__urgency-detail {
+      font-size: 10.5px;
+      color: rgba(255,255,255,0.35);
+    }
 
     /* ── Shopify Partner badge ── */
     .partner-badge {
@@ -376,10 +426,10 @@
       .avatar-wrap { margin-bottom: 20px; }
       .partner-badge { margin-top: 18px; }
       .partner-badge img { height: 18px; }
-      .urgency { margin-top: 24px; padding: 14px 16px; gap: 12px; }
-      .urgency__icon { width: 34px; height: 34px; border-radius: 10px; }
-      .urgency__title { font-size: 11.5px; }
-      .urgency__text { font-size: 11px; }
+      .cta--coaching .cta__main { padding: 18px 16px; }
+      .cta__urgency { padding: 8px 12px; gap: 5px; border-radius: 0 0 24px 24px; }
+      .cta__urgency-text { font-size: 10px; }
+      .cta__urgency-detail { font-size: 9.5px; }
       .proof { gap: 7px; margin-top: 22px; }
       .proof__item { padding: 14px 4px 12px; border-radius: 16px; }
       .proof__num { font-size: 19px; }
@@ -487,30 +537,30 @@
   </div>
 
   <nav class="ctas">
-    <a class="cta" href="https://cal.com/team/made-academie/decouverte-e-com" target="_blank" rel="noopener noreferrer">
-      <div class="cta__icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M8 2v4M16 2v4"/>
-          <rect x="3" y="4" width="18" height="18" rx="3"/>
-          <path d="M3 10h18"/>
-          <circle cx="12" cy="15" r="1.5" fill="#B691FE" stroke="none"/>
-        </svg>
+    <a class="cta cta--coaching" href="https://cal.com/team/made-academie/decouverte-e-com" target="_blank" rel="noopener noreferrer">
+      <div class="cta__main">
+        <div class="cta__icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M8 2v4M16 2v4"/>
+            <rect x="3" y="4" width="18" height="18" rx="3"/>
+            <path d="M3 10h18"/>
+            <circle cx="12" cy="15" r="1.5" fill="#B691FE" stroke="none"/>
+          </svg>
+        </div>
+        <div class="cta__text">
+          <span class="cta__label">Coaching E-com</span>
+          <div class="cta__title">Réserve ta session découverte</div>
+          <div class="cta__sub">Postule pour rejoindre nos programmes</div>
+        </div>
+        <svg class="cta__arrow" viewBox="0 0 24 24"><polyline points="9 5 16 12 9 19"/></svg>
       </div>
-      <div class="cta__text">
-        <span class="cta__label">Coaching E-com</span>
-        <div class="cta__title">Réserve ta session découverte</div>
-        <div class="cta__sub">Postule pour rejoindre nos programmes</div>
+      <div class="cta__urgency">
+        <span class="cta__urgency-dot"></span>
+        <span class="cta__urgency-text">5 places / mois</span>
+        <span class="cta__urgency-sep">·</span>
+        <span class="cta__urgency-detail">Réserve ta place dès maintenant</span>
       </div>
-      <svg class="cta__arrow" viewBox="0 0 24 24"><polyline points="9 5 16 12 9 19"/></svg>
     </a>
-    <div class="urgency anim" style="margin-top: -8px;">
-      <div class="urgency__icon"><span class="urgency__dot"></span></div>
-      <div class="urgency__content">
-        <div class="urgency__title">5 places / mois disponibles</div>
-        <div class="urgency__sep"></div>
-        <div class="urgency__text">Chaque accompagnement est pris au sérieux.<br>Anticipe et réserve ta place dès maintenant.</div>
-      </div>
-    </div>
 
     <a class="cta" href="https://instagram.com/hugo.bnls" target="_blank" rel="noopener noreferrer">
       <div class="cta__icon">
