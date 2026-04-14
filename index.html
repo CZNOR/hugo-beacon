@@ -440,8 +440,8 @@
     cycle: 5 + Math.random() * 3,     // cycle 5-8s
   }));
 
-  // Projette un point sphère → 2D (axe incliné ~40° pour maximiser la visibilité des terres)
-  const TILT = 0.7; // ~40° — vue plongeante, continents toujours visibles
+  // Projette un point sphère → 2D (axe incliné inversé pour voir max de terre)
+  const TILT = -0.45; // inclinaison inversée — hémisphère nord visible (+ de continents)
   const cosT = Math.cos(TILT), sinT = Math.sin(TILT);
   function proj(phi, theta, rotY, cx, cy) {
     const sp = Math.sin(phi), cp = Math.cos(phi);
