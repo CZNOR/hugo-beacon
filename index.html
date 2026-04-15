@@ -479,6 +479,20 @@
     @media (max-width: 480px) {
       .footer { margin-top: -100px; height: 100px; }
     }
+
+    /* Desktop: footer fixé en bas */
+    @media (min-width: 481px) {
+      .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin-top: 0;
+        height: 120px;
+        overflow: hidden;
+        opacity: 0.25;
+      }
+    }
   </style>
 </head>
 <body>
