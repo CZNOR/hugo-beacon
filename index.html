@@ -299,12 +299,12 @@
     /* ── Shopify Partner badge ── */
     .partner-badge {
       margin-top: 24px;
-      opacity: 0.45;
+      opacity: 0.9;
       transition: opacity .3s;
     }
-    .partner-badge:hover { opacity: 0.70; }
+    .partner-badge:hover { opacity: 1; }
     .partner-badge img {
-      height: 22px; width: auto;
+      height: 26px; width: auto;
       display: block;
     }
 
@@ -457,9 +457,8 @@
       position: relative;
       z-index: 12;
       pointer-events: none;
-      margin-top: -140px;
-      overflow: hidden;
-      height: 140px;
+      /* hauteur naturelle du logo (ratio viewBox 552:180) pour l'afficher en entier, collé en bas */
+      margin-top: calc(100vw * -0.3261);
     }
     .footer__logo-wrap {
       position: relative;
@@ -476,20 +475,13 @@
       fill: #B691FE;
     }
 
-    @media (max-width: 480px) {
-      .footer { margin-top: -100px; height: 100px; }
-    }
-
-    /* Desktop: footer en bas du scroll, pas visible directement */
+    /* Desktop : le canvas globe est fixed (hauteur de flux nulle), le logo reste en flux normal */
     @media (min-width: 481px) {
       .globe-footer {
         margin-top: 60px;
       }
       .footer {
-        position: relative;
-        margin-top: 80px;
-        height: 300px;
-        opacity: 0.7;
+        margin-top: 0;
       }
     }
   </style>
@@ -529,7 +521,7 @@
 
   <p class="tagline anim">
     Ne lance pas ta marque au hasard.<br>
-    Récupère ta stratégie ici.
+    Réserve ton diagnostic e-com offert.
   </p>
 
   <div class="partner-badge anim">
