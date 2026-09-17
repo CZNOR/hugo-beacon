@@ -15,7 +15,7 @@
   <link rel="icon" href="assets/globe/sac1.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#050507; --ink:#f4f2fb; --muted:#aaa7bc; --line:rgba(255,255,255,.1);
@@ -712,89 +712,175 @@
       .road9 .step p{font-size:14.5px}
     }
 
-    /* ═════════ IPHONE : parcours orienté conversion ═════════ */
+    /* ═════════ STORIA ═════════ */
+    .st-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,5vw,80px);align-items:center}
+    .st-chapters{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+    .st-chapters li{display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 7px;border-radius:100px;font-size:14px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px var(--line)}
+    .st-chapters b{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:#ff5a1f;color:#fff}
+    .st-app{--st:#faf7f2;--sti:#15131a;border-radius:24px;overflow:hidden;background:var(--st);color:var(--sti);box-shadow:0 0 0 1px rgba(255,255,255,.12),0 60px 120px -40px rgba(182,145,254,.45);font-family:var(--sans);letter-spacing:-.01em}
+    .st-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#efeae2;border-bottom:1px solid #e6e0d6}
+    .st-bar i{width:10px;height:10px;border-radius:50%;background:#d9d2c6}
+    .st-bar span{margin:0 auto;font-size:12px;color:#8a8479;padding-right:40px}
+    .st-body{display:grid;grid-template-columns:190px 1fr;min-height:460px}
+    .st-side{padding:18px 12px;border-right:1px solid #ece6dc;display:flex;flex-direction:column;gap:4px}
+    .st-logo{display:flex;align-items:center;gap:8px;margin:0 6px 14px}
+    .st-logo b{font-size:22px;font-weight:600;font-style:italic;letter-spacing:-.04em}
+    .st-ico{width:30px;height:30px;flex:none}.st-ico.sm{width:26px;height:26px}.st-ico.lg-ico{width:52px;height:52px}
+    .st-brand{display:flex;gap:8px;align-items:center;margin:0 4px 14px;font-size:13px}
+    .st-brand span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#efe8dd;font-weight:600}
+    .st-brand b{display:block;font-weight:600}.st-brand small{color:#8a8479;font-size:11px}
+    .st-cap{font-size:12px;color:#8a8479;margin:6px 8px 4px}
+    .st-side button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;font-size:14px;transition:background .3s,box-shadow .3s}
+    .st-side button em{font-style:normal;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;box-shadow:inset 0 0 0 1.5px #cfc7ba;color:#6b655b}
+    .st-side button:hover{background:#f1ebe2}
+    .st-side button.on{background:#f1ebe2;box-shadow:inset 0 0 0 2px #ff6b35}
+    .st-side button.on em{background:#e0447a;color:#fff;box-shadow:none}
+    .st-xp{margin-top:auto;display:flex;flex-wrap:wrap;justify-content:space-between;font-size:12px;padding:12px;border-radius:14px;background:#fff}
+    .st-xp i{flex:0 0 100%;height:5px;border-radius:5px;background:#eee8df;margin-top:8px;overflow:hidden}
+    .st-xp i b{display:block;height:100%;width:0;background:#ff5a1f;transition:width .8s var(--ease)}
+    .st-main{position:relative;padding:22px 26px}
+    .st-view{position:absolute;inset:22px 26px;display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .45s var(--ease),transform .6s var(--ease)}
+    .st-view.on{opacity:1;transform:none;pointer-events:auto}
+    .st-crumb{font-size:13px;color:#8a8479}.st-crumb b{color:var(--sti);font-weight:500}
+    .st-user{align-self:flex-end;max-width:80%;padding:10px 16px;border-radius:16px;background:#efe8dd;font-size:14.5px}
+    .st-msg{display:flex;gap:10px;font-size:14.5px;line-height:1.5}
+    .st-msg small{color:#8a8479}.st-msg p{margin-top:6px}.st-msg b{font-weight:600}
+    .st-link{color:#e8531d;text-decoration:underline;text-underline-offset:3px}
+    .st-input{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:12px 12px 12px 16px;border-radius:16px;background:#fff;font-size:13.5px;color:#9a9489;box-shadow:0 0 0 1px #ece6dc}
+    .st-input i{font-style:normal;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#ff8a65;color:#fff}
+    .st-head{display:flex;gap:14px;align-items:flex-start}
+    .st-head small{font-size:12.5px;color:#6b655b}
+    .st-head h4{font-size:clamp(26px,2.6vw,36px);font-weight:700;letter-spacing:-.05em;line-height:1.05;margin:2px 0 4px}
+    .st-head p{font-size:14.5px;color:#6b655b;font-weight:500;letter-spacing:-.03em}
+    .st-list li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:12px 14px;border-radius:14px;background:#fff;margin-bottom:8px;box-shadow:0 0 0 1px #ece6dc;font-size:14px}
+    .st-list b{font-weight:600}.st-list span{color:#8a8479;font-size:12.5px}
+    .st-list em{grid-row:span 2;align-self:center;font-style:normal;font-weight:600;color:#1f8a80;font-size:15px}
+    .st-names{display:flex;gap:8px}.st-names span{padding:10px 16px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px #ece6dc;font-weight:600;font-size:16px}
+    .st-names span.on{box-shadow:0 0 0 2px #e0447a}
+    .st-palette{display:flex;gap:8px}.st-palette i{flex:1;height:64px;border-radius:14px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+    .st-ads{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .st-ads figure{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:#ddd}
+    .st-ads img{width:100%;height:100%;object-fit:cover}
+    .st-ads span{position:absolute;left:8px;bottom:8px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:100px;background:rgba(255,255,255,.9)}
+    .st-btn{all:unset;align-self:flex-start;margin-top:auto;padding:12px 20px;border-radius:14px;background:#ff5a1f;color:#fff;font-weight:500;font-size:15px}
+    @media (max-width:1080px){.st-grid{grid-template-columns:1fr}}
+
+    /* ═════════ IPHONE V2 : vertical, aéré, sans carrousel ═════════ */
     .m-only{display:none}
     .m-cta{display:none}
+    .grow{clip-path:inset(5% 4% round 40px);transition:clip-path 1.2s var(--ease),opacity .9s var(--ease),transform .9s var(--ease)}
+    .grow.in{clip-path:inset(0 round 40px)}
     @media (max-width:640px){
       .d-only{display:none}
       .m-only{display:block}
-      section{padding-block:52px}
-      .head{margin-bottom:26px}
-      h1{font-size:clamp(36px,10.4vw,44px);line-height:1.03}
-      h2{font-size:clamp(28px,8vw,34px);line-height:1.08}
-      .sub{font-size:16px}
+      .wrap{padding-inline:22px}
+      main>section:not(.hero){padding-block:64px!important}
+      .hero+section{padding-block:28px 8px!important}
+      .head{margin-bottom:30px}
+      h1{font-size:clamp(38px,10.6vw,44px);line-height:1.04}
+      h2{font-size:clamp(30px,8.4vw,34px);line-height:1.08}
+      .head h2{margin:12px 0 12px}
+      .sub{font-size:16px;line-height:1.5}
       .eyebrow{font-size:13px}
 
-      /* hero : tout le message + CTA au premier écran, planète en fond */
-      .hero{position:relative;padding-block:96px 34px;overflow:hidden}
-      .hero .planet{position:absolute;right:-120px;top:70px;width:340px;max-width:none;opacity:.45;margin:0;z-index:0;pointer-events:none}
-      .hero-copy{position:relative;z-index:2}
-      .hero h1{margin:16px 0 12px}
-      .lead{font-size:16.5px;color:rgba(241,240,234,.8)}
-      .hero-tags{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:18px}
-      .hero-tags li{font-size:12.5px;padding:6px 10px 6px 6px}
-      .cta-row{margin-top:20px}
-      .cta-row .btn-ghost{display:none}
-      .cta-row .btn-neon{width:100%;padding:18px;font-size:16px}
-      .trust{margin-top:14px;justify-content:center}
+      /* sections retirées sur iPhone */
+      #pourquoi-ia,#evolue,#tour,.dms,.ia-c,.ia-e,.ia-d .mock-out,.logos,.brands .bcard:nth-child(3),.founders p,.canton-strip,.st-chapters,.hero-tags,.cta-row .btn-ghost,.terrain-grid figure:nth-child(n+2){display:none!important}
 
-      /* chiffres compacts */
-      .stats{grid-template-columns:1fr 1fr;row-gap:18px}
-      .stat .n{font-size:40px}
-      .stat p{font-size:13px}
+      /* hero */
+      .hero{padding-block:112px 0;overflow:hidden}
+      .hero-grid{gap:0}
+      .hero h1{margin:20px 0 16px}
+      .lead{font-size:17px;line-height:1.5;color:rgba(241,240,234,.75)}
+      .cta-row{margin-top:28px}
+      .cta-row .btn-neon{width:100%;padding:19px;font-size:16.5px}
+      .trust{margin-top:18px;justify-content:center}
+      .hero .planet{position:relative;inset:auto;width:100%;max-width:340px;opacity:1;margin:18px auto 0;z-index:0;pointer-events:none}
 
-      /* ce qui a changé : 3 lignes */
-      .shift-row:nth-child(n+5){display:none}
-      .shift-row{padding:14px 16px}
-      .shift-row span{font-size:16px}
+      /* chiffres */
+      .stats{grid-template-columns:1fr 1fr;row-gap:28px}
+      .stat{padding:4px 16px}
+      .stat .n{font-size:46px}
+      .stat p{font-size:13.5px}
 
-      /* carrousels au doigt */
-      .ia-bento,.dash-grid,.road9,.crew{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin-inline:-16px;padding:4px 16px 12px;scrollbar-width:none}
-      .ia-bento::-webkit-scrollbar,.dash-grid::-webkit-scrollbar,.road9::-webkit-scrollbar,.crew::-webkit-scrollbar{display:none}
-      .ia-card{flex:0 0 86%;scroll-snap-align:center;min-height:0}
-      .ia-b .gen{grid-template-columns:1fr}.ia-b .prompt{display:none}.gen-img{min-height:240px}
-      .dash-grid figure{flex:0 0 72%;scroll-snap-align:center;display:block!important}
-      .road9[hidden]{display:none!important}
-      .road9 .step{flex:0 0 78%;scroll-snap-align:start;display:block;padding:20px;border:0;border-radius:22px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--line)}
-      .road9 .step .top{flex-direction:row;justify-content:space-between;align-items:center}
-      .road9 .step h4{margin-top:10px}
-      .crew .member{flex:0 0 30%}
-      .dms .dm{flex:0 0 66%}
-      .ia-bento::after,.road9::after,.dash-grid::after{content:'';flex:0 0 6px}
+      /* en pratique : cartes qui s'empilent au scroll */
+      .ia-bento{display:flex;flex-direction:column;gap:22px}
+      .ia-card{position:sticky;top:92px;padding:24px;border-radius:26px;background:#14111d;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 -20px 40px -10px rgba(0,0,0,.7)}
+      .ia-b{top:104px}.ia-d{top:116px}
+      .ia-card h3{font-size:25px}
+      .ia-b .gen{grid-template-columns:1fr;gap:10px}
+      .gen-img{min-height:230px}
+      .mock-row{font-size:13.5px}
+      .ads{font-size:13px}
 
-      /* CTA intermédiaires */
-      .m-mid{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding:16px 18px;border-radius:20px}
-      .m-mid b{display:block;font-weight:600;font-size:16px;letter-spacing:-.02em}
-      .m-mid span{font-size:13.5px;color:var(--muted)}
-      .m-mid i{font-style:normal;flex:0 0 40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#9f7aea,#6d28d9);color:#fff}
+      /* storia */
+      .st-grid{gap:30px}
+      .st-app{border-radius:22px}
+      .st-bar{padding:8px 12px}
+      .st-body{grid-template-columns:1fr;min-height:0}
+      .st-side{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px;border-right:0;border-bottom:1px solid #ece6dc}
+      .st-logo,.st-brand,.st-cap,.st-xp{display:none}
+      .st-side button{justify-content:center;padding:10px 6px;font-size:14px;background:#fff;box-shadow:0 0 0 1px #ece6dc}
+      .st-side button em{width:20px;height:20px}
+      .st-main{height:440px;padding:0}
+      .st-view{inset:18px}
+      .st-head{gap:10px}
+      .st-ico.lg-ico{width:40px;height:40px}
+      .st-head h4{font-size:26px}
+      .st-head p{font-size:13.5px}
+      .st-msg{font-size:14px}
+      .st-user{font-size:14px}
+      .st-palette i{height:52px}
+
+      /* résultats */
+      .dash-grid{grid-template-columns:1fr 1fr;gap:10px}
+
+      /* méthode : index épuré */
+      .tabs{display:flex;width:100%}
+      .tabs button{flex:1;padding:11px 6px;font-size:13.5px}
+      .road9{display:block}
+      .road9 .step{display:flex;align-items:center;gap:14px;padding:15px 0;border-top:1px solid var(--line)}
+      .road9 .step .top{display:block}
+      .road9 .step .i{font-size:26px;width:40px}
+      .road9 .step .ico3d,.road9 .step p{display:none}
+      .road9 .step h4{font-size:19px;margin:0}
+
+      /* terrain : une vidéo plein cadre */
+      .terrain-grid{display:block;height:500px}
+      .terrain-grid figure:first-child{height:100%}
+      .terrain-card{border-radius:28px}
+      .t-big{font-size:36px}
+      .t-small{font-size:15px}
+      .grow{clip-path:inset(4% 4% round 28px)}.grow.in{clip-path:inset(0 round 28px)}
+
+      /* marques */
+      .brands{gap:16px}
+
+      /* équipe */
+      .founders{gap:10px}
+      .founders h4{font-size:17px}
+      .crew{grid-template-columns:repeat(3,1fr);gap:10px}
+      .crew h4{font-size:14px}
+      .team-label{margin:30px 0 14px}
+
+      /* chine */
+      .canton-hero{min-height:580px;border-radius:28px}
+      .canton h2{font-size:56px}
+      .canton .intro{font-size:16px}
+      .canton-points{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+      .canton-points li{padding:7px 12px;border:0;border-radius:100px;background:rgba(252,165,165,.12)}
+      .canton-points b{font-size:14px}
+
+      /* offres */
+      .tiers2{gap:16px}
+      .tiers2 .feat{order:-1}
+      .tier .incl li{font-size:15px}
 
       /* barre fixe de réservation */
-      .m-cta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;flex-direction:column;align-items:center;gap:4px;padding:10px 10px 8px;border-radius:24px;background:rgba(12,10,20,.92);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 20px 50px rgba(0,0,0,.6);transform:translateY(140%);transition:transform .45s var(--ease)}
+      .m-cta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;flex-direction:column;align-items:center;gap:4px;padding:10px 10px 8px;border-radius:24px;background:rgba(12,10,20,.94);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 20px 50px rgba(0,0,0,.6);transform:translateY(140%);transition:transform .45s var(--ease)}
       .m-cta.show{transform:none}
       .m-cta .btn{width:100%;padding:15px;font-size:16px}
       .m-cta small{font-size:12px;color:var(--muted)}
-      footer{padding-bottom:110px}
-
-      /* sections allégées */
-      .tour{padding-block:48px}
-      .panel{height:430px!important}
-      .evolve{padding:22px;gap:10px}
-      .evolve .sub{display:none}
-      .cadence li{padding:10px 0;font-size:14.5px}.cadence b{font-size:18px}
-      .terrain-grid{height:380px}
-      .t-small{display:none}
-      .team-label{margin:18px 0 10px}
-      .founders p{display:none}
-      .canton-hero{min-height:520px}
-      .canton .intro{font-size:15.5px}
-      .canton-points{display:flex;flex-wrap:wrap;gap:6px}
-      .canton-points li{padding:6px 10px;border:0;border-radius:100px;background:rgba(252,165,165,.12)}
-      .canton-points b{font-size:14px}
-      .canton-strip figure:nth-child(n+3){display:none}
-      .tiers2 .feat{order:-1}
-      .tier .incl li{font-size:14.5px}
-      .logos{display:none}
-      .brands .bcard:nth-child(3){display:none}
+      footer{padding-bottom:120px}
     }
 
   </style>
@@ -808,10 +894,10 @@
     <div class="nav-in glass blur">
       <a href="#top" class="logo" aria-label="MADE Académie"><svg viewBox="-2 0 550 180"><use href="#made-logo"/></svg><i class="dot"></i><small>ACADÉMIE</small></a>
       <nav class="nav-links">
-        <a href="#ia">L'IA en action</a>
+        <a href="#ia">En pratique</a>
         <a href="#resultats">Résultats</a>
         <a href="#roadmap">Méthode</a>
-        <a href="#tour">Plateforme</a>
+        <a href="#storia">Storia</a>
         <a href="#equipe">Équipe</a>
         <a href="#chine">Chine</a>
         <a href="#offres">Offres</a>
@@ -822,7 +908,7 @@
     </div>
   </header>
   <div class="mmenu glass blur" id="mmenu">
-    <a href="#ia">L\'IA en action</a>
+    <a href="#storia">Storia</a>
     <a href="#resultats">Résultats</a>
     <a href="#roadmap">Méthode</a>
     <a href="#tour">Plateforme</a>
@@ -840,18 +926,18 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <span class="pill glass blur rv"><b>Nouvelle Académie</b> Ecom IA · Rentrée 2026</span>
-          <h1 class="rv">Construis une vraie marque ecommerce. <em class="s">Avec l'IA à chaque étape.</em></h1>
-          <p class="lead rv"><span class="d-only">La méthode MADE, de la recherche produit au scale, accélérée par l'IA. Avec un coaching et une équipe qui l'applique tous les jours sur de vraies marques.</span><span class="m-only">Formation et coaching ecommerce, avec l'IA intégrée à chaque étape.</span></p>
+          <span class="pill glass blur rv"><b>Nouvelle Académie</b> Rentrée 2026</span>
+          <h1 class="rv">Construis une vraie marque ecommerce. <em class="s">Deux fois plus vite.</em></h1>
+          <p class="lead rv"><span class="d-only">La méthode MADE, de la recherche produit au scale. Un coach, une équipe qui l'applique chaque jour sur de vraies marques, et l'IA pour faire le travail lourd.</span><span class="m-only">Formation et coaching ecommerce. L'IA fait le travail lourd, ton coach te guide.</span></p>
           <ul class="hero-tags rv">
-            <li><img class="ico3d" src="assets/3d/loupe.webp" alt="">Recherche produit IA</li>
-            <li><img class="ico3d" src="assets/3d/baguette.webp" alt="">Créas et UGC IA</li>
+            <li><img class="ico3d" src="assets/3d/loupe.webp" alt="">Recherche produit</li>
+            <li><img class="ico3d" src="assets/3d/baguette.webp" alt="">Créas et UGC</li>
             <li><img class="ico3d" src="assets/3d/courbe.webp" alt="">Analyse de tes pubs</li>
             <li><img class="ico3d" src="assets/3d/poignee.webp" alt="">Coach dédié</li>
           </ul>
           <div class="cta-row rv">
             <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel gratuit <span class="arr">→</span></a>
-            <a href="#ia" class="btn btn-ghost btn-lg">Voir l'IA en action</a>
+            <a href="#ia" class="btn btn-ghost btn-lg">Voir comment ça marche</a>
           </div>
           <div class="trust rv">
             <div class="avatars"><img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/Guillaume.webp" alt=""><img src="assets/made/team/TheoG.webp" alt=""></div>
@@ -884,9 +970,9 @@
           <p class="sub rv">Une bonne marque repose toujours sur un bon produit, une vraie offre et des chiffres suivis de près. Ce qui change, c'est la vitesse à laquelle tu peux tester, apprendre et produire.</p>
         </div>
         <div class="shift rv">
-          <div class="shift-head"><span></span><b>Sans IA</b><b class="ia">Avec la méthode MADE</b></div>
+          <div class="shift-head"><span></span><b>Avant</b><b class="ia">Avec la méthode MADE</b></div>
           <div class="shift-row"><span>Recherche produit</span><p>Des semaines de veille à la main</p><p class="ia">Avis, concurrents et tendances analysés en quelques heures</p></div>
-          <div class="shift-row"><span>Créas publicitaires</span><p>Un shooting, un monteur, peu de variantes</p><p class="ia">Des dizaines de déclinaisons, UGC IA et hooks à tester</p></div>
+          <div class="shift-row"><span>Créas publicitaires</span><p>Un shooting, un monteur, peu de variantes</p><p class="ia">Des dizaines de déclinaisons, UGC et hooks à tester</p></div>
           <div class="shift-row"><span>Boutique</span><p>Fiches produit écrites une par une</p><p class="ia">Structure, textes et visuels produits, puis optimisés</p></div>
           <div class="shift-row"><span>Publicité</span><p>Lire les tableaux et deviner</p><p class="ia">Créas gagnantes repérées, nouveaux angles proposés</p></div>
           <div class="shift-row"><span>Scale</span><p>Tâches répétitives qui mangent tes journées</p><p class="ia">Rapports, relances et suivi automatisés par des agents</p></div>
@@ -898,9 +984,9 @@
     <section id="ia" style="padding-top:0">
       <div class="wrap">
         <div class="head">
-          <span class="eyebrow rv">L'IA en action</span>
-          <h2 class="rv">Ce que tu fais <em class="s">vraiment avec l'IA.</em></h2>
-          <p class="sub rv">Pas des astuces ChatGPT. Des usages concrets, appliqués à chaque étape de ta marque.</p>
+          <span class="eyebrow rv">En pratique</span>
+          <h2 class="rv">Ce que tu fais <em class="s">concrètement.</em></h2>
+          <p class="sub rv">Pas des astuces ChatGPT. Des usages précis, appliqués à ta marque.</p>
         </div>
         <div class="ia-bento">
           <!-- Recherche produit -->
@@ -920,7 +1006,7 @@
 
           <!-- Créa IA -->
           <article class="ia-card lg rv ia-b">
-            <span class="ia-label">Créas IA</span>
+            <span class="ia-label">Créas</span>
             <h3>Un visuel produit <em class="s">sans shooting.</em></h3>
             <div class="gen">
               <div class="prompt">Sac en verre violet, fond noir, lumière studio, rendu premium</div>
@@ -930,9 +1016,9 @@
 
           <!-- UGC & scripts -->
           <article class="ia-card lg rv ia-c">
-            <span class="ia-label">UGC IA et scripts</span>
+            <span class="ia-label">UGC et scripts</span>
             <h3>10 hooks, <em class="s">3 formats, une journée.</em></h3>
-            <div class="avatar-row"><img src="assets/ia/avatar-ugc.webp" alt="Avatar UGC généré par IA" loading="lazy"><img src="assets/ia/avatar-ugc2.webp" alt="Avatar UGC généré par IA" loading="lazy"><span>Avatars IA<br><small>Personnages fictifs générés</small></span></div>
+            <div class="avatar-row"><img src="assets/ia/avatar-ugc.webp" alt="Avatar UGC généré" loading="lazy"><img src="assets/ia/avatar-ugc2.webp" alt="Avatar UGC généré" loading="lazy"><span>Avatars<br><small>Personnages fictifs générés</small></span></div>
             <ol class="hooks">
               <li><b>01</b>« J'ai arrêté de racheter des gourdes le jour où… »</li>
               <li><b>02</b>« 3 raisons pour lesquelles ta gourde fuit »</li>
@@ -959,12 +1045,78 @@
             <span class="ia-label">Automatisations et agents</span>
             <h3>Les tâches répétitives, <em class="s">en pilote automatique.</em></h3>
             <div class="flow">
-              <span>Commande Shopify</span><i>→</i><span>Relance email IA</span><i>→</i><span>Avis client analysé</span><i>→</i><span class="hl">Rapport du lundi</span>
+              <span>Commande Shopify</span><i>→</i><span>Relance email</span><i>→</i><span>Avis client analysé</span><i>→</i><span class="hl">Rapport du lundi</span>
             </div>
           </article>
         </div>
       </div>
-      <div class="wrap m-only"><a href="#appel" class="m-mid lg"><span><b>Voir ce que l'IA change pour ta marque</b>Appel gratuit de 20 minutes</span><i>→</i></a></div>
+    </section>
+
+    <!-- ═══ STORIA : L'OUTIL MADE ═══ -->
+    <section id="storia" style="padding-top:0">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="st-face" viewBox="0 0 64 64"><rect x="4" y="6" width="56" height="52" rx="18" fill="currentColor"/><circle cx="23" cy="28" r="8" fill="#fff"/><circle cx="41" cy="28" r="8" fill="#fff"/><circle cx="25" cy="29" r="4" fill="#15131a"/><circle cx="43" cy="29" r="4" fill="#15131a"/><path d="M24 42c4 4 12 4 16 0" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="14" cy="40" r="3.5" fill="#fff" opacity=".22"/><circle cx="50" cy="40" r="3.5" fill="#fff" opacity=".22"/></symbol></svg>
+      <div class="wrap st-grid">
+        <div class="st-copy">
+          <span class="eyebrow rv">Inclus dans l'Académie</span>
+          <h2 class="rv">Storia. <em class="s">Ta marque, chapitre par chapitre.</em></h2>
+          <p class="sub rv">Notre outil te guide de zéro à ta première campagne. Tu colles un lien produit, il fait le travail lourd. Ton coach valide avec toi.</p>
+          <ol class="st-chapters rv">
+            <li><b>1</b>Produit</li><li><b>2</b>Marque</li><li><b>3</b>Fournisseurs</li><li><b>4</b>Boutique</li><li><b>5</b>Pubs</li><li><b>6</b>Emails</li><li><b>7</b>Campagnes</li>
+          </ol>
+        </div>
+
+        <div class="st-app rv" id="stApp">
+          <div class="st-bar"><i></i><i></i><i></i><span>storia</span></div>
+          <div class="st-body">
+            <aside class="st-side">
+              <div class="st-logo"><svg class="st-ico" style="color:#15131a"><use href="#st-face"/></svg><b>storia</b></div>
+              <div class="st-brand"><span>M</span><div><b>Ma marque</b><small>Lancement de marque</small></div></div>
+              <div class="st-cap">Chapitres</div>
+              <button class="on" data-v="0"><em>✓</em>Produit</button>
+              <button data-v="1"><em>2</em>Marque</button>
+              <button data-v="2"><em>3</em>Fournisseurs</button>
+              <button data-v="3"><em>5</em>Pubs</button>
+              <div class="st-xp"><span>🚀 Niv. 2</span><span>50 XP</span><i><b></b></i></div>
+            </aside>
+            <div class="st-main">
+              <!-- Produit -->
+              <div class="st-view on">
+                <div class="st-crumb">Ma marque › <b>Accueil</b></div>
+                <div class="st-user">J'ai trouvé ce produit, il vaut le coup ?</div>
+                <div class="st-msg"><svg class="st-ico sm" style="color:#15131a"><use href="#st-face"/></svg><div><small>Storia</small><p>Bonne pioche. <b>1 240 avis analysés</b> chez tes concurrents : les clients se plaignent surtout des fuites.</p><p>Ton angle : <b>« le seul qui tient 2 ans »</b>. Marge estimée <b>18 € par vente</b>.</p><p class="st-link">Ouvrir le chapitre Ta marque →</p></div></div>
+                <div class="st-input">Colle un lien produit, pose une question…<i>↑</i></div>
+              </div>
+              <!-- Marque -->
+              <div class="st-view">
+                <div class="st-head" style="--c:#e0447a"><svg class="st-ico lg-ico" style="color:#e0447a"><use href="#st-face"/></svg><div><small>Chapitre 2 · Marque</small><h4>Ta marque</h4><p>Nom, logo, couleurs. Une identité qui se retient.</p></div></div>
+                <div class="st-names"><span class="on">Aquora</span><span>Tidal</span><span>Nuvo</span></div>
+                <div class="st-palette"><i style="background:#0f3d3e"></i><i style="background:#1f8a80"></i><i style="background:#f4efe6"></i><i style="background:#ff5a1f"></i></div>
+                <button class="st-btn">Valider mon identité →</button>
+              </div>
+              <!-- Fournisseurs -->
+              <div class="st-view">
+                <div class="st-head"><svg class="st-ico lg-ico" style="color:#1f8a80"><use href="#st-face"/></svg><div><small>Chapitre 3 · Fournisseurs</small><h4>Tes fournisseurs</h4><p>Derrière chaque boutique qui tient, quelqu'un expédie à l'heure.</p></div></div>
+                <ul class="st-list">
+                  <li><b>Fournisseur A · Shenzhen</b><span>4,20 € · 8 jours</span><em>+18 €</em></li>
+                  <li><b>Fournisseur B · Yiwu</b><span>3,80 € · 12 jours</span><em>+17 €</em></li>
+                  <li><b>Fournisseur C · Guangzhou</b><span>5,10 € · 6 jours</span><em>+16 €</em></li>
+                </ul>
+                <button class="st-btn">Trouver mes fournisseurs →</button>
+              </div>
+              <!-- Pubs -->
+              <div class="st-view">
+                <div class="st-head"><svg class="st-ico lg-ico" style="color:#8b2d6b"><use href="#st-face"/></svg><div><small>Chapitre 5 · Pubs</small><h4>Tes pubs</h4><p>Ta marque sait qui elle est. Maintenant, on la fait remarquer.</p></div></div>
+                <div class="st-ads">
+                  <figure><img src="assets/hero-3d.webp" alt="" loading="lazy"><span>Visuel</span></figure>
+                  <figure><img src="assets/ia/avatar-ugc.webp" alt="" loading="lazy"><span>UGC</span></figure>
+                  <figure><img src="assets/ia/avatar-ugc2.webp" alt="" loading="lazy"><span>UGC</span></figure>
+                </div>
+                <button class="st-btn">Créer mes 5 pubs →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ═══ 5. DES CAPTURES, PAS DES PROMESSES ═══ -->
@@ -985,7 +1137,6 @@
 
       </div>
       <div class="wrap"><div class="dash-grid" id="dashGrid"></div></div>
-      <div class="wrap m-only"><a href="#appel" class="m-mid lg"><span><b>Tu veux ces résultats ?</b>On regarde ton projet ensemble</span><i>→</i></a></div>
     </section>
 
     <!-- ═══ 6. LE PARCOURS : L'IA À CHAQUE ÉTAPE ═══ -->
@@ -993,30 +1144,30 @@
       <div class="wrap">
         <div class="head">
           <span class="eyebrow rv">La méthode</span>
-          <h2 class="rv">Un parcours ecommerce complet. <em class="s">L'IA à chaque étape.</em></h2>
+          <h2 class="rv">Un parcours ecommerce complet. <em class="s">De l'idée au scale.</em></h2>
           <div class="tabs glass rv" role="tablist">
             <button class="on" data-tab="deb" role="tab" aria-selected="true">Je pars de zéro</button>
             <button data-tab="conf" role="tab" aria-selected="false">J'ai déjà une boutique</button>
           </div>
         </div>
         <div class="road road9" id="road-deb">
-          <div class="step rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/loupe.webp" alt=""></div><h4>Recherche produit</h4><p><b>Avec l'IA :</b> marchés, concurrents, avis clients et tendances analysés pour trouver un vrai angle.</p></div>
-          <div class="step rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/cible.webp" alt=""></div><h4>Validation</h4><p><b>Avec l'IA :</b> offres et messages testés avant d'investir en stock et en pub.</p></div>
-          <div class="step rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/gemme.webp" alt=""></div><h4>Branding</h4><p><b>Avec l'IA :</b> naming, positionnement, identité et storytelling en quelques jours.</p></div>
-          <div class="step rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/sacs.webp" alt=""></div><h4>Sourcing</h4><p><b>Avec l'IA :</b> fournisseurs comparés, échanges traduits, négociation préparée.</p></div>
-          <div class="step rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/laptop.webp" alt=""></div><h4>Boutique Shopify</h4><p><b>Avec l'IA :</b> structure, fiches produit, textes et visuels, puis optimisation.</p></div>
-          <div class="step rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/baguette.webp" alt=""></div><h4>Créas et contenu</h4><p><b>Avec l'IA :</b> images, vidéos, UGC, avatars, voix, scripts et déclinaisons.</p></div>
-          <div class="step rv"><div class="top"><span class="i">07</span><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div><h4>Meta, TikTok et TikTok Shop</h4><p><b>Avec l'IA :</b> créas gagnantes repérées, nouveaux angles, contenu organique à grande échelle.</p></div>
-          <div class="step rv"><div class="top"><span class="i">08</span><img class="ico3d" src="assets/3d/cerveau.webp" alt=""></div><h4>Email et CRM</h4><p><b>Avec l'IA :</b> rédaction, segmentation et automatisations qui tournent seules.</p></div>
-          <div class="step rv"><div class="top"><span class="i">09</span><img class="ico3d" src="assets/3d/couronne.webp" alt=""></div><h4>Scale</h4><p><b>Avec l'IA :</b> données analysées, tâches automatisées, agents IA au quotidien.</p></div>
+          <div class="step rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/loupe.webp" alt=""></div><h4>Recherche produit</h4><p>marchés, concurrents, avis clients et tendances analysés pour trouver un vrai angle.</p></div>
+          <div class="step rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/cible.webp" alt=""></div><h4>Validation</h4><p>offres et messages testés avant d'investir en stock et en pub.</p></div>
+          <div class="step rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/gemme.webp" alt=""></div><h4>Branding</h4><p>naming, positionnement, identité et storytelling en quelques jours.</p></div>
+          <div class="step rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/sacs.webp" alt=""></div><h4>Sourcing</h4><p>fournisseurs comparés, échanges traduits, négociation préparée.</p></div>
+          <div class="step rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/laptop.webp" alt=""></div><h4>Boutique Shopify</h4><p>structure, fiches produit, textes et visuels, puis optimisation.</p></div>
+          <div class="step rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/baguette.webp" alt=""></div><h4>Créas et contenu</h4><p>images, vidéos, UGC, avatars, voix, scripts et déclinaisons.</p></div>
+          <div class="step rv"><div class="top"><span class="i">07</span><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div><h4>Meta, TikTok et TikTok Shop</h4><p>créas gagnantes repérées, nouveaux angles, contenu organique à grande échelle.</p></div>
+          <div class="step rv"><div class="top"><span class="i">08</span><img class="ico3d" src="assets/3d/cerveau.webp" alt=""></div><h4>Email et CRM</h4><p>rédaction, segmentation et automatisations qui tournent seules.</p></div>
+          <div class="step rv"><div class="top"><span class="i">09</span><img class="ico3d" src="assets/3d/couronne.webp" alt=""></div><h4>Scale</h4><p>données analysées, tâches automatisées, agents au quotidien.</p></div>
         </div>
         <div class="road road9" id="road-conf" hidden>
-          <div class="step rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/loupe.webp" alt=""></div><h4>Audit de ta marque</h4><p><b>Avec l'IA :</b> boutique, pubs, avis et marges passés au crible.</p></div>
-          <div class="step rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/courbe.webp" alt=""></div><h4>Conversion</h4><p><b>Avec l'IA :</b> pages et offres réécrites, tests A/B plus rapides.</p></div>
-          <div class="step rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/baguette.webp" alt=""></div><h4>Machine à créas</h4><p><b>Avec l'IA :</b> volume de créas multiplié, UGC IA et itérations chaque semaine.</p></div>
-          <div class="step rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div><h4>Nouveaux canaux</h4><p><b>Avec l'IA :</b> TikTok, TikTok Shop et organique à grande échelle.</p></div>
-          <div class="step rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/sacs.webp" alt=""></div><h4>Marque propre</h4><p><b>Avec l'IA :</b> sourcing direct, packaging et marges optimisées.</p></div>
-          <div class="step rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/robot.webp" alt=""></div><h4>Automatisation</h4><p><b>Avec l'IA :</b> agents, rapports et CRM pour scaler sans t'épuiser.</p></div>
+          <div class="step rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/loupe.webp" alt=""></div><h4>Audit de ta marque</h4><p>boutique, pubs, avis et marges passés au crible.</p></div>
+          <div class="step rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/courbe.webp" alt=""></div><h4>Conversion</h4><p>pages et offres réécrites, tests A/B plus rapides.</p></div>
+          <div class="step rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/baguette.webp" alt=""></div><h4>Machine à créas</h4><p>volume de créas multiplié, UGC et itérations chaque semaine.</p></div>
+          <div class="step rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div><h4>Nouveaux canaux</h4><p>TikTok, TikTok Shop et organique à grande échelle.</p></div>
+          <div class="step rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/sacs.webp" alt=""></div><h4>Marque propre</h4><p>sourcing direct, packaging et marges optimisées.</p></div>
+          <div class="step rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/robot.webp" alt=""></div><h4>Automatisation</h4><p>agents, rapports et CRM pour scaler sans t'épuiser.</p></div>
         </div>
       </div>
     </section>
@@ -1025,17 +1176,17 @@
     <section class="tour" id="tour" aria-label="Visite de l'académie">
       <div class="tour-sticky">
         <div class="floor" aria-hidden="true"></div>
-        <div class="tour-nav glass blur" id="tourNav"><button class="on"><b>01</b>Accueil</button><button><b>02</b>Formations</button><button><b>03</b>Lives</button><button><b>04</b>Studio IA</button><button><b>05</b>Outils</button></div>
+        <div class="tour-nav glass blur" id="tourNav"><button class="on"><b>01</b>Accueil</button><button><b>02</b>Formations</button><button><b>03</b>Lives</button><button><b>04</b>Studio</button><button><b>05</b>Outils</button></div>
         <div class="tour-prog" id="tourProg"></div>
         <div class="tour-head" id="tourHead">
           <span class="eyebrow">Dans l'académie</span>
-          <h2>Ton espace de travail <em class="s">Ecom IA.</em></h2>
+          <h2>Ton espace de travail <em class="s">MADE.</em></h2>
         </div>
         <div class="tour-stage">
         <!-- 1. Accueil -->
         <div class="panel" data-label="01 · Ton plan de la semaine" data-x="-120" data-ry="10">
           <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a class="on"><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Studio IA</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a class="on"><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Studio</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
             <main>
               <div><h5>Salut Karim, on reprend ?</h5><div class="muted">Semaine 6 de ton coaching</div></div>
               <div class="g3">
@@ -1045,7 +1196,7 @@
               </div>
               <div class="card ai-sug"><span class="chip">Assistant MADE</span><b style="color:#fff;display:block;margin-top:6px">Ta créa « UGC hook 02 » tient un CPA de 11 €.</b><div class="muted">Suggestion : 3 nouvelles accroches sur le même angle, à valider avec ton coach jeudi.</div></div>
               <div class="g2">
-                <div class="card"><div class="thumb"><img src="assets/formation/02.8_Decouverte-Meta-Ads.webp" alt="" loading="lazy"></div><b style="color:#fff">Module 7 · Meta Ads avec l'IA</b><div class="pbar"><i style="width:45%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/02.8_Decouverte-Meta-Ads.webp" alt="" loading="lazy"></div><b style="color:#fff">Module 7 · Meta Ads</b><div class="pbar"><i style="width:45%"></i></div></div>
                 <div class="card"><span class="chip">Prochain live</span><b style="color:#fff;display:block;margin-top:6px">20 créas générées en direct</b><div class="muted">Jeudi 18h</div></div>
               </div>
             </main>
@@ -1055,13 +1206,13 @@
         <!-- 2. Formations -->
         <div class="panel" data-label="02 · Les formations" data-x="140" data-ry="-12">
           <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a class="on"><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Studio IA</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a class="on"><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Studio</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
             <main>
               <div><h5>Formations</h5><div class="muted">Nouveaux modules chaque mois</div></div>
               <div class="g3">
-                <div class="card"><div class="thumb"><img src="assets/formation/03_Module_Recherche-produit.webp" alt="" loading="lazy"></div><span class="chip">IA</span><b style="color:#fff;display:block">Recherche produit et analyse d'avis</b><div class="pbar"><i style="width:100%"></i></div></div>
-                <div class="card"><div class="thumb"><img src="assets/formation/02_Module_Introduction-Fondation.webp" alt="" loading="lazy"></div><span class="chip">IA</span><b style="color:#fff;display:block">Branding et boutique Shopify</b><div class="pbar"><i style="width:72%"></i></div></div>
-                <div class="card"><div class="thumb"><img src="assets/formation/02.9_Analyse-de-la-marque-Boku.webp" alt="" loading="lazy"></div><span class="chip">Nouveau</span><b style="color:#fff;display:block">Créas, UGC IA et avatars</b><div class="pbar"><i style="width:18%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/03_Module_Recherche-produit.webp" alt="" loading="lazy"></div><span class="chip">À jour</span><b style="color:#fff;display:block">Recherche produit et analyse d'avis</b><div class="pbar"><i style="width:100%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/02_Module_Introduction-Fondation.webp" alt="" loading="lazy"></div><span class="chip">À jour</span><b style="color:#fff;display:block">Branding et boutique Shopify</b><div class="pbar"><i style="width:72%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/02.9_Analyse-de-la-marque-Boku.webp" alt="" loading="lazy"></div><span class="chip">Nouveau</span><b style="color:#fff;display:block">Créas, UGC et avatars</b><div class="pbar"><i style="width:18%"></i></div></div>
               </div>
               <div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><b style="color:#fff">TikTok Shop : contenu, créateurs et lives</b><div class="muted">Ajouté ce mois · 9 leçons</div></div><span class="chip">Commencer</span></div>
             </main>
@@ -1071,12 +1222,12 @@
         <!-- 3. Lives -->
         <div class="panel" data-label="03 · Les lives" data-x="-140" data-ry="12">
           <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a class="on"><i></i>Lives</a><a><i></i>Studio IA</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a class="on"><i></i>Lives</a><a><i></i>Studio</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
             <main>
-              <div class="player"><video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" muted loop playsinline preload="none"></video><span class="lb">EN DIRECT</span><span class="pt">On analyse vos pubs avec l'IA</span></div>
+              <div class="player"><video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" muted loop playsinline preload="none"></video><span class="lb">EN DIRECT</span><span class="pt">On analyse vos pubs en direct</span></div>
               <div class="g3">
                 <div class="card"><div class="muted">Replay</div><b style="color:#fff">25 205 € en 24 h, le lancement décortiqué</b></div>
-                <div class="card"><div class="muted">Replay</div><b style="color:#fff">UGC IA : ce qui convertit vraiment</b></div>
+                <div class="card"><div class="muted">Replay</div><b style="color:#fff">UGC : ce qui convertit vraiment</b></div>
                 <div class="card"><div class="muted">Replay</div><b style="color:#fff">Préparer une négociation fournisseur</b></div>
               </div>
             </main>
@@ -1084,14 +1235,14 @@
         </div>
 
         <!-- 4. Studio IA -->
-        <div class="panel" data-label="04 · Le studio IA" data-x="140" data-ry="-10">
+        <div class="panel" data-label="04 · Le studio" data-x="140" data-ry="-10">
           <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a class="on"><i></i>Studio IA</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a class="on"><i></i>Studio</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
             <main>
-              <div><h5>Studio IA</h5><div class="muted">Workflows prêts à l'emploi, testés par l'équipe</div></div>
+              <div><h5>Studio</h5><div class="muted">Workflows prêts à l'emploi, testés par l'équipe</div></div>
               <div class="g2">
                 <div class="card studio-img"><img src="assets/hero-3d.webp" alt="" loading="lazy"><div><span class="chip">Visuel produit</span><div class="muted">4 variantes générées</div></div></div>
-                <div class="card" style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:8px"><img class="av-mini" src="assets/ia/avatar-ugc.webp" alt="" loading="lazy"><span class="chip" style="margin:0">Script UGC · avatar IA</span></div><b style="color:#fff">« J'ai arrêté de racheter des gourdes le jour où… »</b><div class="muted">Hook · problème · preuve · appel à l'action</div><div class="voice"><span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Voix off · 0:24</div></div>
+                <div class="card" style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:8px"><img class="av-mini" src="assets/ia/avatar-ugc.webp" alt="" loading="lazy"><span class="chip" style="margin:0">Script UGC · avatar</span></div><b style="color:#fff">« J'ai arrêté de racheter des gourdes le jour où… »</b><div class="muted">Hook · problème · preuve · appel à l'action</div><div class="voice"><span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Voix off · 0:24</div></div>
               </div>
               <div class="g3">
                 <div class="card"><div class="muted">Fiches produit</div><b style="color:#fff">12 rédigées</b></div>
@@ -1105,15 +1256,15 @@
         <!-- 5. Outils -->
         <div class="panel" data-label="05 · Les outils" data-x="0" data-ry="0">
           <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Studio IA</a><a class="on"><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Studio</a><a class="on"><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
             <main>
               <div><h5>Outils</h5><div class="muted">Inclus dans ton accès</div></div>
               <div class="g3">
-                <div class="card tool"><span class="ic"><img src="assets/3d/laptop.webp" alt=""></span><b style="color:#fff">SaaS MADE</b><span class="muted">Analyse IA de ta boutique</span><span class="soon-b">Bientôt</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/laptop.webp" alt=""></span><b style="color:#fff">Storia</b><span class="muted">Ta marque en 7 chapitres</span><span class="soon-b">Inclus</span></div>
                 <div class="card tool"><span class="ic"><img src="assets/3d/courbe.webp" alt=""></span><b style="color:#fff">TrendTrack</b><span class="muted">Produits et pubs qui marchent</span></div>
                 <div class="card tool"><span class="ic"><img src="assets/3d/loupe.webp" alt=""></span><b style="color:#fff">Analyse d'avis</b><span class="muted">Frustrations et angles clients</span></div>
                 <div class="card tool"><span class="ic"><img src="assets/3d/baguette.webp" alt=""></span><b style="color:#fff">Générateur de scripts</b><span class="muted">Hooks et UGC</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/robot.webp" alt=""></span><b style="color:#fff">Agents IA</b><span class="muted">Rapports et relances</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/robot.webp" alt=""></span><b style="color:#fff">Agents</b><span class="muted">Rapports et relances</span></div>
                 <div class="card tool"><span class="ic"><img src="assets/3d/poignee.webp" alt=""></span><b style="color:#fff">Agents Chine</b><span class="muted">Nos contacts sourcing</span></div>
               </div>
             </main>
@@ -1151,7 +1302,7 @@
 
     <!-- ═══ 9. LOIN DES ÉCRANS ═══ -->
     <section class="terrain" aria-label="Sur le terrain">
-      <div class="wrap"><div class="terrain-card">
+      <div class="wrap"><div class="terrain-card rv grow">
       <div class="terrain-grid">
         <figure><video src="assets/chine/packaging.mp4" poster="assets/chine/packaging.jpg" muted loop playsinline preload="none"></video><figcaption>Packaging</figcaption></figure>
         <figure><video src="assets/chine/entrepot.mp4" poster="assets/chine/entrepot.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
@@ -1160,8 +1311,8 @@
       <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampA" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampA">MADE ACADÉMIE ✦ ÉCOLE DE TERRAIN ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
       <div class="terrain-copy">
         <span class="eyebrow">Loin des écrans</span>
-        <p class="t-big">L'IA accélère. <span>Le terrain reste.</span></p>
-        <p class="t-small">De vrais cartons, de vraies usines, de vraies commandes. L'IA ne remplace pas un bon produit ni un bon fournisseur.</p>
+        <p class="t-big">Les outils accélèrent. <span>Le terrain reste.</span></p>
+        <p class="t-small">De vrais cartons, de vraies usines, de vraies commandes. Aucun outil ne remplace un bon produit ni un bon fournisseur.</p>
       </div>
       </div></div>
     </section>
@@ -1202,7 +1353,7 @@
         <div class="head head-sm">
           <span class="eyebrow rv">L'équipe MADE</span>
           <h2 class="rv">Testé sur nos marques <em class="s">avant de t'être enseigné.</em></h2>
-          <p class="sub rv">Media buyers, créatifs, designers et coachs. Chaque outil IA de l'Académie passe d'abord par nos campagnes et nos clients.</p>
+          <p class="sub rv">Media buyers, créatifs, designers et coachs. Chaque outil de l'Académie passe d'abord par nos campagnes et nos clients.</p>
         </div>
         <div class="founders">
           <div class="member rv"><div class="ph"><img src="assets/made/team/HugoB.webp" alt="Hugo" loading="lazy"></div><h4>Hugo</h4><p>Cofondateur · Acquisition & media buying</p></div>
@@ -1228,12 +1379,12 @@
     <!-- ═══ 12. CHINE / CANTON ═══ -->
     <section class="canton" id="chine">
       <div class="wrap">
-      <div class="canton-hero">
+      <div class="canton-hero rv grow">
         <video src="assets/chine/canton-nuit.mp4" poster="assets/chine/canton-nuit.jpg" muted loop playsinline preload="none"></video>
         <div class="canton-in" style="padding-inline:clamp(22px,5vw,70px)">
           <span class="eyebrow rv">Séminaire · Canton</span>
           <h2 class="rv">Voyage <em class="s">en Chine.</em></h2>
-          <p class="intro rv">L'IA prépare la négociation. Sur place, c'est toi qui serres la main du fabricant.</p>
+          <p class="intro rv">Tout se prépare en amont. Sur place, c'est toi qui serres la main du fabricant.</p>
           <ul class="canton-points rv">
             <li><b>La Foire de Canton</b></li>
             <li><b>Usines et fournisseurs</b></li>
@@ -1256,17 +1407,17 @@
       <div class="wrap">
         <div class="head c">
           <span class="eyebrow rv">Rejoindre l'Académie</span>
-          <h2 class="rv">Deux façons d'avancer. <em class="s">La même méthode Ecom IA.</em></h2>
+          <h2 class="rv">Deux façons d'avancer. <em class="s">La même méthode.</em></h2>
         </div>
         <!-- TODO: contenu des offres à finaliser (réunion offres) -->
         <div class="tiers tiers2">
           <article class="tier lg rv">
             <span class="lvl">En autonomie</span>
             <h3>Formation Ecom IA</h3>
-            <p class="promise">Tout le parcours, de la recherche produit au scale, avec l'IA à chaque étape.</p>
+            <p class="promise">Tout le parcours, de la recherche produit au scale, à ton rythme.</p>
             <ul class="incl">
               <li>Le parcours complet, mis à jour chaque mois</li>
-              <li>Les workflows et prompts IA de l'équipe</li>
+              <li>Storia et les workflows de l'équipe</li>
               <li>Lives chaque semaine et replays</li>
               <li>La communauté MADE</li>
             </ul>
@@ -1281,7 +1432,7 @@
               <li>Tout le contenu de la formation</li>
               <li>Coach dédié et point chaque semaine</li>
               <li>Analyse de ta boutique et de tes pubs</li>
-              <li>Mise en place de tes outils et automatisations IA</li>
+              <li>Mise en place de tes outils et automatisations</li>
             </ul>
             <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel <span class="arr">→</span></a>
           </article>
@@ -1316,7 +1467,7 @@
             <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampB" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampB">MADE ACADÉMIE ✦ ECOM IA ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
             <span class="eyebrow">Prochaine étape</span>
             <h2>20 minutes pour savoir <em class="s">si on peut t'aider.</em></h2>
-            <p class="sub">On regarde ton projet et où l'IA peut te faire gagner le plus de temps. Gratuit et sans engagement.</p>
+            <p class="sub">On regarde ton projet et ce qui peut te faire gagner le plus de temps. Gratuit et sans engagement.</p>
             <ol class="after">
               <li><b>1</b><span><strong>Tu choisis ton créneau</strong></span></li>
               <li><b>2</b><span><strong>On échange 20 minutes</strong></span></li>
@@ -1354,10 +1505,10 @@
     const RESULTS = ['R12','R1','R3','R4','R5','R6','R7','R8','R9','R10','R11','R13','R14','R15','R16','R17','R18','R19','R20','R21','R2aniv'];
     const TOUR = [
       ['Accueil', 'Ton plan de la semaine', 'Tes chiffres, tes actions et les suggestions de l\'assistant MADE.'],
-      ['Formations', 'Un parcours qui évolue', 'Nouveaux modules chaque mois, l\'IA intégrée à chaque étape.'],
+      ['Formations', 'Un parcours qui évolue', 'Nouveaux modules chaque mois, mis à jour avec les derniers outils.'],
       ['Lives', 'En direct chaque semaine', 'Pubs analysées, créas générées et questions en direct.'],
-      ['Studio IA', 'Les workflows de l\'équipe', 'Visuels, scripts UGC, fiches produit et emails prêts à adapter.'],
-      ['Outils', 'Tout au même endroit', 'TrendTrack, analyse d\'avis, agents IA et bientôt le SaaS MADE.']
+      ['Studio', 'Les workflows de l\'équipe', 'Visuels, scripts UGC, fiches produit et emails prêts à adapter.'],
+      ['Outils', 'Tout au même endroit', 'Storia, TrendTrack, analyse d\'avis et agents.']
     ];
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = matchMedia('(max-width: 640px)').matches;
@@ -1433,6 +1584,22 @@
     let ticking = false;
     const kick = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; renderTour(); }); } };
     if (!isMobile) { addEventListener('scroll', kick, { passive: true }); addEventListener('resize', kick, { passive: true }); if (lenis) lenis.on('scroll', kick); kick(); }
+
+
+    /* ─── Storia : chapitres ─── */
+    const stApp = document.getElementById('stApp');
+    if (stApp) {
+      const btns = [...stApp.querySelectorAll('.st-side button')], views = [...stApp.querySelectorAll('.st-view')], xp = stApp.querySelector('.st-xp b');
+      let cur = 0, auto = null;
+      const show = i => { cur = i; btns.forEach((b, j) => b.classList.toggle('on', j === i)); views.forEach((v, j) => v.classList.toggle('on', j === i)); if (xp) xp.style.width = (25 + i * 25) + '%'; };
+      btns.forEach((b, i) => b.addEventListener('click', () => { clearInterval(auto); auto = 'off'; show(i); }));
+      new IntersectionObserver(e => {
+        if (auto === 'off') return;
+        if (e[0].isIntersecting && !reduced) { if (!auto) auto = setInterval(() => show((cur + 1) % views.length), 3800); }
+        else { clearInterval(auto); auto = null; }
+      }, { threshold: .4 }).observe(stApp);
+      show(0);
+    }
 
     /* ─── Barre d'appel mobile ─── */
     const mCta = document.getElementById('mCta');
