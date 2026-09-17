@@ -969,6 +969,115 @@
       .o-trust{flex-direction:column;align-items:center;gap:8px}
     }
 
+    /* ═════════ V8 : Storia simple, reflets, CTA ═════════ */
+    html{scroll-padding-top:90px}
+    #marques,#equipe,#chine,#offres,#faq{content-visibility:auto;contain-intrinsic-size:auto 900px}
+    .sto{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px;max-width:940px;margin:0 auto;align-items:stretch}
+    .sto-steps{display:flex;flex-direction:column;gap:10px;justify-content:center}
+    .sto-steps button{all:unset;cursor:pointer;position:relative;overflow:hidden;display:flex;gap:14px;align-items:flex-start;width:100%;box-sizing:border-box;padding:18px;border-radius:20px;background:rgba(255,255,255,.03);box-shadow:inset 0 0 0 1px var(--line);opacity:.55;transition:opacity .4s,background .4s}
+    .sto-steps b{flex:0 0 30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;background:rgba(255,255,255,.08)}
+    .sto-steps strong{display:block;font-weight:600;font-size:17px;letter-spacing:-.02em}
+    .sto-steps small{font-size:13.5px;color:var(--muted)}
+    .sto-steps i{position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,#ff5a1f,#B691FE)}
+    .sto-steps li.on button{opacity:1;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),inset 0 1px 0 rgba(255,255,255,.2)}
+    .sto-steps li.on b{background:#ff5a1f;color:#fff}
+    .sto-steps li.on i{animation:stoBar var(--dur,4.5s) linear forwards}
+    .sto.manual .sto-steps li.on i{animation:none;width:100%}
+    @keyframes stoBar{to{width:100%}}
+    .sto-win{border-radius:24px;overflow:hidden;background:#faf7f2;color:#15131a;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 50px 100px -40px rgba(182,145,254,.5)}
+    .sto-stage{position:relative;height:390px}
+    .sto-v{position:absolute;inset:22px;display:flex;flex-direction:column;gap:14px;justify-content:center;opacity:0;transform:translateY(14px) scale(.98);transition:opacity .5s var(--ease),transform .7s var(--ease);pointer-events:none}
+    .sto-v.on{opacity:1;transform:none;pointer-events:auto}
+    .sto-input{display:flex;justify-content:space-between;align-items:center;padding:12px 12px 12px 16px;border-radius:14px;background:#fff;box-shadow:0 0 0 1px #ece6dc;font-size:14px;color:#6b655b}
+    .sto-input i{font-style:normal;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#ff5a1f;color:#fff}
+    .sto-msg{display:flex;gap:10px;font-size:14.5px;line-height:1.45}
+    .sto-msg small{color:#8a8479;font-size:12px}
+    .sto-msg p b{font-weight:600}
+    .sto-angle{margin-top:10px;padding:10px 14px;border-radius:12px;background:#fff1ea;font-weight:600;letter-spacing:-.02em}
+    .sto-angle small{display:block;font-weight:500;color:#e8531d}
+    .sto-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+    .sto-kpi span{padding:8px 10px;border-radius:10px;background:#fff;box-shadow:0 0 0 1px #ece6dc}
+    .sto-kpi small{display:block;font-size:11px}.sto-kpi b{font-size:16px;font-weight:700;letter-spacing:-.03em}
+    .sto-shop{border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px #ece6dc}
+    .sto-shop-bar{display:flex;justify-content:space-between;padding:10px 14px;font-size:12px;color:#8a8479;border-bottom:1px solid #f0ebe3}
+    .sto-shop-bar b{color:#2f3a2c;letter-spacing:.16em;font-size:12px}
+    .sto-shop-hero{display:grid;grid-template-columns:1.05fr 1fr;gap:16px;align-items:center;padding:14px;background:#f3efe6}
+    .sto-shop-hero img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px}
+    .sto-shop-hero small{font-size:12px;color:#6d7a5f}
+    .sto-shop-hero b{display:block;font-size:21px;font-weight:700;letter-spacing:-.04em;line-height:1.1;margin:6px 0;color:#2f3a2c}
+    .sto-shop-hero span{display:block;font-weight:600;margin-bottom:10px}
+    .sto-shop-hero i{font-style:normal;display:inline-block;padding:10px 16px;border-radius:10px;background:#2f3a2c;color:#fff;font-size:13px}
+    .sto-ads{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .sto-ads figure{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden}
+    .sto-ads img{width:100%;height:100%;object-fit:cover}
+    .sto-ads span{position:absolute;left:8px;bottom:8px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:100px;background:rgba(255,255,255,.92)}
+    .sto-ready{align-self:center;font-weight:600;font-size:14px;color:#1f8a60;padding:8px 14px;border-radius:100px;background:#e3f5ec}
+    .sto-v figure,.sto-v .sto-angle,.sto-v .sto-kpi,.sto-v .sto-shop-hero img{opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .6s var(--ease)}
+    .sto-v.on figure,.sto-v.on .sto-angle,.sto-v.on .sto-kpi,.sto-v.on .sto-shop-hero img{opacity:1;transform:none}
+    .sto-v.on figure:nth-child(2),.sto-v.on .sto-kpi{transition-delay:.15s}.sto-v.on figure:nth-child(3){transition-delay:.3s}
+    .sto-promise{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px;margin-top:26px;font-size:15px;color:rgba(241,240,234,.8)}
+    .sto-promise li{display:flex;align-items:center;gap:8px}
+    .sto-promise li::before{content:'✓';color:#ff8a5c;font-weight:700}
+
+    .cta-inline{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:34px;text-align:center}
+    .cta-inline span{font-size:13.5px;color:var(--muted)}
+    .cta-band{padding-block:10px 60px!important}
+
+    /* reflets liquides */
+    .sheen{position:relative;isolation:isolate}
+    .sheen::before{content:'';position:absolute;top:-10%;bottom:-10%;left:-70%;width:45%;z-index:5;pointer-events:none;background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.08) 35%,rgba(255,255,255,.28) 50%,rgba(255,255,255,.08) 65%,transparent 100%);transform:skewX(-20deg)}
+    .sheen.in::before,.in .sheen::before{animation:sheen 1.8s .4s var(--ease) both}
+    .sheen:hover::before{animation:sheen 1.3s var(--ease)}
+    @keyframes sheen{from{left:-70%}to{left:140%}}
+    .btn-neon::after{content:'';position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:btnSheen 4.5s ease-in-out infinite;pointer-events:none}
+    @keyframes btnSheen{0%,70%{left:-60%}100%{left:140%}}
+    .emo-card,.phase,.offer,.sto-win,.canton-hero,.terrain-card{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(255,255,255,.08)}
+    .emo-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.6s var(--ease)}
+    .emo-card.in video{transform:scale(1)}
+
+    /* espace de travail épuré */
+    .scr main.clean{gap:16px;justify-content:center}
+    .big-kpi{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .big-kpi>div{padding:16px;border-radius:14px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+    .big-kpi small{display:block;color:rgba(255,255,255,.45);font-size:12px}
+    .big-kpi b{display:block;color:#fff;font-size:30px;font-weight:600;letter-spacing:-.04em;margin:4px 0 10px}
+    .scr .player{flex:1}
+    .tools3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;flex:1;max-height:300px}
+    .t3{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;padding:16px;border-radius:18px;min-height:190px;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+    .t3 b{position:relative;z-index:2;color:#fff;font-size:18px;font-weight:600;letter-spacing:-.03em}
+    .t3 span{position:relative;z-index:2;color:rgba(255,255,255,.75);font-size:12.5px}
+    .t3-storia{background:linear-gradient(160deg,#ff7a45,#e8431a)}
+    .t3-storia svg{position:absolute;top:16px;left:16px;width:54px;height:54px;color:#15131a}
+    .t3-trend{background:linear-gradient(160deg,#10271f,#0b1512)}
+    .t3-trend svg{position:absolute;top:24px;left:14px;right:14px;width:calc(100% - 28px);height:60px}
+    .t3-chine img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .t3-chine::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.85))}
+
+    @media (max-width:640px){
+      .sto{grid-template-columns:1fr;gap:12px}
+      .sto-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+      .sto-steps button{flex-direction:column;align-items:center;text-align:center;gap:6px;padding:12px 6px;border-radius:16px}
+      .sto-steps small{display:none}
+      .sto-steps strong{font-size:12.5px;line-height:1.2}
+      .sto-steps b{flex:none;width:26px;height:26px}
+      .sto-stage{height:400px}
+      .sto-v{inset:16px}
+      .sto-shop-hero{grid-template-columns:1fr;gap:10px}
+      .sto-shop-hero img{aspect-ratio:16/10}
+      .sto-shop-hero b{font-size:18px}
+      .sto-input span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+      .sto-promise{flex-direction:column;align-items:center;gap:6px;font-size:14.5px}
+      .cta-inline{margin-top:26px}
+      .cta-inline .btn{width:100%}
+      .big-kpi b{font-size:24px}
+      .tools3{grid-template-columns:1fr 1fr;max-height:none}
+      .t3{min-height:120px;padding:12px}
+      .t3-storia{grid-column:span 2}
+      .t3-storia svg{width:40px;height:40px;top:12px;left:12px}
+      .t3-trend svg{top:12px;height:34px}.t3{min-height:130px}
+      .t3 b{font-size:15px}
+    }
+
     /* ═════════ IPHONE V2 : vertical, aéré, sans carrousel ═════════ */
     .m-only{display:none}
     .m-cta{display:none}
@@ -1177,6 +1286,7 @@
         <div class="rev"><div class="rb-track" id="rb2"></div></div>
       </div>
       <p class="rb-cap rv">Les ventes de nos élèves. <b>De vraies captures.</b></p>
+      <div class="wrap"><div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Obtenir ces résultats <span class="arr">→</span></a><span>Appel gratuit · 20 min</span></div></div>
     </section>
 
     <!-- ═══ 3. CE QUI A CHANGÉ ═══ -->
@@ -1203,14 +1313,15 @@
       <div class="wrap">
         <div class="head">
           <span class="eyebrow rv">Ce que ça change</span>
-          <h2 class="rv">Moins de doutes. <em class="s">Plus de ventes.</em></h2>
+          <h2 class="rv">Moins de doutes. <em class="s">Plus d'ambition.</em></h2>
         </div>
         <div class="emo-grid">
-          <article class="emo-card rv"><img src="assets/photos/emo-vente.webp" alt="" loading="lazy"><div><span>01</span><h3>Te réveiller avec des ventes.</h3><p>Ta boutique tourne pendant que tu dors.</p></div></article>
-          <article class="emo-card rv"><img src="assets/photos/emo-colis.webp" alt="" loading="lazy"><div><span>02</span><h3>Tes premiers colis. Ta marque.</h3><p>Un vrai produit, choisi avec méthode.</p></div></article>
-          <article class="emo-card rv"><img src="assets/photos/emo-commande.webp" alt="" loading="lazy"><div><span>03</span><h3>Plus besoin de deviner.</h3><p>Tu sais quelle pub couper et laquelle pousser.</p></div></article>
-          <article class="emo-card rv"><img src="assets/photos/emo-coach.webp" alt="" loading="lazy"><div><span>04</span><h3>Plus jamais seul face à tes chiffres.</h3><p>Un coach chaque semaine, jusqu'au bout.</p></div></article>
+          <article class="emo-card sheen rv"><video src="assets/chine/gz-nuit.mp4" poster="assets/chine/gz-nuit.jpg" muted loop playsinline preload="none"></video><div><span>01</span><h3>Voir plus grand.</h3><p>Ta marque, ton produit, ton usine.</p></div></article>
+          <article class="emo-card sheen rv"><video src="assets/chine/packaging.mp4" poster="assets/chine/packaging.jpg" muted loop playsinline preload="none"></video><div><span>02</span><h3>Tes premiers colis. Ta marque.</h3><p>Un vrai produit, choisi avec méthode.</p></div></article>
+          <article class="emo-card sheen rv"><video src="assets/chine/fournisseur-textile.mp4" poster="assets/chine/fournisseur-textile.jpg" muted loop playsinline preload="none"></video><div><span>03</span><h3>Négocier en face à face.</h3><p>De meilleures marges, sans intermédiaire.</p></div></article>
+          <article class="emo-card sheen rv"><video src="assets/chine/canton-pont.mp4" poster="assets/chine/canton-pont.jpg" muted loop playsinline preload="none"></video><div><span>04</span><h3>Plus jamais seul.</h3><p>Un coach chaque semaine, jusqu'au bout.</p></div></article>
         </div>
+        <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Je veux ça pour ma marque <span class="arr">→</span></a><span>Appel gratuit · 20 min · sans engagement</span></div>
       </div>
     </section>
 
@@ -1220,89 +1331,42 @@
       <div class="wrap">
         <div class="head c">
           <span class="st-badge rv"><i></i>Inclus dans l'Académie</span>
-          <h2 class="rv">Storia. <em class="s">Ta marque, chapitre par chapitre.</em></h2>
-          <p class="sub rv">Notre outil te mène de zéro à ta première campagne. Tu avances, il fait le travail lourd.</p>
+          <h2 class="rv">Tu as une idée. <em class="s">Storia en fait une marque.</em></h2>
+          <p class="sub rv">Colle un lien produit. Storia te guide jusqu'à ta première vente, étape par étape.</p>
         </div>
 
-        <div class="st-app rv" id="stApp">
-          <div class="st-bar"><i></i><i></i><i></i><span>storia</span></div>
-          <div class="st-body">
-            <aside class="st-side">
-              <div class="st-logo"><svg class="st-ico" style="color:#15131a"><use href="#st-face"/></svg><b>storia</b></div>
-              <div class="st-cap">Chapitres</div>
-              <button data-v="0" style="--c:#f2a33a"><em>1</em><span>Produit</span></button>
-              <button data-v="1" style="--c:#e0447a"><em>2</em><span>Marque</span></button>
-              <button data-v="2" style="--c:#1f8a80"><em>3</em><span>Fournisseurs</span></button>
-              <button data-v="3" style="--c:#3b6fe0"><em>4</em><span>Boutique</span></button>
-              <button data-v="4" style="--c:#8b2d6b"><em>5</em><span>Pubs</span></button>
-              <button data-v="5" style="--c:#d9622b"><em>6</em><span>Emails</span></button>
-              <button data-v="6" style="--c:#6d4ce0"><em>7</em><span>Campagnes</span></button>
-              <div class="st-xp"><span>🚀 Niv. <b id="stLvl">1</b></span><span id="stXp">10 XP</span><i><b></b></i></div>
-            </aside>
-            <div class="st-main">
-              <div class="st-view">
-                <div class="st-crumb">Ma marque › <b>Produit</b></div>
-                <div class="st-user">J'ai trouvé ce produit, il vaut le coup ?</div>
-                <div class="st-msg"><svg class="st-ico sm" style="color:#f2a33a"><use href="#st-face"/></svg><div><small>Storia</small><p>Bonne pioche. <b>1 240 avis analysés</b> chez tes concurrents : l'eau ne reste pas froide.</p><p>Ton angle : <b>« froide 24 h, garanti »</b>. Marge estimée <b>18 € par vente</b>.</p></div></div>
-                <div class="st-input">Colle un lien produit…<i>↑</i></div>
+        <div class="sto rv" id="stApp">
+          <ol class="sto-steps">
+            <li><button><b>1</b><span><strong>Tu colles un lien</strong><small>Storia analyse le produit et les avis</small></span><i></i></button></li>
+            <li><button><b>2</b><span><strong>Ta marque prend forme</strong><small>Nom, identité, boutique prête à vendre</small></span><i></i></button></li>
+            <li><button><b>3</b><span><strong>Tes pubs sont prêtes</strong><small>Des visuels qui donnent envie de cliquer</small></span><i></i></button></li>
+          </ol>
+          <div class="sto-win sheen">
+            <div class="st-bar"><i></i><i></i><i></i><span><svg class="st-ico" style="color:#15131a;width:16px;height:16px;vertical-align:-3px"><use href="#st-face"/></svg> storia</span></div>
+            <div class="sto-stage">
+              <div class="sto-v">
+                <div class="sto-input"><span>aliexpress.com/item/100500648</span><i>↑</i></div>
+                <div class="sto-msg"><svg class="st-ico" style="color:#f2a33a"><use href="#st-face"/></svg><div><small>Storia</small><p><b>1 240 avis analysés.</b> Les clientes veulent une peau hydratée sans effet gras.</p><div class="sto-angle"><small>Ton angle</small>« Hydratée en 3 secondes. Zéro film gras. »</div><div class="sto-kpi"><span><small>Marge</small><b>21 €</b></span><span><small>Concurrence</small><b>Faible</b></span><span><small>Potentiel</small><b>Fort</b></span></div></div></div>
               </div>
-              <div class="st-view">
-                <div class="st-head"><svg class="st-ico lg-ico" style="color:#e0447a"><use href="#st-face"/></svg><div><small>Chapitre 2 · Marque</small><h4>Ta marque</h4><p>Nom, logo, couleurs.</p></div></div>
-                <div class="st-names"><span class="on">Hydra</span><span>Nuvo</span><span>Tidal</span></div>
-                <div class="st-palette"><i style="background:#c9b8e8"></i><i style="background:#7b5ea7"></i><i style="background:#f6f2ea"></i><i style="background:#2b2233"></i></div>
-                <button class="st-btn">Valider mon identité →</button>
-              </div>
-              <div class="st-view">
-                <div class="st-head"><svg class="st-ico lg-ico" style="color:#1f8a80"><use href="#st-face"/></svg><div><small>Chapitre 3 · Fournisseurs</small><h4>Tes fournisseurs</h4><p>Les meilleurs, et ton bénéfice par vente.</p></div></div>
-                <ul class="st-list">
-                  <li><b>Fournisseur A · Shenzhen</b><span>4,20 € · 8 jours</span><em>+18 €</em></li>
-                  <li><b>Fournisseur B · Yiwu</b><span>3,80 € · 12 jours</span><em>+17 €</em></li>
-                  <li><b>Fournisseur C · Canton</b><span>5,10 € · 6 jours</span><em>+16 €</em></li>
-                </ul>
-              </div>
-              <div class="st-view">
-                <div class="st-head"><svg class="st-ico lg-ico" style="color:#3b6fe0"><use href="#st-face"/></svg><div><small>Chapitre 4 · Boutique</small><h4>Ta boutique</h4><p>Ta page Shopify, prête à vendre.</p></div></div>
-                <div class="st-shop">
-                  <div class="st-shop-bar"><b>HYDRA</b><span>Boutique · Contact · Panier</span></div>
-                  <div class="st-shop-hero"><img src="assets/photos/packshot.webp" alt="" loading="lazy"><div><small>★★★★★ 1 240 avis</small><b>Froide 24 h. Chaude 12 h.</b><span>29,90 €</span><i>Ajouter au panier</i></div></div>
+              <div class="sto-v">
+                <div class="sto-shop">
+                  <div class="sto-shop-bar"><b>TA MARQUE</b><span>Soins · À propos · Panier</span></div>
+                  <div class="sto-shop-hero"><img src="assets/photos/marque-flatlay.webp" alt="" loading="lazy" decoding="async"><div><small>★★★★★ 1 240 avis</small><b>La brume qui hydrate en 3 secondes.</b><span>32 €</span><i>Ajouter au panier</i></div></div>
                 </div>
               </div>
-              <div class="st-view">
-                <div class="st-head"><svg class="st-ico lg-ico" style="color:#8b2d6b"><use href="#st-face"/></svg><div><small>Chapitre 5 · Pubs</small><h4>Tes pubs</h4><p>Une photo produit, 5 pubs prêtes.</p></div></div>
-                <div class="st-ads">
-                  <figure><img src="assets/photos/pub-flatlay.webp" alt="" loading="lazy"><span>Visuel</span></figure>
-                  <figure><img src="assets/photos/pub-lifestyle.webp" alt="" loading="lazy"><span>Lifestyle</span></figure>
-                  <figure><img src="assets/photos/pub-ugc.webp" alt="" loading="lazy"><span>UGC</span></figure>
+              <div class="sto-v">
+                <div class="sto-ads">
+                  <figure><img src="assets/photos/marque-ugc.webp" alt="" loading="lazy" decoding="async"><span>UGC</span></figure>
+                  <figure><img src="assets/photos/marque-duo.webp" alt="" loading="lazy" decoding="async"><span>Lifestyle</span></figure>
+                  <figure><img src="assets/photos/marque-brume.webp" alt="" loading="lazy" decoding="async"><span>Visuel</span></figure>
                 </div>
-              </div>
-              <div class="st-view">
-                <div class="st-head"><svg class="st-ico lg-ico" style="color:#d9622b"><use href="#st-face"/></svg><div><small>Chapitre 6 · Emails</small><h4>Tes emails</h4><p>Ils vendent pendant que tu dors.</p></div></div>
-                <ul class="st-list">
-                  <li><b>Bienvenue</b><span>À l'inscription</span><em style="color:#d9622b">62 % ouverts</em></li>
-                  <li><b>Panier abandonné</b><span>1 h après</span><em style="color:#d9622b">+11 % ventes</em></li>
-                  <li><b>Demande d'avis</b><span>10 jours après</span><em style="color:#d9622b">38 % réponses</em></li>
-                </ul>
-              </div>
-              <div class="st-view">
-                <div class="st-head"><svg class="st-ico lg-ico" style="color:#6d4ce0"><use href="#st-face"/></svg><div><small>Chapitre 7 · Campagnes</small><h4>Tes campagnes</h4><p>Facebook et Instagram, prêtes à lancer.</p></div></div>
-                <div class="st-kpis"><div><small>Budget</small><b>30 €/j</b></div><div><small>ROAS</small><b>2,9</b></div><div><small>Ventes</small><b>214</b></div></div>
-                <div class="st-chart"><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:55%"></i><i style="height:61%"></i><i style="height:58%"></i><i style="height:74%"></i><i style="height:86%"></i></div>
-                <button class="st-btn">Lancer ma campagne →</button>
+                <div class="sto-ready">✓ 5 pubs prêtes à lancer</div>
               </div>
             </div>
           </div>
         </div>
-
-        <ul class="st-feats">
-          <li class="rv" style="--c:#f2a33a"><svg><use href="#st-face"/></svg><b>Produit</b><span>Avis et concurrents analysés</span></li>
-          <li class="rv" style="--c:#e0447a"><svg><use href="#st-face"/></svg><b>Marque</b><span>Nom, logo, couleurs</span></li>
-          <li class="rv" style="--c:#1f8a80"><svg><use href="#st-face"/></svg><b>Fournisseurs</b><span>Trouvés en 1 minute</span></li>
-          <li class="rv" style="--c:#3b6fe0"><svg><use href="#st-face"/></svg><b>Boutique</b><span>Page Shopify générée</span></li>
-          <li class="rv" style="--c:#8b2d6b"><svg><use href="#st-face"/></svg><b>Pubs</b><span>5 pubs depuis une photo</span></li>
-          <li class="rv" style="--c:#d9622b"><svg><use href="#st-face"/></svg><b>Emails</b><span>Séquences rédigées</span></li>
-          <li class="rv" style="--c:#6d4ce0"><svg><use href="#st-face"/></svg><b>Campagnes</b><span>Prêtes à lancer</span></li>
-          <li class="rv" style="--c:#15131a"><svg><use href="#st-face"/></svg><b>Espion Pub</b><span>Les pubs de tes concurrents</span></li>
-        </ul>
+        <ul class="sto-promise rv"><li>Fini la page blanche</li><li>Fini les semaines perdues</li><li>Tu avances chaque soir</li></ul>
+        <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Accéder à Storia <span class="arr">→</span></a><span>Inclus dans la Formation et le Coaching</span></div>
       </div>
     </section>
 
@@ -1318,14 +1382,15 @@
           </div>
         </div>
         <div class="phases" id="road-deb">
-          <article class="phase rv"><div class="ph-media"><img src="assets/photos/packshot.webp" alt="" loading="lazy"><span>01 à 03</span></div><div class="ph-body"><h3>Construire</h3><ol><li><b>Recherche produit</b><span>Un produit qui répond à un vrai manque</span></li><li><b>Validation</b><span>Testé avant d'acheter du stock</span></li><li><b>Branding</b><span>Un nom, une identité, une histoire</span></li></ol></div></article>
-          <article class="phase rv"><div class="ph-media"><video src="assets/chine/usine-skincare.mp4" poster="assets/chine/usine-skincare.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Lancer</h3><ol><li><b>Sourcing</b><span>Le bon fournisseur, la bonne marge</span></li><li><b>Boutique Shopify</b><span>Une boutique qui convertit</span></li><li><b>Créas et contenu</b><span>Des pubs qui arrêtent le scroll</span></li></ol></div></article>
-          <article class="phase rv"><div class="ph-media"><img src="assets/dash/R5.webp" alt="" loading="lazy"><span>07 à 09</span></div><div class="ph-body"><h3>Scaler</h3><ol><li><b>Meta, TikTok et TikTok Shop</b><span>Les canaux qui rapportent</span></li><li><b>Email et CRM</b><span>Des clients qui reviennent</span></li><li><b>Scale</b><span>Automatiser et déléguer</span></li></ol></div></article>
+          <article class="phase sheen rv"><div class="ph-media"><img src="assets/photos/marque-flatlay.webp" alt="" loading="lazy" decoding="async"><span>01 à 03</span></div><div class="ph-body"><h3>Construire</h3><ol><li><b>Recherche produit</b><span>Un produit qui répond à un vrai manque</span></li><li><b>Validation</b><span>Testé avant d'acheter du stock</span></li><li><b>Branding</b><span>Un nom, une identité, une histoire</span></li></ol></div></article>
+          <article class="phase sheen rv"><div class="ph-media"><video src="assets/chine/usine-skincare.mp4" poster="assets/chine/usine-skincare.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Lancer</h3><ol><li><b>Sourcing</b><span>Le bon fournisseur, la bonne marge</span></li><li><b>Boutique Shopify</b><span>Une boutique qui convertit</span></li><li><b>Créas et contenu</b><span>Des pubs qui arrêtent le scroll</span></li></ol></div></article>
+          <article class="phase sheen rv"><div class="ph-media"><img src="assets/dash/R5.webp" alt="" loading="lazy" decoding="async"><span>07 à 09</span></div><div class="ph-body"><h3>Scaler</h3><ol><li><b>Meta, TikTok et TikTok Shop</b><span>Les canaux qui rapportent</span></li><li><b>Email et CRM</b><span>Des clients qui reviennent</span></li><li><b>Scale</b><span>Automatiser et déléguer</span></li></ol></div></article>
         </div>
         <div class="phases" id="road-conf" hidden>
-          <article class="phase rv"><div class="ph-media"><img src="assets/photos/emo-commande.webp" alt="" loading="lazy"><span>01 à 03</span></div><div class="ph-body"><h3>Optimiser</h3><ol><li><b>Audit de ta marque</b><span>Boutique, pubs et marges passées au crible</span></li><li><b>Conversion</b><span>Pages et offres retravaillées</span></li><li><b>Machine à créas</b><span>De nouvelles créas chaque semaine</span></li></ol></div></article>
-          <article class="phase rv"><div class="ph-media"><video src="assets/chine/camion.mp4" poster="assets/chine/camion.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Accélérer</h3><ol><li><b>Nouveaux canaux</b><span>TikTok, TikTok Shop et organique</span></li><li><b>Marque propre</b><span>Sourcing direct et packaging</span></li><li><b>Automatisation</b><span>Scaler sans t'épuiser</span></li></ol></div></article>
+          <article class="phase sheen rv"><div class="ph-media"><img src="assets/chine/showroom-parfum.jpg" alt="" loading="lazy" decoding="async"><span>01 à 03</span></div><div class="ph-body"><h3>Optimiser</h3><ol><li><b>Audit de ta marque</b><span>Boutique, pubs et marges passées au crible</span></li><li><b>Conversion</b><span>Pages et offres retravaillées</span></li><li><b>Machine à créas</b><span>De nouvelles créas chaque semaine</span></li></ol></div></article>
+          <article class="phase sheen rv"><div class="ph-media"><video src="assets/chine/camion.mp4" poster="assets/chine/camion.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Accélérer</h3><ol><li><b>Nouveaux canaux</b><span>TikTok, TikTok Shop et organique</span></li><li><b>Marque propre</b><span>Sourcing direct et packaging</span></li><li><b>Automatisation</b><span>Scaler sans t'épuiser</span></li></ol></div></article>
         </div>
+        <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Construire ma marque <span class="arr">→</span></a><span>On fait le point sur ton projet en 20 min</span></div>
       </div>
     </section>
 
@@ -1340,80 +1405,60 @@
           <h2>Ton espace de travail <em class="s">MADE.</em></h2>
         </div>
         <div class="tour-stage">
-        <!-- 1. Accueil -->
         <div class="panel" data-label="01 · Ton plan de la semaine" data-x="-120" data-ry="10">
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a class="on"><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Storia</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
-            <main>
+            <main class="clean">
               <div><h5>Salut Karim, on reprend ?</h5><div class="muted">Semaine 6 de ton coaching</div></div>
-              <div class="g3">
-                <div class="card"><div class="muted">CA du mois · objectif 10 000 €</div><b style="color:#fff;font-size:18px">6 240 €</b><div class="pbar"><i style="width:62%"></i></div></div>
-                <div class="card"><div class="muted">ROAS sur 7 jours</div><b style="color:#fff;font-size:18px">2,9</b><div class="pbar"><i style="width:58%"></i></div></div>
-                <div class="card"><div class="muted">Commandes ce mois</div><b style="color:#fff;font-size:18px">214</b></div>
-              </div>
-              <div class="card ai-sug"><span class="chip">Note de ton coach</span><b style="color:#fff;display:block;margin-top:6px">Ta créa « UGC hook 02 » tient un CPA de 11 €.</b><div class="muted">On en fait 3 variantes et on en parle jeudi.</div></div>
-              <div class="g2">
-                <div class="card"><div class="thumb"><img src="assets/formation/02.8_Decouverte-Meta-Ads.webp" alt="" loading="lazy"></div><b style="color:#fff">Module 7 · Meta Ads</b><div class="pbar"><i style="width:45%"></i></div></div>
-                <div class="card"><span class="chip">Prochain live</span><b style="color:#fff;display:block;margin-top:6px">20 créas générées en direct</b><div class="muted">Jeudi 18h</div></div>
-              </div>
+              <div class="big-kpi"><div><small>CA du mois</small><b>6 240 €</b><div class="pbar"><i style="width:62%"></i></div></div><div><small>ROAS</small><b>2,9</b><div class="pbar"><i style="width:58%"></i></div></div></div>
+              <div class="card ai-sug"><span class="chip">Note de ton coach</span><b style="color:#fff;display:block;margin-top:8px;font-size:15px">Ta meilleure créa tient un CPA de 11 €. On la décline jeudi.</b></div>
             </main>
           </div>
         </div>
 
-        <!-- 2. Formations -->
         <div class="panel" data-label="02 · Les formations" data-x="140" data-ry="-12">
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a class="on"><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Storia</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
-            <main>
+            <main class="clean">
               <div><h5>Formations</h5><div class="muted">Nouveaux modules chaque mois</div></div>
               <div class="g3">
-                <div class="card"><div class="thumb"><img src="assets/formation/03_Module_Recherche-produit.webp" alt="" loading="lazy"></div><span class="chip">À jour</span><b style="color:#fff;display:block">Recherche produit et analyse d'avis</b><div class="pbar"><i style="width:100%"></i></div></div>
-                <div class="card"><div class="thumb"><img src="assets/formation/02_Module_Introduction-Fondation.webp" alt="" loading="lazy"></div><span class="chip">À jour</span><b style="color:#fff;display:block">Branding et boutique Shopify</b><div class="pbar"><i style="width:72%"></i></div></div>
-                <div class="card"><div class="thumb"><img src="assets/formation/02.9_Analyse-de-la-marque-Boku.webp" alt="" loading="lazy"></div><span class="chip">Nouveau</span><b style="color:#fff;display:block">Créas, UGC et avatars</b><div class="pbar"><i style="width:18%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/03_Module_Recherche-produit.webp" alt="" loading="lazy" decoding="async"></div><b style="color:#fff;display:block">Recherche produit</b><div class="pbar"><i style="width:100%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/05_Module_Shopify.webp" alt="" loading="lazy" decoding="async"></div><b style="color:#fff;display:block">Boutique Shopify</b><div class="pbar"><i style="width:72%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/02.8_Decouverte-Meta-Ads.webp" alt="" loading="lazy" decoding="async"></div><b style="color:#fff;display:block">Meta Ads</b><div class="pbar"><i style="width:18%"></i></div></div>
               </div>
-              <div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><b style="color:#fff">TikTok Shop : contenu, créateurs et lives</b><div class="muted">Ajouté ce mois · 9 leçons</div></div><span class="chip">Commencer</span></div>
             </main>
           </div>
         </div>
 
-        <!-- 3. Lives -->
         <div class="panel" data-label="03 · Les lives" data-x="-140" data-ry="12">
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a class="on"><i></i>Lives</a><a><i></i>Storia</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
-            <main>
-              <div class="player"><video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" muted loop playsinline preload="none"></video><span class="lb">EN DIRECT</span><span class="pt">On analyse vos pubs en direct</span></div>
-              <div class="g3">
-                <div class="card"><div class="muted">Replay</div><b style="color:#fff">25 205 € en 24 h, le lancement décortiqué</b></div>
-                <div class="card"><div class="muted">Replay</div><b style="color:#fff">UGC : ce qui convertit vraiment</b></div>
-                <div class="card"><div class="muted">Replay</div><b style="color:#fff">Préparer une négociation fournisseur</b></div>
-              </div>
+            <main class="clean">
+              <div class="player"><video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" muted loop playsinline preload="none"></video><span class="lb">EN DIRECT</span><span class="pt">On analyse vos boutiques en direct</span></div>
             </main>
           </div>
         </div>
 
-        <!-- 4. Storia -->
         <div class="panel" data-label="04 · Storia" data-x="140" data-ry="-10">
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a class="on"><i></i>Storia</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
             <main class="mini-st">
-              <div class="ms-top"><svg class="st-ico" style="color:#3b6fe0"><use href="#st-face"/></svg><div><small>Chapitre 4 · Boutique</small><h5>Ta boutique Hydra</h5></div><span class="ms-steps"><i class="d"></i><i class="d"></i><i class="d"></i><i class="o"></i><i></i><i></i><i></i></span></div>
-              <div class="ms-shop"><img src="assets/photos/packshot.webp" alt="" loading="lazy"><div><small>★★★★★ 1 240 avis</small><b>Froide 24 h. Chaude 12 h.</b><span>29,90 €</span><i>Ajouter au panier</i></div></div>
-              <div class="ms-ads"><img src="assets/photos/pub-main.webp" alt="" loading="lazy"><img src="assets/photos/pub-lifestyle.webp" alt="" loading="lazy"><img src="assets/photos/pub-flatlay.webp" alt="" loading="lazy"><img src="assets/photos/pub-ugc.webp" alt="" loading="lazy"></div>
+              <div class="ms-top"><svg class="st-ico" style="color:#3b6fe0"><use href="#st-face"/></svg><div><small>Chapitre 4 · Boutique</small><h5>Ta boutique est prête</h5></div><span class="ms-steps"><i class="d"></i><i class="d"></i><i class="d"></i><i class="o"></i><i></i><i></i><i></i></span></div>
+              <div class="ms-shop"><img src="assets/photos/marque-flatlay.webp" alt="" loading="lazy" decoding="async"><div><small>★★★★★ 1 240 avis</small><b>La brume qui hydrate en 3 secondes.</b><span>32 €</span><i>Ajouter au panier</i></div></div>
+              <div class="ms-ads"><img src="assets/photos/marque-ugc.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-duo.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-lifestyle.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-brume.webp" alt="" loading="lazy" decoding="async"></div>
             </main>
           </div>
         </div>
 
-        <!-- 5. Outils -->
         <div class="panel" data-label="05 · Les outils" data-x="0" data-ry="0">
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Storia</a><a class="on"><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
-            <main>
-              <div><h5>Outils</h5><div class="muted">Inclus dans ton accès</div></div>
-              <div class="g3">
-                <div class="card tool"><span class="ic"><svg class="st-ico" style="color:#ff5a1f;width:30px;height:30px"><use href="#st-face"/></svg></span><b style="color:#fff">Storia</b><span class="muted">Ta marque en 7 chapitres</span><span class="soon-b">Inclus</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/courbe.webp" alt=""></span><b style="color:#fff">TrendTrack</b><span class="muted">Produits et pubs qui marchent</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/poignee.webp" alt=""></span><b style="color:#fff">Agents Chine</b><span class="muted">Nos contacts sourcing</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/laptop.webp" alt=""></span><b style="color:#fff">Replays</b><span class="muted">Tous les lives</span></div>
+            <main class="clean">
+              <div><h5>Tes outils</h5><div class="muted">Inclus dans ton accès</div></div>
+              <div class="tools3">
+                <div class="t3 t3-storia"><svg class="st-ico"><use href="#st-face"/></svg><b>Storia</b><span>Ta marque en 7 chapitres</span></div>
+                <div class="t3 t3-trend"><svg viewBox="0 0 120 40" preserveAspectRatio="none"><path d="M0 34 L15 30 L30 32 L45 22 L60 25 L75 14 L90 16 L105 6 L120 4" fill="none" stroke="#6ee7b7" stroke-width="2.5"/></svg><b>TrendTrack</b><span>Les produits qui décollent</span></div>
+                <div class="t3 t3-chine"><img src="assets/chine/fournisseur-textile.jpg" alt="" loading="lazy" decoding="async"><b>Agents Chine</b><span>Nos contacts sur place</span></div>
               </div>
             </main>
           </div>
@@ -1429,6 +1474,8 @@
         </div>
       </div>
     </section>
+
+    <section class="cta-band"><div class="wrap"><div class="cta-inline rv" style="margin-top:0"><a href="#appel" class="btn btn-neon btn-lg">Visiter l'Académie avec nous <span class="arr">→</span></a><span>On te montre tout pendant l'appel</span></div></div></section>
 
     <!-- ═══ 8. UN ENVIRONNEMENT QUI ÉVOLUE ═══ -->
     <section id="evolue" style="padding-top:0">
@@ -1450,7 +1497,7 @@
 
     <!-- ═══ 9. LOIN DES ÉCRANS ═══ -->
     <section class="terrain" aria-label="Sur le terrain">
-      <div class="wrap"><div class="terrain-card rv grow pz">
+      <div class="wrap"><div class="terrain-card rv grow pz sheen">
       <div class="terrain-grid t5">
         <figure><video src="assets/chine/packaging.mp4" poster="assets/chine/packaging.jpg" muted loop playsinline preload="none"></video><figcaption>Packaging</figcaption></figure>
         <figure><video src="assets/chine/entrepot.mp4" poster="assets/chine/entrepot.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
@@ -1476,17 +1523,17 @@
         </div>
         <div class="brands">
           <div class="bcard lg rv">
-            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>beautymarts.fr</span></div><img src="assets/made/sites/beautymarts.webp" alt="Site Beauty Mart's" loading="lazy"></div>
+            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>beautymarts.fr</span></div><img src="assets/made/sites/beautymarts.webp" alt="Site Beauty Mart's" loading="lazy" decoding="async"></div>
             <div class="bc-body"><div class="bc-top"><h4>Beauty Mart's</h4><span>Beauté</span></div>
               <div class="metrics"><div><b>+1&nbsp;M€</b><span>de CA généré</span></div><div><b>+50&nbsp;k€</b><span>en 7 jours au lancement</span></div><div><b>7&nbsp;%</b><span>de taux de conversion</span></div></div></div>
           </div>
           <div class="bcard lg rv">
-            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>scorekeys.shop</span></div><img src="assets/made/sites/scorekeys.webp" alt="Site ScoreKeys" loading="lazy"></div>
+            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>scorekeys.shop</span></div><img src="assets/made/sites/scorekeys.webp" alt="Site ScoreKeys" loading="lazy" decoding="async"></div>
             <div class="bc-body"><div class="bc-top"><h4>ScoreKeys</h4><span>Ecommerce</span></div>
               <div class="metrics"><div><b>+250&nbsp;%</b><span>de taux de conversion</span></div><div><b>+200&nbsp;%</b><span>de CA mensuel</span></div><div><b>x1,5</b><span>sur le panier moyen</span></div></div></div>
           </div>
           <div class="bcard lg rv">
-            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>Unik Journal</span></div><img src="assets/made/projects/project5.webp" alt="Unik Journal" loading="lazy" style="object-position:center"></div>
+            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>Unik Journal</span></div><img src="assets/made/projects/project5.webp" alt="Unik Journal" loading="lazy" decoding="async" style="object-position:center"></div>
             <div class="bc-body"><div class="bc-top"><h4>Unik Journal</h4><span>Marque</span></div>
               <div class="metrics"><div><b>300&nbsp;k</b><span>visiteurs par mois</span></div><div><b>100&nbsp;%</b><span>direction artistique sur mesure</span></div><div><b>Monde</b><span>lancement international</span></div></div></div>
           </div>
@@ -1504,15 +1551,15 @@
           <h2 class="rv">Testé chez nous <em class="s">avant de t'être enseigné.</em></h2>
         </div>
         <div class="team9">
-          <div class="member rv"><div class="ph"><img src="assets/made/team/HugoB.webp" alt="Hugo" loading="lazy"></div><h4>Hugo</h4><p>Cofondateur</p></div>
-          <div class="member rv"><div class="ph"><img src="assets/made/team/Guillaume.webp" alt="Guillaume" loading="lazy"></div><h4>Guillaume</h4><p>Cofondateur</p></div>
-          <div class="member rv"><div class="ph"><img src="assets/made/team/TheoG.webp" alt="Théo" loading="lazy"></div><h4>Théo</h4><p>Cofondateur</p></div>
-          <div class="member rv"><div class="ph"><img src="assets/made/team/Marvin.webp" alt="Marvin" loading="lazy"></div><h4>Marvin</h4><p>Coach</p></div>
-          <div class="member rv"><div class="ph"><img src="assets/made/team/Mailis.webp" alt="Mailis" loading="lazy"></div><h4>Mailis</h4></div>
-          <div class="member rv"><div class="ph"><img src="assets/made/team/Lionel.webp" alt="Lionel" loading="lazy"></div><h4>Lionel</h4></div>
-          <div class="member rv"><div class="ph"><img src="assets/made/team/Delphine.webp" alt="Delphine" loading="lazy"></div><h4>Delphine</h4></div>
-          <div class="member rv"><div class="ph"><img src="assets/made/team/Lola.webp" alt="Lola" loading="lazy"></div><h4>Lola</h4></div>
-          <div class="member rv"><div class="ph"><img src="assets/made/team/HugoM.webp" alt="Hugo M." loading="lazy"></div><h4>Hugo M.</h4></div>
+          <div class="member rv"><div class="ph"><img src="assets/made/team/HugoB.webp" alt="Hugo" loading="lazy" decoding="async"></div><h4>Hugo</h4><p>Cofondateur</p></div>
+          <div class="member rv"><div class="ph"><img src="assets/made/team/Guillaume.webp" alt="Guillaume" loading="lazy" decoding="async"></div><h4>Guillaume</h4><p>Cofondateur</p></div>
+          <div class="member rv"><div class="ph"><img src="assets/made/team/TheoG.webp" alt="Théo" loading="lazy" decoding="async"></div><h4>Théo</h4><p>Cofondateur</p></div>
+          <div class="member rv"><div class="ph"><img src="assets/made/team/Marvin.webp" alt="Marvin" loading="lazy" decoding="async"></div><h4>Marvin</h4><p>Coach</p></div>
+          <div class="member rv"><div class="ph"><img src="assets/made/team/Mailis.webp" alt="Mailis" loading="lazy" decoding="async"></div><h4>Mailis</h4></div>
+          <div class="member rv"><div class="ph"><img src="assets/made/team/Lionel.webp" alt="Lionel" loading="lazy" decoding="async"></div><h4>Lionel</h4></div>
+          <div class="member rv"><div class="ph"><img src="assets/made/team/Delphine.webp" alt="Delphine" loading="lazy" decoding="async"></div><h4>Delphine</h4></div>
+          <div class="member rv"><div class="ph"><img src="assets/made/team/Lola.webp" alt="Lola" loading="lazy" decoding="async"></div><h4>Lola</h4></div>
+          <div class="member rv"><div class="ph"><img src="assets/made/team/HugoM.webp" alt="Hugo M." loading="lazy" decoding="async"></div><h4>Hugo M.</h4></div>
         </div>
       </div>
     </section>
@@ -1552,7 +1599,7 @@
         </div>
         <!-- TODO: contenu des offres à finaliser (réunion offres) -->
         <div class="offers">
-          <article class="offer rv">
+          <article class="offer sheen rv">
             <header><span class="o-lvl">En autonomie</span><h3>Formation</h3><p>La méthode et les outils. Tu avances à ton rythme.</p></header>
             <div class="o-chips"><span>Storia inclus</span><span>Lives chaque semaine</span></div>
             <ul class="o-list">
@@ -1600,7 +1647,7 @@
     <section id="appel" style="padding-top:0">
       <div class="wrap">
         <div class="final glass rv">
-          <img class="bgimg" src="assets/salon.webp" alt="" aria-hidden="true" loading="lazy">
+          <img class="bgimg" src="assets/salon.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
           <div class="shade"></div>
           <div class="final-in">
             <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampB" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampB">MADE ACADÉMIE ✦ ECOM IA ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
@@ -1643,11 +1690,11 @@
     const EMBED_BOOKING = true;
     const RESULTS = ['R12','R1','R3','R4','R5','R6','R7','R8','R9','R10','R11','R13','R14','R15','R16','R17','R18','R19','R20','R21','R2aniv'];
     const TOUR = [
-      ['Accueil', 'Ton plan de la semaine', 'Tes chiffres, tes actions et les notes de ton coach.'],
-      ['Formations', 'Un parcours qui évolue', 'Nouveaux modules chaque mois, mis à jour avec les derniers outils.'],
-      ['Lives', 'En direct chaque semaine', 'Pubs analysées, créas générées et questions en direct.'],
-      ['Storia', 'Ta marque, chapitre par chapitre', 'De la page produit aux pubs, avec tes vraies photos.'],
-      ['Outils', 'Tout au même endroit', 'Storia, TrendTrack, analyse d\'avis et agents.']
+      ['Accueil', 'Tu sais quoi faire chaque semaine', 'Tes chiffres et le prochain pas, validé avec ton coach.'],
+      ['Formations', 'Tout le parcours, toujours à jour', 'De la recherche produit au scale, en vidéos courtes.'],
+      ['Lives', 'Tes questions, en direct', 'Chaque semaine, on analyse vos boutiques et vos pubs.'],
+      ['Storia', 'Ta marque prend forme', 'Boutique et pubs prêtes, avec tes vraies photos.'],
+      ['Outils', 'Les outils des pros', 'Storia, TrendTrack et nos agents en Chine.']
     ];
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = matchMedia('(max-width: 640px)').matches;
@@ -1725,40 +1772,35 @@
     if (!isMobile) { addEventListener('scroll', kick, { passive: true }); addEventListener('resize', kick, { passive: true }); if (lenis) lenis.on('scroll', kick); kick(); }
 
 
-    /* ─── Storia : chapitres ─── */
+    /* ─── Storia : démo en 3 étapes ─── */
     const stApp = document.getElementById('stApp');
     if (stApp) {
-      const btns = [...stApp.querySelectorAll('.st-side button')], views = [...stApp.querySelectorAll('.st-view')], xp = stApp.querySelector('.st-xp i b');
-      let cur = 0, auto = null;
+      const steps = [...stApp.querySelectorAll('.sto-steps li')], views = [...stApp.querySelectorAll('.sto-v')];
+      let cur = 0, timer = null, manual = false, visible = false;
       const show = i => {
         cur = i;
-        btns.forEach((b, j) => { b.classList.toggle('on', j === i); b.classList.toggle('done', j < i); b.querySelector('em').textContent = j < i ? '✓' : j + 1; });
+        steps.forEach((s, j) => { s.classList.remove('on'); void s.offsetWidth; s.classList.toggle('on', j === i); });
         views.forEach((v, j) => v.classList.toggle('on', j === i));
-        if (xp) xp.style.width = ((i + 1) / views.length * 100) + '%';
-        document.getElementById('stXp').textContent = (i + 1) * 10 + ' XP';
-        document.getElementById('stLvl').textContent = 1 + Math.floor(i / 2);
+        clearTimeout(timer);
+        if (!manual && visible && !reduced) timer = setTimeout(() => show((cur + 1) % views.length), 4500);
       };
-      btns.forEach((b, i) => b.addEventListener('click', () => { clearInterval(auto); auto = 'off'; show(i); }));
-      new IntersectionObserver(e => {
-        if (auto === 'off') return;
-        if (e[0].isIntersecting && !reduced) { if (!auto) auto = setInterval(() => show((cur + 1) % views.length), 3200); }
-        else { clearInterval(auto); auto = null; }
-      }, { threshold: .4 }).observe(stApp);
+      steps.forEach((s, i) => s.querySelector('button').addEventListener('click', () => { manual = true; stApp.classList.add('manual'); show(i); }));
+      new IntersectionObserver(e => { visible = e[0].isIntersecting; if (visible) show(cur); else clearTimeout(timer); }, { threshold: .35 }).observe(stApp);
       show(0);
     }
 
     /* ─── Ruban résultats ─── */
     const fig = (c, inner) => `<figure class="${c}">${inner}</figure>`;
-    const r1 = ['R5','R12','R3','R1','R15','R14','R8','R4'].map(n => fig('sq', `<img src="assets/dash/${n}.webp" alt="" loading="lazy">`)).join('');
+    const r1 = ['R5','R12','R3','R1','R15','R14','R8','R4'].map(n => fig('sq', `<img src="assets/dash/${n}.webp" alt="" loading="lazy" decoding="async">`)).join('');
     const r2 = [
-      fig('pt', '<img src="assets/avis/roas10.webp" alt="" loading="lazy">'),
+      fig('pt', '<img src="assets/avis/roas10.webp" alt="" loading="lazy" decoding="async">'),
       fig('pt', '<video src="assets/chine/packaging.mp4" muted loop playsinline preload="none"></video>'),
-      fig('pt', '<img src="assets/avis/avis.webp" alt="" loading="lazy">'),
-      fig('pt', '<img src="assets/avis/vente1.webp" alt="" loading="lazy">'),
+      fig('pt', '<img src="assets/avis/avis.webp" alt="" loading="lazy" decoding="async">'),
+      fig('pt', '<img src="assets/avis/vente1.webp" alt="" loading="lazy" decoding="async">'),
       fig('pt', '<video src="assets/chine/showroom-parfum.mp4" muted loop playsinline preload="none"></video>'),
-      fig('pt', '<img src="assets/avis/accomp2.webp" alt="" loading="lazy">'),
-      fig('pt', '<img src="assets/avis/rayan.webp" alt="" loading="lazy">'),
-      fig('pt', '<img src="assets/avis/accomp1.webp" alt="" loading="lazy">')
+      fig('pt', '<img src="assets/avis/accomp2.webp" alt="" loading="lazy" decoding="async">'),
+      fig('pt', '<img src="assets/avis/rayan.webp" alt="" loading="lazy" decoding="async">'),
+      fig('pt', '<img src="assets/avis/accomp1.webp" alt="" loading="lazy" decoding="async">')
     ].join('');
     document.getElementById('rb1').innerHTML = r1 + r1;
     document.getElementById('rb2').innerHTML = r2 + r2;
@@ -1791,13 +1833,13 @@
     bookBtn.addEventListener('click', e => {
       e.preventDefault();
       if (!BOOKING_URL) { bookBtn.textContent = 'Calendrier bientôt disponible'; return; }
-      if (EMBED_BOOKING) document.getElementById('booking').innerHTML = `<iframe src="${BOOKING_URL}" title="Réserver un appel" loading="lazy" data-lenis-prevent></iframe>`;
+      if (EMBED_BOOKING) document.getElementById('booking').innerHTML = `<iframe src="${BOOKING_URL}" title="Réserver un appel" loading="lazy" decoding="async" data-lenis-prevent></iframe>`;
       else window.open(BOOKING_URL, '_blank', 'noopener');
     });
 
     /* ─── Tableaux de ventes + logos ─── */
     const DASH = ['R5','R12','R3','R1','R15','R14','R8','R4'];
-    const logos = [1,2,3,4,5,7,8,10,11].map(i => `<img src="assets/made/partners/p${i}.webp" alt="" loading="lazy" width="138" height="46">`).join('') + '<img src="assets/made/partners/beautymarts.webp" alt="Beauty Mart\'s" loading="lazy" style="height:24px">';
+    const logos = [1,2,3,4,5,7,8,10,11].map(i => `<img src="assets/made/partners/p${i}.webp" alt="" loading="lazy" decoding="async" width="138" height="46">`).join('') + '<img src="assets/made/partners/beautymarts.webp" alt="Beauty Mart\'s" loading="lazy" decoding="async" style="height:24px">';
     document.getElementById('logos').innerHTML = logos + logos;
 
     /* ─── Menu mobile ─── */
