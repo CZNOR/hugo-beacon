@@ -45,7 +45,7 @@
     h1 em.s{display:block}
     h2{font-size:clamp(40px,5.2vw,74px);line-height:1}
     .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--made)}
-    .eyebrow::before{content:'';width:22px;height:1px;background:currentColor}
+    .eyebrow::before{content:'✦';font-size:11px;letter-spacing:0}
     .sub{font-size:18px;color:var(--muted);max-width:600px;line-height:1.6}
     .head{margin-bottom:56px}
     .head h2{margin:14px 0 16px}
@@ -176,7 +176,7 @@
     .pillar .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
     .pillar h3{font-size:clamp(40px,3.8vw,56px);line-height:1}
     .pillar h3 small{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--made);margin-bottom:8px}
-    .pillar>p{color:var(--muted);margin-bottom:18px;max-width:340px}
+    .pillar .line{font-size:18px;color:var(--muted)}
     .pillar li{display:flex;gap:12px;padding:13px 0;border-top:1px solid var(--line);font-size:16px;line-height:1.4}
     .pillar li::before{content:'';flex:0 0 7px;height:7px;margin-top:8px;border-radius:50%;background:var(--made);box-shadow:0 0 10px rgba(182,145,254,.8)}
     .pillar li b{font-weight:600}
@@ -296,10 +296,10 @@
     .step p{color:var(--muted);font-size:16px;margin-top:8px;max-width:330px}
 
     /* ═══ 12. Chine / Canton ═══ */
-    .canton{padding:0;background:#030204;overflow:hidden}
-    .canton-hero{position:relative;min-height:min(96vh,900px);display:flex;align-items:flex-end;padding:clamp(28px,6vw,90px) 0}
+    .canton{padding-block:clamp(40px,6vw,80px)}
+    .canton-hero{position:relative;min-height:min(88vh,820px);display:flex;align-items:flex-end;padding:clamp(28px,5vw,70px) 0;border-radius:40px;overflow:hidden;background:#030204;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 60px 140px -60px rgba(220,38,38,.35)}
     .canton-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-    .canton-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#030204 0%,rgba(3,2,4,.55) 45%,rgba(3,2,4,.25) 100%),linear-gradient(90deg,rgba(3,2,4,.8),transparent 60%)}
+    .canton-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,2,4,.95) 0%,rgba(3,2,4,.55) 45%,rgba(3,2,4,.25) 100%),linear-gradient(90deg,rgba(3,2,4,.8),transparent 60%)}
     .canton-in{position:relative;z-index:1}
     .canton .eyebrow{color:#fca5a5}
     .canton h2{font-size:clamp(64px,10vw,168px);line-height:.88;margin:14px 0 20px}
@@ -311,10 +311,10 @@
     .canton-points span{font-size:15px;color:rgba(255,255,255,.72)}
     .canton .btn-red{margin-top:36px;color:#fff;background:rgba(220,38,38,.28);box-shadow:inset 0 0 0 1px rgba(248,113,113,.5)}
     .canton .btn-red:hover{background:rgba(220,38,38,.42);transform:translateY(-2px)}
-    .canton-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:6px}
-    .canton-strip figure{position:relative;aspect-ratio:4/5;overflow:hidden}
+    .canton-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:14px}
+    .canton-strip figure{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:28px;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
     .canton-strip video{width:100%;height:100%;object-fit:cover}
-    .canton-strip figcaption{position:absolute;left:14px;bottom:12px;font-family:var(--display);font-size:20px;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+    .canton-strip figcaption{position:absolute;left:14px;bottom:14px;font-family:var(--sans);font-weight:600;font-size:13px;padding:6px 12px;border-radius:100px;background:rgba(0,0,0,.55)}
 
     /* ═══ 13. Offres : niveaux d'accès à l'écosystème ═══ */
     .tiers{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:16px;align-items:stretch}
@@ -486,7 +486,8 @@
       .step p{font-size:15px}
       .tabs button{padding:10px 14px;font-size:13px}
 
-      .canton-hero{min-height:640px}
+      .canton-hero{min-height:620px;border-radius:28px}
+      .canton-strip{gap:8px}.canton-strip figure{border-radius:20px}
       .canton h2{font-size:64px}
       .canton-points{grid-template-columns:1fr;gap:14px;margin-top:26px}
       .canton-points b{font-size:22px}
@@ -546,12 +547,7 @@
         <div class="hero-copy">
           <span class="pill glass blur rv"><b>Rentrée 2026</b> Nouvelle promo, places limitées</span>
           <h1 class="rv">Construis ta marque. <em class="s">Pas un dropshipping de plus.</em></h1>
-          <p class="lead rv"><strong>Coaching 1:1, formation et outils</strong> pour lancer ou faire grandir ta marque ecommerce, avec l'équipe MADE : 7 ans de terrain, +1200 élèves accompagnés, +10 M€ générés.</p>
-          <ul class="hero-points rv">
-            <li><b>Pour qui</b>Débutants motivés et ecommerçants qui veulent passer un cap</li>
-            <li><b>Ce que tu reçois</b>Un coach, une méthode, des outils et une communauté</li>
-            <li><b>L'objectif</b>Une marque rentable, pas une boutique de passage</li>
-          </ul>
+          <p class="lead rv"><strong>Coaching 1:1, formation et outils</strong> pour lancer ta marque ecommerce avec l'équipe MADE.</p>
           <div class="cta-row rv">
             <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel gratuit <span class="arr">→</span></a>
             <a href="#resultats" class="btn btn-ghost btn-lg">Voir les résultats</a>
@@ -567,14 +563,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ═══ 2. PREUVES RAPIDES ═══ -->
-    <div class="ticker" aria-label="Résultats">
-      <div class="track">
-        <span><b>25 205 €</b>&nbsp;en 24 h</span><span><b>53 000 €</b>&nbsp;en 48 h</span><span><b>ROAS 10</b>&nbsp;pour un élève</span><span><b>1 000 €</b>&nbsp;par jour stabilisés</span><span><b>+1 M€</b>&nbsp;pour Beauty Mart's</span><span><b>+250 %</b>&nbsp;de conversion pour ScoreKeys</span><span><b>10 693 €</b>&nbsp;en une journée</span>
-        <span><b>25 205 €</b>&nbsp;en 24 h</span><span><b>53 000 €</b>&nbsp;en 48 h</span><span><b>ROAS 10</b>&nbsp;pour un élève</span><span><b>1 000 €</b>&nbsp;par jour stabilisés</span><span><b>+1 M€</b>&nbsp;pour Beauty Mart's</span><span><b>+250 %</b>&nbsp;de conversion pour ScoreKeys</span><span><b>10 693 €</b>&nbsp;en une journée</span>
-      </div>
-    </div>
 
     <!-- ═══ 3. CHIFFRES MADE ═══ -->
     <section style="padding-block:80px 0">
@@ -593,13 +581,12 @@
         <div class="head">
           <span class="eyebrow rv">Résultats élèves</span>
           <h2 class="rv">Des captures, <em class="s">pas des promesses.</em></h2>
-          <p class="sub rv">Messages d'élèves et tableaux de ventes réels. Les noms sont masqués.</p>
         </div>
         <div class="dms">
-          <figure class="dm rv"><img src="assets/avis/avis.webp" alt="Avis d'un élève sur la formation" loading="lazy" width="506" height="900"><figcaption>« Franchement je kiffe la formation, les admins sont à l'écoute. »</figcaption></figure>
-          <figure class="dm rv"><img src="assets/avis/roas10.webp" alt="Élève à 10 de ROAS" loading="lazy" width="506" height="900"><figcaption>« Pour 3 € dépensés, on a fait 90 €. »</figcaption></figure>
-          <figure class="dm rv"><img src="assets/avis/accomp2.webp" alt="Élève accompagné sur WhatsApp" loading="lazy" width="457" height="900"><figcaption>« On stabilise les 1k par jour depuis le début. »</figcaption></figure>
-          <figure class="dm rv"><img src="assets/avis/vente1.webp" alt="Première vente d'un élève" loading="lazy" width="750" height="900"><figcaption>« Première vente. »</figcaption></figure>
+          <figure class="dm rv"><img src="assets/avis/avis.webp" alt="Avis d'un élève sur la formation" loading="lazy" width="506" height="900"></figure>
+          <figure class="dm rv"><img src="assets/avis/roas10.webp" alt="Élève à 10 de ROAS" loading="lazy" width="506" height="900"></figure>
+          <figure class="dm rv"><img src="assets/avis/accomp2.webp" alt="Élève accompagné sur WhatsApp" loading="lazy" width="457" height="900"></figure>
+          <figure class="dm rv"><img src="assets/avis/vente1.webp" alt="Première vente d'un élève" loading="lazy" width="750" height="900"></figure>
         </div>
       </div>
       <div class="proof rv"><div class="track" id="proof"></div></div>
@@ -610,7 +597,7 @@
       <div class="wrap why">
         <div>
           <span class="eyebrow rv">Pourquoi MADE</span>
-          <blockquote class="rv">Les formations t'apprennent à regarder. <span class="dim">Nous, on accompagne des marques depuis 7 ans.</span> <em class="s">Et on t'accompagne pareil, sur ta boutique, chaque semaine.</em></blockquote>
+          <blockquote class="rv">Les formations t'apprennent à regarder. <em class="s">Nous, on le fait avec toi.</em></blockquote>
           <div class="sig rv"><div class="avatars"><img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/Guillaume.webp" alt=""><img src="assets/made/team/TheoG.webp" alt=""></div><p><strong>Hugo, Guillaume et Théo</strong><br>Cofondateurs de MADE</p></div>
         </div>
         <figure class="why-video rv">
@@ -632,7 +619,7 @@
       <div class="terrain-copy">
         <span class="eyebrow">Loin des écrans</span>
         <p class="t-big">De vrais cartons.<br>De vraies usines.<br><span>De vraies commandes.</span></p>
-        <p class="t-small">L'ecommerce, on le fait avec les mains. On va chez les fournisseurs, on négocie, on reçoit la marchandise. Et on t'emmène avec nous.</p>
+        
       </div>
     </section>
 
@@ -642,36 +629,19 @@
         <div class="head">
           <span class="eyebrow rv">Ce que tu reçois</span>
           <h2 class="rv">Tout pour lancer. <em class="s">Rien de superflu.</em></h2>
-          <p class="sub rv">Trois choses, pas un catalogue : apprendre, exécuter, et ne jamais avancer seul.</p>
         </div>
         <div class="pillars">
           <article class="pillar rv">
             <div class="top"><h3><small>01</small>Apprendre</h3><img class="ico3d" src="assets/3d/ampoule.webp" alt=""></div>
-            <p>La méthode, dans l'ordre, sur des cas réels.</p>
-            <ul>
-              <li><span><b>Formation pas à pas</b>, des bases à ta propre marque</span></li>
-              <li><span><b>Études de cas réels</b> : 25 205 € en 24 h, 53 000 € en 48 h</span></li>
-              <li><span><b>Lives chaque semaine</b> et tous les replays</span></li>
-            </ul>
+            <p class="line">Formation, cas réels, lives.</p>
           </article>
           <article class="pillar rv">
             <div class="top"><h3><small>02</small>Exécuter</h3><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div>
-            <p>Appliquer sur ta boutique, avec les bons outils.</p>
-            <ul>
-              <li><span><b>Coaching 1:1</b> et plan d'action chaque semaine</span></li>
-              <li><span><b>Analyses de ta boutique</b> par l'équipe</span></li>
-              <li><span><b>Sourcing</b> : agents, négociation, packaging</span></li>
-              <li><span><b>Outils</b> : TrendTrack et notre SaaS MADE</span></li>
-            </ul>
+            <p class="line">Coaching, analyses, sourcing, outils.</p>
           </article>
           <article class="pillar rv">
             <div class="top"><h3><small>03</small>Être accompagné</h3><img class="ico3d" src="assets/3d/poignee.webp" alt=""></div>
-            <p>De vraies personnes qui répondent.</p>
-            <ul>
-              <li><span><b>L'équipe MADE</b> : Hugo, Guillaume, Théo et les coachs</span></li>
-              <li><span><b>Une communauté</b> de +1200 élèves</span></li>
-              <li><span><b>Un suivi sur 3 mois</b>, jusqu'à ce que ça tourne</span></li>
-            </ul>
+            <p class="line">Équipe, communauté, suivi 3 mois.</p>
           </article>
         </div>
       </div>
@@ -787,7 +757,6 @@
         <div class="head">
           <span class="eyebrow rv">Marques accompagnées</span>
           <h2 class="rv">Ce qu'on fait <em class="s">avec de vraies marques.</em></h2>
-          <p class="sub rv">Ce qu'on t'enseigne, on l'applique chaque jour pour les marques qu'on accompagne.</p>
         </div>
         <div class="brands">
           <div class="bcard glass tilt rv">
@@ -817,7 +786,7 @@
         <div class="head head-sm">
           <span class="eyebrow rv">L'équipe</span>
           <h2 class="rv">Les visages <em class="s">derrière MADE.</em></h2>
-          <p class="sub rv">Hugo, Guillaume, Théo et l'équipe gèrent chaque jour des pubs, des sites et des créas pour de vraies marques. Ce sont eux qui te coachent.</p>
+          <p class="sub rv">Ce sont eux qui te coachent.</p>
         </div>
         <div class="team-label rv">Les cofondateurs</div>
         <div class="founders">
@@ -845,19 +814,18 @@
         <div class="head">
           <span class="eyebrow rv">La méthode</span>
           <h2 class="rv">De zéro à ta marque, <em class="s">en 6 étapes.</em></h2>
-          <p class="sub rv">Débutant ou déjà lancé, on part de là où tu en es vraiment.</p>
           <div class="tabs glass rv" role="tablist">
             <button class="on" data-tab="deb" role="tab" aria-selected="true">Je pars de zéro</button>
             <button data-tab="conf" role="tab" aria-selected="false">J'ai déjà une boutique</button>
           </div>
         </div>
         <div class="road" id="road-deb">
-          <div class="step rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/boussole.webp" alt=""></div><h4>Le bon point de départ</h4><p>Ton budget, ton temps, ton objectif. On choisit un modèle qui tient avec ta vraie vie.</p></div>
-          <div class="step rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/loupe.webp" alt=""></div><h4>Le produit qui se vend</h4><p>Une vraie marge, une vraie demande. On valide avant que tu dépenses un euro en pub.</p></div>
-          <div class="step rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/gemme.webp" alt=""></div><h4>Une marque, pas un catalogue</h4><p>Nom, identité, boutique qui convertit et fournisseur fiable.</p></div>
-          <div class="step rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div><h4>Tes premières ventes</h4><p>Créas, campagnes, premiers chiffres. On les lit ensemble.</p></div>
-          <div class="step rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/courbe.webp" alt=""></div><h4>Ce qui marche, en plus grand</h4><p>On coupe ce qui ne rapporte pas et on pousse ce qui rapporte.</p></div>
-          <div class="step rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/couronne.webp" alt=""></div><h4>Une activité qui tient</h4><p>Scale, process, délégation. Ta marque tourne sans toi au quotidien.</p></div>
+          <div class="step rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/boussole.webp" alt=""></div><h4>Le bon point de départ</h4></div>
+          <div class="step rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/loupe.webp" alt=""></div><h4>Le produit qui se vend</h4></div>
+          <div class="step rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/gemme.webp" alt=""></div><h4>Une marque, pas un catalogue</h4></div>
+          <div class="step rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div><h4>Tes premières ventes</h4></div>
+          <div class="step rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/courbe.webp" alt=""></div><h4>Ce qui marche, en plus grand</h4></div>
+          <div class="step rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/couronne.webp" alt=""></div><h4>Une activité qui tient</h4></div>
         </div>
         <div class="road" id="road-conf" hidden>
           <div class="step glass rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/cerveau.webp" alt=""></div><h4>Audit complet</h4><p>Boutique, pubs, marges, supply : on trouve ce qui bloque.</p></div>
@@ -873,24 +841,26 @@
 
     <!-- ═══ 12. CHINE / CANTON ═══ -->
     <section class="canton" id="chine">
+      <div class="wrap">
       <div class="canton-hero">
         <video src="assets/chine/canton-nuit.mp4" poster="assets/chine/canton-nuit.jpg" muted loop playsinline preload="none"></video>
-        <div class="wrap canton-in">
+        <div class="canton-in" style="padding-inline:clamp(22px,5vw,70px)">
           <span class="eyebrow rv">Séminaire · Canton</span>
           <h2 class="rv">Voyage <em class="s">en Chine.</em></h2>
-          <p class="intro rv">10 jours là où tout se fabrique. On t'emmène à la Foire de Canton, chez nos fournisseurs et dans les usines, avec des cours chaque jour.</p>
+          <p class="intro rv">10 jours là où tout se fabrique.</p>
           <ul class="canton-points rv">
-            <li><b>La Foire de Canton</b><span>Des milliers de fabricants au même endroit</span></li>
-            <li><b>Usines et fournisseurs</b><span>Tu vois ton produit se fabriquer</span></li>
-            <li><b>Négociation sur place</b><span>Prix, packaging, délais, avec nous à côté</span></li>
+            <li><b>La Foire de Canton</b></li>
+            <li><b>Usines et fournisseurs</b></li>
+            <li><b>Négociation sur place</b></li>
           </ul>
           <a href="#appel" class="btn btn-lg btn-red rv">Je veux en savoir plus <span class="arr">→</span></a><!-- TODO: pointer vers chine/ quand la page existe -->
         </div>
       </div>
       <div class="canton-strip">
-        <figure><video src="assets/chine/fournisseurs-hugo.mp4" poster="assets/chine/fournisseurs-hugo.jpg" muted loop playsinline preload="none"></video><figcaption>Chez les fournisseurs</figcaption></figure>
-        <figure><video src="assets/chine/entrepot-hugo.mp4" poster="assets/chine/entrepot-hugo.jpg" muted loop playsinline preload="none"></video><figcaption>Devant l'entrepôt</figcaption></figure>
+        <figure><video src="assets/chine/entrepot-exterieur.mp4" poster="assets/chine/entrepot-exterieur.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
+        <figure><video src="assets/chine/rdv-fabricant.mp4" poster="assets/chine/rdv-fabricant.jpg" muted loop playsinline preload="none"></video><figcaption>Chez le fabricant</figcaption></figure>
         <figure><video src="assets/chine/ligne-production.mp4" poster="assets/chine/ligne-production.jpg" muted loop playsinline preload="none"></video><figcaption>Ligne de production</figcaption></figure>
+      </div>
       </div>
     </section>
 
@@ -901,7 +871,7 @@
         <div class="head c">
           <span class="eyebrow rv">Rejoindre MADE</span>
           <h2 class="rv">Trois façons d'entrer <em class="s">dans l'écosystème.</em></h2>
-          <p class="sub rv">Même équipe, même méthode, même communauté. Tu choisis ton niveau d'accompagnement, on en parle pendant l'appel.</p>
+          <p class="sub rv">Même équipe, même méthode. Tu choisis ton niveau.</p>
         </div>
         <!-- TODO: contenu des offres à finaliser (réunion offres) -->
         <div class="tiers">
@@ -909,7 +879,6 @@
             <span class="lvl">Niveau 1 · Apprendre</span>
             <h3>Formation</h3>
             <p class="promise">La méthode complète, à ton rythme.</p>
-            <p class="who">Pour toi si tu débutes et que tu préfères avancer seul.</p>
             <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
           </article>
           <article class="tier glass feat rv">
@@ -917,36 +886,16 @@
             <span class="lvl">Niveau 2 · Être accompagné</span>
             <h3>Coaching <em class="s">1:1</em></h3>
             <p class="promise">On construit ta marque avec toi pendant 3 mois, semaine après semaine.</p>
-            <p class="who">Pour toi si tu veux aller vite et éviter les erreurs coûteuses.</p>
             <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel <span class="arr">→</span></a>
           </article>
           <article class="tier glass rv">
             <span class="lvl">Niveau 3 · Exécuter</span>
             <h3>Plateforme</h3>
             <p class="promise">Les bons outils pour piloter ta boutique.</p>
-            <p class="who">Pour toi si tu as déjà une boutique et veux gagner du temps.</p>
             <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
           </article>
         </div>
-        <div class="compare rv">
-          <table>
-            <thead><tr><th>Ce qui est inclus</th><th>Formation</th><th class="hl">Coaching 1:1</th><th>Plateforme</th></tr></thead>
-            <tbody>
-              <tr><td>Formation complète, pas à pas</td><td class="y">✓</td><td class="hl y">✓</td><td class="n">·</td></tr>
-              <tr><td>Lives chaque semaine et replays</td><td class="y">✓</td><td class="hl y">✓</td><td class="n">·</td></tr>
-              <tr><td>Tips quotidiens et actus ecommerce</td><td class="y">✓</td><td class="hl y">✓</td><td class="n">·</td></tr>
-              <tr><td>Accès à la communauté</td><td class="y">✓</td><td class="hl y">✓</td><td class="y">✓</td></tr>
-              <tr><td>Coach dédié et point chaque semaine</td><td class="n">·</td><td class="hl y">✓</td><td class="n">·</td></tr>
-              <tr><td>Plan d'action personnalisé</td><td class="n">·</td><td class="hl y">✓</td><td class="n">·</td></tr>
-              <tr><td>Analyses de ta boutique</td><td class="n">·</td><td class="hl y">Illimitées</td><td class="n">·</td></tr>
-              <tr><td>Formation « Créer une marque à succès »</td><td class="n">·</td><td class="hl y">✓</td><td class="n">·</td></tr>
-              <tr><td>TrendTrack et notre SaaS MADE</td><td class="n">·</td><td class="hl y">✓</td><td class="y">✓</td></tr>
-              <tr><td>Prompts IA prêts à l'emploi</td><td class="n">·</td><td class="hl y">✓</td><td class="y">✓</td></tr>
-              <tr><td>Durée de l'accompagnement</td><td>À ton rythme</td><td class="hl">3 mois</td><td class="n">·</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="offers-note rv">Pas de paiement en ligne. On t'appelle, on regarde ton projet, et on te dit franchement si on peut t'aider.</p>
+        <p class="offers-note rv">Pas de paiement en ligne. On en parle pendant l'appel.</p>
       </div>
     </section>
 
@@ -956,12 +905,10 @@
         <div class="head">
           <span class="eyebrow rv">FAQ</span>
           <h2 class="rv">Les questions <em class="s">qu'on nous pose.</em></h2>
-          <p class="sub rv">Il t'en reste une ? Pose la pendant l'appel.</p>
         </div>
         <div class="faq-list">
           <details class="glass rv"><summary>J'ai déjà une boutique, ça m'apporte quoi ?</summary><p>Un audit complet, un plan pour passer le palier suivant et l'accès à notre réseau sourcing pour transformer ta boutique en vraie marque, avec de meilleures marges.</p></details>
           <details class="glass rv"><summary>Formation ou coaching, je choisis quoi ?</summary><p>La formation, c'est la méthode en autonomie. Le coaching, c'est quelqu'un qui suit ta boutique chaque semaine et t'évite les erreurs qui coûtent cher. On t'oriente pendant l'appel.</p></details>
-          <details class="glass rv"><summary>Pourquoi les prix ne sont pas affichés ?</summary><p>Parce qu'on ne vend pas le même parcours à tout le monde. L'appel est gratuit, sans engagement, et tu repars avec un tarif clair.</p></details>
           <details class="glass rv"><summary>C'est quoi le voyage en Chine ?</summary><p>Un séminaire de 10 jours à Canton pendant la foire internationale. Tu rencontres des fournisseurs, tu négocies avec nous et tu suis des cours chaque jour. La page dédiée arrive bientôt.</p></details>
         </div>
 
@@ -978,11 +925,11 @@
             <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampB" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampB">MADE ACADÉMIE ✦ ÉCOLE DE TERRAIN ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
             <span class="eyebrow">Prochaine étape</span>
             <h2>20 minutes pour savoir <em class="s">si on peut t'aider.</em></h2>
-            <p class="sub">Gratuit, sans engagement. On regarde ton projet ensemble et tu repars avec une vision claire de la suite.</p>
+            <p class="sub">Gratuit et sans engagement.</p>
             <ol class="after">
-              <li><b>1</b><span><strong>Tu choisis ton créneau</strong>2 minutes, sans paiement</span></li>
-              <li><b>2</b><span><strong>On échange 20 minutes</strong>Ton projet, ton budget, ton temps</span></li>
-              <li><b>3</b><span><strong>Tu repars avec un plan</strong>Et une offre seulement si elle a du sens pour toi</span></li>
+              <li><b>1</b><span><strong>Tu choisis ton créneau</strong></span></li>
+              <li><b>2</b><span><strong>On échange 20 minutes</strong></span></li>
+              <li><b>3</b><span><strong>Tu repars avec un plan</strong></span></li>
             </ol>
             <div class="booking" id="booking">
               <a href="#" class="btn btn-neon btn-lg" id="book-btn">Choisir mon créneau <span class="arr">→</span></a>
