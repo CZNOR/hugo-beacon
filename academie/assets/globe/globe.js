@@ -7,7 +7,7 @@ function MadeGlobe(c, opts) {
   const host = c.parentElement;
   const ctx = c.getContext('2d');
   const mobile0 = window.innerWidth <= 640;
-  const dpr = mobile0 ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+  const dpr = mobile0 ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
   const mob = window.innerWidth <= 640;
   const PI2 = Math.PI * 2;
   let w, h, R, cx, cy, stars = [], grid = [];
@@ -26,7 +26,7 @@ function MadeGlobe(c, opts) {
   }
 
   const dots = [];
-  const step = mob ? 2.2 : 0.8;
+  const step = mob ? 2.2 : (window.innerWidth < 1100 ? 1.2 : 1);
   for (let lat = -90; lat <= 90; lat += step)
     for (let lon = -180; lon < 180; lon += step)
       if (isLand(lat, lon)) {
