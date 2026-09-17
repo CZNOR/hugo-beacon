@@ -6,7 +6,8 @@ function MadeGlobe(c, opts) {
   opts = opts || {};
   const host = c.parentElement;
   const ctx = c.getContext('2d');
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const mobile0 = window.innerWidth <= 640;
+  const dpr = mobile0 ? 1 : Math.min(window.devicePixelRatio || 1, 2);
   const mob = window.innerWidth <= 640;
   const PI2 = Math.PI * 2;
   let w, h, R, cx, cy, stars = [], grid = [];
@@ -25,7 +26,7 @@ function MadeGlobe(c, opts) {
   }
 
   const dots = [];
-  const step = mob ? 1.5 : 0.8;
+  const step = mob ? 2.2 : 0.8;
   for (let lat = -90; lat <= 90; lat += step)
     for (let lon = -180; lon < 180; lon += step)
       if (isLand(lat, lon)) {
@@ -42,7 +43,7 @@ function MadeGlobe(c, opts) {
     cx = w / 2;
     cy = h + R * (mob ? 0.3 : 0.3);
     stars = [];
-    for (let i = 0; i < (mob ? 70 : 180); i++)
+    for (let i = 0; i < (mob ? 35 : 180); i++)
       stars.push({ x: Math.random() * w, y: Math.random() * h, r: .3 + Math.random() * 1.1, s: .5 + Math.random() * 2, p: Math.random() * PI2, a: .12 + Math.random() * .5 });
     grid = [];
     if (!mob) for (let x = 0; x < w + 20; x += 20) for (let y = 0; y < h + 20; y += 20) grid.push([x, y]);
@@ -116,9 +117,12 @@ function MadeGlobe(c, opts) {
     if (visible && !raf) raf = requestAnimationFrame(draw);
   }).observe(host);
 
+  let last = 0;
   function draw(ms) {
     raf = 0;
     if (!visible) return;
+    if (mob && ms - last < 32) { raf = requestAnimationFrame(draw); return; }  // 30 i/s sur mobile
+    last = ms;
     const t = ms / 1000, rotY = t * .06;
     ctx.clearRect(0, 0, w, h);
 

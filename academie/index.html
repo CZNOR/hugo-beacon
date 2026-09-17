@@ -8,8 +8,11 @@
   <meta property="og:title" content="MADE Académie · Construis ta marque ecommerce" />
   <meta property="og:description" content="Formation, coaching 1:1, outils et voyage en Chine. 7 ans d'expérience, +300 projets accompagnés. Réserve ton appel." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://hugo-bnls.fr/academie/assets/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#050507" />
   <meta name="robots" content="noindex" /><!-- TODO: passer en index au lancement -->
-  <link rel="icon" href="assets/globe/sac1.png" />
+  <link rel="icon" href="assets/globe/sac1.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -274,6 +277,7 @@
     .dots{display:flex;gap:6px;margin-top:18px}
     .dots i{height:4px;width:18px;border-radius:4px;background:rgba(255,255,255,.18);transition:all .4s var(--ease)}
     .dots i.on{width:38px;background:var(--made)}
+    .tour-stage{position:absolute;inset:0}
     .tour-hint{position:absolute;right:clamp(16px,5vw,70px);bottom:clamp(24px,7vh,70px);z-index:300;font-size:13px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:10px}
     .tour-hint i{width:22px;height:34px;border-radius:12px;border:1.5px solid rgba(255,255,255,.4);position:relative}
     .tour-hint i::after{content:'';position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:#fff;animation:wheel 1.6s infinite}
@@ -657,6 +661,64 @@
       .foot{flex-direction:column;align-items:flex-start;gap:14px}
       .p3d{display:none}
     }
+    .hero-3d{display:none}
+    /* ═══════════ MOBILE : perf + lisibilité ═══════════ */
+    @media (max-width:640px){
+      :root{--muted:#c2bfd1}
+      body{font-size:16px}
+      /* effets coûteux coupés */
+      .blur{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background-color:rgba(16,13,26,.94)}
+      .glass::before,.glass::after{display:none}
+      .glass{box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+      .grain,.ambient{display:none}
+      .ico3d{animation:none}
+      .rv{transform:translateY(18px);transition-duration:.6s}
+      .w{transform:none;transition-duration:.4s}
+
+      /* hero : image 3D fixe au lieu du globe animé */
+      .hero canvas,.bags{display:none}
+      .hero{min-height:0;padding-bottom:0;display:flex;flex-direction:column}
+      .hero-copy{order:1}
+      .hero-3d{order:2;display:block;position:relative;z-index:1;width:100%;height:auto;max-width:420px;align-self:center;margin:-10px 0 -40px;-webkit-mask:radial-gradient(closest-side,#000 62%,transparent);mask:radial-gradient(closest-side,#000 62%,transparent)}
+      .hero::after{height:80px}
+
+      /* moins d'infos */
+      .marquee,.fc-sales,.fc-coach,.fc-step,.t-com,.t-live,.t-saas{display:none!important}
+      .manifesto{padding-block:48px}
+      .manifesto blockquote{font-size:23px;line-height:1.22}
+      .t-coach .vis{display:none}
+      .t-coach,.t-form{grid-row:auto!important}
+      .offer-main .fit,.offer-alt .fit{display:none}
+      .offer-main .incl li:nth-child(n+5),.offer-alt .incl li:nth-child(n+4){display:none}
+      .om-right .tl span{display:none}
+      .proof-track.rev{display:none}
+      .gallery{grid-template-rows:repeat(2,210px)!important}
+      .gallery figure{grid-row:auto!important}
+      .gallery figure:nth-child(n+5){display:none}
+      .logos{display:none}
+      .road-conf-note{display:none}
+
+      /* visite : carrousel simple au doigt, sans 3D ni scroll bloqué */
+      .tour{height:auto!important;padding-block:56px}
+      .tour-sticky{position:relative;height:auto;overflow:visible;perspective:none;background:none}
+      .tour-sticky::after,.floor,.tour-bg,.tour-hint,.tour-prog,.tour-nav,.tour-cap{display:none!important}
+      .tour-head{display:block!important;position:static;padding-inline:16px;margin-bottom:22px;opacity:1!important}
+      .tour-head h2{font-size:32px}
+      .tour-stage{position:static;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:26px 16px 10px;scrollbar-width:none}
+      .tour-stage::-webkit-scrollbar{display:none}
+      .panel{position:relative!important;left:auto!important;top:auto!important;translate:none!important;margin:0!important;flex:0 0 84%;height:470px!important;
+        transform:none!important;opacity:1!important;visibility:visible!important;scroll-snap-align:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+      .panel::before{content:attr(data-label);position:absolute;left:6px;top:-24px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--v2)}
+
+      /* lisibilité */
+      h2{font-size:clamp(30px,8.6vw,36px);line-height:1.08}
+      .sub{font-size:16.5px}
+      .tile p,.step p,.incl li,details p{font-size:16px}
+      .step h4{font-size:18px}
+      .case span{font-size:14px}
+      .metrics span{font-size:12.5px}
+    }
+    @media (max-width:640px) and (prefers-reduced-motion:no-preference){ .proof-track{animation-duration:90s} }
   </style>
 </head>
 <body>
@@ -699,8 +761,9 @@
     <!-- ═══ HERO ═══ -->
     <section class="hero">
       <canvas id="globe" aria-hidden="true"></canvas>
+      <img class="hero-3d" src="assets/hero-3d.webp" alt="" aria-hidden="true" width="1000" height="1000" fetchpriority="high">
       <div class="bags" aria-hidden="true">
-        <img src="assets/globe/sac1.png" alt=""><img src="assets/globe/sac2.png" alt=""><img src="assets/globe/sac3.png" alt=""><img src="assets/globe/sac4.png" alt="">
+        <img src="assets/globe/sac1.webp" alt=""><img src="assets/globe/sac2.webp" alt=""><img src="assets/globe/sac3.webp" alt=""><img src="assets/globe/sac4.webp" alt="">
       </div>
 
       <div class="wrap hero-copy">
@@ -713,7 +776,7 @@
         </div>
         <div class="trust rv">
           <div class="avatars">
-            <img src="assets/made/team/HugoB.jpg" alt=""><img src="assets/made/team/Guillaume.jpg" alt=""><img src="assets/made/team/TheoG.jpg" alt="">
+            <img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/Guillaume.webp" alt=""><img src="assets/made/team/TheoG.webp" alt="">
           </div>
           <p><strong>+230 membres</strong> déjà dans l'académie</p>
         </div>
@@ -729,7 +792,7 @@
         </svg>
       </div>
       <div class="fcard glass blur fc-coach" aria-hidden="true">
-        <img src="assets/made/team/HugoB.jpg" alt="">
+        <img src="assets/made/team/HugoB.webp" alt="">
         <p><strong><span class="live"></span>Hugo est en ligne</strong>Point coaching · jeudi 18h</p>
       </div>
       <div class="fcard glass blur fc-step" aria-hidden="true">
@@ -757,8 +820,8 @@
 
     <!-- ═══ MANIFESTE ═══ -->
     <section class="manifesto">
-      <img class="p3d" data-depth=".35" src="assets/globe/sac3.png" alt="" style="width:170px;left:6%;top:18%">
-      <img class="p3d" data-depth="-.25" src="assets/globe/sac4.png" alt="" style="width:120px;right:8%;bottom:14%">
+      <img class="p3d" data-depth=".35" src="assets/globe/sac3.webp" alt="" style="width:170px;left:6%;top:18%">
+      <img class="p3d" data-depth="-.25" src="assets/globe/sac4.webp" alt="" style="width:120px;right:8%;bottom:14%">
       <div class="wrap">
         <span class="eyebrow rv">Pourquoi MADE</span>
         <blockquote class="rv">Les formations t'apprennent à regarder. <span class="dim">Nous, on accompagne des marques depuis 7 ans et on t'accompagne pareil,</span> <em class="s">sur ta boutique, chaque semaine.</em></blockquote>
@@ -783,9 +846,9 @@
               <p>Tu apprends sur des cas réels : ce qui a été fait, dans quel ordre, et les chiffres obtenus. Puis tu l'appliques sur ta boutique.</p>
             </div>
             <div class="vis"><div class="cases">
-              <div class="case"><img class="ico3d" src="assets/3d/sablier.png" alt=""><b>25 205 €</b><span>en 24 h avec un lancement préparé en 10 jours</span></div>
-              <div class="case"><img class="ico3d" src="assets/3d/argent-ailes.png" alt="" style="animation-delay:-2s"><b>53 000 €</b><span>en 48 h sur une promo, 16 % de conversion</span></div>
-              <div class="case"><img class="ico3d" src="assets/3d/cible.png" alt="" style="animation-delay:-3.5s"><b>10 693 €</b><span>en une journée, plus de 150 commandes</span></div>
+              <div class="case"><img class="ico3d" src="assets/3d/sablier.webp" alt=""><b>25 205 €</b><span>en 24 h avec un lancement préparé en 10 jours</span></div>
+              <div class="case"><img class="ico3d" src="assets/3d/argent-ailes.webp" alt="" style="animation-delay:-2s"><b>53 000 €</b><span>en 48 h sur une promo, 16 % de conversion</span></div>
+              <div class="case"><img class="ico3d" src="assets/3d/cible.webp" alt="" style="animation-delay:-3.5s"><b>10 693 €</b><span>en une journée, plus de 150 commandes</span></div>
             </div></div>
           </article>
 
@@ -797,7 +860,7 @@
             </div>
             <div class="vis"><div class="chat">
               <div class="msg me">J'ai 3 produits en test, lequel je scale ?</div>
-              <div class="msg co"><img src="assets/made/team/TheoG.jpg" alt=""><div><small>Théo · media buyer</small>Le 2 : ROAS 3,1 et meilleur panier. On double le budget demain et on prépare 3 nouvelles créas.</div></div>
+              <div class="msg co"><img src="assets/made/team/TheoG.webp" alt=""><div><small>Théo · media buyer</small>Le 2 : ROAS 3,1 et meilleur panier. On double le budget demain et on prépare 3 nouvelles créas.</div></div>
             </div></div>
           </article>
 
@@ -823,7 +886,7 @@
             <div class="body" style="max-width:60%">
               <h3>+230 membres <em class="s">qui avancent.</em></h3>
             </div>
-            <img class="bag3d" src="assets/globe/sac2.png" alt="" aria-hidden="true">
+            <img class="bag3d" src="assets/globe/sac2.webp" alt="" aria-hidden="true">
           </article>
 
           <article class="tile glass tilt t-live rv">
@@ -837,7 +900,7 @@
             <div class="body" style="display:flex;gap:20px;align-items:center;justify-content:space-between">
               <div><h3>Du fournisseur à <em class="s">ta propre marque.</em></h3>
               <p>Agents de confiance, négociation, packaging personnalisé. On t'aide à sortir d'AliExpress.</p></div>
-              <span class="icon-tile" style="width:120px;height:120px"><img class="ico3d" src="assets/3d/poignee.png" alt="" style="width:84px;height:84px"></span>
+              <span class="icon-tile" style="width:120px;height:120px"><img class="ico3d" src="assets/3d/poignee.webp" alt="" style="width:84px;height:84px"></span>
             </div>
           </article>
         </div>
@@ -856,15 +919,16 @@
           <h2>Entre dans <em class="s">l'académie.</em></h2>
         </div>
 
+        <div class="tour-stage">
         <!-- 1. Accueil -->
-        <div class="panel" data-x="-120" data-ry="10">
+        <div class="panel" data-label="01 · Ton tableau de bord" data-x="-120" data-ry="10">
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a class="on"><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Communauté</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
             <main>
               <div><h5>Salut Karim, on reprend ?</h5><div class="muted">Tu as terminé 68 % de ton parcours</div></div>
               <div class="g2">
                 <div class="card"><div class="thumb" style="background:linear-gradient(135deg,#701a75,#312e81)"></div><b style="color:#fff">Module 4 · Lancement publicitaire</b><div class="muted">Leçon 3 : structurer ta première campagne</div><div class="pbar"><i style="width:45%"></i></div></div>
-                <div class="card" style="display:flex;flex-direction:column;gap:8px"><span class="chip" style="align-self:flex-start">Prochain live</span><b style="color:#fff;font-size:15px">Analyse de boutiques en direct</b><div class="muted">Jeudi 18h · avec Hugo</div><div class="post" style="margin-top:auto;align-items:center"><img src="assets/made/team/HugoB.jpg" alt=""><span class="muted">32 membres inscrits</span></div></div>
+                <div class="card" style="display:flex;flex-direction:column;gap:8px"><span class="chip" style="align-self:flex-start">Prochain live</span><b style="color:#fff;font-size:15px">Analyse de boutiques en direct</b><div class="muted">Jeudi 18h · avec Hugo</div><div class="post" style="margin-top:auto;align-items:center"><img src="assets/made/team/HugoB.webp" alt=""><span class="muted">32 membres inscrits</span></div></div>
               </div>
               <div class="g3">
                 <div class="card"><div class="muted">Objectif du mois</div><b style="color:#fff;font-size:18px">10 000 €</b><div class="pbar"><i style="width:62%"></i></div></div>
@@ -876,7 +940,7 @@
         </div>
 
         <!-- 2. Formations -->
-        <div class="panel" data-x="140" data-ry="-12">
+        <div class="panel" data-label="02 · Les formations" data-x="140" data-ry="-12">
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a class="on"><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Communauté</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
             <main>
@@ -892,11 +956,11 @@
         </div>
 
         <!-- 3. Lives -->
-        <div class="panel" data-x="-140" data-ry="12">
+        <div class="panel" data-label="03 · Les lives" data-x="-140" data-ry="12">
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a class="on"><i></i>Lives</a><a><i></i>Communauté</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
             <main>
-              <div class="player"><video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" autoplay muted loop playsinline preload="none"></video><span class="lb">EN DIRECT</span><span class="pt">Hugo en live depuis Canton</span></div>
+              <div class="player"><video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" muted loop playsinline preload="none"></video><span class="lb">EN DIRECT</span><span class="pt">Hugo en live depuis Canton</span></div>
               <div class="g3">
                 <div class="card"><div class="muted">Replay</div><b style="color:#fff">25 205 € en 24 h, le lancement décortiqué</b></div>
                 <div class="card"><div class="muted">Replay</div><b style="color:#fff">Meta Ads : les créas qui marchent en 2026</b></div>
@@ -907,36 +971,37 @@
         </div>
 
         <!-- 4. Communauté -->
-        <div class="panel" data-x="140" data-ry="-10">
+        <div class="panel" data-label="04 · La communauté" data-x="140" data-ry="-10">
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a class="on"><i></i>Communauté</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
             <main>
               <div><h5>Communauté</h5><div style="margin-top:8px"><span class="chip">Questions & Réponses</span><span class="chip">Tips quotidiens</span><span class="chip">Actu ecommerce</span><span class="chip">Résultats des membres</span></div></div>
               <div class="card post"><div class="av" style="background:linear-gradient(135deg,#5eead4,#0f766e)"></div><div><b>Sarah</b> <span class="muted">· Résultats des membres</span><div>Ma première vente ce matin ! Merci pour le retour sur ma page produit hier 🙏</div></div></div>
-              <div class="card post"><img src="assets/made/team/Mailis.jpg" alt=""><div><b>Mailis</b> <span class="muted">· Tips quotidiens</span><div>3 angles de créas à tester cette semaine sur les produits beauté. Exemples dans le fil.</div></div></div>
+              <div class="card post"><img src="assets/made/team/Mailis.webp" alt=""><div><b>Mailis</b> <span class="muted">· Tips quotidiens</span><div>3 angles de créas à tester cette semaine sur les produits beauté. Exemples dans le fil.</div></div></div>
               <div class="card post"><div class="av" style="background:linear-gradient(135deg,#fcd34d,#b45309)"></div><div><b>Mehdi</b> <span class="muted">· Questions & Réponses</span><div>Quel délai de livraison annoncer avec un agent en Chine ?</div></div></div>
             </main>
           </div>
         </div>
 
         <!-- 5. Outils -->
-        <div class="panel" data-x="0" data-ry="0">
+        <div class="panel" data-label="05 · Les outils" data-x="0" data-ry="0">
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Communauté</a><a class="on"><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
             <main>
               <div><h5>Outils</h5><div class="muted">Tout est inclus dans ton accès</div></div>
               <div class="g3">
-                <div class="card tool"><span class="ic"><img src="assets/3d/laptop.png" alt=""></span><b style="color:#fff">SaaS MADE</b><span class="muted">Notre outil maison pour piloter ta boutique</span><span class="soon-b">Bientôt</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/courbe.png" alt=""></span><b style="color:#fff">TrendTrack</b><span class="muted">Trouve les produits et pubs qui marchent</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/loupe.png" alt=""></span><b style="color:#fff">Analyse de site</b><span class="muted">Ta boutique relue par l'équipe</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/sablier.png" alt=""></span><b style="color:#fff">Calculateur de marge</b><span class="muted">Prix, coûts, rentabilité</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/baguette.png" alt=""></span><b style="color:#fff">Prompts IA</b><span class="muted">Fiches produit, pubs, emails</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/poignee.png" alt=""></span><b style="color:#fff">Agents Chine</b><span class="muted">Nos contacts sourcing</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/laptop.webp" alt=""></span><b style="color:#fff">SaaS MADE</b><span class="muted">Notre outil maison pour piloter ta boutique</span><span class="soon-b">Bientôt</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/courbe.webp" alt=""></span><b style="color:#fff">TrendTrack</b><span class="muted">Trouve les produits et pubs qui marchent</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/loupe.webp" alt=""></span><b style="color:#fff">Analyse de site</b><span class="muted">Ta boutique relue par l'équipe</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/sablier.webp" alt=""></span><b style="color:#fff">Calculateur de marge</b><span class="muted">Prix, coûts, rentabilité</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/baguette.webp" alt=""></span><b style="color:#fff">Prompts IA</b><span class="muted">Fiches produit, pubs, emails</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/poignee.webp" alt=""></span><b style="color:#fff">Agents Chine</b><span class="muted">Nos contacts sourcing</span></div>
               </div>
             </main>
           </div>
         </div>
 
+        </div>
         <div class="tour-cap glass blur" aria-live="polite">
           <div class="fade" id="capText">
             <div class="k" id="capK">01 · Accueil</div>
@@ -963,27 +1028,27 @@
         </div>
 
         <div class="road" id="road-deb">
-          <div class="step glass tilt rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/boussole.png" alt=""></div><h4>Le bon point de départ</h4><p>Ton budget, ton temps, ton objectif. On choisit un modèle qui tient avec ta vraie vie.</p></div>
-          <div class="step glass tilt rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/loupe.png" alt=""></div><h4>Le produit qui se vend</h4><p>Une vraie marge, une vraie demande. On valide avant que tu dépenses un euro en pub.</p></div>
-          <div class="step glass tilt rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/gemme.png" alt=""></div><h4>Une marque, pas un catalogue</h4><p>Nom, identité, boutique qui convertit et fournisseur fiable.</p></div>
-          <div class="step glass tilt rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/fusee.png" alt=""></div><h4>Tes premières ventes</h4><p>Créas, campagnes, premiers chiffres. On les lit ensemble.</p></div>
-          <div class="step glass tilt rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/courbe.png" alt=""></div><h4>Ce qui marche, en plus grand</h4><p>On coupe ce qui ne rapporte pas et on pousse ce qui rapporte.</p></div>
-          <div class="step glass tilt rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/couronne.png" alt=""></div><h4>Une activité qui tient</h4><p>Scale, process, délégation. Ta marque tourne sans toi au quotidien.</p></div>
+          <div class="step glass tilt rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/boussole.webp" alt=""></div><h4>Le bon point de départ</h4><p>Ton budget, ton temps, ton objectif. On choisit un modèle qui tient avec ta vraie vie.</p></div>
+          <div class="step glass tilt rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/loupe.webp" alt=""></div><h4>Le produit qui se vend</h4><p>Une vraie marge, une vraie demande. On valide avant que tu dépenses un euro en pub.</p></div>
+          <div class="step glass tilt rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/gemme.webp" alt=""></div><h4>Une marque, pas un catalogue</h4><p>Nom, identité, boutique qui convertit et fournisseur fiable.</p></div>
+          <div class="step glass tilt rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div><h4>Tes premières ventes</h4><p>Créas, campagnes, premiers chiffres. On les lit ensemble.</p></div>
+          <div class="step glass tilt rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/courbe.webp" alt=""></div><h4>Ce qui marche, en plus grand</h4><p>On coupe ce qui ne rapporte pas et on pousse ce qui rapporte.</p></div>
+          <div class="step glass tilt rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/couronne.webp" alt=""></div><h4>Une activité qui tient</h4><p>Scale, process, délégation. Ta marque tourne sans toi au quotidien.</p></div>
         </div>
         <div class="road" id="road-conf" hidden>
-          <div class="step glass rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/cerveau.png" alt=""></div><h4>Audit complet</h4><p>Boutique, pubs, marges, supply : on trouve ce qui bloque.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/engrenage.png" alt=""></div><h4>Les fondamentaux</h4><p>Offre, conversion, panier moyen : on renforce ce qui porte ton chiffre.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/cible.png" alt=""></div><h4>Le plan de scale</h4><p>Créas et budgets pour passer le palier suivant sans perdre en rentabilité.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/sacs.png" alt=""></div><h4>Ta propre marque</h4><p>Sourcing direct, packaging, stock : tu reprends la main sur tes marges.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/robot.png" alt=""></div><h4>Un système qui tourne</h4><p>Process, SAV, équipe : l'activité avance sans toi au quotidien.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/etoile.png" alt=""></div><h4>Le palier d'après</h4><p>Nouveaux marchés, nouveaux canaux, nouvelles gammes.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/cerveau.webp" alt=""></div><h4>Audit complet</h4><p>Boutique, pubs, marges, supply : on trouve ce qui bloque.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/engrenage.webp" alt=""></div><h4>Les fondamentaux</h4><p>Offre, conversion, panier moyen : on renforce ce qui porte ton chiffre.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/cible.webp" alt=""></div><h4>Le plan de scale</h4><p>Créas et budgets pour passer le palier suivant sans perdre en rentabilité.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/sacs.webp" alt=""></div><h4>Ta propre marque</h4><p>Sourcing direct, packaging, stock : tu reprends la main sur tes marges.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/robot.webp" alt=""></div><h4>Un système qui tourne</h4><p>Process, SAV, équipe : l'activité avance sans toi au quotidien.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/etoile.webp" alt=""></div><h4>Le palier d'après</h4><p>Nouveaux marchés, nouveaux canaux, nouvelles gammes.</p></div>
         </div>
       </div>
     </section>
 
     <!-- ═══ ÉQUIPE ═══ -->
     <section id="equipe" style="padding-top:0">
-      <img class="p3d" data-depth=".3" src="assets/globe/sac1.png" alt="" style="width:150px;right:4%;top:0">
+      <img class="p3d" data-depth=".3" src="assets/globe/sac1.webp" alt="" style="width:150px;right:4%;top:0">
       <div class="wrap">
         <div class="head-c">
           <span class="eyebrow rv">L'équipe</span>
@@ -992,18 +1057,18 @@
         </div>
         <div class="team-label rv">Les cofondateurs</div>
         <div class="founders">
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/HugoB.jpg" alt="Hugo" loading="lazy"></div><h4>Hugo</h4><p>Cofondateur · Acquisition & media buying</p></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Guillaume.jpg" alt="Guillaume" loading="lazy"></div><h4>Guillaume</h4><p>Cofondateur · Site & conversion</p></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/TheoG.jpg" alt="Théo" loading="lazy"></div><h4>Théo</h4><p>Cofondateur · Publicité & scale</p></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/HugoB.webp" alt="Hugo" loading="lazy"></div><h4>Hugo</h4><p>Cofondateur · Acquisition & media buying</p></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Guillaume.webp" alt="Guillaume" loading="lazy"></div><h4>Guillaume</h4><p>Cofondateur · Site & conversion</p></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/TheoG.webp" alt="Théo" loading="lazy"></div><h4>Théo</h4><p>Cofondateur · Publicité & scale</p></div>
         </div>
         <div class="team-label rv">Toute l'équipe</div>
         <div class="crew">
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Marvin.jpg" alt="Marvin" loading="lazy" onerror="this.style.visibility='hidden'"></div><h4>Marvin</h4><p>Coach</p></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Mailis.jpg" alt="Mailis" loading="lazy"></div><h4>Mailis</h4></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lionel.jpg" alt="Lionel" loading="lazy"></div><h4>Lionel</h4></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Delphine.jpg" alt="Delphine" loading="lazy"></div><h4>Delphine</h4></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lola.jpg" alt="Lola" loading="lazy"></div><h4>Lola</h4></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/HugoM.jpg" alt="Hugo M." loading="lazy"></div><h4>Hugo M.</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Marvin.webp" alt="Marvin" loading="lazy" onerror="this.style.visibility='hidden'"></div><h4>Marvin</h4><p>Coach</p></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Mailis.webp" alt="Mailis" loading="lazy"></div><h4>Mailis</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lionel.webp" alt="Lionel" loading="lazy"></div><h4>Lionel</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Delphine.webp" alt="Delphine" loading="lazy"></div><h4>Delphine</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lola.webp" alt="Lola" loading="lazy"></div><h4>Lola</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/HugoM.webp" alt="Hugo M." loading="lazy"></div><h4>Hugo M.</h4></div>
         </div>
       </div>
     </section>
@@ -1018,17 +1083,17 @@
         </div>
         <div class="brands">
           <div class="bcard glass tilt rv">
-            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>beautymarts.fr</span></div><img src="assets/made/sites/beautymarts.jpg" alt="Site Beauty Mart's" loading="lazy"></div>
+            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>beautymarts.fr</span></div><img src="assets/made/sites/beautymarts.webp" alt="Site Beauty Mart's" loading="lazy"></div>
             <div class="bc-body"><div class="bc-top"><h4>Beauty Mart's</h4><span>Beauté</span></div>
               <div class="metrics"><div><b>+1&nbsp;M€</b><span>de CA généré</span></div><div><b>+50&nbsp;k€</b><span>en 7 jours au lancement</span></div><div><b>7&nbsp;%</b><span>de taux de conversion</span></div></div></div>
           </div>
           <div class="bcard glass tilt rv">
-            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>scorekeys.shop</span></div><img src="assets/made/sites/scorekeys.jpg" alt="Site ScoreKeys" loading="lazy"></div>
+            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>scorekeys.shop</span></div><img src="assets/made/sites/scorekeys.webp" alt="Site ScoreKeys" loading="lazy"></div>
             <div class="bc-body"><div class="bc-top"><h4>ScoreKeys</h4><span>Ecommerce</span></div>
               <div class="metrics"><div><b>+250&nbsp;%</b><span>de taux de conversion</span></div><div><b>+200&nbsp;%</b><span>de CA mensuel</span></div><div><b>x1,5</b><span>sur le panier moyen</span></div></div></div>
           </div>
           <div class="bcard glass tilt rv">
-            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>Unik Journal</span></div><img src="assets/made/projects/project5.jpg" alt="Unik Journal" loading="lazy" style="object-position:center"></div>
+            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>Unik Journal</span></div><img src="assets/made/projects/project5.webp" alt="Unik Journal" loading="lazy" style="object-position:center"></div>
             <div class="bc-body"><div class="bc-top"><h4>Unik Journal</h4><span>Marque</span></div>
               <div class="metrics"><div><b>300&nbsp;k</b><span>visiteurs par mois</span></div><div><b>100&nbsp;%</b><span>direction artistique sur mesure</span></div><div><b>Monde</b><span>lancement international</span></div></div></div>
           </div>
@@ -1041,7 +1106,7 @@
 
     <!-- ═══ OFFRES ═══ -->
     <section id="offres" style="padding-top:0">
-      <img class="p3d" data-depth="-.2" src="assets/globe/sac2.png" alt="" style="width:130px;right:4%;top:14%">
+      <img class="p3d" data-depth="-.2" src="assets/globe/sac2.webp" alt="" style="width:130px;right:4%;top:14%">
       <div class="wrap">
         <div class="head-c">
           <span class="eyebrow rv">Les programmes</span>
@@ -1051,7 +1116,7 @@
         <!-- TODO: contenu des offres à finaliser (réunion offres) -->
         <article class="offer-main glass rv">
           <div>
-            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/poignee.png" alt=""></span><div><span class="tag feat-tag">Le plus choisi</span><h3>Coaching <em class="s">1:1</em></h3></div></div>
+            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/poignee.webp" alt=""></span><div><span class="tag feat-tag">Le plus choisi</span><h3>Coaching <em class="s">1:1</em></h3></div></div>
             <p class="promise">On construit ta marque avec toi, semaine après semaine, jusqu'à ce qu'elle tourne.</p>
             <div class="fit"><b>Pour toi si</b><span>tu veux aller vite</span><span>tu as un budget à investir</span><span>tu veux éviter les erreurs coûteuses</span></div>
             <ul class="incl two">
@@ -1068,12 +1133,12 @@
             <div class="tl"><span class="when">Semaine 1</span><div><b>Audit et plan d'action</b><span>On part de ta situation réelle</span></div></div>
             <div class="tl"><span class="when">Mois 1</span><div><b>Tes premières ventes</b><span>Produit validé, boutique en ligne, pubs lancées</span></div></div>
             <div class="tl"><span class="when">Mois 3</span><div><b>Une marque qui scale</b><span>Budgets, créas et sourcing optimisés</span></div></div>
-            <div class="coachs"><img src="assets/made/team/HugoB.jpg" alt=""><img src="assets/made/team/Guillaume.jpg" alt=""><img src="assets/made/team/TheoG.jpg" alt=""><span><b>Hugo, Guillaume et Théo</b> et l'équipe</span></div>
+            <div class="coachs"><img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/Guillaume.webp" alt=""><img src="assets/made/team/TheoG.webp" alt=""><span><b>Hugo, Guillaume et Théo</b> et l'équipe</span></div>
           </div>
         </article>
         <div class="offers-duo">
           <article class="offer-alt glass tilt rv">
-            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/ampoule.png" alt=""></span><div><span class="tag">En autonomie</span><h3>Formation</h3></div></div>
+            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/ampoule.webp" alt=""></span><div><span class="tag">En autonomie</span><h3>Formation</h3></div></div>
             <p class="promise">La méthode complète, à ton rythme.</p>
             <div class="fit"><b>Pour toi si</b><span>tu débutes</span><span>tu préfères avancer seul</span></div>
             <ul class="incl">
@@ -1085,7 +1150,7 @@
             <a href="#appel" class="btn btn-ghost btn-lg">Réserver un appel</a>
           </article>
           <article class="offer-alt glass tilt rv">
-            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/laptop.png" alt=""></span><div><span class="tag">Outils</span><h3>Plateforme</h3></div></div>
+            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/laptop.webp" alt=""></span><div><span class="tag">Outils</span><h3>Plateforme</h3></div></div>
             <p class="promise">Les bons outils pour piloter ta boutique.</p>
             <div class="fit"><b>Pour toi si</b><span>tu as déjà une boutique</span><span>tu veux gagner du temps</span></div>
             <ul class="incl">
@@ -1121,7 +1186,7 @@
       <div class="wrap">
         <div class="bento">
           <a href="#appel" class="china glass rv"><!-- TODO: pointer vers chine/ quand la page existe -->
-            <video class="poster" src="assets/chine/rue-horizontal1.mp4" poster="assets/chine/rue-horizontal1.jpg" autoplay muted loop playsinline preload="metadata"></video>
+            <video class="poster" src="assets/chine/canton-nuit.mp4" poster="assets/chine/canton-nuit.jpg" muted loop playsinline preload="none"></video>
             <div class="shade"></div>
             <div class="china-in">
               <span class="tag">Séminaire · Canton</span>
@@ -1132,12 +1197,12 @@
           </a>
         </div>
         <div class="gallery">
-          <figure class="g-a rv"><video data-par src="assets/chine/hugo-mall.mp4" poster="assets/chine/hugo-mall.jpg" autoplay muted loop playsinline preload="none"></video><figcaption>Visite de fournisseurs</figcaption></figure>
-          <figure class="rv"><video data-par src="assets/chine/textile.mp4" poster="assets/chine/textile.jpg" autoplay muted loop playsinline preload="none"></video><figcaption>Textile</figcaption></figure>
-          <figure class="rv"><video data-par src="assets/chine/showroom.mp4" poster="assets/chine/showroom.jpg" autoplay muted loop playsinline preload="none"></video><figcaption>Showroom</figcaption></figure>
-          <figure class="g-d rv"><video data-par src="assets/chine/hugo-fournisseur.mp4" poster="assets/chine/hugo-fournisseur.jpg" autoplay muted loop playsinline preload="none"></video><figcaption>Chez un fabricant</figcaption></figure>
-          <figure class="rv"><img data-par src="assets/chine/p6861.jpg" alt="Hugo devant la Canton Tower" loading="lazy"><figcaption>Canton Tower</figcaption></figure>
-          <figure class="rv"><video data-par src="assets/chine/hugo-nuit.mp4" poster="assets/chine/hugo-nuit.jpg" autoplay muted loop playsinline preload="none"></video><figcaption>Canton, le soir</figcaption></figure>
+          <figure class="g-a rv"><video data-par src="assets/chine/entrepot-hugo.mp4" poster="assets/chine/entrepot-hugo.jpg" muted loop playsinline preload="none"></video><figcaption>Devant l'entrepôt</figcaption></figure>
+          <figure class="rv"><video data-par src="assets/chine/usine-skincare.mp4" poster="assets/chine/usine-skincare.jpg" muted loop playsinline preload="none"></video><figcaption>Usine skincare</figcaption></figure>
+          <figure class="rv"><video data-par src="assets/chine/ligne-production.mp4" poster="assets/chine/ligne-production.jpg" muted loop playsinline preload="none"></video><figcaption>Ligne de production</figcaption></figure>
+          <figure class="g-d rv"><video data-par src="assets/chine/fournisseurs-hugo.mp4" poster="assets/chine/fournisseurs-hugo.jpg" muted loop playsinline preload="none"></video><figcaption>Chez les fournisseurs</figcaption></figure>
+          <figure class="rv"><video data-par src="assets/chine/entrepot.mp4" poster="assets/chine/entrepot.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
+          <figure class="rv"><video data-par src="assets/chine/packaging.mp4" poster="assets/chine/packaging.jpg" muted loop playsinline preload="none"></video><figcaption>Packaging</figcaption></figure>
         </div>
       </div>
     </section>
@@ -1166,7 +1231,7 @@
     <section id="appel" style="padding-top:0">
       <div class="wrap">
         <div class="final glass rv">
-          <img class="bgimg" data-par src="assets/salon.jpg" alt="" aria-hidden="true" loading="lazy">
+          <img class="bgimg" data-par src="assets/salon.webp" alt="" aria-hidden="true" loading="lazy">
           <div class="shade"></div>
           <div class="final-in">
             <span class="eyebrow">Prochaine étape</span>
@@ -1212,7 +1277,9 @@
     const vh = () => window.innerHeight;
 
     /* ─── Scroll fluide ─── */
-    const lenis = reduced || typeof Lenis === 'undefined' ? null : new Lenis({ lerp: .09, smoothWheel: true });
+    const isMobile = matchMedia('(max-width: 640px)').matches;
+    const isTouch = matchMedia('(hover: none)').matches;
+    const lenis = reduced || isTouch || isMobile || typeof Lenis === 'undefined' ? null : new Lenis({ lerp: .09, smoothWheel: true });
     document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
       const id = a.getAttribute('href');
       if (id.length < 2) return;
@@ -1223,7 +1290,8 @@
     }));
 
     /* ─── Planète ─── */
-    MadeGlobe(document.getElementById('globe'), { bags: [...document.querySelectorAll('.bags img')] });
+    const startGlobe = () => MadeGlobe(document.getElementById('globe'), { bags: [...document.querySelectorAll('.bags img')] });
+    if (!isMobile) startGlobe();
 
     /* ─── Room tour 3D ─── */
     const tour = document.getElementById('tour');
@@ -1240,6 +1308,7 @@
     const GAP = 1500;
     let capIdx = 0;
     function renderTour() {
+      if (isMobile) return;
       const r = tour.getBoundingClientRect();
       if (r.bottom < 0 || r.top > vh()) return;
       const total = r.height - vh();
@@ -1290,6 +1359,7 @@
     const p3d = [...document.querySelectorAll('.p3d')];
     const pars = [...document.querySelectorAll('[data-par]')];
     function renderParallax() {
+      if (isMobile || isTouch) return;
       const h = vh();
       p3d.forEach(el => {
         const r = el.parentElement.getBoundingClientRect();
@@ -1312,7 +1382,7 @@
       renderParallax();
       requestAnimationFrame(frame);
     }
-    requestAnimationFrame(frame);
+    if (!isMobile) requestAnimationFrame(frame);
 
     /* ─── Tilt 3D des cartes ─── */
     if (matchMedia('(hover:hover)').matches && !reduced) {
@@ -1337,7 +1407,11 @@
     }
 
     /* ─── Vidéos : lecture uniquement à l'écran ─── */
-    const vio = new IntersectionObserver(es => es.forEach(en => en.isIntersecting ? en.target.play().catch(() => {}) : en.target.pause()));
+    const vio = new IntersectionObserver(es => es.forEach(en => {
+      const v = en.target;
+      if (en.isIntersecting) { if (getComputedStyle(v.closest('figure,.panel,.china') || v).display !== 'none') v.play().catch(() => {}); }
+      else v.pause();
+    }), { rootMargin: '120px' });
     document.querySelectorAll('video').forEach(v => vio.observe(v));
 
     /* ─── Réservation ─── */
@@ -1352,10 +1426,10 @@
     /* ─── Résultats + logos ─── */
     const half = Math.ceil(RESULTS.length / 2);
     [[RESULTS.slice(0, half), 'proof1'], [RESULTS.slice(half), 'proof2']].forEach(([list, id]) => {
-      const html = list.map(n => `<figure class="glass"><img src="assets/resultats/${n}.jpg" alt="Résultat élève, tableau de ventes Shopify" decoding="async" width="560" height="533"></figure>`).join('');
+      const html = list.map(n => `<figure class="glass"><img src="assets/resultats/${n}.webp" alt="Résultat élève, tableau de ventes Shopify" loading="lazy" decoding="async" width="560" height="533"></figure>`).join('');
       document.getElementById(id).innerHTML = html + html;
     });
-    const logos = [1,2,3,4,5,7,8,10,11].map(i => `<img src="assets/made/partners/p${i}.png" alt="" loading="lazy" width="138" height="46">`).join('') + '<img src="assets/made/partners/beautymarts.png" alt="Beauty Mart\'s" loading="lazy" style="height:26px">';
+    const logos = [1,2,3,4,5,7,8,10,11].map(i => `<img src="assets/made/partners/p${i}.webp" alt="" loading="lazy" width="138" height="46">`).join('') + '<img src="assets/made/partners/beautymarts.webp" alt="Beauty Mart\'s" loading="lazy" style="height:26px">';
     document.getElementById('logos').innerHTML = logos + logos;
 
     /* ─── Menu mobile ─── */
