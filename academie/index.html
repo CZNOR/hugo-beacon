@@ -1024,13 +1024,14 @@
     .cta-band{padding-block:10px 60px!important}
 
     /* reflets liquides */
-    .sheen{position:relative;isolation:isolate}
-    .sheen::before{content:'';position:absolute;top:-10%;bottom:-10%;left:-70%;width:45%;z-index:5;pointer-events:none;background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.08) 35%,rgba(255,255,255,.28) 50%,rgba(255,255,255,.08) 65%,transparent 100%);transform:skewX(-20deg)}
+    .sheen{isolation:isolate}
+    .phase,.sto-win{position:relative}
+    .sheen::before{content:'';position:absolute;top:-10%;bottom:-10%;left:0;width:45%;will-change:transform;transform:translateX(-160%) skewX(-20deg);z-index:5;pointer-events:none;background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.08) 35%,rgba(255,255,255,.28) 50%,rgba(255,255,255,.08) 65%,transparent 100%)}
     .sheen.in::before,.in .sheen::before{animation:sheen 1.8s .4s var(--ease) both}
     .sheen:hover::before{animation:sheen 1.3s var(--ease)}
-    @keyframes sheen{from{left:-70%}to{left:140%}}
-    .btn-neon::after{content:'';position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:btnSheen 4.5s ease-in-out infinite;pointer-events:none}
-    @keyframes btnSheen{0%,70%{left:-60%}100%{left:140%}}
+    @keyframes sheen{from{transform:translateX(-160%) skewX(-20deg)}to{transform:translateX(320%) skewX(-20deg)}}
+    .btn-neon::after{content:'';position:absolute;top:0;bottom:0;left:0;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-160%) skewX(-20deg);animation:btnSheen 4.5s ease-in-out infinite;pointer-events:none;will-change:transform}
+    @keyframes btnSheen{0%,70%{transform:translateX(-160%) skewX(-20deg)}100%{transform:translateX(360%) skewX(-20deg)}}
     .emo-card,.phase,.offer,.sto-win,.canton-hero,.terrain-card{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(255,255,255,.08)}
     .emo-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.6s var(--ease)}
     .emo-card.in video{transform:scale(1)}
@@ -1077,6 +1078,15 @@
       .t3-storia svg{width:40px;height:40px;top:12px;left:12px}
       .t3-trend svg{top:12px;height:34px}.t3{min-height:130px}
       .t3 b{font-size:15px}
+    }
+
+
+    @media (max-width:640px){
+      .emo-card.sheen,.phase.sheen{position:sticky}
+      .emo-card,.phase,.panel{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 0 1px rgba(255,255,255,.1)!important}
+      .emo-card+.emo-card,.phase+.phase{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 0 1px rgba(255,255,255,.1),0 -18px 30px -18px rgba(0,0,0,.9)!important}
+      .pz video{transform:none!important}
+      .m-cta .btn-neon::after{animation:none}
     }
 
     /* ═════════ IPHONE V2 : vertical, aéré, sans carrousel ═════════ */
@@ -1810,7 +1820,7 @@
     const pzEls = [...document.querySelectorAll('.pz')];
     let pzT = false;
     const pz = () => { pzT = false; pzEls.forEach(el => { const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh()) return; const k = Math.min(Math.max((vh() - r.top) / (vh() + r.height), 0), 1); el.style.setProperty('--z', (1.18 - k * .18).toFixed(3)); }); };
-    addEventListener('scroll', () => { if (!pzT) { pzT = true; requestAnimationFrame(pz); } }, { passive: true });
+    if (!isMobile) addEventListener('scroll', () => { if (!pzT) { pzT = true; requestAnimationFrame(pz); } }, { passive: true });
 
     /* ─── Barre d'appel mobile ─── */
     const mCta = document.getElementById('mCta');
@@ -1822,7 +1832,7 @@
     }
 
     /* ─── Vidéos : lecture seulement à l'écran ─── */
-    const vio = new IntersectionObserver(es => es.forEach(en => en.isIntersecting ? en.target.play().catch(() => {}) : en.target.pause()), { rootMargin: '150px' });
+    const vio = new IntersectionObserver(es => es.forEach(en => en.isIntersecting ? en.target.play().catch(() => {}) : en.target.pause()), { rootMargin: isMobile ? '0px' : '150px', threshold: isMobile ? .2 : 0 });
     document.querySelectorAll('video').forEach(v => vio.observe(v));
 
     /* ─── Animations CSS en pause hors écran ─── */
