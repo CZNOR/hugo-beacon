@@ -765,6 +765,100 @@
     .st-btn{all:unset;align-self:flex-start;margin-top:auto;padding:12px 20px;border-radius:14px;background:#ff5a1f;color:#fff;font-weight:500;font-size:15px}
     @media (max-width:1080px){.st-grid{grid-template-columns:1fr}}
 
+    /* ═════════ STORIA V2 ═════════ */
+    @property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+    @keyframes rot{to{--a:360deg}}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.7)}100%{box-shadow:0 0 0 10px rgba(52,211,153,0)}}
+    .st-badge{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:100px;font-weight:600;font-size:15px;letter-spacing:-.01em}
+    .st-badge::before{content:'';position:absolute;inset:-1.5px;border-radius:inherit;z-index:-2;background:conic-gradient(from var(--a),#ff5a1f,#B691FE,#1f8a80,#f2a33a,#ff5a1f);animation:rot 4s linear infinite}
+    .st-badge::after{content:'';position:absolute;inset:0;border-radius:inherit;z-index:-1;background:#0d0b14}
+    .st-badge i{width:8px;height:8px;border-radius:50%;background:#34d399;animation:pulse 1.6s infinite}
+    #storia .st-app{max-width:1040px;margin:0 auto}
+    .st-side button span{flex:1}
+    .st-side button.on{box-shadow:inset 0 0 0 2px var(--c)}
+    .st-side button.on em{background:var(--c)}
+    .st-side button.done em{background:#eee6da;color:#6b655b;box-shadow:none}
+    .st-body{min-height:500px}
+    .st-shop{border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px #ece6dc}
+    .st-shop-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #f0ebe3;font-size:12px;color:#8a8479}
+    .st-shop-bar b{color:#0f3d3e;letter-spacing:.14em;font-size:13px}
+    .st-shop-hero{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;align-items:center;background:#f4efe6}
+    .st-shop-hero img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px}
+    .st-shop-hero small{color:#1f8a80;font-size:12px}
+    .st-shop-hero b{display:block;font-size:20px;font-weight:700;letter-spacing:-.04em;line-height:1.1;margin:6px 0;color:#0f3d3e}
+    .st-shop-hero span{display:block;font-weight:600;margin-bottom:10px}
+    .st-shop-hero i{font-style:normal;display:inline-block;padding:9px 14px;border-radius:10px;background:#0f3d3e;color:#fff;font-size:13px}
+    .st-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .st-kpis div{padding:12px;border-radius:14px;background:#fff;box-shadow:0 0 0 1px #ece6dc}
+    .st-kpis small{display:block;color:#8a8479;font-size:12px}.st-kpis b{font-size:22px;font-weight:700;letter-spacing:-.04em}
+    .st-chart{display:flex;align-items:flex-end;gap:8px;height:110px;padding:12px;border-radius:14px;background:#fff;box-shadow:0 0 0 1px #ece6dc}
+    .st-chart i{flex:1;border-radius:6px 6px 2px 2px;background:linear-gradient(#8b7cf0,#6d4ce0);transform-origin:bottom;transform:scaleY(0);transition:transform .8s var(--ease)}
+    .st-view.on .st-chart i{transform:none}
+    .st-view.on .st-chart i:nth-child(2n){transition-delay:.08s}.st-view.on .st-chart i:nth-child(3n){transition-delay:.16s}
+    .st-view .st-list li,.st-view .st-ads figure,.st-view .st-names span{opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .6s var(--ease)}
+    .st-view.on .st-list li,.st-view.on .st-ads figure,.st-view.on .st-names span{opacity:1;transform:none}
+    .st-view.on li:nth-child(2),.st-view.on figure:nth-child(2),.st-view.on .st-names span:nth-child(2){transition-delay:.12s}
+    .st-view.on li:nth-child(3),.st-view.on figure:nth-child(3),.st-view.on .st-names span:nth-child(3){transition-delay:.24s}
+    .st-feats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:1040px;margin:18px auto 0}
+    .st-feats li{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--line);transition:background .3s,transform .4s var(--ease)}
+    .st-feats li:hover{background:rgba(255,255,255,.07);transform:translateY(-3px)}
+    .st-feats svg{grid-row:span 2;width:36px;height:36px;color:var(--c)}
+    .st-feats li:last-child svg{color:#f1f0ea}
+    .st-feats b{font-weight:600;font-size:15.5px;letter-spacing:-.02em}
+    .st-feats span{font-size:13px;color:var(--muted)}
+
+    /* ═════════ RUBAN RÉSULTATS ═════════ */
+    .ribbon{padding-block:clamp(40px,6vw,90px)!important;overflow:hidden}
+    .rb-rows{transform:rotate(-4deg);margin-inline:-5vw;display:flex;flex-direction:column;gap:14px;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+    .rb-track{display:flex;gap:14px;width:max-content;animation:mq 70s linear infinite}
+    .rb-rows .rev .rb-track{animation-direction:reverse;animation-duration:90s}
+    .rb-track figure{flex:none;height:220px;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 20px 40px -20px rgba(0,0,0,.8)}
+    .rb-track figure.sq{width:220px}
+    .rb-track figure.pt{width:150px;background:#111}
+    .rb-track img,.rb-track video{width:100%;height:100%;object-fit:cover}
+    .rb-cap{text-align:center;margin-top:34px;font-family:var(--cond);font-weight:600;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:rgba(241,240,234,.55)}
+    .rb-cap b{color:var(--made);font-weight:600}
+    .pz{overflow:hidden}.pz video{transform:scale(var(--z,1.12));transition:transform .1s linear}
+
+    @media (max-width:640px){
+      .st-badge{font-size:14px;padding:9px 16px}
+      .st-side{grid-template-columns:repeat(7,1fr)!important;gap:4px!important;padding:10px 8px!important}
+      .st-side button{padding:6px 0!important;background:none!important;box-shadow:none!important}
+      .st-side button span{display:none}
+      .st-side button em{width:30px!important;height:30px!important;font-size:13px}
+      .st-side button.on em{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--c)}
+      .st-main{height:470px!important}
+      .st-shop-hero{grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+      .st-shop-hero b{font-size:16px}
+      .st-kpis b{font-size:18px}
+      .st-feats{grid-template-columns:1fr 1fr;gap:8px}
+      .st-feats li{padding:12px;column-gap:10px}
+      .st-feats svg{width:28px;height:28px}
+      .st-feats b{font-size:14.5px}.st-feats span{font-size:12px;line-height:1.3}
+      .rb-track figure{height:150px;border-radius:14px}
+      .rb-track figure.sq{width:150px}.rb-track figure.pt{width:104px}
+      .rb-rows{gap:10px}.rb-track{gap:10px}
+      .rb-cap{font-size:13px;margin-top:24px;padding-inline:22px}
+
+      /* visite de l'académie : écrans empilés */
+      #tour{display:block!important}
+      .tour{padding-block:64px!important}
+      .tour-head{padding-inline:22px!important;margin-bottom:10px!important;text-align:left}
+      .tour-stage{display:block!important;overflow:visible!important;padding:0 22px!important}
+      .panel{position:sticky!important;top:96px!important;height:430px!important;margin:0 0 26px!important;padding:40px 8px 8px!important;background:#0e0c15!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 -24px 40px -12px rgba(0,0,0,.8)!important}
+      .panel:nth-child(2){top:108px!important}.panel:nth-child(3){top:120px!important}.panel:nth-child(4){top:132px!important}.panel:nth-child(5){top:144px!important}
+      .panel::before{left:18px!important;top:14px!important}
+      .panel{width:auto!important;left:auto!important;height:400px!important}
+      .scr{top:40px!important;grid-template-columns:1fr!important;grid-template-rows:1fr!important}
+      .scr aside{display:none!important}
+      .scr main{padding:16px!important;gap:10px!important}
+      .scr .g3{grid-template-columns:1fr 1fr!important}
+      .scr .g3>.card:nth-child(3):not(.tool){display:none}
+      .scr .g2{grid-template-columns:1fr!important}
+      .scr .thumb{height:auto!important;aspect-ratio:16/9}
+      .scr .tool .ic img{width:30px;height:30px}
+    }
+
     /* ═════════ IPHONE V2 : vertical, aéré, sans carrousel ═════════ */
     .m-only{display:none}
     .m-cta{display:none}
@@ -784,7 +878,7 @@
       .eyebrow{font-size:13px}
 
       /* sections retirées sur iPhone */
-      #pourquoi-ia,#evolue,#tour,.dms,.ia-c,.ia-e,.ia-d .mock-out,.logos,.brands .bcard:nth-child(3),.founders p,.canton-strip,.st-chapters,.hero-tags,.cta-row .btn-ghost,.terrain-grid figure:nth-child(n+2){display:none!important}
+      #pourquoi-ia,#evolue,.dms,.ia-c,.ia-e,.ia-d .mock-out,.logos,.brands .bcard:nth-child(3),.founders p,.st-chapters,.canton-strip figure:nth-child(3),.hero-tags,.cta-row .btn-ghost,.terrain-grid figure:nth-child(n+2){display:none!important}
 
       /* hero */
       .hero{padding-block:112px 0;overflow:hidden}
@@ -912,6 +1006,7 @@
     <a href="#resultats">Résultats</a>
     <a href="#roadmap">Méthode</a>
     <a href="#tour">Plateforme</a>
+    <a href="#storia">Storia</a>
     <a href="#equipe">Équipe</a>
     <a href="#chine">Voyage en Chine</a>
     <a href="#offres">Offres</a>
@@ -928,7 +1023,7 @@
         <div class="hero-copy">
           <span class="pill glass blur rv"><b>Nouvelle Académie</b> Rentrée 2026</span>
           <h1 class="rv">Construis une vraie marque ecommerce. <em class="s">Deux fois plus vite.</em></h1>
-          <p class="lead rv"><span class="d-only">La méthode MADE, de la recherche produit au scale. Un coach, une équipe qui l'applique chaque jour sur de vraies marques, et l'IA pour faire le travail lourd.</span><span class="m-only">Formation et coaching ecommerce. L'IA fait le travail lourd, ton coach te guide.</span></p>
+          <p class="lead rv"><span class="d-only">La méthode MADE, du produit au scale. Un coach, une équipe terrain, et l'IA pour le travail lourd.</span><span class="m-only">Formation et coaching ecommerce. Ton coach te guide, l'IA fait le reste.</span></p>
           <ul class="hero-tags rv">
             <li><img class="ico3d" src="assets/3d/loupe.webp" alt="">Recherche produit</li>
             <li><img class="ico3d" src="assets/3d/baguette.webp" alt="">Créas et UGC</li>
@@ -961,13 +1056,22 @@
       </div>
     </section>
 
+    <!-- ═══ RUBAN RÉSULTATS ═══ -->
+    <section class="ribbon" aria-label="Résultats de nos élèves">
+      <div class="rb-rows">
+        <div><div class="rb-track" id="rb1"></div></div>
+        <div class="rev"><div class="rb-track" id="rb2"></div></div>
+      </div>
+      <p class="rb-cap rv">Les ventes de nos élèves. <b>De vraies captures.</b></p>
+    </section>
+
     <!-- ═══ 3. CE QUI A CHANGÉ ═══ -->
     <section id="pourquoi-ia">
       <div class="wrap">
         <div class="head">
           <span class="eyebrow rv">Ce qui a changé</span>
           <h2 class="rv">Les méthodes ont changé. <em class="s">Les fondamentaux, non.</em></h2>
-          <p class="sub rv">Une bonne marque repose toujours sur un bon produit, une vraie offre et des chiffres suivis de près. Ce qui change, c'est la vitesse à laquelle tu peux tester, apprendre et produire.</p>
+          <p class="sub rv">Un bon produit, une vraie offre, des chiffres suivis. Ce qui change : la vitesse.</p>
         </div>
         <div class="shift rv">
           <div class="shift-head"><span></span><b>Avant</b><b class="ia">Avec la méthode MADE</b></div>
@@ -986,7 +1090,7 @@
         <div class="head">
           <span class="eyebrow rv">En pratique</span>
           <h2 class="rv">Ce que tu fais <em class="s">concrètement.</em></h2>
-          <p class="sub rv">Pas des astuces ChatGPT. Des usages précis, appliqués à ta marque.</p>
+          <p class="sub rv">Pas des astuces ChatGPT. Du concret, sur ta marque.</p>
         </div>
         <div class="ia-bento">
           <!-- Recherche produit -->
@@ -1053,16 +1157,13 @@
     </section>
 
     <!-- ═══ STORIA : L'OUTIL MADE ═══ -->
-    <section id="storia" style="padding-top:0">
+    <section id="storia">
       <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="st-face" viewBox="0 0 64 64"><rect x="4" y="6" width="56" height="52" rx="18" fill="currentColor"/><circle cx="23" cy="28" r="8" fill="#fff"/><circle cx="41" cy="28" r="8" fill="#fff"/><circle cx="25" cy="29" r="4" fill="#15131a"/><circle cx="43" cy="29" r="4" fill="#15131a"/><path d="M24 42c4 4 12 4 16 0" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="14" cy="40" r="3.5" fill="#fff" opacity=".22"/><circle cx="50" cy="40" r="3.5" fill="#fff" opacity=".22"/></symbol></svg>
-      <div class="wrap st-grid">
-        <div class="st-copy">
-          <span class="eyebrow rv">Inclus dans l'Académie</span>
+      <div class="wrap">
+        <div class="head c">
+          <span class="st-badge rv"><i></i>Inclus dans l'Académie</span>
           <h2 class="rv">Storia. <em class="s">Ta marque, chapitre par chapitre.</em></h2>
-          <p class="sub rv">Notre outil te guide de zéro à ta première campagne. Tu colles un lien produit, il fait le travail lourd. Ton coach valide avec toi.</p>
-          <ol class="st-chapters rv">
-            <li><b>1</b>Produit</li><li><b>2</b>Marque</li><li><b>3</b>Fournisseurs</li><li><b>4</b>Boutique</li><li><b>5</b>Pubs</li><li><b>6</b>Emails</li><li><b>7</b>Campagnes</li>
-          </ol>
+          <p class="sub rv">Notre outil te mène de zéro à ta première campagne. Tu avances, il fait le travail lourd.</p>
         </div>
 
         <div class="st-app rv" id="stApp">
@@ -1070,52 +1171,80 @@
           <div class="st-body">
             <aside class="st-side">
               <div class="st-logo"><svg class="st-ico" style="color:#15131a"><use href="#st-face"/></svg><b>storia</b></div>
-              <div class="st-brand"><span>M</span><div><b>Ma marque</b><small>Lancement de marque</small></div></div>
               <div class="st-cap">Chapitres</div>
-              <button class="on" data-v="0"><em>✓</em>Produit</button>
-              <button data-v="1"><em>2</em>Marque</button>
-              <button data-v="2"><em>3</em>Fournisseurs</button>
-              <button data-v="3"><em>5</em>Pubs</button>
-              <div class="st-xp"><span>🚀 Niv. 2</span><span>50 XP</span><i><b></b></i></div>
+              <button data-v="0" style="--c:#f2a33a"><em>1</em><span>Produit</span></button>
+              <button data-v="1" style="--c:#e0447a"><em>2</em><span>Marque</span></button>
+              <button data-v="2" style="--c:#1f8a80"><em>3</em><span>Fournisseurs</span></button>
+              <button data-v="3" style="--c:#3b6fe0"><em>4</em><span>Boutique</span></button>
+              <button data-v="4" style="--c:#8b2d6b"><em>5</em><span>Pubs</span></button>
+              <button data-v="5" style="--c:#d9622b"><em>6</em><span>Emails</span></button>
+              <button data-v="6" style="--c:#6d4ce0"><em>7</em><span>Campagnes</span></button>
+              <div class="st-xp"><span>🚀 Niv. <b id="stLvl">1</b></span><span id="stXp">10 XP</span><i><b></b></i></div>
             </aside>
             <div class="st-main">
-              <!-- Produit -->
-              <div class="st-view on">
-                <div class="st-crumb">Ma marque › <b>Accueil</b></div>
-                <div class="st-user">J'ai trouvé ce produit, il vaut le coup ?</div>
-                <div class="st-msg"><svg class="st-ico sm" style="color:#15131a"><use href="#st-face"/></svg><div><small>Storia</small><p>Bonne pioche. <b>1 240 avis analysés</b> chez tes concurrents : les clients se plaignent surtout des fuites.</p><p>Ton angle : <b>« le seul qui tient 2 ans »</b>. Marge estimée <b>18 € par vente</b>.</p><p class="st-link">Ouvrir le chapitre Ta marque →</p></div></div>
-                <div class="st-input">Colle un lien produit, pose une question…<i>↑</i></div>
-              </div>
-              <!-- Marque -->
               <div class="st-view">
-                <div class="st-head" style="--c:#e0447a"><svg class="st-ico lg-ico" style="color:#e0447a"><use href="#st-face"/></svg><div><small>Chapitre 2 · Marque</small><h4>Ta marque</h4><p>Nom, logo, couleurs. Une identité qui se retient.</p></div></div>
+                <div class="st-crumb">Ma marque › <b>Produit</b></div>
+                <div class="st-user">J'ai trouvé ce produit, il vaut le coup ?</div>
+                <div class="st-msg"><svg class="st-ico sm" style="color:#f2a33a"><use href="#st-face"/></svg><div><small>Storia</small><p>Bonne pioche. <b>1 240 avis analysés</b> chez tes concurrents : ils se plaignent surtout des fuites.</p><p>Ton angle : <b>« le seul qui tient 2 ans »</b>. Marge estimée <b>18 € par vente</b>.</p></div></div>
+                <div class="st-input">Colle un lien produit…<i>↑</i></div>
+              </div>
+              <div class="st-view">
+                <div class="st-head"><svg class="st-ico lg-ico" style="color:#e0447a"><use href="#st-face"/></svg><div><small>Chapitre 2 · Marque</small><h4>Ta marque</h4><p>Nom, logo, couleurs.</p></div></div>
                 <div class="st-names"><span class="on">Aquora</span><span>Tidal</span><span>Nuvo</span></div>
                 <div class="st-palette"><i style="background:#0f3d3e"></i><i style="background:#1f8a80"></i><i style="background:#f4efe6"></i><i style="background:#ff5a1f"></i></div>
                 <button class="st-btn">Valider mon identité →</button>
               </div>
-              <!-- Fournisseurs -->
               <div class="st-view">
-                <div class="st-head"><svg class="st-ico lg-ico" style="color:#1f8a80"><use href="#st-face"/></svg><div><small>Chapitre 3 · Fournisseurs</small><h4>Tes fournisseurs</h4><p>Derrière chaque boutique qui tient, quelqu'un expédie à l'heure.</p></div></div>
+                <div class="st-head"><svg class="st-ico lg-ico" style="color:#1f8a80"><use href="#st-face"/></svg><div><small>Chapitre 3 · Fournisseurs</small><h4>Tes fournisseurs</h4><p>Les meilleurs, et ton bénéfice par vente.</p></div></div>
                 <ul class="st-list">
                   <li><b>Fournisseur A · Shenzhen</b><span>4,20 € · 8 jours</span><em>+18 €</em></li>
                   <li><b>Fournisseur B · Yiwu</b><span>3,80 € · 12 jours</span><em>+17 €</em></li>
-                  <li><b>Fournisseur C · Guangzhou</b><span>5,10 € · 6 jours</span><em>+16 €</em></li>
+                  <li><b>Fournisseur C · Canton</b><span>5,10 € · 6 jours</span><em>+16 €</em></li>
                 </ul>
-                <button class="st-btn">Trouver mes fournisseurs →</button>
               </div>
-              <!-- Pubs -->
               <div class="st-view">
-                <div class="st-head"><svg class="st-ico lg-ico" style="color:#8b2d6b"><use href="#st-face"/></svg><div><small>Chapitre 5 · Pubs</small><h4>Tes pubs</h4><p>Ta marque sait qui elle est. Maintenant, on la fait remarquer.</p></div></div>
+                <div class="st-head"><svg class="st-ico lg-ico" style="color:#3b6fe0"><use href="#st-face"/></svg><div><small>Chapitre 4 · Boutique</small><h4>Ta boutique</h4><p>Ta page Shopify, prête à vendre.</p></div></div>
+                <div class="st-shop">
+                  <div class="st-shop-bar"><b>AQUORA</b><span>Boutique · Contact · Panier</span></div>
+                  <div class="st-shop-hero"><img src="assets/hero-3d.webp" alt="" loading="lazy"><div><small>★★★★★ 1 240 avis</small><b>La gourde qui tient 2 ans.</b><span>34,90 €</span><i>Ajouter au panier</i></div></div>
+                </div>
+              </div>
+              <div class="st-view">
+                <div class="st-head"><svg class="st-ico lg-ico" style="color:#8b2d6b"><use href="#st-face"/></svg><div><small>Chapitre 5 · Pubs</small><h4>Tes pubs</h4><p>Une photo produit, 5 pubs prêtes.</p></div></div>
                 <div class="st-ads">
                   <figure><img src="assets/hero-3d.webp" alt="" loading="lazy"><span>Visuel</span></figure>
                   <figure><img src="assets/ia/avatar-ugc.webp" alt="" loading="lazy"><span>UGC</span></figure>
                   <figure><img src="assets/ia/avatar-ugc2.webp" alt="" loading="lazy"><span>UGC</span></figure>
                 </div>
-                <button class="st-btn">Créer mes 5 pubs →</button>
+              </div>
+              <div class="st-view">
+                <div class="st-head"><svg class="st-ico lg-ico" style="color:#d9622b"><use href="#st-face"/></svg><div><small>Chapitre 6 · Emails</small><h4>Tes emails</h4><p>Ils vendent pendant que tu dors.</p></div></div>
+                <ul class="st-list">
+                  <li><b>Bienvenue</b><span>À l'inscription</span><em style="color:#d9622b">62 % ouverts</em></li>
+                  <li><b>Panier abandonné</b><span>1 h après</span><em style="color:#d9622b">+11 % ventes</em></li>
+                  <li><b>Demande d'avis</b><span>10 jours après</span><em style="color:#d9622b">38 % réponses</em></li>
+                </ul>
+              </div>
+              <div class="st-view">
+                <div class="st-head"><svg class="st-ico lg-ico" style="color:#6d4ce0"><use href="#st-face"/></svg><div><small>Chapitre 7 · Campagnes</small><h4>Tes campagnes</h4><p>Facebook et Instagram, prêtes à lancer.</p></div></div>
+                <div class="st-kpis"><div><small>Budget</small><b>30 €/j</b></div><div><small>ROAS</small><b>2,9</b></div><div><small>Ventes</small><b>214</b></div></div>
+                <div class="st-chart"><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:55%"></i><i style="height:61%"></i><i style="height:58%"></i><i style="height:74%"></i><i style="height:86%"></i></div>
+                <button class="st-btn">Lancer ma campagne →</button>
               </div>
             </div>
           </div>
         </div>
+
+        <ul class="st-feats">
+          <li class="rv" style="--c:#f2a33a"><svg><use href="#st-face"/></svg><b>Produit</b><span>Avis et concurrents analysés</span></li>
+          <li class="rv" style="--c:#e0447a"><svg><use href="#st-face"/></svg><b>Marque</b><span>Nom, logo, couleurs</span></li>
+          <li class="rv" style="--c:#1f8a80"><svg><use href="#st-face"/></svg><b>Fournisseurs</b><span>Trouvés en 1 minute</span></li>
+          <li class="rv" style="--c:#3b6fe0"><svg><use href="#st-face"/></svg><b>Boutique</b><span>Page Shopify générée</span></li>
+          <li class="rv" style="--c:#8b2d6b"><svg><use href="#st-face"/></svg><b>Pubs</b><span>5 pubs depuis une photo</span></li>
+          <li class="rv" style="--c:#d9622b"><svg><use href="#st-face"/></svg><b>Emails</b><span>Séquences rédigées</span></li>
+          <li class="rv" style="--c:#6d4ce0"><svg><use href="#st-face"/></svg><b>Campagnes</b><span>Prêtes à lancer</span></li>
+          <li class="rv" style="--c:#15131a"><svg><use href="#st-face"/></svg><b>Espion Pub</b><span>Les pubs de tes concurrents</span></li>
+        </ul>
       </div>
     </section>
 
@@ -1126,7 +1255,7 @@
         <div class="head">
           <span class="eyebrow rv">Résultats</span>
           <h2 class="rv">Des captures, <em class="s">pas des promesses.</em></h2>
-          <p class="sub rv">La méthode est la même depuis 7 ans : tester, mesurer, garder ce qui marche. Voilà ce que ça donne.</p>
+          <p class="sub rv">Tester, mesurer, garder ce qui marche. Depuis 7 ans.</p>
         </div>
         <div class="dms">
           <figure class="dm rv"><img src="assets/avis/avis.webp" alt="Avis d'un élève sur la formation" loading="lazy" width="506" height="900"></figure>
@@ -1289,7 +1418,7 @@
           <div>
             <span class="eyebrow">Toujours à jour</span>
             <h2>Les outils bougent chaque mois. <em class="s">L'Académie aussi.</em></h2>
-            <p class="sub">Ce n'est pas une formation enregistrée une fois pour toutes. On teste chaque nouvel outil sur nos marques, et on garde ce qui marche vraiment.</p>
+            <p class="sub">On teste chaque outil sur nos marques. On garde ce qui marche.</p>
           </div>
           <ul class="cadence">
             <li><b>Chaque semaine</b>Veille outils et lives sur ce qu'on teste</li>
@@ -1302,7 +1431,7 @@
 
     <!-- ═══ 9. LOIN DES ÉCRANS ═══ -->
     <section class="terrain" aria-label="Sur le terrain">
-      <div class="wrap"><div class="terrain-card rv grow">
+      <div class="wrap"><div class="terrain-card rv grow pz">
       <div class="terrain-grid">
         <figure><video src="assets/chine/packaging.mp4" poster="assets/chine/packaging.jpg" muted loop playsinline preload="none"></video><figcaption>Packaging</figcaption></figure>
         <figure><video src="assets/chine/entrepot.mp4" poster="assets/chine/entrepot.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
@@ -1312,7 +1441,7 @@
       <div class="terrain-copy">
         <span class="eyebrow">Loin des écrans</span>
         <p class="t-big">Les outils accélèrent. <span>Le terrain reste.</span></p>
-        <p class="t-small">De vrais cartons, de vraies usines, de vraies commandes. Aucun outil ne remplace un bon produit ni un bon fournisseur.</p>
+        <p class="t-small">De vrais cartons, de vraies usines, de vraies commandes.</p>
       </div>
       </div></div>
     </section>
@@ -1353,7 +1482,7 @@
         <div class="head head-sm">
           <span class="eyebrow rv">L'équipe MADE</span>
           <h2 class="rv">Testé sur nos marques <em class="s">avant de t'être enseigné.</em></h2>
-          <p class="sub rv">Media buyers, créatifs, designers et coachs. Chaque outil de l'Académie passe d'abord par nos campagnes et nos clients.</p>
+          <p class="sub rv">Media buyers, créatifs, designers et coachs. Tout est testé chez nous d'abord.</p>
         </div>
         <div class="founders">
           <div class="member rv"><div class="ph"><img src="assets/made/team/HugoB.webp" alt="Hugo" loading="lazy"></div><h4>Hugo</h4><p>Cofondateur · Acquisition & media buying</p></div>
@@ -1379,7 +1508,7 @@
     <!-- ═══ 12. CHINE / CANTON ═══ -->
     <section class="canton" id="chine">
       <div class="wrap">
-      <div class="canton-hero rv grow">
+      <div class="canton-hero rv grow pz">
         <video src="assets/chine/canton-nuit.mp4" poster="assets/chine/canton-nuit.jpg" muted loop playsinline preload="none"></video>
         <div class="canton-in" style="padding-inline:clamp(22px,5vw,70px)">
           <span class="eyebrow rv">Séminaire · Canton</span>
@@ -1417,7 +1546,7 @@
             <p class="promise">Tout le parcours, de la recherche produit au scale, à ton rythme.</p>
             <ul class="incl">
               <li>Le parcours complet, mis à jour chaque mois</li>
-              <li>Storia et les workflows de l'équipe</li>
+              <li>Accès à Storia</li>
               <li>Lives chaque semaine et replays</li>
               <li>La communauté MADE</li>
             </ul>
@@ -1429,7 +1558,7 @@
             <h3>Coaching <em class="s">Ecom IA</em></h3>
             <p class="promise">3 mois avec un coach qui construit ta marque avec toi, semaine après semaine.</p>
             <ul class="incl">
-              <li>Tout le contenu de la formation</li>
+              <li>Tout le contenu de la formation et Storia</li>
               <li>Coach dédié et point chaque semaine</li>
               <li>Analyse de ta boutique et de tes pubs</li>
               <li>Mise en place de tes outils et automatisations</li>
@@ -1449,10 +1578,10 @@
           <h2 class="rv">Les questions <em class="s">qu'on nous pose.</em></h2>
         </div>
         <div class="faq-list">
-          <details class="glass rv"><summary>C'est une formation ChatGPT ?</summary><p>Non. C'est une formation ecommerce complète : produit, marque, sourcing, boutique, pub, scale. L'IA est intégrée à chaque étape pour aller plus vite et produire plus, pas pour remplacer la méthode.</p></details>
-          <details class="glass rv"><summary>Je dois déjà maîtriser l'IA ?</summary><p>Non. On part de zéro sur les outils. Tu apprends à t'en servir directement sur ta marque, avec les workflows que l'équipe utilise chaque jour.</p></details>
-          <details class="glass rv"><summary>Les outils changent vite, la formation suit ?</summary><p>Oui. On teste les nouveaux outils sur nos marques, on ajoute des modules chaque mois et on retire ce qui ne marche plus.</p></details>
-          <details class="glass rv"><summary>C'est quoi le voyage en Chine ?</summary><p>Un séminaire de 10 jours à Canton pendant la foire internationale : fournisseurs, usines, négociation et cours chaque jour avec l'équipe.</p></details>
+          <details class="glass rv"><summary>C'est une formation ChatGPT ?</summary><p>Non. C'est une formation ecommerce complète, du produit au scale. L'IA sert à aller plus vite, pas à remplacer la méthode.</p></details>
+          <details class="glass rv"><summary>Je dois déjà maîtriser l'IA ?</summary><p>Non. On part de zéro, directement sur ta marque.</p></details>
+          <details class="glass rv"><summary>Les outils changent vite, la formation suit ?</summary><p>Oui. Nouveaux modules chaque mois, et on retire ce qui ne marche plus.</p></details>
+          <details class="glass rv"><summary>C'est quoi le voyage en Chine ?</summary><p>10 jours à Canton pendant la foire : fournisseurs, usines et négociation avec l'équipe.</p></details>
         </div>
       </div>
     </section>
@@ -1467,7 +1596,7 @@
             <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampB" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampB">MADE ACADÉMIE ✦ ECOM IA ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
             <span class="eyebrow">Prochaine étape</span>
             <h2>20 minutes pour savoir <em class="s">si on peut t'aider.</em></h2>
-            <p class="sub">On regarde ton projet et ce qui peut te faire gagner le plus de temps. Gratuit et sans engagement.</p>
+            <p class="sub">On regarde ton projet ensemble. Gratuit et sans engagement.</p>
             <ol class="after">
               <li><b>1</b><span><strong>Tu choisis ton créneau</strong></span></li>
               <li><b>2</b><span><strong>On échange 20 minutes</strong></span></li>
@@ -1589,17 +1718,46 @@
     /* ─── Storia : chapitres ─── */
     const stApp = document.getElementById('stApp');
     if (stApp) {
-      const btns = [...stApp.querySelectorAll('.st-side button')], views = [...stApp.querySelectorAll('.st-view')], xp = stApp.querySelector('.st-xp b');
+      const btns = [...stApp.querySelectorAll('.st-side button')], views = [...stApp.querySelectorAll('.st-view')], xp = stApp.querySelector('.st-xp i b');
       let cur = 0, auto = null;
-      const show = i => { cur = i; btns.forEach((b, j) => b.classList.toggle('on', j === i)); views.forEach((v, j) => v.classList.toggle('on', j === i)); if (xp) xp.style.width = (25 + i * 25) + '%'; };
+      const show = i => {
+        cur = i;
+        btns.forEach((b, j) => { b.classList.toggle('on', j === i); b.classList.toggle('done', j < i); b.querySelector('em').textContent = j < i ? '✓' : j + 1; });
+        views.forEach((v, j) => v.classList.toggle('on', j === i));
+        if (xp) xp.style.width = ((i + 1) / views.length * 100) + '%';
+        document.getElementById('stXp').textContent = (i + 1) * 10 + ' XP';
+        document.getElementById('stLvl').textContent = 1 + Math.floor(i / 2);
+      };
       btns.forEach((b, i) => b.addEventListener('click', () => { clearInterval(auto); auto = 'off'; show(i); }));
       new IntersectionObserver(e => {
         if (auto === 'off') return;
-        if (e[0].isIntersecting && !reduced) { if (!auto) auto = setInterval(() => show((cur + 1) % views.length), 3800); }
+        if (e[0].isIntersecting && !reduced) { if (!auto) auto = setInterval(() => show((cur + 1) % views.length), 3200); }
         else { clearInterval(auto); auto = null; }
       }, { threshold: .4 }).observe(stApp);
       show(0);
     }
+
+    /* ─── Ruban résultats ─── */
+    const fig = (c, inner) => `<figure class="${c}">${inner}</figure>`;
+    const r1 = ['R5','R12','R3','R1','R15','R14','R8','R4'].map(n => fig('sq', `<img src="assets/dash/${n}.webp" alt="" loading="lazy">`)).join('');
+    const r2 = [
+      fig('pt', '<img src="assets/avis/roas10.webp" alt="" loading="lazy">'),
+      fig('pt', '<video src="assets/chine/packaging.mp4" muted loop playsinline preload="none"></video>'),
+      fig('pt', '<img src="assets/avis/avis.webp" alt="" loading="lazy">'),
+      fig('pt', '<img src="assets/avis/vente1.webp" alt="" loading="lazy">'),
+      fig('pt', '<video src="assets/chine/showroom-parfum.mp4" muted loop playsinline preload="none"></video>'),
+      fig('pt', '<img src="assets/avis/accomp2.webp" alt="" loading="lazy">'),
+      fig('pt', '<img src="assets/avis/rayan.webp" alt="" loading="lazy">'),
+      fig('pt', '<img src="assets/avis/accomp1.webp" alt="" loading="lazy">')
+    ].join('');
+    document.getElementById('rb1').innerHTML = r1 + r1;
+    document.getElementById('rb2').innerHTML = r2 + r2;
+
+    /* ─── Zoom des vidéos au scroll ─── */
+    const pzEls = [...document.querySelectorAll('.pz')];
+    let pzT = false;
+    const pz = () => { pzT = false; pzEls.forEach(el => { const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh()) return; const k = Math.min(Math.max((vh() - r.top) / (vh() + r.height), 0), 1); el.style.setProperty('--z', (1.18 - k * .18).toFixed(3)); }); };
+    addEventListener('scroll', () => { if (!pzT) { pzT = true; requestAnimationFrame(pz); } }, { passive: true });
 
     /* ─── Barre d'appel mobile ─── */
     const mCta = document.getElementById('mCta');
