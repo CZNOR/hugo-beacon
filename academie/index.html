@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MADE Académie · Construis ta marque ecommerce</title>
-  <meta name="description" content="L'académie de l'équipe MADE : coaching 1:1, formation et outils pour lancer ou faire grandir ta marque ecommerce. +1200 élèves accompagnés, +10 M€ générés." />
-  <meta property="og:title" content="MADE Académie · Construis ta marque ecommerce" />
-  <meta property="og:description" content="Coaching 1:1, formation, outils et voyage à Canton. 7 ans d'expérience, +1200 élèves accompagnés, +10 M€ générés." />
+  <title>MADE Académie · Ecom IA, construis ta marque ecommerce</title>
+  <meta name="description" content="Formation et coaching ecommerce : recherche produit, branding, sourcing, Shopify, créas, Meta et TikTok Ads, scale. Avec l\'IA à chaque étape." />
+  <meta property="og:title" content="MADE Académie · Ecom IA" />
+  <meta property="og:description" content="Construis une vraie marque ecommerce, avec l\'IA à chaque étape. Formation, coaching, lives et communauté." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://hugo-bnls.fr/academie/assets/og.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -611,6 +611,107 @@
       .lg{backdrop-filter:none;-webkit-backdrop-filter:none}
     }
 
+    /* ═════════ ECOM IA : nouveaux composants ═════════ */
+    .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;max-width:600px}
+    .hero-tags li{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 8px;border-radius:100px;font-size:14px;font-weight:500;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+    .hero-tags .ico3d{width:26px;height:26px;filter:grayscale(1) brightness(1.2) sepia(1) hue-rotate(215deg) saturate(3)}
+
+    .shift{border-radius:28px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+    .shift-head,.shift-row{display:grid;grid-template-columns:.8fr 1fr 1.2fr;gap:24px;padding:18px 28px;align-items:center}
+    .shift-head{background:rgba(255,255,255,.03)}
+    .shift-head b{font-family:var(--cond);font-weight:600;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:rgba(241,240,234,.5)}
+    .shift-head b.ia{color:var(--made)}
+    .shift-row{border-top:1px solid var(--line)}
+    .shift-row span{font-weight:500;font-size:17px;letter-spacing:-.02em}
+    .shift-row p{color:rgba(241,240,234,.45);font-size:15.5px;text-decoration:line-through;text-decoration-color:rgba(241,240,234,.25)}
+    .shift-row p.ia{color:var(--ink);text-decoration:none;display:flex;gap:10px}
+    .shift-row p.ia::before{content:'';flex:0 0 8px;height:8px;margin-top:7px;border-radius:50%;background:var(--made);box-shadow:0 0 10px rgba(182,145,254,.8)}
+
+    .ia-bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+    .ia-card{padding:26px;display:flex;flex-direction:column;gap:14px}
+    .ia-a{grid-column:span 3}.ia-b{grid-column:span 3}.ia-c{grid-column:span 2}.ia-d{grid-column:span 2}.ia-e{grid-column:span 2}
+    .ia-label{font-family:var(--cond);font-weight:600;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--made)}
+    .ia-card h3{font-size:clamp(22px,1.9vw,28px)}
+    .mock{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+    .mock-row{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+    .mock-row i{width:6px;height:6px;border-radius:50%;background:var(--made)}
+    .mock-row b{color:var(--ink);font-weight:500}
+    .mock-row span{margin-left:auto;font-family:var(--cond);font-weight:600;font-size:16px;color:var(--ink)}
+    .mock-bar{height:4px;border-radius:4px;background:rgba(255,255,255,.07);margin-bottom:6px;overflow:hidden}
+    .mock-bar i{display:block;height:100%;background:linear-gradient(90deg,#8b5cf6,#f0abfc)}
+    .mock-out{margin-top:8px;padding:12px 14px;border-radius:14px;background:rgba(182,145,254,.1);box-shadow:inset 0 0 0 1px rgba(182,145,254,.25);font-size:15px;line-height:1.4}
+    .mock-out span{display:block;font-family:var(--cond);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--made);margin-bottom:2px}
+    .gen{display:grid;grid-template-columns:1fr 1.1fr;gap:14px;align-items:stretch;flex:1}
+    .prompt{padding:14px;border-radius:14px;background:rgba(0,0,0,.35);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);font-size:14.5px;color:var(--muted);line-height:1.45;position:relative}
+    .prompt::before{content:'Prompt';display:block;font-family:var(--cond);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--made);margin-bottom:6px}
+    .prompt::after{content:'';display:inline-block;width:2px;height:15px;background:var(--made);margin-left:3px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+    .gen-img{position:relative;border-radius:16px;overflow:hidden;min-height:200px}
+    .gen-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .gen-img span{position:absolute;left:10px;bottom:10px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:100px;background:rgba(0,0,0,.6)}
+    .hooks li{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:15px;line-height:1.35}
+    .hooks b{font-family:var(--cond);font-weight:600;color:var(--made)}
+    .voice{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+    .wave{display:flex;align-items:center;gap:3px;height:22px}
+    .wave i{width:3px;border-radius:3px;background:var(--made);animation:wave 1.1s ease-in-out infinite}
+    .wave i:nth-child(odd){animation-delay:-.4s}.wave i:nth-child(3n){animation-delay:-.7s}
+    @keyframes wave{0%,100%{height:5px}50%{height:20px}}
+    .ads{width:100%;border-collapse:collapse;font-size:14px}
+    .ads th{font-family:var(--cond);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:rgba(241,240,234,.45);text-align:left;padding:6px 0}
+    .ads td{padding:9px 0;border-top:1px solid var(--line)}
+    .ads span{font-size:12px;font-weight:600;padding:3px 8px;border-radius:100px;background:rgba(52,211,153,.15);color:#6ee7b7}
+    .ads span.mid{background:rgba(250,204,21,.12);color:#fde68a}
+    .ads span.stop{background:rgba(248,113,113,.12);color:#fca5a5}
+    .ads tr.off td{color:rgba(241,240,234,.45)}
+    .flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:auto}
+    .flow span{font-size:13.5px;padding:9px 12px;border-radius:12px;background:rgba(0,0,0,.35);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+    .flow span.hl{background:rgba(182,145,254,.16);box-shadow:inset 0 0 0 1px rgba(182,145,254,.4)}
+    .flow i{font-style:normal;color:var(--made)}
+
+    .road9{grid-template-columns:repeat(3,1fr)}
+    .road9 .step p{margin-top:8px}
+    .road9 .step p b{font-weight:600;color:var(--made)}
+
+    .evolve{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;padding:clamp(28px,4vw,56px)}
+    .evolve h2{margin:10px 0 14px}
+    .cadence li{padding:16px 0;border-top:1px solid var(--line);font-size:16px;color:var(--muted)}
+    .cadence li:first-child{border-top:0}
+    .cadence b{display:block;font-family:var(--cond);font-weight:600;font-size:22px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink)}
+
+    .t-small{margin-top:12px}
+    .tiers2{grid-template-columns:1fr 1fr;max-width:940px;margin-inline:auto}
+    .tiers2 .tier.feat{transform:none}
+    .tier .incl{display:flex;flex-direction:column;gap:10px;margin:18px 0 26px}
+    .tier .incl li{display:flex;gap:10px;font-size:15.5px;line-height:1.4}
+    .tier .incl li::before{content:'✓';color:var(--made);font-weight:700}
+    .ai-sug{box-shadow:inset 0 0 0 1px rgba(182,145,254,.35);background:rgba(182,145,254,.08)}
+    .studio-img{display:flex;gap:10px;align-items:center}
+    .avatar-row{display:flex;align-items:center;gap:8px}
+    .avatar-row img{width:64px;height:80px;border-radius:12px;object-fit:cover;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
+    .avatar-row span{margin-left:6px;font-weight:500;font-size:15px;line-height:1.2}
+    .avatar-row small{font-size:12.5px;color:var(--muted);font-weight:400}
+    .av-mini{width:36px;height:36px;border-radius:50%;object-fit:cover}
+    .studio-img img{width:96px;height:96px;border-radius:10px;object-fit:cover}
+
+    @media (max-width:1080px){
+      .ia-bento{grid-template-columns:1fr 1fr}.ia-a,.ia-b{grid-column:span 2}.ia-c,.ia-d{grid-column:span 1}.ia-e{grid-column:span 2}
+      .evolve{grid-template-columns:1fr}
+      .road9{grid-template-columns:repeat(2,1fr)}
+      .tiers2{grid-template-columns:1fr;max-width:560px}
+    }
+    @media (max-width:640px){
+      .hero-tags li{font-size:13px;padding:6px 12px 6px 6px}
+      .shift-head{display:none}
+      .shift-row{grid-template-columns:1fr;gap:4px;padding:16px 18px}
+      .shift-row p:not(.ia){display:none}
+      .ia-bento{grid-template-columns:1fr}.ia-a,.ia-b,.ia-c,.ia-d,.ia-e{grid-column:auto}
+      .ia-card{padding:20px}
+      .gen{grid-template-columns:1fr}
+      .gen-img{min-height:220px}
+      .road9{grid-template-columns:1fr}
+      .road9 .step p{font-size:14.5px}
+    }
+
   </style>
 </head>
 <body>
@@ -622,13 +723,13 @@
     <div class="nav-in glass blur">
       <a href="#top" class="logo" aria-label="MADE Académie"><svg viewBox="-2 0 550 180"><use href="#made-logo"/></svg><i class="dot"></i><small>ACADÉMIE</small></a>
       <nav class="nav-links">
+        <a href="#ia">L'IA en action</a>
         <a href="#resultats">Résultats</a>
-        <a href="#tour">L'académie</a>
-        <a href="#marques">Marques</a>
+        <a href="#roadmap">Méthode</a>
+        <a href="#tour">Plateforme</a>
         <a href="#equipe">Équipe</a>
         <a href="#chine">Chine</a>
         <a href="#offres">Offres</a>
-        <a href="#faq">FAQ</a>
       </nav>
       <a href="https://made-academie.vercel.app/login" class="btn btn-ghost btn-sm">Espace élève</a>
       <a href="#appel" class="btn btn-neon btn-sm">Réserver mon appel</a>
@@ -636,33 +737,39 @@
     </div>
   </header>
   <div class="mmenu glass blur" id="mmenu">
+    <a href="#ia">L\'IA en action</a>
     <a href="#resultats">Résultats</a>
-    <a href="#tour">L\'académie de l\'intérieur</a>
-    <a href="#marques">Marques accompagnées</a>
+    <a href="#roadmap">Méthode</a>
+    <a href="#tour">Plateforme</a>
     <a href="#equipe">Équipe</a>
     <a href="#chine">Voyage en Chine</a>
     <a href="#offres">Offres</a>
-    <a href="#faq">FAQ</a>
     <a href="https://made-academie.vercel.app/login">Espace élève</a>
     <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel</a>
   </div>
 
 
   <main id="top">
-    <!-- ═══ 1. HERO + PLANÈTE D'ORIGINE ═══ -->
+    <!-- ═══ 1. HERO : ECOMMERCE + IA + MARQUE + ACCOMPAGNEMENT ═══ -->
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <span class="pill glass blur rv"><b>Rentrée 2026</b> Nouvelle promo, places limitées</span>
-          <h1 class="rv">Construis ta marque. <em class="s">Pas un dropshipping de plus.</em></h1>
-          <p class="lead rv"><strong>Coaching 1:1, formation et outils</strong> pour lancer ta marque ecommerce avec l'équipe MADE.</p>
+          <span class="pill glass blur rv"><b>Nouvelle Académie</b> Ecom IA · Rentrée 2026</span>
+          <h1 class="rv">Construis une vraie marque ecommerce. <em class="s">Avec l'IA à chaque étape.</em></h1>
+          <p class="lead rv">La méthode MADE, de la recherche produit au scale, accélérée par l'IA. Avec un coaching et une équipe qui l'applique tous les jours sur de vraies marques.</p>
+          <ul class="hero-tags rv">
+            <li><img class="ico3d" src="assets/3d/loupe.webp" alt="">Recherche produit IA</li>
+            <li><img class="ico3d" src="assets/3d/baguette.webp" alt="">Créas et UGC IA</li>
+            <li><img class="ico3d" src="assets/3d/courbe.webp" alt="">Analyse de tes pubs</li>
+            <li><img class="ico3d" src="assets/3d/poignee.webp" alt="">Coach dédié</li>
+          </ul>
           <div class="cta-row rv">
             <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel gratuit <span class="arr">→</span></a>
-            <a href="#resultats" class="btn btn-ghost btn-lg">Voir les résultats</a>
+            <a href="#ia" class="btn btn-ghost btn-lg">Voir l'IA en action</a>
           </div>
           <div class="trust rv">
             <div class="avatars"><img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/Guillaume.webp" alt=""><img src="assets/made/team/TheoG.webp" alt=""></div>
-            <p><strong>+1200 élèves</strong> déjà accompagnés</p>
+            <p><strong>+1200 élèves</strong> déjà accompagnés par MADE</p>
           </div>
         </div>
         <div class="planet" aria-hidden="true">
@@ -672,23 +779,115 @@
       </div>
     </section>
 
-    <!-- ═══ 3. CHIFFRES MADE ═══ -->
-    <section style="padding-block:80px 0">
+    <!-- ═══ 2. CHIFFRES MADE ═══ -->
+    <section style="padding-block:40px 0">
       <div class="wrap stats">
-        <div class="stat rv"><div class="n">+<span data-count="10">0</span><em class="s">M€</em></div><p>Générés avec nos élèves et clients</p></div>
+        <div class="stat rv"><div class="n"><span data-count="7">0</span> <em class="s">ans</em></div><p>D'ecommerce sur le terrain</p></div>
         <div class="stat rv"><div class="n">+<span data-count="1200">0</span></div><p>Élèves accompagnés</p></div>
-        <div class="stat rv"><div class="n"><span data-count="7">0</span> <em class="s">ans</em></div><p>D'expérience en ecommerce</p></div>
-        <div class="stat rv"><div class="n"><span data-count="3">0</span> <em class="s">mois</em></div><p>D'accompagnement 1:1</p></div>
+        <div class="stat rv"><div class="n">+<span data-count="10">0</span><em class="s">M€</em></div><p>Générés avec nos élèves et clients</p></div>
+        <div class="stat rv"><div class="n"><span data-count="3">0</span> <em class="s">mois</em></div><p>De coaching 1:1</p></div>
       </div>
     </section>
 
-    <!-- ═══ 4. DES CAPTURES, PAS DES PROMESSES ═══ -->
-    <section id="resultats">
+    <!-- ═══ 3. CE QUI A CHANGÉ ═══ -->
+    <section id="pourquoi-ia">
+      <div class="wrap">
+        <div class="head">
+          <span class="eyebrow rv">Ce qui a changé</span>
+          <h2 class="rv">Les méthodes ont changé. <em class="s">Les fondamentaux, non.</em></h2>
+          <p class="sub rv">Une bonne marque repose toujours sur un bon produit, une vraie offre et des chiffres suivis de près. Ce qui change, c'est la vitesse à laquelle tu peux tester, apprendre et produire.</p>
+        </div>
+        <div class="shift rv">
+          <div class="shift-head"><span></span><b>Sans IA</b><b class="ia">Avec la méthode MADE</b></div>
+          <div class="shift-row"><span>Recherche produit</span><p>Des semaines de veille à la main</p><p class="ia">Avis, concurrents et tendances analysés en quelques heures</p></div>
+          <div class="shift-row"><span>Créas publicitaires</span><p>Un shooting, un monteur, peu de variantes</p><p class="ia">Des dizaines de déclinaisons, UGC IA et hooks à tester</p></div>
+          <div class="shift-row"><span>Boutique</span><p>Fiches produit écrites une par une</p><p class="ia">Structure, textes et visuels produits, puis optimisés</p></div>
+          <div class="shift-row"><span>Publicité</span><p>Lire les tableaux et deviner</p><p class="ia">Créas gagnantes repérées, nouveaux angles proposés</p></div>
+          <div class="shift-row"><span>Scale</span><p>Tâches répétitives qui mangent tes journées</p><p class="ia">Rapports, relances et suivi automatisés par des agents</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4. L'IA EN ACTION ═══ -->
+    <section id="ia" style="padding-top:0">
+      <div class="wrap">
+        <div class="head">
+          <span class="eyebrow rv">L'IA en action</span>
+          <h2 class="rv">Ce que tu fais <em class="s">vraiment avec l'IA.</em></h2>
+          <p class="sub rv">Pas des astuces ChatGPT. Des usages concrets, appliqués à chaque étape de ta marque.</p>
+        </div>
+        <div class="ia-bento">
+          <!-- Recherche produit -->
+          <article class="ia-card lg rv ia-a">
+            <span class="ia-label">Recherche produit</span>
+            <h3>1 240 avis clients <em class="s">analysés.</em></h3>
+            <div class="mock">
+              <div class="mock-row"><i></i>Frustration n°1 : <b>fuite après 2 semaines</b><span>38 %</span></div>
+              <div class="mock-bar"><i style="width:38%"></i></div>
+              <div class="mock-row"><i></i>Frustration n°2 : <b>trop bruyant la nuit</b><span>24 %</span></div>
+              <div class="mock-bar"><i style="width:24%"></i></div>
+              <div class="mock-row"><i></i>Frustration n°3 : <b>notice incompréhensible</b><span>15 %</span></div>
+              <div class="mock-bar"><i style="width:15%"></i></div>
+              <div class="mock-out"><span>Angle proposé</span>« Le seul qui tient 2 ans, garanti silencieux. »</div>
+            </div>
+          </article>
+
+          <!-- Créa IA -->
+          <article class="ia-card lg rv ia-b">
+            <span class="ia-label">Créas IA</span>
+            <h3>Un visuel produit <em class="s">sans shooting.</em></h3>
+            <div class="gen">
+              <div class="prompt">Sac en verre violet, fond noir, lumière studio, rendu premium</div>
+              <div class="gen-img"><img src="assets/hero-3d.webp" alt="Visuel produit généré par IA" loading="lazy"><span>Généré</span></div>
+            </div>
+          </article>
+
+          <!-- UGC & scripts -->
+          <article class="ia-card lg rv ia-c">
+            <span class="ia-label">UGC IA et scripts</span>
+            <h3>10 hooks, <em class="s">3 formats, une journée.</em></h3>
+            <div class="avatar-row"><img src="assets/ia/avatar-ugc.webp" alt="Avatar UGC généré par IA" loading="lazy"><img src="assets/ia/avatar-ugc2.webp" alt="Avatar UGC généré par IA" loading="lazy"><span>Avatars IA<br><small>Personnages fictifs générés</small></span></div>
+            <ol class="hooks">
+              <li><b>01</b>« J'ai arrêté de racheter des gourdes le jour où… »</li>
+              <li><b>02</b>« 3 raisons pour lesquelles ta gourde fuit »</li>
+              <li><b>03</b>« Test : 30 jours dans mon sac de sport »</li>
+            </ol>
+            <div class="voice"><span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Voix off générée · 0:24</div>
+          </article>
+
+          <!-- Analyse Meta Ads -->
+          <article class="ia-card lg rv ia-d">
+            <span class="ia-label">Analyse Meta Ads</span>
+            <h3>Les créas gagnantes, <em class="s">repérées.</em></h3>
+            <table class="ads">
+              <tr><th>Créa</th><th>ROAS</th><th>CPA</th><th></th></tr>
+              <tr class="win"><td>UGC hook 02</td><td>3,4</td><td>11 €</td><td><span>À scaler</span></td></tr>
+              <tr><td>Visuel studio</td><td>2,1</td><td>18 €</td><td><span class="mid">À itérer</span></td></tr>
+              <tr class="off"><td>Carrousel prix</td><td>0,9</td><td>41 €</td><td><span class="stop">À couper</span></td></tr>
+            </table>
+            <div class="mock-out"><span>Prochaine itération</span>Reprendre le hook 02 avec 3 nouvelles accroches.</div>
+          </article>
+
+          <!-- Automatisations -->
+          <article class="ia-card lg rv ia-e">
+            <span class="ia-label">Automatisations et agents</span>
+            <h3>Les tâches répétitives, <em class="s">en pilote automatique.</em></h3>
+            <div class="flow">
+              <span>Commande Shopify</span><i>→</i><span>Relance email IA</span><i>→</i><span>Avis client analysé</span><i>→</i><span class="hl">Rapport du lundi</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 5. DES CAPTURES, PAS DES PROMESSES ═══ -->
+    <section id="resultats" style="padding-top:0">
       <div class="ring" aria-hidden="true" style="width:1100px;left:-420px;top:60px"></div>
       <div class="wrap">
         <div class="head">
-          <span class="eyebrow rv">Résultats élèves</span>
+          <span class="eyebrow rv">Résultats</span>
           <h2 class="rv">Des captures, <em class="s">pas des promesses.</em></h2>
+          <p class="sub rv">La méthode est la même depuis 7 ans : tester, mesurer, garder ce qui marche. Voilà ce que ça donne.</p>
         </div>
         <div class="dms">
           <figure class="dm rv"><img src="assets/avis/avis.webp" alt="Avis d'un élève sur la formation" loading="lazy" width="506" height="900"></figure>
@@ -696,26 +895,173 @@
           <figure class="dm rv"><img src="assets/avis/accomp2.webp" alt="Élève accompagné sur WhatsApp" loading="lazy" width="457" height="900"></figure>
           <figure class="dm rv"><img src="assets/avis/vente1.webp" alt="Première vente d'un élève" loading="lazy" width="750" height="900"></figure>
         </div>
+
       </div>
       <div class="wrap"><div class="dash-grid" id="dashGrid"></div></div>
     </section>
 
-    <!-- ═══ 5. POURQUOI MADE (la vidéo sert la confiance) ═══ -->
-    <section id="pourquoi" style="padding-top:0">
-      <div class="wrap why">
-        <div>
-          <span class="eyebrow rv">Pourquoi MADE</span>
-          <blockquote class="rv">Les formations t'apprennent à regarder. <em class="s">Nous, on le fait avec toi.</em></blockquote>
-          <div class="sig rv"><div class="avatars"><img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/Guillaume.webp" alt=""><img src="assets/made/team/TheoG.webp" alt=""></div><p><strong>Hugo, Guillaume et Théo</strong><br>Cofondateurs de MADE</p></div>
+    <!-- ═══ 6. LE PARCOURS : L'IA À CHAQUE ÉTAPE ═══ -->
+    <section id="roadmap" style="padding-top:0">
+      <div class="wrap">
+        <div class="head">
+          <span class="eyebrow rv">La méthode</span>
+          <h2 class="rv">Un parcours ecommerce complet. <em class="s">L'IA à chaque étape.</em></h2>
+          <div class="tabs glass rv" role="tablist">
+            <button class="on" data-tab="deb" role="tab" aria-selected="true">Je pars de zéro</button>
+            <button data-tab="conf" role="tab" aria-selected="false">J'ai déjà une boutique</button>
+          </div>
         </div>
-        <figure class="why-video rv">
-          <video src="assets/chine/hugo-canton.mp4" poster="assets/chine/hugo-canton.jpg" muted loop playsinline preload="none"></video>
-          <figcaption>Hugo, cofondateur<span>À Canton, au pied de la tour</span></figcaption>
-        </figure>
+        <div class="road road9" id="road-deb">
+          <div class="step rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/loupe.webp" alt=""></div><h4>Recherche produit</h4><p><b>Avec l'IA :</b> marchés, concurrents, avis clients et tendances analysés pour trouver un vrai angle.</p></div>
+          <div class="step rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/cible.webp" alt=""></div><h4>Validation</h4><p><b>Avec l'IA :</b> offres et messages testés avant d'investir en stock et en pub.</p></div>
+          <div class="step rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/gemme.webp" alt=""></div><h4>Branding</h4><p><b>Avec l'IA :</b> naming, positionnement, identité et storytelling en quelques jours.</p></div>
+          <div class="step rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/sacs.webp" alt=""></div><h4>Sourcing</h4><p><b>Avec l'IA :</b> fournisseurs comparés, échanges traduits, négociation préparée.</p></div>
+          <div class="step rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/laptop.webp" alt=""></div><h4>Boutique Shopify</h4><p><b>Avec l'IA :</b> structure, fiches produit, textes et visuels, puis optimisation.</p></div>
+          <div class="step rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/baguette.webp" alt=""></div><h4>Créas et contenu</h4><p><b>Avec l'IA :</b> images, vidéos, UGC, avatars, voix, scripts et déclinaisons.</p></div>
+          <div class="step rv"><div class="top"><span class="i">07</span><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div><h4>Meta, TikTok et TikTok Shop</h4><p><b>Avec l'IA :</b> créas gagnantes repérées, nouveaux angles, contenu organique à grande échelle.</p></div>
+          <div class="step rv"><div class="top"><span class="i">08</span><img class="ico3d" src="assets/3d/cerveau.webp" alt=""></div><h4>Email et CRM</h4><p><b>Avec l'IA :</b> rédaction, segmentation et automatisations qui tournent seules.</p></div>
+          <div class="step rv"><div class="top"><span class="i">09</span><img class="ico3d" src="assets/3d/couronne.webp" alt=""></div><h4>Scale</h4><p><b>Avec l'IA :</b> données analysées, tâches automatisées, agents IA au quotidien.</p></div>
+        </div>
+        <div class="road road9" id="road-conf" hidden>
+          <div class="step rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/loupe.webp" alt=""></div><h4>Audit de ta marque</h4><p><b>Avec l'IA :</b> boutique, pubs, avis et marges passés au crible.</p></div>
+          <div class="step rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/courbe.webp" alt=""></div><h4>Conversion</h4><p><b>Avec l'IA :</b> pages et offres réécrites, tests A/B plus rapides.</p></div>
+          <div class="step rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/baguette.webp" alt=""></div><h4>Machine à créas</h4><p><b>Avec l'IA :</b> volume de créas multiplié, UGC IA et itérations chaque semaine.</p></div>
+          <div class="step rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div><h4>Nouveaux canaux</h4><p><b>Avec l'IA :</b> TikTok, TikTok Shop et organique à grande échelle.</p></div>
+          <div class="step rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/sacs.webp" alt=""></div><h4>Marque propre</h4><p><b>Avec l'IA :</b> sourcing direct, packaging et marges optimisées.</p></div>
+          <div class="step rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/robot.webp" alt=""></div><h4>Automatisation</h4><p><b>Avec l'IA :</b> agents, rapports et CRM pour scaler sans t'épuiser.</p></div>
+        </div>
       </div>
     </section>
 
-    <!-- ═══ 6. LOIN DES ÉCRANS ═══ -->
+    <!-- ═══ 7. VISITE DE L'ACADÉMIE ═══ -->
+    <section class="tour" id="tour" aria-label="Visite de l'académie">
+      <div class="tour-sticky">
+        <div class="floor" aria-hidden="true"></div>
+        <div class="tour-nav glass blur" id="tourNav"><button class="on"><b>01</b>Accueil</button><button><b>02</b>Formations</button><button><b>03</b>Lives</button><button><b>04</b>Studio IA</button><button><b>05</b>Outils</button></div>
+        <div class="tour-prog" id="tourProg"></div>
+        <div class="tour-head" id="tourHead">
+          <span class="eyebrow">Dans l'académie</span>
+          <h2>Ton espace de travail <em class="s">Ecom IA.</em></h2>
+        </div>
+        <div class="tour-stage">
+        <!-- 1. Accueil -->
+        <div class="panel" data-label="01 · Ton plan de la semaine" data-x="-120" data-ry="10">
+          <div class="scr">
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a class="on"><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Studio IA</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <main>
+              <div><h5>Salut Karim, on reprend ?</h5><div class="muted">Semaine 6 de ton coaching</div></div>
+              <div class="g3">
+                <div class="card"><div class="muted">CA du mois · objectif 10 000 €</div><b style="color:#fff;font-size:18px">6 240 €</b><div class="pbar"><i style="width:62%"></i></div></div>
+                <div class="card"><div class="muted">ROAS sur 7 jours</div><b style="color:#fff;font-size:18px">2,9</b><div class="pbar"><i style="width:58%"></i></div></div>
+                <div class="card"><div class="muted">Commandes ce mois</div><b style="color:#fff;font-size:18px">214</b></div>
+              </div>
+              <div class="card ai-sug"><span class="chip">Assistant MADE</span><b style="color:#fff;display:block;margin-top:6px">Ta créa « UGC hook 02 » tient un CPA de 11 €.</b><div class="muted">Suggestion : 3 nouvelles accroches sur le même angle, à valider avec ton coach jeudi.</div></div>
+              <div class="g2">
+                <div class="card"><div class="thumb"><img src="assets/formation/02.8_Decouverte-Meta-Ads.webp" alt="" loading="lazy"></div><b style="color:#fff">Module 7 · Meta Ads avec l'IA</b><div class="pbar"><i style="width:45%"></i></div></div>
+                <div class="card"><span class="chip">Prochain live</span><b style="color:#fff;display:block;margin-top:6px">20 créas générées en direct</b><div class="muted">Jeudi 18h</div></div>
+              </div>
+            </main>
+          </div>
+        </div>
+
+        <!-- 2. Formations -->
+        <div class="panel" data-label="02 · Les formations" data-x="140" data-ry="-12">
+          <div class="scr">
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a class="on"><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Studio IA</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <main>
+              <div><h5>Formations</h5><div class="muted">Nouveaux modules chaque mois</div></div>
+              <div class="g3">
+                <div class="card"><div class="thumb"><img src="assets/formation/03_Module_Recherche-produit.webp" alt="" loading="lazy"></div><span class="chip">IA</span><b style="color:#fff;display:block">Recherche produit et analyse d'avis</b><div class="pbar"><i style="width:100%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/02_Module_Introduction-Fondation.webp" alt="" loading="lazy"></div><span class="chip">IA</span><b style="color:#fff;display:block">Branding et boutique Shopify</b><div class="pbar"><i style="width:72%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/02.9_Analyse-de-la-marque-Boku.webp" alt="" loading="lazy"></div><span class="chip">Nouveau</span><b style="color:#fff;display:block">Créas, UGC IA et avatars</b><div class="pbar"><i style="width:18%"></i></div></div>
+              </div>
+              <div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><b style="color:#fff">TikTok Shop : contenu, créateurs et lives</b><div class="muted">Ajouté ce mois · 9 leçons</div></div><span class="chip">Commencer</span></div>
+            </main>
+          </div>
+        </div>
+
+        <!-- 3. Lives -->
+        <div class="panel" data-label="03 · Les lives" data-x="-140" data-ry="12">
+          <div class="scr">
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a class="on"><i></i>Lives</a><a><i></i>Studio IA</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <main>
+              <div class="player"><video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" muted loop playsinline preload="none"></video><span class="lb">EN DIRECT</span><span class="pt">On analyse vos pubs avec l'IA</span></div>
+              <div class="g3">
+                <div class="card"><div class="muted">Replay</div><b style="color:#fff">25 205 € en 24 h, le lancement décortiqué</b></div>
+                <div class="card"><div class="muted">Replay</div><b style="color:#fff">UGC IA : ce qui convertit vraiment</b></div>
+                <div class="card"><div class="muted">Replay</div><b style="color:#fff">Préparer une négociation fournisseur</b></div>
+              </div>
+            </main>
+          </div>
+        </div>
+
+        <!-- 4. Studio IA -->
+        <div class="panel" data-label="04 · Le studio IA" data-x="140" data-ry="-10">
+          <div class="scr">
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a class="on"><i></i>Studio IA</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <main>
+              <div><h5>Studio IA</h5><div class="muted">Workflows prêts à l'emploi, testés par l'équipe</div></div>
+              <div class="g2">
+                <div class="card studio-img"><img src="assets/hero-3d.webp" alt="" loading="lazy"><div><span class="chip">Visuel produit</span><div class="muted">4 variantes générées</div></div></div>
+                <div class="card" style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:8px"><img class="av-mini" src="assets/ia/avatar-ugc.webp" alt="" loading="lazy"><span class="chip" style="margin:0">Script UGC · avatar IA</span></div><b style="color:#fff">« J'ai arrêté de racheter des gourdes le jour où… »</b><div class="muted">Hook · problème · preuve · appel à l'action</div><div class="voice"><span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Voix off · 0:24</div></div>
+              </div>
+              <div class="g3">
+                <div class="card"><div class="muted">Fiches produit</div><b style="color:#fff">12 rédigées</b></div>
+                <div class="card"><div class="muted">Angles publicitaires</div><b style="color:#fff">8 à tester</b></div>
+                <div class="card"><div class="muted">Emails de relance</div><b style="color:#fff">Séquence prête</b></div>
+              </div>
+            </main>
+          </div>
+        </div>
+
+        <!-- 5. Outils -->
+        <div class="panel" data-label="05 · Les outils" data-x="0" data-ry="0">
+          <div class="scr">
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Studio IA</a><a class="on"><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <main>
+              <div><h5>Outils</h5><div class="muted">Inclus dans ton accès</div></div>
+              <div class="g3">
+                <div class="card tool"><span class="ic"><img src="assets/3d/laptop.webp" alt=""></span><b style="color:#fff">SaaS MADE</b><span class="muted">Analyse IA de ta boutique</span><span class="soon-b">Bientôt</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/courbe.webp" alt=""></span><b style="color:#fff">TrendTrack</b><span class="muted">Produits et pubs qui marchent</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/loupe.webp" alt=""></span><b style="color:#fff">Analyse d'avis</b><span class="muted">Frustrations et angles clients</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/baguette.webp" alt=""></span><b style="color:#fff">Générateur de scripts</b><span class="muted">Hooks et UGC</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/robot.webp" alt=""></span><b style="color:#fff">Agents IA</b><span class="muted">Rapports et relances</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/poignee.webp" alt=""></span><b style="color:#fff">Agents Chine</b><span class="muted">Nos contacts sourcing</span></div>
+              </div>
+            </main>
+          </div>
+        </div>
+
+        </div>
+        <div class="tour-cap" aria-live="polite">
+          <div class="fade" id="capText">
+            <div class="k" id="capK">01 · Accueil</div>
+            <h3 id="capH">Ton plan de la semaine</h3>
+            <p id="capP">Tes chiffres, tes actions et les suggestions de l'assistant MADE.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 8. UN ENVIRONNEMENT QUI ÉVOLUE ═══ -->
+    <section id="evolue" style="padding-top:0">
+      <div class="wrap">
+        <div class="evolve lg rv">
+          <div>
+            <span class="eyebrow">Toujours à jour</span>
+            <h2>Les outils bougent chaque mois. <em class="s">L'Académie aussi.</em></h2>
+            <p class="sub">Ce n'est pas une formation enregistrée une fois pour toutes. On teste chaque nouvel outil sur nos marques, et on garde ce qui marche vraiment.</p>
+          </div>
+          <ul class="cadence">
+            <li><b>Chaque semaine</b>Veille outils et lives sur ce qu'on teste</li>
+            <li><b>Chaque mois</b>Nouveaux modules et nouveaux cas réels</li>
+            <li><b>En continu</b>Méthodes retirées dès qu'elles ne marchent plus</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 9. LOIN DES ÉCRANS ═══ -->
     <section class="terrain" aria-label="Sur le terrain">
       <div class="wrap"><div class="terrain-card">
       <div class="terrain-grid">
@@ -726,140 +1072,13 @@
       <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampA" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampA">MADE ACADÉMIE ✦ ÉCOLE DE TERRAIN ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
       <div class="terrain-copy">
         <span class="eyebrow">Loin des écrans</span>
-        <p class="t-big">De vrais cartons. De vraies usines. <span>De vraies commandes.</span></p>
+        <p class="t-big">L'IA accélère. <span>Le terrain reste.</span></p>
+        <p class="t-small">De vrais cartons, de vraies usines, de vraies commandes. L'IA ne remplace pas un bon produit ni un bon fournisseur.</p>
       </div>
       </div></div>
     </section>
 
-    <!-- ═══ 7. TOUT POUR LANCER ═══ -->
-    <section id="ecosysteme">
-      <div class="wrap">
-        <div class="head">
-          <span class="eyebrow rv">Ce que tu reçois</span>
-          <h2 class="rv">Tout pour lancer. <em class="s">Rien de superflu.</em></h2>
-        </div>
-        <div class="pillars">
-          <article class="pillar lg rv">
-            <div class="top"><h3><small>01</small>Apprendre</h3><img class="ico3d" src="assets/3d/ampoule.webp" alt=""></div>
-            <p class="line">Formation, cas réels, lives.</p>
-          </article>
-          <article class="pillar lg rv">
-            <div class="top"><h3><small>02</small>Exécuter</h3><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div>
-            <p class="line">Coaching, analyses, sourcing, outils.</p>
-          </article>
-          <article class="pillar lg rv">
-            <div class="top"><h3><small>03</small>Être accompagné</h3><img class="ico3d" src="assets/3d/poignee.webp" alt=""></div>
-            <p class="line">Équipe, communauté, suivi 3 mois.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ 8. VISITE DE L'ACADÉMIE ═══ -->
-    <section class="tour" id="tour" aria-label="Visite de l'académie">
-      <div class="tour-sticky">
-        <div class="floor" aria-hidden="true"></div>
-        <div class="tour-nav glass blur" id="tourNav"><button class="on"><b>01</b>Accueil</button><button><b>02</b>Formations</button><button><b>03</b>Lives</button><button><b>04</b>Communauté</button><button><b>05</b>Outils</button></div>
-        <div class="tour-prog" id="tourProg"></div>
-        <div class="tour-head" id="tourHead">
-          <span class="eyebrow">Dans l'académie</span>
-          <h2>Ton espace <em class="s">de travail.</em></h2>
-        </div>
-        <div class="tour-stage">
-        <!-- 1. Accueil -->
-        <div class="panel" data-label="01 · Ton plan de la semaine" data-x="-120" data-ry="10">
-          <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a class="on"><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Communauté</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
-            <main>
-              <div><h5>Salut Karim, on reprend ?</h5><div class="muted">Tu as terminé 68 % de ton parcours</div></div>
-              <div class="g2">
-                <div class="card"><div class="thumb"><img src="assets/formation/02.8_Decouverte-Meta-Ads.webp" alt="" loading="lazy"></div><b style="color:#fff">Module 4 · Lancement publicitaire</b><div class="muted">Leçon 3 : structurer ta première campagne</div><div class="pbar"><i style="width:45%"></i></div></div>
-                <div class="card" style="display:flex;flex-direction:column;gap:8px"><span class="chip" style="align-self:flex-start">Prochain live</span><b style="color:#fff;font-size:15px">Analyse de boutiques en direct</b><div class="muted">Jeudi 18h · avec Hugo</div><div class="post" style="margin-top:auto;align-items:center"><img src="assets/made/team/HugoB.webp" alt=""><span class="muted">32 membres inscrits</span></div></div>
-              </div>
-              <div class="g3">
-                <div class="card"><div class="muted">CA du mois · objectif 10 000 €</div><b style="color:#fff;font-size:18px">6 240 €</b><div class="pbar"><i style="width:62%"></i></div></div>
-                <div class="card"><div class="muted">ROAS sur 7 jours</div><b style="color:#fff;font-size:18px">2,9</b><div class="pbar"><i style="width:58%"></i></div></div>
-                <div class="card"><div class="muted">Commandes ce mois</div><b style="color:#fff;font-size:18px">214</b></div>
-              </div>
-            </main>
-          </div>
-        </div>
-
-        <!-- 2. Formations -->
-        <div class="panel" data-label="02 · Les formations" data-x="140" data-ry="-12">
-          <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a class="on"><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Communauté</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
-            <main>
-              <div><h5>Formations</h5><div class="muted">Des modules courts, mis à jour en continu</div></div>
-              <div class="g3">
-                <div class="card"><div class="thumb"><img src="assets/formation/02_Module_Introduction-Fondation.webp" alt="" loading="lazy"></div><span class="chip">Gratuit</span><b style="color:#fff;display:block">Les bases de l'ecommerce</b><div class="pbar"><i style="width:100%"></i></div></div>
-                <div class="card"><div class="thumb"><img src="assets/formation/03_Module_Recherche-produit.webp" alt="" loading="lazy"></div><span class="chip">Premium</span><b style="color:#fff;display:block">Formation ecommerce A à Z</b><div class="pbar"><i style="width:72%"></i></div></div>
-                <div class="card"><div class="thumb"><img src="assets/formation/02.9_Analyse-de-la-marque-Boku.webp" alt="" loading="lazy"></div><span class="chip">Élite</span><b style="color:#fff;display:block">Créer une marque à succès</b><div class="pbar"><i style="width:18%"></i></div></div>
-              </div>
-              <div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><b style="color:#fff">Recherche produit : la méthode complète</b><div class="muted">12 leçons · 2 h 40</div></div><span class="chip">Reprendre</span></div>
-            </main>
-          </div>
-        </div>
-
-        <!-- 3. Lives -->
-        <div class="panel" data-label="03 · Les lives" data-x="-140" data-ry="12">
-          <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a class="on"><i></i>Lives</a><a><i></i>Communauté</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
-            <main>
-              <div class="player"><video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" muted loop playsinline preload="none"></video><span class="lb">EN DIRECT</span><span class="pt">Hugo en live depuis Canton</span></div>
-              <div class="g3">
-                <div class="card"><div class="muted">Replay</div><b style="color:#fff">25 205 € en 24 h, le lancement décortiqué</b></div>
-                <div class="card"><div class="muted">Replay</div><b style="color:#fff">Meta Ads : les créas qui marchent en 2026</b></div>
-                <div class="card"><div class="muted">Replay</div><b style="color:#fff">Questions sourcing Chine</b></div>
-              </div>
-            </main>
-          </div>
-        </div>
-
-        <!-- 4. Communauté -->
-        <div class="panel" data-label="04 · La communauté" data-x="140" data-ry="-10">
-          <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a class="on"><i></i>Communauté</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
-            <main>
-              <div><h5>Communauté</h5><div style="margin-top:8px"><span class="chip">Questions & Réponses</span><span class="chip">Tips quotidiens</span><span class="chip">Actu ecommerce</span><span class="chip">Résultats des membres</span></div></div>
-              <div class="card post"><div class="av" style="background:linear-gradient(135deg,#5eead4,#0f766e)"></div><div><b>Sarah</b> <span class="muted">· Résultats des membres</span><div>Ma première vente ce matin ! Merci pour le retour sur ma page produit hier 🙏</div></div></div>
-              <div class="card post"><img src="assets/made/team/Mailis.webp" alt=""><div><b>Mailis</b> <span class="muted">· Tips quotidiens</span><div>3 angles de créas à tester cette semaine sur les produits beauté. Exemples dans le fil.</div></div></div>
-              <div class="card post"><div class="av" style="background:linear-gradient(135deg,#fcd34d,#b45309)"></div><div><b>Mehdi</b> <span class="muted">· Questions & Réponses</span><div>Quel délai de livraison annoncer avec un agent en Chine ?</div></div></div>
-            </main>
-          </div>
-        </div>
-
-        <!-- 5. Outils -->
-        <div class="panel" data-label="05 · Les outils" data-x="0" data-ry="0">
-          <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Communauté</a><a class="on"><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
-            <main>
-              <div><h5>Outils</h5><div class="muted">Tout est inclus dans ton accès</div></div>
-              <div class="g3">
-                <div class="card tool"><span class="ic"><img src="assets/3d/laptop.webp" alt=""></span><b style="color:#fff">SaaS MADE</b><span class="muted">Notre outil maison pour piloter ta boutique</span><span class="soon-b">Bientôt</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/courbe.webp" alt=""></span><b style="color:#fff">TrendTrack</b><span class="muted">Trouve les produits et pubs qui marchent</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/loupe.webp" alt=""></span><b style="color:#fff">Analyse de site</b><span class="muted">Ta boutique relue par l'équipe</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/sablier.webp" alt=""></span><b style="color:#fff">Calculateur de marge</b><span class="muted">Prix, coûts, rentabilité</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/baguette.webp" alt=""></span><b style="color:#fff">Prompts IA</b><span class="muted">Fiches produit, pubs, emails</span></div>
-                <div class="card tool"><span class="ic"><img src="assets/3d/poignee.webp" alt=""></span><b style="color:#fff">Agents Chine</b><span class="muted">Nos contacts sourcing</span></div>
-              </div>
-            </main>
-          </div>
-        </div>
-
-        </div>
-
-        <div class="tour-cap" aria-live="polite">
-          <div class="fade" id="capText">
-            <div class="k" id="capK">01 · Accueil</div>
-            <h3 id="capH">Ton plan de la semaine</h3>
-            <p id="capP">Tes ventes, ton ROAS et tes prochaines actions, préparées avec ton coach.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ 9. MARQUES ACCOMPAGNÉES ═══ -->
+    <!-- ═══ 10. MARQUES ACCOMPAGNÉES ═══ -->
     <section id="marques">
       <div class="wrap">
         <div class="head">
@@ -883,25 +1102,26 @@
               <div class="metrics"><div><b>300&nbsp;k</b><span>visiteurs par mois</span></div><div><b>100&nbsp;%</b><span>direction artistique sur mesure</span></div><div><b>Monde</b><span>lancement international</span></div></div></div>
           </div>
         </div>
+
       </div>
       <div class="logos rv" aria-label="Marques accompagnées"><div class="track" id="logos"></div></div>
     </section>
 
-    <!-- ═══ 10. ÉQUIPE ═══ -->
+    <!-- ═══ 11. ÉQUIPE MADE ═══ -->
     <section id="equipe" style="padding-top:0">
       <div class="ring" aria-hidden="true" style="width:900px;right:-360px;top:-40px"></div>
       <div class="wrap">
         <div class="head head-sm">
-          <span class="eyebrow rv">L'équipe</span>
-          <h2 class="rv">Les visages <em class="s">derrière MADE.</em></h2>
-          <p class="sub rv">Ce sont eux qui te coachent.</p>
+          <span class="eyebrow rv">L'équipe MADE</span>
+          <h2 class="rv">Testé sur nos marques <em class="s">avant de t'être enseigné.</em></h2>
+          <p class="sub rv">Media buyers, créatifs, designers et coachs. Chaque outil IA de l'Académie passe d'abord par nos campagnes et nos clients.</p>
         </div>
-        <div class="team-label rv">Les cofondateurs</div>
         <div class="founders">
           <div class="member rv"><div class="ph"><img src="assets/made/team/HugoB.webp" alt="Hugo" loading="lazy"></div><h4>Hugo</h4><p>Cofondateur · Acquisition & media buying</p></div>
           <div class="member rv"><div class="ph"><img src="assets/made/team/Guillaume.webp" alt="Guillaume" loading="lazy"></div><h4>Guillaume</h4><p>Cofondateur · Site & conversion</p></div>
           <div class="member rv"><div class="ph"><img src="assets/made/team/TheoG.webp" alt="Théo" loading="lazy"></div><h4>Théo</h4><p>Cofondateur · Publicité & scale</p></div>
         </div>
+
 
         <div class="team-label rv">Toute l'équipe</div>
         <div class="crew">
@@ -913,36 +1133,6 @@
           <div class="member rv"><div class="ph"><img src="assets/made/team/HugoM.webp" alt="Hugo M." loading="lazy"></div><h4>Hugo M.</h4></div>
         </div>
 
-      </div>
-    </section>
-
-    <!-- ═══ 11. MÉTHODE ═══ -->
-    <section id="roadmap" style="padding-top:0">
-      <div class="wrap">
-        <div class="head">
-          <span class="eyebrow rv">La méthode</span>
-          <h2 class="rv">De zéro à ta marque, <em class="s">en 6 étapes.</em></h2>
-          <div class="tabs glass rv" role="tablist">
-            <button class="on" data-tab="deb" role="tab" aria-selected="true">Je pars de zéro</button>
-            <button data-tab="conf" role="tab" aria-selected="false">J'ai déjà une boutique</button>
-          </div>
-        </div>
-        <div class="road" id="road-deb">
-          <div class="step rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/boussole.webp" alt=""></div><h4>Le bon point de départ</h4></div>
-          <div class="step rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/loupe.webp" alt=""></div><h4>Le produit qui se vend</h4></div>
-          <div class="step rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/gemme.webp" alt=""></div><h4>Une marque, pas un catalogue</h4></div>
-          <div class="step rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div><h4>Tes premières ventes</h4></div>
-          <div class="step rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/courbe.webp" alt=""></div><h4>Ce qui marche, en plus grand</h4></div>
-          <div class="step rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/couronne.webp" alt=""></div><h4>Une activité qui tient</h4></div>
-        </div>
-        <div class="road" id="road-conf" hidden>
-          <div class="step glass rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/cerveau.webp" alt=""></div><h4>Audit complet</h4><p>Boutique, pubs, marges, supply : on trouve ce qui bloque.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/engrenage.webp" alt=""></div><h4>Les fondamentaux</h4><p>Offre, conversion, panier moyen : on renforce ce qui porte ton chiffre.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/cible.webp" alt=""></div><h4>Le plan de scale</h4><p>Créas et budgets pour passer le palier suivant sans perdre en rentabilité.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/sacs.webp" alt=""></div><h4>Ta propre marque</h4><p>Sourcing direct, packaging, stock : tu reprends la main sur tes marges.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/robot.webp" alt=""></div><h4>Un système qui tourne</h4><p>Process, SAV, équipe : l'activité avance sans toi au quotidien.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/etoile.webp" alt=""></div><h4>Le palier d'après</h4><p>Nouveaux marchés, nouveaux canaux, nouvelles gammes.</p></div>
-        </div>
 
       </div>
     </section>
@@ -955,7 +1145,7 @@
         <div class="canton-in" style="padding-inline:clamp(22px,5vw,70px)">
           <span class="eyebrow rv">Séminaire · Canton</span>
           <h2 class="rv">Voyage <em class="s">en Chine.</em></h2>
-          <p class="intro rv">10 jours là où tout se fabrique.</p>
+          <p class="intro rv">L'IA prépare la négociation. Sur place, c'est toi qui serres la main du fabricant.</p>
           <ul class="canton-points rv">
             <li><b>La Foire de Canton</b></li>
             <li><b>Usines et fournisseurs</b></li>
@@ -977,30 +1167,35 @@
       <div class="ring" aria-hidden="true" style="width:1200px;left:50%;margin-left:-600px;top:-60px;opacity:.8"></div>
       <div class="wrap">
         <div class="head c">
-          <span class="eyebrow rv">Rejoindre MADE</span>
-          <h2 class="rv">Trois façons d'entrer <em class="s">dans l'écosystème.</em></h2>
-          <p class="sub rv">Même équipe, même méthode. Tu choisis ton niveau.</p>
+          <span class="eyebrow rv">Rejoindre l'Académie</span>
+          <h2 class="rv">Deux façons d'avancer. <em class="s">La même méthode Ecom IA.</em></h2>
         </div>
         <!-- TODO: contenu des offres à finaliser (réunion offres) -->
-        <div class="tiers">
+        <div class="tiers tiers2">
           <article class="tier lg rv">
-            <span class="lvl">Niveau 1 · Apprendre</span>
-            <h3>Formation</h3>
-            <p class="promise">La méthode complète, à ton rythme.</p>
+            <span class="lvl">En autonomie</span>
+            <h3>Formation Ecom IA</h3>
+            <p class="promise">Tout le parcours, de la recherche produit au scale, avec l'IA à chaque étape.</p>
+            <ul class="incl">
+              <li>Le parcours complet, mis à jour chaque mois</li>
+              <li>Les workflows et prompts IA de l'équipe</li>
+              <li>Lives chaque semaine et replays</li>
+              <li>La communauté MADE</li>
+            </ul>
             <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
           </article>
           <article class="tier lg feat rv">
             <span class="badge">Le plus choisi</span>
-            <span class="lvl">Niveau 2 · Être accompagné</span>
-            <h3>Coaching <em class="s">1:1</em></h3>
-            <p class="promise">On construit ta marque avec toi pendant 3 mois, semaine après semaine.</p>
+            <span class="lvl">Accompagné</span>
+            <h3>Coaching <em class="s">Ecom IA</em></h3>
+            <p class="promise">3 mois avec un coach qui construit ta marque avec toi, semaine après semaine.</p>
+            <ul class="incl">
+              <li>Tout le contenu de la formation</li>
+              <li>Coach dédié et point chaque semaine</li>
+              <li>Analyse de ta boutique et de tes pubs</li>
+              <li>Mise en place de tes outils et automatisations IA</li>
+            </ul>
             <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel <span class="arr">→</span></a>
-          </article>
-          <article class="tier lg rv">
-            <span class="lvl">Niveau 3 · Exécuter</span>
-            <h3>Plateforme</h3>
-            <p class="promise">Les bons outils pour piloter ta boutique.</p>
-            <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
           </article>
         </div>
         <p class="offers-note rv">Pas de paiement en ligne. On en parle pendant l'appel.</p>
@@ -1015,11 +1210,11 @@
           <h2 class="rv">Les questions <em class="s">qu'on nous pose.</em></h2>
         </div>
         <div class="faq-list">
-          <details class="glass rv"><summary>J'ai déjà une boutique, ça m'apporte quoi ?</summary><p>Un audit complet, un plan pour passer le palier suivant et l'accès à notre réseau sourcing pour transformer ta boutique en vraie marque, avec de meilleures marges.</p></details>
-          <details class="glass rv"><summary>Formation ou coaching, je choisis quoi ?</summary><p>La formation, c'est la méthode en autonomie. Le coaching, c'est quelqu'un qui suit ta boutique chaque semaine et t'évite les erreurs qui coûtent cher. On t'oriente pendant l'appel.</p></details>
-          <details class="glass rv"><summary>C'est quoi le voyage en Chine ?</summary><p>Un séminaire de 10 jours à Canton pendant la foire internationale. Tu rencontres des fournisseurs, tu négocies avec nous et tu suis des cours chaque jour. La page dédiée arrive bientôt.</p></details>
+          <details class="glass rv"><summary>C'est une formation ChatGPT ?</summary><p>Non. C'est une formation ecommerce complète : produit, marque, sourcing, boutique, pub, scale. L'IA est intégrée à chaque étape pour aller plus vite et produire plus, pas pour remplacer la méthode.</p></details>
+          <details class="glass rv"><summary>Je dois déjà maîtriser l'IA ?</summary><p>Non. On part de zéro sur les outils. Tu apprends à t'en servir directement sur ta marque, avec les workflows que l'équipe utilise chaque jour.</p></details>
+          <details class="glass rv"><summary>Les outils changent vite, la formation suit ?</summary><p>Oui. On teste les nouveaux outils sur nos marques, on ajoute des modules chaque mois et on retire ce qui ne marche plus.</p></details>
+          <details class="glass rv"><summary>C'est quoi le voyage en Chine ?</summary><p>Un séminaire de 10 jours à Canton pendant la foire internationale : fournisseurs, usines, négociation et cours chaque jour avec l'équipe.</p></details>
         </div>
-
       </div>
     </section>
 
@@ -1030,10 +1225,10 @@
           <img class="bgimg" src="assets/salon.webp" alt="" aria-hidden="true" loading="lazy">
           <div class="shade"></div>
           <div class="final-in">
-            <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampB" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampB">MADE ACADÉMIE ✦ ÉCOLE DE TERRAIN ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
+            <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampB" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampB">MADE ACADÉMIE ✦ ECOM IA ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
             <span class="eyebrow">Prochaine étape</span>
             <h2>20 minutes pour savoir <em class="s">si on peut t'aider.</em></h2>
-            <p class="sub">Gratuit et sans engagement.</p>
+            <p class="sub">On regarde ton projet et où l'IA peut te faire gagner le plus de temps. Gratuit et sans engagement.</p>
             <ol class="after">
               <li><b>1</b><span><strong>Tu choisis ton créneau</strong></span></li>
               <li><b>2</b><span><strong>On échange 20 minutes</strong></span></li>
@@ -1070,11 +1265,11 @@
     const EMBED_BOOKING = true;
     const RESULTS = ['R12','R1','R3','R4','R5','R6','R7','R8','R9','R10','R11','R13','R14','R15','R16','R17','R18','R19','R20','R21','R2aniv'];
     const TOUR = [
-      ['Accueil', 'Ton plan de la semaine', 'Tes ventes, ton ROAS et tes prochaines actions, préparées avec ton coach.'],
-      ['Formations', 'Pas à pas, dans l\'ordre', 'Des bases à ta propre marque, avec une action concrète à chaque module.'],
-      ['Lives', 'En direct chaque semaine', 'Tes questions, ta boutique analysée, et tous les replays.'],
-      ['Communauté', '+1200 élèves', 'Des gens qui vendent, qui partagent leurs chiffres et qui s\'entraident.'],
-      ['Outils', 'TrendTrack et notre SaaS', 'Trouver ce qui marche et piloter ta boutique au même endroit.']
+      ['Accueil', 'Ton plan de la semaine', 'Tes chiffres, tes actions et les suggestions de l\'assistant MADE.'],
+      ['Formations', 'Un parcours qui évolue', 'Nouveaux modules chaque mois, l\'IA intégrée à chaque étape.'],
+      ['Lives', 'En direct chaque semaine', 'Pubs analysées, créas générées et questions en direct.'],
+      ['Studio IA', 'Les workflows de l\'équipe', 'Visuels, scripts UGC, fiches produit et emails prêts à adapter.'],
+      ['Outils', 'Tout au même endroit', 'TrendTrack, analyse d\'avis, agents IA et bientôt le SaaS MADE.']
     ];
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = matchMedia('(max-width: 640px)').matches;
