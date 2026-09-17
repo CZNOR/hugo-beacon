@@ -636,7 +636,7 @@
     .mock-row{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
     .mock-row i{width:6px;height:6px;border-radius:50%;background:var(--made)}
     .mock-row b{color:var(--ink);font-weight:500}
-    .mock-row span{margin-left:auto;font-family:var(--cond);font-weight:600;font-size:16px;color:var(--ink)}
+    .mock-row span{white-space:nowrap;margin-left:auto;font-family:var(--cond);font-weight:600;font-size:16px;color:var(--ink)}
     .mock-bar{height:4px;border-radius:4px;background:rgba(255,255,255,.07);margin-bottom:6px;overflow:hidden}
     .mock-bar i{display:block;height:100%;background:linear-gradient(90deg,#8b5cf6,#f0abfc)}
     .mock-out{margin-top:8px;padding:12px 14px;border-radius:14px;background:rgba(182,145,254,.1);box-shadow:inset 0 0 0 1px rgba(182,145,254,.25);font-size:15px;line-height:1.4}
@@ -712,6 +712,91 @@
       .road9 .step p{font-size:14.5px}
     }
 
+    /* ═════════ IPHONE : parcours orienté conversion ═════════ */
+    .m-only{display:none}
+    .m-cta{display:none}
+    @media (max-width:640px){
+      .d-only{display:none}
+      .m-only{display:block}
+      section{padding-block:52px}
+      .head{margin-bottom:26px}
+      h1{font-size:clamp(36px,10.4vw,44px);line-height:1.03}
+      h2{font-size:clamp(28px,8vw,34px);line-height:1.08}
+      .sub{font-size:16px}
+      .eyebrow{font-size:13px}
+
+      /* hero : tout le message + CTA au premier écran, planète en fond */
+      .hero{position:relative;padding-block:96px 34px;overflow:hidden}
+      .hero .planet{position:absolute;right:-120px;top:70px;width:340px;max-width:none;opacity:.45;margin:0;z-index:0;pointer-events:none}
+      .hero-copy{position:relative;z-index:2}
+      .hero h1{margin:16px 0 12px}
+      .lead{font-size:16.5px;color:rgba(241,240,234,.8)}
+      .hero-tags{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:18px}
+      .hero-tags li{font-size:12.5px;padding:6px 10px 6px 6px}
+      .cta-row{margin-top:20px}
+      .cta-row .btn-ghost{display:none}
+      .cta-row .btn-neon{width:100%;padding:18px;font-size:16px}
+      .trust{margin-top:14px;justify-content:center}
+
+      /* chiffres compacts */
+      .stats{grid-template-columns:1fr 1fr;row-gap:18px}
+      .stat .n{font-size:40px}
+      .stat p{font-size:13px}
+
+      /* ce qui a changé : 3 lignes */
+      .shift-row:nth-child(n+5){display:none}
+      .shift-row{padding:14px 16px}
+      .shift-row span{font-size:16px}
+
+      /* carrousels au doigt */
+      .ia-bento,.dash-grid,.road9,.crew{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin-inline:-16px;padding:4px 16px 12px;scrollbar-width:none}
+      .ia-bento::-webkit-scrollbar,.dash-grid::-webkit-scrollbar,.road9::-webkit-scrollbar,.crew::-webkit-scrollbar{display:none}
+      .ia-card{flex:0 0 86%;scroll-snap-align:center;min-height:0}
+      .ia-b .gen{grid-template-columns:1fr}.ia-b .prompt{display:none}.gen-img{min-height:240px}
+      .dash-grid figure{flex:0 0 72%;scroll-snap-align:center;display:block!important}
+      .road9[hidden]{display:none!important}
+      .road9 .step{flex:0 0 78%;scroll-snap-align:start;display:block;padding:20px;border:0;border-radius:22px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--line)}
+      .road9 .step .top{flex-direction:row;justify-content:space-between;align-items:center}
+      .road9 .step h4{margin-top:10px}
+      .crew .member{flex:0 0 30%}
+      .dms .dm{flex:0 0 66%}
+      .ia-bento::after,.road9::after,.dash-grid::after{content:'';flex:0 0 6px}
+
+      /* CTA intermédiaires */
+      .m-mid{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding:16px 18px;border-radius:20px}
+      .m-mid b{display:block;font-weight:600;font-size:16px;letter-spacing:-.02em}
+      .m-mid span{font-size:13.5px;color:var(--muted)}
+      .m-mid i{font-style:normal;flex:0 0 40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#9f7aea,#6d28d9);color:#fff}
+
+      /* barre fixe de réservation */
+      .m-cta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;flex-direction:column;align-items:center;gap:4px;padding:10px 10px 8px;border-radius:24px;background:rgba(12,10,20,.92);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 20px 50px rgba(0,0,0,.6);transform:translateY(140%);transition:transform .45s var(--ease)}
+      .m-cta.show{transform:none}
+      .m-cta .btn{width:100%;padding:15px;font-size:16px}
+      .m-cta small{font-size:12px;color:var(--muted)}
+      footer{padding-bottom:110px}
+
+      /* sections allégées */
+      .tour{padding-block:48px}
+      .panel{height:430px!important}
+      .evolve{padding:22px;gap:10px}
+      .evolve .sub{display:none}
+      .cadence li{padding:10px 0;font-size:14.5px}.cadence b{font-size:18px}
+      .terrain-grid{height:380px}
+      .t-small{display:none}
+      .team-label{margin:18px 0 10px}
+      .founders p{display:none}
+      .canton-hero{min-height:520px}
+      .canton .intro{font-size:15.5px}
+      .canton-points{display:flex;flex-wrap:wrap;gap:6px}
+      .canton-points li{padding:6px 10px;border:0;border-radius:100px;background:rgba(252,165,165,.12)}
+      .canton-points b{font-size:14px}
+      .canton-strip figure:nth-child(n+3){display:none}
+      .tiers2 .feat{order:-1}
+      .tier .incl li{font-size:14.5px}
+      .logos{display:none}
+      .brands .bcard:nth-child(3){display:none}
+    }
+
   </style>
 </head>
 <body>
@@ -749,6 +834,7 @@
   </div>
 
 
+  <div class="m-cta" id="mCta" aria-hidden="true"><a href="#appel" class="btn btn-neon">Réserver mon appel gratuit <span class="arr">→</span></a><small>20 min · sans engagement</small></div>
   <main id="top">
     <!-- ═══ 1. HERO : ECOMMERCE + IA + MARQUE + ACCOMPAGNEMENT ═══ -->
     <section class="hero">
@@ -756,7 +842,7 @@
         <div class="hero-copy">
           <span class="pill glass blur rv"><b>Nouvelle Académie</b> Ecom IA · Rentrée 2026</span>
           <h1 class="rv">Construis une vraie marque ecommerce. <em class="s">Avec l'IA à chaque étape.</em></h1>
-          <p class="lead rv">La méthode MADE, de la recherche produit au scale, accélérée par l'IA. Avec un coaching et une équipe qui l'applique tous les jours sur de vraies marques.</p>
+          <p class="lead rv"><span class="d-only">La méthode MADE, de la recherche produit au scale, accélérée par l'IA. Avec un coaching et une équipe qui l'applique tous les jours sur de vraies marques.</span><span class="m-only">Formation et coaching ecommerce, avec l'IA intégrée à chaque étape.</span></p>
           <ul class="hero-tags rv">
             <li><img class="ico3d" src="assets/3d/loupe.webp" alt="">Recherche produit IA</li>
             <li><img class="ico3d" src="assets/3d/baguette.webp" alt="">Créas et UGC IA</li>
@@ -769,7 +855,7 @@
           </div>
           <div class="trust rv">
             <div class="avatars"><img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/Guillaume.webp" alt=""><img src="assets/made/team/TheoG.webp" alt=""></div>
-            <p><strong>+1200 élèves</strong> déjà accompagnés par MADE</p>
+            <p><strong>+300 élèves</strong> déjà accompagnés par MADE</p>
           </div>
         </div>
         <div class="planet" aria-hidden="true">
@@ -783,8 +869,8 @@
     <section style="padding-block:40px 0">
       <div class="wrap stats">
         <div class="stat rv"><div class="n"><span data-count="7">0</span> <em class="s">ans</em></div><p>D'ecommerce sur le terrain</p></div>
-        <div class="stat rv"><div class="n">+<span data-count="1200">0</span></div><p>Élèves accompagnés</p></div>
-        <div class="stat rv"><div class="n">+<span data-count="10">0</span><em class="s">M€</em></div><p>Générés avec nos élèves et clients</p></div>
+        <div class="stat rv"><div class="n">+<span data-count="300">0</span></div><p>Élèves accompagnés</p></div>
+        <div class="stat rv"><div class="n">+<span data-count="2">0</span><em class="s">M€</em></div><p>Générés avec nos élèves et clients</p></div>
         <div class="stat rv"><div class="n"><span data-count="3">0</span> <em class="s">mois</em></div><p>De coaching 1:1</p></div>
       </div>
     </section>
@@ -878,6 +964,7 @@
           </article>
         </div>
       </div>
+      <div class="wrap m-only"><a href="#appel" class="m-mid lg"><span><b>Voir ce que l'IA change pour ta marque</b>Appel gratuit de 20 minutes</span><i>→</i></a></div>
     </section>
 
     <!-- ═══ 5. DES CAPTURES, PAS DES PROMESSES ═══ -->
@@ -898,6 +985,7 @@
 
       </div>
       <div class="wrap"><div class="dash-grid" id="dashGrid"></div></div>
+      <div class="wrap m-only"><a href="#appel" class="m-mid lg"><span><b>Tu veux ces résultats ?</b>On regarde ton projet ensemble</span><i>→</i></a></div>
     </section>
 
     <!-- ═══ 6. LE PARCOURS : L'IA À CHAQUE ÉTAPE ═══ -->
@@ -1345,6 +1433,15 @@
     let ticking = false;
     const kick = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; renderTour(); }); } };
     if (!isMobile) { addEventListener('scroll', kick, { passive: true }); addEventListener('resize', kick, { passive: true }); if (lenis) lenis.on('scroll', kick); kick(); }
+
+    /* ─── Barre d'appel mobile ─── */
+    const mCta = document.getElementById('mCta');
+    if (mCta) {
+      let pastHero = false, atEnd = false;
+      const upd = () => mCta.classList.toggle('show', pastHero && !atEnd);
+      new IntersectionObserver(e => { pastHero = !e[0].isIntersecting; upd(); }).observe(document.querySelector('.hero .cta-row'));
+      new IntersectionObserver(e => { atEnd = e[0].isIntersecting; upd(); }, { rootMargin: '0px 0px -30% 0px' }).observe(document.getElementById('appel'));
+    }
 
     /* ─── Vidéos : lecture seulement à l'écran ─── */
     const vio = new IntersectionObserver(es => es.forEach(en => en.isIntersecting ? en.target.play().catch(() => {}) : en.target.pause()), { rootMargin: '150px' });
