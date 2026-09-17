@@ -217,16 +217,29 @@
     /* ─── ROOM TOUR 3D ─── */
     .tour{padding:0;height:560vh}
     .tour-sticky{position:sticky;top:0;height:100vh;overflow:hidden;perspective:1100px;perspective-origin:50% 42%}
-    .tour-bg{position:absolute;inset:-6%;background:url(assets/salon.jpg) center/cover;opacity:.55;transform:scale(var(--bgs,1.15));filter:saturate(1.15)}
+    .tour-sticky{background:radial-gradient(60% 55% at 50% 38%,rgba(124,58,237,.38),transparent 70%),radial-gradient(35% 40% at 85% 85%,rgba(217,70,239,.16),transparent 70%),radial-gradient(35% 40% at 10% 90%,rgba(94,234,212,.08),transparent 70%),#07060b}
+    .tour-bg{position:absolute;inset:0;pointer-events:none}
+    .tour-bg i{position:absolute;z-index:250;border-radius:50%;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.75),rgba(255,255,255,.12) 18%,rgba(182,145,254,.08) 55%,rgba(196,181,253,.35) 100%);
+      box-shadow:inset 0 1px 1px rgba(255,255,255,.5),inset -10px -20px 40px rgba(124,58,237,.25),0 30px 60px -20px rgba(0,0,0,.6);animation:float 9s ease-in-out infinite;transform:translateY(var(--oy,0))}
+    .tour-bg i:nth-child(1){width:180px;height:180px;left:6%;top:22%}
+    .tour-bg i:nth-child(2){width:90px;height:90px;right:9%;top:18%;animation-delay:-3s}
+    .tour-bg i:nth-child(3){width:130px;height:130px;right:14%;bottom:12%;animation-delay:-5s}
+    .tour-bg i:nth-child(4){width:60px;height:60px;left:22%;bottom:18%;animation-delay:-2s}
+    .tour-nav{position:absolute;top:92px;left:50%;transform:translateX(-50%);z-index:300;display:flex;gap:4px;padding:5px;border-radius:100px;max-width:calc(100% - 24px);overflow-x:auto;scrollbar-width:none}
+    .tour-nav button{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--muted);background:none;border:0;padding:10px 16px;border-radius:100px;cursor:pointer;white-space:nowrap;transition:all .4s var(--ease)}
+    .tour-nav button b{color:var(--v2);font-weight:600;margin-right:6px}
+    .tour-nav button.on{color:#fff;background:rgba(182,145,254,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+    .tour-prog{position:absolute;left:0;bottom:0;height:3px;z-index:300;background:linear-gradient(90deg,#8b5cf6,#f0abfc);box-shadow:0 0 16px rgba(217,70,239,.8);width:0}
     .tour-sticky::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:200;background:radial-gradient(70% 70% at 50% 45%,transparent 30%,rgba(5,5,7,.85) 100%),linear-gradient(180deg,var(--bg) 0%,transparent 16%,transparent 80%,var(--bg) 100%)}
     .floor{position:absolute;left:50%;top:62%;width:5000px;height:9000px;margin-left:-2500px;transform-origin:50% 0;transform:rotateX(88deg);
       background-image:linear-gradient(rgba(182,145,254,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(182,145,254,.22) 1px,transparent 1px);background-size:160px 160px;background-position:0 var(--fy,0);
       -webkit-mask:radial-gradient(40% 50% at 50% 0%,#000,transparent);mask:radial-gradient(40% 50% at 50% 0%,#000,transparent)}
-    .tour-head{position:absolute;top:96px;left:0;right:0;text-align:center;z-index:250;pointer-events:none}
+    .tour-head{position:absolute;top:150px;left:0;right:0;text-align:center;z-index:250;pointer-events:none}
     .tour-head h2{margin:10px 0 0;font-size:clamp(30px,4vw,52px)}
-    .panel{position:absolute;left:50%;top:52%;width:880px;height:500px;margin:-250px 0 0 -440px;border-radius:22px;will-change:transform,opacity;
-      box-shadow:0 60px 140px -30px rgba(0,0,0,.9),0 0 80px -20px rgba(139,92,246,.45)}
-    .scr{position:absolute;inset:0;border-radius:inherit;overflow:hidden;background:#0c0b10;display:grid;grid-template-columns:190px 1fr;font-size:13px;color:#ddd;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+    .panel{position:absolute;left:50%;top:54%;width:900px;height:520px;margin:-260px 0 0 -450px;border-radius:32px;padding:10px;will-change:transform,opacity;
+      background:linear-gradient(160deg,rgba(255,255,255,.2),rgba(255,255,255,.04) 40%,rgba(182,145,254,.12));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.1),0 60px 140px -30px rgba(0,0,0,.9),0 0 90px -20px rgba(139,92,246,.5)}
+    .scr{position:absolute;inset:10px;border-radius:23px;overflow:hidden;background:#0c0b10;display:grid;grid-template-columns:190px 1fr;font-size:13px;color:#ddd;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
     .scr aside{background:#08070b;border-right:1px solid rgba(255,255,255,.06);padding:18px 14px;display:flex;flex-direction:column;gap:4px}
     .scr .brand{font-family:var(--bebas);font-size:24px;letter-spacing:.5px;color:#fff;margin:0 6px 16px;line-height:1}
     .scr .brand span{color:var(--made)}
@@ -245,16 +258,19 @@
     .thumb::after{content:'▶';position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:14px}
     .pbar{height:5px;border-radius:5px;background:rgba(255,255,255,.08);margin-top:8px;overflow:hidden}
     .pbar i{display:block;height:100%;background:linear-gradient(90deg,#8b5cf6,#f0abfc)}
-    .player{flex:1;border-radius:14px;position:relative;overflow:hidden;background:url(assets/chine/p6776.jpg) center/cover}
-    .player::before{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.75),transparent 60%)}
-    .player .lb{position:absolute;left:14px;top:14px;background:#ef4444;color:#fff;font-weight:700;font-size:11px;padding:4px 8px;border-radius:6px}
-    .player .pt{position:absolute;left:16px;bottom:14px;color:#fff;font-size:16px;font-weight:600}
+    .player{flex:1;border-radius:14px;position:relative;overflow:hidden;background:#000}
+    .player video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .player::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(0,0,0,.75),transparent 60%)}
+    .player .lb{z-index:2;position:absolute;left:14px;top:14px;background:#ef4444;color:#fff;font-weight:700;font-size:11px;padding:4px 8px;border-radius:6px}
+    .player .pt{z-index:2;position:absolute;left:16px;bottom:14px;color:#fff;font-size:16px;font-weight:600}
     .post{display:flex;gap:10px;align-items:flex-start}
     .post img,.post .av{width:30px;height:30px;border-radius:50%;object-fit:cover;flex-shrink:0;background:#b691fe}
     .post b{color:#fff;font-weight:600}
     .chip{display:inline-block;padding:4px 9px;border-radius:100px;background:rgba(182,145,254,.14);color:var(--v2);font-size:11px;margin:0 4px 4px 0}
     .tool{display:flex;flex-direction:column;gap:6px}
-    .tool .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:16px;background:linear-gradient(135deg,rgba(182,145,254,.35),rgba(124,58,237,.2))}
+    .tool .ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(182,145,254,.3),rgba(124,58,237,.12));box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+    .tool .ic img{width:32px;height:32px;object-fit:contain;filter:grayscale(1) brightness(1.2) sepia(1) hue-rotate(215deg) saturate(3)}
+    .tool .soon-b{align-self:flex-start;font-size:10px;padding:3px 7px;border-radius:100px;background:linear-gradient(135deg,#8b5cf6,#c026d3);color:#fff;font-weight:600}
     .tour-cap{position:absolute;left:clamp(16px,5vw,70px);bottom:clamp(24px,7vh,70px);z-index:300;width:min(380px,calc(100% - 32px));padding:24px 26px;border-radius:24px}
     .tour-cap .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--v2);font-weight:600}
     .tour-cap h3{font-size:28px;letter-spacing:-.03em;margin:8px 0 8px;line-height:1.05}
@@ -286,7 +302,7 @@
     .gallery .g-d{grid-row:span 2}
 
     /* ─── ICÔNES 3D ─── */
-    .ico3d{width:84px;height:84px;object-fit:contain;filter:drop-shadow(0 14px 26px rgba(124,58,237,.45));animation:bob 5s ease-in-out infinite;transition:transform .5s var(--ease)}
+    .ico3d{width:84px;height:84px;object-fit:contain;filter:grayscale(1) brightness(1.15) contrast(1.1) sepia(1) hue-rotate(215deg) saturate(3.2) drop-shadow(0 12px 22px rgba(139,92,246,.6));animation:bob 5s ease-in-out infinite;transition:transform .5s var(--ease)}
     .rv:not(.in) .ico3d{transform:scale(.4) rotate(-20deg);opacity:0}
     .rv.in .ico3d{transition:transform .9s cubic-bezier(.34,1.56,.64,1) .25s,opacity .5s .25s}
     *:hover>.top .ico3d,.case:hover .ico3d{transform:scale(1.12) rotate(-8deg)}
@@ -305,9 +321,65 @@
     .founders .ph{aspect-ratio:4/5}
     .founders h4{font-size:24px}
     .founders p{font-size:15px}
-    .crew{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .crew{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
     .crew h4{font-size:16px}
     .crew p{font-size:13px}
+    .icon-tile{width:92px;height:92px;flex-shrink:0;border-radius:26px;display:grid;place-items:center;
+      background:radial-gradient(circle at 50% 65%,rgba(182,145,254,.35),transparent 70%),linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.02));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 0 0 1px rgba(255,255,255,.08),0 20px 40px -18px rgba(124,58,237,.6)}
+    .icon-tile .ico3d{width:62px;height:62px}
+
+    /* ─── OFFRES v2 ─── */
+    .offer-main{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;padding:clamp(26px,3.4vw,44px);border-radius:var(--r-xl);
+      background:radial-gradient(90% 90% at 0% 0%,rgba(139,92,246,.32),transparent 60%),radial-gradient(60% 60% at 100% 100%,rgba(217,70,239,.14),transparent 70%),linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.025));
+      box-shadow:0 50px 120px -40px rgba(139,92,246,.65),inset 0 1px 0 rgba(255,255,255,.3)}
+    .om-head{display:flex;align-items:center;gap:18px}
+    .om-head h3,.offer-alt h3{font-size:clamp(32px,3.6vw,46px);letter-spacing:-.045em;line-height:1;margin-top:8px}
+    .om-head h3 em.s{color:var(--v2)}
+    .feat-tag{color:#fff!important;background:linear-gradient(135deg,#8b5cf6,#c026d3)!important;box-shadow:0 0 20px rgba(192,38,211,.5)!important}
+    .promise{font-size:clamp(19px,1.8vw,23px);line-height:1.35;letter-spacing:-.02em;margin:22px 0 18px;color:#fff;font-weight:500}
+    .fit{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:22px}
+    .fit b{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--v2);margin-right:4px}
+    .fit span{font-size:14px;padding:7px 12px;border-radius:100px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+    .incl{list-style:none;display:grid;gap:12px 22px;margin-bottom:28px}
+    .incl.two{grid-template-columns:1fr 1fr}
+    .incl li{display:flex;gap:10px;font-size:16px;line-height:1.4;color:rgba(255,255,255,.9)}
+    .incl li::before{content:'✓';flex:0 0 22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff;background:linear-gradient(135deg,#a78bfa,#6d28d9);box-shadow:0 0 12px rgba(139,92,246,.5)}
+    .om-right{display:flex;flex-direction:column;gap:12px;justify-content:center}
+    .tl{display:flex;gap:14px;align-items:center;padding:16px 18px;border-radius:20px;background:rgba(5,5,7,.45);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+    .tl .when{flex-shrink:0;width:86px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--v2)}
+    .tl b{display:block;font-size:17px;letter-spacing:-.02em}
+    .tl span{font-size:14px;color:var(--muted)}
+    .tl:nth-child(2){margin-left:22px}.tl:nth-child(3){margin-left:44px}
+    .coachs{display:flex;align-items:center;gap:12px;margin-top:6px;padding:12px 16px;border-radius:18px;background:rgba(255,255,255,.04)}
+    .coachs img{width:40px;height:40px;border-radius:50%;object-fit:cover;margin-left:-12px;border:2px solid #120d1d;background:#b691fe}
+    .coachs img:first-child{margin-left:0}
+    .coachs span{font-size:14px;color:var(--muted)}.coachs span b{color:#fff}
+    .offers-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .offer-alt{padding:clamp(24px,3vw,36px);border-radius:var(--r-xl);display:flex;flex-direction:column}
+    .offer-alt .promise{font-size:19px}
+    .offer-alt .btn{margin-top:auto;width:100%}
+
+    /* ─── MARQUES v2 ─── */
+    .browser{border-radius:18px;overflow:hidden;background:#0c0b10;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 30px 60px -30px rgba(0,0,0,.8)}
+    .browser .bb{display:flex;align-items:center;gap:6px;padding:10px 12px;background:rgba(255,255,255,.05)}
+    .browser .bb i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.2)}
+    .browser .bb span{margin-left:10px;font-size:12px;color:var(--muted);padding:3px 10px;border-radius:8px;background:rgba(0,0,0,.35)}
+    .browser img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;transition:transform 1.2s var(--ease)}
+    .bcard:hover .browser img{transform:scale(1.04)}
+    .bcard{padding:12px;border-radius:var(--r-lg);display:flex;flex-direction:column}
+    .bc-body{padding:18px 10px 8px}
+    .bc-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .bc-top h4{font-size:22px;letter-spacing:-.03em}
+    .bc-top span{font-size:12px;color:var(--v2);padding:5px 10px;border-radius:100px;background:rgba(182,145,254,.12)}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+    .metrics div{padding:12px 10px;border-radius:14px;background:rgba(0,0,0,.3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+    .metrics b{display:block;white-space:nowrap;font-size:clamp(19px,1.75vw,25px);letter-spacing:-.04em;line-height:1;background:linear-gradient(95deg,#fff,#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .metrics span{display:block;font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.3}
+
+    /* ─── GALERIE CHINE ─── */
+    .gallery video{width:100%;height:116%;object-fit:cover;will-change:transform}
+
     /* titres mot par mot */
     .w{display:inline-block;opacity:0;transform:translateY(.45em) rotate(3deg);transition:opacity .7s var(--ease),transform .9s var(--ease)}
     .in .w,.w.in{opacity:1;transform:none}
@@ -410,7 +482,10 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width:1080px){
       .founders{grid-template-columns:repeat(3,1fr)}.crew{grid-template-columns:repeat(3,1fr)}
+      .brands{grid-template-columns:1fr!important}.brands .bcard:last-child{grid-column:auto!important}
       .cases{grid-template-columns:1fr}
+      .offer-main{grid-template-columns:1fr}.offers-duo{grid-template-columns:1fr}
+      .tl:nth-child(n){margin-left:0}
       .nav-links,.nav-in>.btn{display:none}
       .burger{display:flex}
       .fc-sales,.fc-coach{display:none}
@@ -429,6 +504,8 @@
     }
     @media (max-width:640px){
       .founders{grid-template-columns:1fr}.crew{grid-template-columns:1fr 1fr}
+      .incl.two{grid-template-columns:1fr}.metrics b{font-size:22px}
+      .tour-nav{top:74px!important}.tour-nav button{padding:8px 11px!important;font-size:12px!important}
       .ico3d{width:64px;height:64px}
       .hero{padding-block:120px 0;min-height:860px}
       .t-com,.t-live{grid-column:span 12}
@@ -575,9 +652,9 @@
               <p>Tu apprends sur des cas réels : ce qui a été fait, dans quel ordre, et les chiffres obtenus. Puis tu l'appliques sur ta boutique.</p>
             </div>
             <div class="vis"><div class="cases">
-              <div class="case"><img class="ico3d" src="assets/3d/feu.png" alt=""><b>25 205 €</b><span>en 24 h avec un lancement préparé en 10 jours</span></div>
-              <div class="case"><img class="ico3d" src="assets/3d/sac-argent.png" alt="" style="animation-delay:-2s"><b>53 000 €</b><span>en 48 h sur une promo, 16 % de conversion</span></div>
-              <div class="case"><img class="ico3d" src="assets/3d/fusee.png" alt="" style="animation-delay:-3.5s"><b>10 693 €</b><span>en une journée, plus de 150 commandes</span></div>
+              <div class="case"><img class="ico3d" src="assets/3d/sablier.png" alt=""><b>25 205 €</b><span>en 24 h avec un lancement préparé en 10 jours</span></div>
+              <div class="case"><img class="ico3d" src="assets/3d/argent-ailes.png" alt="" style="animation-delay:-2s"><b>53 000 €</b><span>en 48 h sur une promo, 16 % de conversion</span></div>
+              <div class="case"><img class="ico3d" src="assets/3d/cible.png" alt="" style="animation-delay:-3.5s"><b>10 693 €</b><span>en une journée, plus de 150 commandes</span></div>
             </div></div>
           </article>
 
@@ -629,7 +706,7 @@
             <div class="body" style="display:flex;gap:20px;align-items:center;justify-content:space-between">
               <div><h3>Du fournisseur à <em class="s">ta propre marque.</em></h3>
               <p>Agents de confiance, négociation, packaging personnalisé. On t'aide à sortir d'AliExpress.</p></div>
-              <img class="ico3d" src="assets/3d/colis.png" alt="" style="width:110px;height:110px;flex-shrink:0">
+              <span class="icon-tile" style="width:120px;height:120px"><img class="ico3d" src="assets/3d/poignee.png" alt="" style="width:84px;height:84px"></span>
             </div>
           </article>
         </div>
@@ -639,7 +716,9 @@
     <!-- ═══ ROOM TOUR 3D ═══ -->
     <section class="tour" id="tour" aria-label="Visite de l'académie">
       <div class="tour-sticky">
-        <div class="tour-bg" aria-hidden="true"></div>
+        <div class="tour-bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="tour-nav glass blur" id="tourNav"><button class="on"><b>01</b>Accueil</button><button><b>02</b>Formations</button><button><b>03</b>Lives</button><button><b>04</b>Communauté</button><button><b>05</b>Outils</button></div>
+        <div class="tour-prog" id="tourProg"></div>
         <div class="floor" aria-hidden="true"></div>
         <div class="tour-head" id="tourHead">
           <span class="eyebrow">Visite guidée</span>
@@ -686,11 +765,11 @@
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a class="on"><i></i>Lives</a><a><i></i>Communauté</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
             <main>
-              <div class="player"><span class="lb">EN DIRECT</span><span class="pt">Live : on analyse vos boutiques en direct</span></div>
+              <div class="player"><video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" autoplay muted loop playsinline preload="none"></video><span class="lb">EN DIRECT</span><span class="pt">Hugo en live depuis Canton</span></div>
               <div class="g3">
                 <div class="card"><div class="muted">Replay</div><b style="color:#fff">25 205 € en 24 h, le lancement décortiqué</b></div>
                 <div class="card"><div class="muted">Replay</div><b style="color:#fff">Meta Ads : les créas qui marchent en 2026</b></div>
-                <div class="card"><div class="muted">Replay</div><b style="color:#fff">Q&A sourcing Chine</b></div>
+                <div class="card"><div class="muted">Replay</div><b style="color:#fff">Questions sourcing Chine</b></div>
               </div>
             </main>
           </div>
@@ -714,14 +793,14 @@
           <div class="scr">
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Communauté</a><a class="on"><i></i>Outils</a><div class="me"><b>K</b>Karim · Élite</div></aside>
             <main>
-              <div><h5>Boîte à outils</h5><div class="muted">Inclus dans ton accès</div></div>
+              <div><h5>Outils</h5><div class="muted">Tout est inclus dans ton accès</div></div>
               <div class="g3">
-                <div class="card tool"><span class="ic">🔍</span><b style="color:#fff">Analyse de site</b><span class="muted">Illimitée, retour sous 48 h</span></div>
-                <div class="card tool"><span class="ic">🧮</span><b style="color:#fff">Calculateur de marge</b><span class="muted">Prix, CPA, rentabilité</span></div>
-                <div class="card tool"><span class="ic">✨</span><b style="color:#fff">Prompts ChatGPT</b><span class="muted">Fiches produit, pubs, emails</span></div>
-                <div class="card tool"><span class="ic">📈</span><b style="color:#fff">Minea</b><span class="muted">Espionnage publicitaire</span></div>
-                <div class="card tool"><span class="ic">🛍️</span><b style="color:#fff">Copyfy</b><span class="muted">Boutiques gagnantes</span></div>
-                <div class="card tool"><span class="ic">📦</span><b style="color:#fff">Agents Chine</b><span class="muted">Nos contacts sourcing</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/laptop.png" alt=""></span><b style="color:#fff">SaaS MADE</b><span class="muted">Notre outil maison pour piloter ta boutique</span><span class="soon-b">Bientôt</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/courbe.png" alt=""></span><b style="color:#fff">TrendTrack</b><span class="muted">Trouve les produits et pubs qui marchent</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/loupe.png" alt=""></span><b style="color:#fff">Analyse de site</b><span class="muted">Ta boutique relue par l'équipe</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/sablier.png" alt=""></span><b style="color:#fff">Calculateur de marge</b><span class="muted">Prix, coûts, rentabilité</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/baguette.png" alt=""></span><b style="color:#fff">Prompts IA</b><span class="muted">Fiches produit, pubs, emails</span></div>
+                <div class="card tool"><span class="ic"><img src="assets/3d/poignee.png" alt=""></span><b style="color:#fff">Agents Chine</b><span class="muted">Nos contacts sourcing</span></div>
               </div>
             </main>
           </div>
@@ -753,7 +832,7 @@
         </div>
 
         <div class="road" id="road-deb">
-          <div class="step glass tilt rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/eclair.png" alt=""></div><h4>Le bon point de départ</h4><p>Ton budget, ton temps, ton objectif. On choisit un modèle qui tient avec ta vraie vie.</p></div>
+          <div class="step glass tilt rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/boussole.png" alt=""></div><h4>Le bon point de départ</h4><p>Ton budget, ton temps, ton objectif. On choisit un modèle qui tient avec ta vraie vie.</p></div>
           <div class="step glass tilt rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/loupe.png" alt=""></div><h4>Le produit qui se vend</h4><p>Une vraie marge, une vraie demande. On valide avant que tu dépenses un euro en pub.</p></div>
           <div class="step glass tilt rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/gemme.png" alt=""></div><h4>Une marque, pas un catalogue</h4><p>Nom, identité, boutique qui convertit et fournisseur fiable.</p></div>
           <div class="step glass tilt rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/fusee.png" alt=""></div><h4>Tes premières ventes</h4><p>Créas, campagnes, premiers chiffres. On les lit ensemble.</p></div>
@@ -761,12 +840,12 @@
           <div class="step glass tilt rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/couronne.png" alt=""></div><h4>Une activité qui tient</h4><p>Scale, process, délégation. Ta marque tourne sans toi au quotidien.</p></div>
         </div>
         <div class="road" id="road-conf" hidden>
-          <div class="step glass rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/loupe.png" alt=""></div><h4>Audit complet</h4><p>Boutique, pubs, marges, supply : on trouve ce qui bloque.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/trading.png" alt=""></div><h4>Les fondamentaux</h4><p>Offre, conversion, panier moyen : on renforce ce qui porte ton chiffre.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/fuse.png" alt=""></div><h4>Le plan de scale</h4><p>Créas et budgets pour passer le palier suivant sans perdre en rentabilité.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/colis.png" alt=""></div><h4>Ta propre marque</h4><p>Sourcing direct, packaging, stock : tu reprends la main sur tes marges.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/chat.png" alt=""></div><h4>Un système qui tourne</h4><p>Process, SAV, équipe : l'activité avance sans toi au quotidien.</p></div>
-          <div class="step glass rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/trophee.png" alt=""></div><h4>Le palier d'après</h4><p>Nouveaux marchés, nouveaux canaux, nouvelles gammes.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">01</span><img class="ico3d" src="assets/3d/cerveau.png" alt=""></div><h4>Audit complet</h4><p>Boutique, pubs, marges, supply : on trouve ce qui bloque.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">02</span><img class="ico3d" src="assets/3d/engrenage.png" alt=""></div><h4>Les fondamentaux</h4><p>Offre, conversion, panier moyen : on renforce ce qui porte ton chiffre.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">03</span><img class="ico3d" src="assets/3d/cible.png" alt=""></div><h4>Le plan de scale</h4><p>Créas et budgets pour passer le palier suivant sans perdre en rentabilité.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">04</span><img class="ico3d" src="assets/3d/sacs.png" alt=""></div><h4>Ta propre marque</h4><p>Sourcing direct, packaging, stock : tu reprends la main sur tes marges.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">05</span><img class="ico3d" src="assets/3d/robot.png" alt=""></div><h4>Un système qui tourne</h4><p>Process, SAV, équipe : l'activité avance sans toi au quotidien.</p></div>
+          <div class="step glass rv"><div class="top"><span class="i">06</span><img class="ico3d" src="assets/3d/etoile.png" alt=""></div><h4>Le palier d'après</h4><p>Nouveaux marchés, nouveaux canaux, nouvelles gammes.</p></div>
         </div>
       </div>
     </section>
@@ -778,7 +857,7 @@
         <div class="head-c">
           <span class="eyebrow rv">L'équipe</span>
           <h2 class="rv">Ceux qui font. <em class="s">Et qui t'apprennent.</em></h2>
-          <p class="sub rv">Trois cofondateurs et une équipe qui gère chaque jour les pubs, les sites et les créas de marques. Ce sont eux qui te coachent.</p>
+          <p class="sub rv">Trois cofondateurs et une grande équipe qui gère chaque jour les pubs, les sites et les créas de marques. Ce sont eux qui te coachent.</p>
         </div>
         <div class="team-label rv">Les cofondateurs</div>
         <div class="founders">
@@ -786,13 +865,14 @@
           <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Guillaume.jpg" alt="Guillaume" loading="lazy"></div><h4>Guillaume</h4><p>Cofondateur · Site & conversion</p></div>
           <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/TheoG.jpg" alt="Théo" loading="lazy"></div><h4>Théo</h4><p>Cofondateur · Publicité & scale</p></div>
         </div>
-        <div class="team-label rv">Collaborateurs & coachs</div>
+        <div class="team-label rv">Toute l'équipe</div>
         <div class="crew">
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Mailis.jpg" alt="Mailis" loading="lazy"></div><h4>Mailis</h4><p>Creative strategist</p></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lionel.jpg" alt="Lionel" loading="lazy"></div><h4>Lionel</h4><p>Directeur commercial</p></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Delphine.jpg" alt="Delphine" loading="lazy"></div><h4>Delphine</h4><p>Community manager</p></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lola.jpg" alt="Lola" loading="lazy"></div><h4>Lola</h4><p>Graphiste</p></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/HugoM.jpg" alt="Hugo M." loading="lazy"></div><h4>Hugo M.</h4><p>Web designer</p></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Marvin.jpg" alt="Marvin" loading="lazy" onerror="this.style.visibility='hidden'"></div><h4>Marvin</h4><p>Coach</p></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Mailis.jpg" alt="Mailis" loading="lazy"></div><h4>Mailis</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lionel.jpg" alt="Lionel" loading="lazy"></div><h4>Lionel</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Delphine.jpg" alt="Delphine" loading="lazy"></div><h4>Delphine</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lola.jpg" alt="Lola" loading="lazy"></div><h4>Lola</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/HugoM.jpg" alt="Hugo M." loading="lazy"></div><h4>Hugo M.</h4></div>
         </div>
       </div>
     </section>
@@ -806,9 +886,21 @@
           <p class="sub rv">Ce qu'on t'enseigne, on l'applique tous les jours pour les marques qu'on accompagne.</p>
         </div>
         <div class="brands">
-          <div class="brand-card glass rv"><img src="assets/made/projects/project11.jpg" alt="Campagne Arabian Musk" loading="lazy"><div><h4>Arabian Musk</h4><p>Refonte ecommerce et acquisition Meta, TikTok, Google</p></div></div>
-          <div class="brand-card glass rv"><img src="assets/made/projects/project4.jpg" alt="Shooting marque" loading="lazy"><div><h4>Shooting & créas</h4><p>Direction artistique et contenus publicitaires</p></div></div>
-          <div class="brand-card glass rv"><img src="assets/made/projects/project6.jpg" alt="Visuel produit 3D" loading="lazy"><div><h4>Visuels produit</h4><p>Créas 3D et motion pour les pubs</p></div></div>
+          <div class="bcard glass tilt rv">
+            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>beautymarts.fr</span></div><img src="assets/made/sites/beautymarts.jpg" alt="Site Beauty Mart's" loading="lazy"></div>
+            <div class="bc-body"><div class="bc-top"><h4>Beauty Mart's</h4><span>Beauté</span></div>
+              <div class="metrics"><div><b>+1&nbsp;M€</b><span>de CA généré</span></div><div><b>+50&nbsp;k€</b><span>en 7 jours au lancement</span></div><div><b>7&nbsp;%</b><span>de taux de conversion</span></div></div></div>
+          </div>
+          <div class="bcard glass tilt rv">
+            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>scorekeys.shop</span></div><img src="assets/made/sites/scorekeys.jpg" alt="Site ScoreKeys" loading="lazy"></div>
+            <div class="bc-body"><div class="bc-top"><h4>ScoreKeys</h4><span>Ecommerce</span></div>
+              <div class="metrics"><div><b>+250&nbsp;%</b><span>de taux de conversion</span></div><div><b>+200&nbsp;%</b><span>de CA mensuel</span></div><div><b>x1,5</b><span>sur le panier moyen</span></div></div></div>
+          </div>
+          <div class="bcard glass tilt rv">
+            <div class="browser"><div class="bb"><i></i><i></i><i></i><span>Unik Journal</span></div><img src="assets/made/projects/project5.jpg" alt="Unik Journal" loading="lazy" style="object-position:center"></div>
+            <div class="bc-body"><div class="bc-top"><h4>Unik Journal</h4><span>Marque</span></div>
+              <div class="metrics"><div><b>300&nbsp;k</b><span>visiteurs par mois</span></div><div><b>100&nbsp;%</b><span>direction artistique sur mesure</span></div><div><b>Monde</b><span>lancement international</span></div></div></div>
+          </div>
         </div>
       </div>
       <div class="logos rv" aria-label="Marques accompagnées">
@@ -818,50 +910,57 @@
 
     <!-- ═══ OFFRES ═══ -->
     <section id="offres" style="padding-top:0">
-      <img class="p3d" data-depth="-.3" src="assets/globe/sac2.png" alt="" style="width:140px;left:3%;top:4%">
+      <img class="p3d" data-depth="-.2" src="assets/globe/sac2.png" alt="" style="width:130px;right:4%;top:14%">
       <div class="wrap">
         <div class="head-c">
           <span class="eyebrow rv">Les programmes</span>
-          <h2 class="rv">Choisis ton <em class="s">niveau d'accompagnement.</em></h2>
+          <h2 class="rv">Trois façons <em class="s">d'avancer.</em></h2>
           <p class="sub rv">Tous les parcours commencent par un appel. On regarde ton projet et on te conseille celui qui a du sens.</p>
         </div>
         <!-- TODO: contenu des offres à finaliser (réunion offres) -->
-        <div class="offers">
-          <article class="offer glass tilt rv">
-            <span class="tag">En autonomie</span>
-            <h3>Formation</h3>
-            <p class="for">Tu veux la méthode complète et avancer à ton rythme.</p>
-            <ul>
+        <article class="offer-main glass rv">
+          <div>
+            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/poignee.png" alt=""></span><div><span class="tag feat-tag">Le plus choisi</span><h3>Coaching <em class="s">1:1</em></h3></div></div>
+            <p class="promise">On construit ta marque avec toi, semaine après semaine, jusqu'à ce qu'elle tourne.</p>
+            <div class="fit"><b>Pour toi si</b><span>tu veux aller vite</span><span>tu as un budget à investir</span><span>tu veux éviter les erreurs coûteuses</span></div>
+            <ul class="incl two">
+              <li>Un coach dédié et un point chaque semaine</li>
+              <li>Ton plan d'action personnalisé</li>
+              <li>Analyses de ta boutique illimitées</li>
+              <li>Formation « Créer une marque à succès »</li>
+              <li>Toute la formation et les lives</li>
+              <li>Accompagnement privé à vie</li>
+            </ul>
+            <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel <span class="arr">→</span></a>
+          </div>
+          <div class="om-right">
+            <div class="tl"><span class="when">Semaine 1</span><div><b>Audit et plan d'action</b><span>On part de ta situation réelle</span></div></div>
+            <div class="tl"><span class="when">Mois 1</span><div><b>Tes premières ventes</b><span>Produit validé, boutique en ligne, pubs lancées</span></div></div>
+            <div class="tl"><span class="when">Mois 3</span><div><b>Une marque qui scale</b><span>Budgets, créas et sourcing optimisés</span></div></div>
+            <div class="coachs"><img src="assets/made/team/HugoB.jpg" alt=""><img src="assets/made/team/Guillaume.jpg" alt=""><img src="assets/made/team/TheoG.jpg" alt=""><span><b>Hugo, Guillaume et Théo</b> et l'équipe</span></div>
+          </div>
+        </article>
+        <div class="offers-duo">
+          <article class="offer-alt glass tilt rv">
+            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/ampoule.png" alt=""></span><div><span class="tag">En autonomie</span><h3>Formation</h3></div></div>
+            <p class="promise">La méthode complète, à ton rythme.</p>
+            <div class="fit"><b>Pour toi si</b><span>tu débutes</span><span>tu préfères avancer seul</span></div>
+            <ul class="incl">
               <li>La formation complète, pas à pas</li>
               <li>Lives chaque semaine et replays</li>
               <li>Tips quotidiens et actus ecommerce</li>
-              <li>Accès au salon questions et réponses</li>
+              <li>Accès à la communauté</li>
             </ul>
             <a href="#appel" class="btn btn-ghost btn-lg">Réserver un appel</a>
           </article>
-
-          <article class="offer glass feat tilt rv">
-            <span class="tag">Le plus choisi</span>
-            <h3>Coaching <em class="s">1:1</em></h3>
-            <p class="for">Tu veux aller vite, sans erreurs coûteuses, avec quelqu'un à tes côtés.</p>
-            <ul>
-              <li>Accompagnement privé à vie</li>
-              <li>Formation « Créer une marque à succès »</li>
-              <li>Études de cas détaillées</li>
-              <li>Analyses de site illimitées</li>
-              <li>Tout le contenu de la formation</li>
-            </ul>
-            <a href="#appel" class="btn btn-neon btn-lg">Réserver un appel <span class="arr">→</span></a>
-          </article>
-
-          <article class="offer glass tilt rv">
-            <span class="tag">Outils</span>
-            <h3>Plateforme</h3>
-            <p class="for">Tu as déjà une boutique et tu veux les bons outils au quotidien.</p>
-            <ul>
-              <li>Boîte à outils (Minea, Copyfy…)</li>
-              <li>Prompts ChatGPT prêts à l'emploi</li>
-              <li>Suivi de progression</li>
+          <article class="offer-alt glass tilt rv">
+            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/laptop.png" alt=""></span><div><span class="tag">Outils</span><h3>Plateforme</h3></div></div>
+            <p class="promise">Les bons outils pour piloter ta boutique.</p>
+            <div class="fit"><b>Pour toi si</b><span>tu as déjà une boutique</span><span>tu veux gagner du temps</span></div>
+            <ul class="incl">
+              <li>TrendTrack pour trouver ce qui marche</li>
+              <li>Notre SaaS MADE (bientôt)</li>
+              <li>Prompts IA prêts à l'emploi</li>
               <li>Nouvelles fonctionnalités chaque mois</li>
             </ul>
             <a href="#appel" class="btn btn-ghost btn-lg">Réserver un appel</a>
@@ -902,12 +1001,12 @@
           </a>
         </div>
         <div class="gallery">
-          <figure class="g-a rv"><img data-par src="assets/chine/p6861.jpg" alt="Hugo devant la Canton Tower" loading="lazy"><figcaption>Canton Tower</figcaption></figure>
-          <figure class="rv"><img data-par src="assets/chine/p6829.jpg" alt="Canton Tower illuminée" loading="lazy"></figure>
-          <figure class="rv"><img data-par src="assets/chine/p6776.jpg" alt="Passerelle lumineuse à Canton" loading="lazy"></figure>
-          <figure class="g-d rv"><img data-par src="assets/chine/p6612.jpg" alt="Quais de la rivière des Perles" loading="lazy"><figcaption>Rivière des Perles</figcaption></figure>
-          <figure class="rv"><img data-par src="assets/chine/p6834.jpg" alt="Skyline de Zhujiang New Town" loading="lazy"></figure>
-          <figure class="rv"><img data-par src="assets/chine/p5140.jpg" alt="Lanternes rouges" loading="lazy"></figure>
+          <figure class="g-a rv"><video data-par src="assets/chine/hugo-mall.mp4" poster="assets/chine/hugo-mall.jpg" autoplay muted loop playsinline preload="none"></video><figcaption>Visite de fournisseurs</figcaption></figure>
+          <figure class="rv"><video data-par src="assets/chine/textile.mp4" poster="assets/chine/textile.jpg" autoplay muted loop playsinline preload="none"></video><figcaption>Textile</figcaption></figure>
+          <figure class="rv"><video data-par src="assets/chine/showroom.mp4" poster="assets/chine/showroom.jpg" autoplay muted loop playsinline preload="none"></video><figcaption>Showroom</figcaption></figure>
+          <figure class="g-d rv"><video data-par src="assets/chine/hugo-fournisseur.mp4" poster="assets/chine/hugo-fournisseur.jpg" autoplay muted loop playsinline preload="none"></video><figcaption>Chez un fabricant</figcaption></figure>
+          <figure class="rv"><img data-par src="assets/chine/p6861.jpg" alt="Hugo devant la Canton Tower" loading="lazy"><figcaption>Canton Tower</figcaption></figure>
+          <figure class="rv"><video data-par src="assets/chine/hugo-nuit.mp4" poster="assets/chine/hugo-nuit.jpg" autoplay muted loop playsinline preload="none"></video><figcaption>Canton, le soir</figcaption></figure>
         </div>
       </div>
     </section>
@@ -976,7 +1075,7 @@
       ['Formations', 'Pas à pas, dans l\'ordre', 'Des bases à ta propre marque, avec une action concrète à chaque module.'],
       ['Lives', 'En direct chaque semaine', 'Tes questions, ta boutique analysée, et tous les replays.'],
       ['Communauté', '+230 membres', 'Pose tes questions, partage tes ventes, récupère les tips du jour.'],
-      ['Outils', 'Ta boîte à outils', 'Analyses de site, calculateur de marge, prompts et contacts sourcing.']
+      ['Outils', 'TrendTrack et notre SaaS', 'TrendTrack pour trouver ce qui marche, et notre propre outil pour piloter ta boutique.']
     ];
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const vh = () => window.innerHeight;
@@ -999,7 +1098,13 @@
     const tour = document.getElementById('tour');
     const panels = [...tour.querySelectorAll('.panel')];
     const head = document.getElementById('tourHead');
-    const floor = tour.querySelector('.floor'), tbg = tour.querySelector('.tour-bg');
+    const floor = tour.querySelector('.floor'), orbs = [...tour.querySelectorAll('.tour-bg i')];
+    const navBtns = [...document.querySelectorAll('#tourNav button')], prog = document.getElementById('tourProg');
+    navBtns.forEach((b, i) => b.addEventListener('click', () => {
+      const total = tour.offsetHeight - vh();
+      const y = tour.offsetTop + total * Math.min(1, (i + .15) / (panels.length - .6));
+      lenis ? lenis.scrollTo(y, { duration: 1.6 }) : window.scrollTo({ top: y, behavior: 'smooth' });
+    }));
     const capText = document.getElementById('capText'), dots = [...document.querySelectorAll('#capDots i')];
     const GAP = 1500;
     let capIdx = 0;
@@ -1022,7 +1127,8 @@
         el.style.transform = `translate3d(${x.toFixed(1)}px, ${(Math.sin(d * 1.3) * 16).toFixed(1)}px, ${z.toFixed(1)}px) rotateY(${ry.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
       });
       floor.style.setProperty('--fy', (t * 400).toFixed(1) + 'px');
-      tbg.style.setProperty('--bgs', (1.15 + p * .25).toFixed(3));
+      orbs.forEach((o, k) => o.style.setProperty('--oy', (-p * (80 + k * 60)).toFixed(1) + 'px'));
+      prog.style.width = (p * 100).toFixed(2) + '%';
       head.style.opacity = Math.max(0, 1 - p * 7).toFixed(2);
       const idx = Math.min(panels.length - 1, Math.max(0, Math.round(t)));
       if (idx !== capIdx) {
@@ -1036,6 +1142,7 @@
           capText.style.opacity = 1;
         }, 180);
         dots.forEach((dt, j) => dt.classList.toggle('on', j === idx));
+        navBtns.forEach((b, j) => b.classList.toggle('on', j === idx));
       }
     }
 
@@ -1108,7 +1215,7 @@
       const html = list.map(n => `<figure class="glass"><img src="assets/resultats/${n}.jpg" alt="Résultat élève, tableau de ventes Shopify" decoding="async" width="560" height="533"></figure>`).join('');
       document.getElementById(id).innerHTML = html + html;
     });
-    const logos = Array.from({ length: 11 }, (_, i) => `<img src="assets/made/partners/p${i + 1}.png" alt="" loading="lazy" width="138" height="46">`).join('');
+    const logos = [1,2,3,4,5,7,8,10,11].map(i => `<img src="assets/made/partners/p${i}.png" alt="" loading="lazy" width="138" height="46">`).join('') + '<img src="assets/made/partners/beautymarts.png" alt="Beauty Mart\'s" loading="lazy" style="height:26px">';
     document.getElementById('logos').innerHTML = logos + logos;
 
     /* ─── Menu mobile ─── */
