@@ -15,7 +15,7 @@
   <link rel="icon" href="assets/globe/sac1.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Anton&family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#050507;
@@ -27,7 +27,7 @@
       --cyan:#5eead4;
       --r-xl:34px; --r-lg:26px; --r-md:18px;
       --ease:cubic-bezier(.22,1,.36,1);
-      --serif:'Instrument Serif',Georgia,serif;
+      --display:'Anton','Arial Narrow',Impact,sans-serif;
       --sans:'Inter Tight',system-ui,-apple-system,sans-serif;
       --bebas:'Bebas Neue','Arial Narrow',sans-serif;
     }
@@ -41,7 +41,7 @@
     a{color:inherit;text-decoration:none}
     img,video{max-width:100%;display:block}
     .wrap{max-width:1240px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
-    em.s{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
+    em.s{font-style:normal;color:var(--made)}
 
     /* ─── AMBIANCE (statique = scroll fluide) ─── */
     .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;
@@ -73,7 +73,8 @@
     .nav-in{display:flex;align-items:center;gap:8px;width:100%;max-width:1160px;height:60px;padding:0 8px 0 20px;border-radius:100px}
     .logo{display:flex;align-items:center;gap:9px;white-space:nowrap}
     .logo svg{height:19px;width:auto;fill:#fff}
-    .logo small{font-family:var(--serif);font-style:italic;font-weight:400;font-size:19px;color:var(--made);line-height:1}
+    .logo small{font-family:var(--display);font-size:13px;letter-spacing:.14em;color:var(--made);line-height:1;padding-top:3px}
+    .logo .dot{width:5px;height:5px;border-radius:50%;background:var(--made);margin:0 4px 0 -6px;align-self:flex-end;margin-bottom:5px}
     .nav-links{display:flex;gap:2px;margin-left:auto}
     .nav-links a{font-size:14px;font-weight:500;color:rgba(255,255,255,.62);padding:9px 12px;border-radius:100px;transition:color .2s,background .2s}
     .nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
@@ -428,7 +429,7 @@
     .tabs button.on{color:#fff;background:rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
     .road{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
     .step{padding:28px;border-radius:var(--r-md);min-height:230px;display:flex;flex-direction:column}
-    .step .i{font-family:var(--serif);font-style:italic;font-size:44px;line-height:1;color:var(--v2)}
+    .step .i{font-family:var(--display);font-size:40px;line-height:1;color:var(--made)}
     .step h4{font-size:21px;letter-spacing:-.02em;font-weight:600;margin-top:auto;padding-top:26px}
     .step p{color:var(--muted);font-size:15.5px;line-height:1.55;margin-top:8px}
     .road[hidden]{display:none}
@@ -565,6 +566,45 @@
       .tour-cap{padding:18px 20px}.tour-cap h3{font-size:22px}.tour-cap p{font-size:14px}
       .p3d{display:none}
     }
+    /* ═══════════ DA MADE (titres condensés, anneaux, filets) ═══════════ */
+    h1,h2,.tile h3,.offer h3,.om-head h3,.offer-alt h3,.china h3,.stat .n,.num-big,.bc-top h4,.member h4,.case b,.metrics b,.tour-cap h3,.t-big{font-family:var(--display);font-weight:400;letter-spacing:.2px}
+    h1{font-size:clamp(50px,6.4vw,96px);line-height:.95;text-transform:none;max-width:1200px}
+    h1 em.s{display:block;background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--made);padding:0;font-size:1em}
+    h2{font-size:clamp(40px,5.2vw,72px);line-height:1}
+    .head-c h2::after,.faq-grid h2::after{content:'';display:block;height:1px;width:min(520px,80%);margin:18px auto 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent)}
+    .faq-grid h2::after{margin-left:0;background:linear-gradient(90deg,rgba(255,255,255,.35),transparent)}
+    .tile h3{font-size:clamp(26px,2.4vw,34px);line-height:1.02}
+    .stat .n{font-size:clamp(44px,4.6vw,62px)}
+    .case b{font-size:28px}
+    .member h4{font-size:22px;letter-spacing:.5px}
+    .founders h4{font-size:28px}
+    .metrics b{-webkit-text-fill-color:initial;background:none;color:#fff}
+    .china h3 em.s{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#fca5a5}
+    .eyebrow{font-family:var(--display);font-weight:400;font-size:14px;letter-spacing:.18em}
+    .eyebrow::before{content:'';width:22px;height:1px;background:currentColor}
+    .tag{font-family:var(--display);font-weight:400;letter-spacing:.14em;font-size:12px}
+    .btn{letter-spacing:.01em}
+
+    .hero{min-height:max(100svh,1040px)}
+    .fc-sales,.fc-step{display:none}
+    .fc-coach{bottom:70px;right:max(3vw,calc(50% - 660px))}
+
+    /* anneau 3D signature MADE */
+    .ring{position:absolute;z-index:0;pointer-events:none;aspect-ratio:1;border-radius:50%;
+      background:radial-gradient(closest-side,transparent 55%,rgba(40,36,54,.0) 56%,rgba(58,53,76,.55) 63%,rgba(24,21,34,.9) 72%,rgba(10,9,14,.6) 79%,transparent 81%);
+      transform:rotate(-24deg) scaleY(.82);filter:drop-shadow(0 40px 80px rgba(0,0,0,.6))}
+    .ring::after{content:'';position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 200deg,transparent 0 30%,rgba(182,145,254,.18) 40%,transparent 55%);
+      -webkit-mask:radial-gradient(closest-side,transparent 60%,#000 64%,#000 76%,transparent 80%);mask:radial-gradient(closest-side,transparent 60%,#000 64%,#000 76%,transparent 80%)}
+    section>.wrap,section>.proof{position:relative;z-index:1}
+
+    /* avis élèves */
+    .dms{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start;margin-bottom:40px}
+    .dm{border-radius:22px;overflow:hidden;background:#0d0c12;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 30px 60px -30px rgba(0,0,0,.8);transition:transform .5s var(--ease)}
+    .dm:nth-child(2){margin-top:40px}.dm:nth-child(4){margin-top:24px}
+    .dm:hover{transform:translateY(-6px) rotate(-.6deg)}
+    .dm img{width:100%;height:340px;object-fit:cover;object-position:top}
+    .dm figcaption{padding:14px 16px 16px;font-family:var(--display);font-size:20px;line-height:1.15;color:#fff}
+
     /* ═══════════ MOBILE (refonte) ═══════════ */
     @media (max-width:640px){
       section{padding-block:64px}
@@ -734,6 +774,15 @@
       .t-small{font-size:15.5px}
       .after{grid-template-columns:1fr;margin-top:22px}
 
+      /* DA MADE mobile */
+      h1{font-size:clamp(44px,12.5vw,56px)}
+      h2{font-size:clamp(36px,10vw,44px)}
+      .dms{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 -16px 26px;padding:4px 16px 8px;scrollbar-width:none}
+      .dms::-webkit-scrollbar{display:none}
+      .dm{flex:0 0 70%;scroll-snap-align:start;margin-top:0!important}
+      .dm img{height:300px}
+      .ring{display:none}
+
       /* moins d'infos */
       .marquee,.fc-sales,.fc-coach,.fc-step,.t-com,.t-live,.t-saas{display:none!important}
       .manifesto{padding-block:48px}
@@ -781,7 +830,7 @@
   <!-- ═══ NAV ═══ -->
   <header class="nav">
     <div class="nav-in glass blur">
-      <a href="#top" class="logo" aria-label="MADE Académie"><svg viewBox="-2 0 550 180"><use href="#made-logo"/></svg><small>Académie</small></a>
+      <a href="#top" class="logo" aria-label="MADE Académie"><svg viewBox="-2 0 550 180"><use href="#made-logo"/></svg><i class="dot"></i><small>ACADÉMIE</small></a>
       <nav class="nav-links">
         <a href="#ecosysteme">Programme</a>
         <a href="#tour">L'académie</a>
@@ -876,27 +925,25 @@
 
     <!-- ═══ RÉSULTATS ═══ -->
     <section id="resultats" style="padding-block:70px 20px">
+      <div class="ring" aria-hidden="true" style="width:1100px;left:-420px;top:40px"></div>
       <div class="wrap">
         <div class="head-c">
           <span class="eyebrow rv">Résultats élèves</span>
           <h2 class="rv">Des captures, <em class="s">pas des promesses.</em></h2>
-          <p class="sub rv">Tableaux de ventes réels de boutiques accompagnées.</p>
+          <p class="sub rv">Messages d'élèves et tableaux de ventes réels. Les noms sont masqués.</p>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="dms">
+          <figure class="dm rv"><img src="assets/avis/avis.webp" alt="Avis d'un élève sur la formation" loading="lazy" width="506" height="900"><figcaption>« Franchement je kiffe la formation, les admins sont à l'écoute. »</figcaption></figure>
+          <figure class="dm rv"><img src="assets/avis/roas10.webp" alt="Élève à 10 de ROAS" loading="lazy" width="506" height="900"><figcaption>« Pour 3 € dépensés, on a fait 90 €. »</figcaption></figure>
+          <figure class="dm rv"><img src="assets/avis/accomp2.webp" alt="Élève accompagné sur WhatsApp" loading="lazy" width="457" height="900"><figcaption>« On stabilise les 1k par jour depuis le début. »</figcaption></figure>
+          <figure class="dm rv"><img src="assets/avis/vente1.webp" alt="Première vente d'un élève" loading="lazy" width="750" height="900"><figcaption>« Première vente. »</figcaption></figure>
         </div>
       </div>
       <div class="proof rv">
         <div class="proof-track" id="proof1"></div>
         <div class="proof-track rev" id="proof2"></div>
-      </div>
-    </section>
-
-    <!-- ═══ MANIFESTE ═══ -->
-    <section class="manifesto">
-      <img class="p3d" data-depth=".35" src="assets/globe/sac3.webp" alt="" style="width:170px;left:6%;top:18%">
-      <img class="p3d" data-depth="-.25" src="assets/globe/sac4.webp" alt="" style="width:120px;right:8%;bottom:14%">
-      <div class="wrap">
-        <span class="eyebrow rv">Pourquoi MADE</span>
-        <blockquote class="rv">Les formations t'apprennent à regarder. <span class="dim">Nous, on accompagne des marques depuis 7 ans et on t'accompagne pareil,</span> <em class="s">sur ta boutique, chaque semaine.</em></blockquote>
-        <p class="sig rv">Hugo, Guillaume et Théo, cofondateurs</p>
       </div>
     </section>
 
@@ -992,6 +1039,7 @@
 
     <!-- ═══ ÉQUIPE ═══ -->
     <section id="equipe" style="padding-top:0">
+      <div class="ring" aria-hidden="true" style="width:900px;right:-360px;top:-80px"></div>
       <img class="p3d" data-depth=".3" src="assets/globe/sac1.webp" alt="" style="width:150px;right:4%;top:0">
       <div class="wrap">
         <div class="head-c">
@@ -1014,6 +1062,69 @@
           <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lola.webp" alt="Lola" loading="lazy"></div><h4>Lola</h4></div>
           <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/HugoM.webp" alt="Hugo M." loading="lazy"></div><h4>Hugo M.</h4></div>
         </div>
+      </div>
+    </section>
+
+    <!-- ═══ OFFRES ═══ -->
+    <section id="offres" style="padding-top:0">
+      <div class="ring" aria-hidden="true" style="width:1200px;left:50%;margin-left:-600px;top:-160px;opacity:.8"></div>
+      <img class="p3d" data-depth="-.2" src="assets/globe/sac2.webp" alt="" style="width:130px;right:4%;top:14%">
+      <div class="wrap">
+        <div class="head-c">
+          <span class="eyebrow rv">Les programmes</span>
+          <h2 class="rv">Trois façons <em class="s">d'avancer.</em></h2>
+          <p class="sub rv">Tous les parcours commencent par un appel. On regarde ton projet et on te conseille celui qui a du sens.</p>
+        </div>
+        <!-- TODO: contenu des offres à finaliser (réunion offres) -->
+        <article class="offer-main glass rv">
+          <div>
+            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/poignee.webp" alt=""></span><div><span class="tag feat-tag">Le plus choisi</span><h3>Coaching <em class="s">1:1</em></h3></div></div>
+            <p class="promise">On construit ta marque avec toi, semaine après semaine, jusqu'à ce qu'elle tourne.</p>
+            <div class="fit"><b>Pour toi si</b><span>tu veux aller vite</span><span>tu as un budget à investir</span><span>tu veux éviter les erreurs coûteuses</span></div>
+            <ul class="incl two">
+              <li>Un coach dédié et un point chaque semaine</li>
+              <li>Ton plan d'action personnalisé</li>
+              <li>Analyses de ta boutique illimitées</li>
+              <li>Formation « Créer une marque à succès »</li>
+              <li>Toute la formation et les lives</li>
+              <li>Accompagnement 3 mois</li>
+            </ul>
+            <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel <span class="arr">→</span></a>
+          </div>
+          <div class="om-right">
+            <div class="tl"><span class="when">Semaine 1</span><div><b>Audit et plan d'action</b><span>On part de ta situation réelle</span></div></div>
+            <div class="tl"><span class="when">Mois 1</span><div><b>Tes premières ventes</b><span>Produit validé, boutique en ligne, pubs lancées</span></div></div>
+            <div class="tl"><span class="when">Mois 3</span><div><b>Une marque qui scale</b><span>Budgets, créas et sourcing optimisés</span></div></div>
+            <div class="coachs"><img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/Guillaume.webp" alt=""><img src="assets/made/team/TheoG.webp" alt=""><span><b>Hugo, Guillaume et Théo</b> et l'équipe</span></div>
+          </div>
+        </article>
+        <div class="offers-duo">
+          <article class="offer-alt glass tilt rv">
+            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/ampoule.webp" alt=""></span><div><span class="tag">En autonomie</span><h3>Formation</h3></div></div>
+            <p class="promise">La méthode complète, à ton rythme.</p>
+            <div class="fit"><b>Pour toi si</b><span>tu débutes</span><span>tu préfères avancer seul</span></div>
+            <ul class="incl">
+              <li>La formation complète, pas à pas</li>
+              <li>Lives chaque semaine et replays</li>
+              <li>Tips quotidiens et actus ecommerce</li>
+              <li>Accès à la communauté</li>
+            </ul>
+            <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
+          </article>
+          <article class="offer-alt glass tilt rv">
+            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/laptop.webp" alt=""></span><div><span class="tag">Outils</span><h3>Plateforme</h3></div></div>
+            <p class="promise">Les bons outils pour piloter ta boutique.</p>
+            <div class="fit"><b>Pour toi si</b><span>tu as déjà une boutique</span><span>tu veux gagner du temps</span></div>
+            <ul class="incl">
+              <li>TrendTrack pour trouver ce qui marche</li>
+              <li>Notre SaaS MADE (bientôt)</li>
+              <li>Prompts IA prêts à l'emploi</li>
+              <li>Nouvelles fonctionnalités chaque mois</li>
+            </ul>
+            <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
+          </article>
+        </div>
+        <p class="offers-note rv">Pas de paiement en ligne. On t'appelle, on regarde ton projet, et on te dit franchement si on peut t'aider.</p>
       </div>
     </section>
 
@@ -1187,68 +1298,6 @@
       </div>
     </section>
 
-    <!-- ═══ OFFRES ═══ -->
-    <section id="offres" style="padding-top:0">
-      <img class="p3d" data-depth="-.2" src="assets/globe/sac2.webp" alt="" style="width:130px;right:4%;top:14%">
-      <div class="wrap">
-        <div class="head-c">
-          <span class="eyebrow rv">Les programmes</span>
-          <h2 class="rv">Trois façons <em class="s">d'avancer.</em></h2>
-          <p class="sub rv">Tous les parcours commencent par un appel. On regarde ton projet et on te conseille celui qui a du sens.</p>
-        </div>
-        <!-- TODO: contenu des offres à finaliser (réunion offres) -->
-        <article class="offer-main glass rv">
-          <div>
-            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/poignee.webp" alt=""></span><div><span class="tag feat-tag">Le plus choisi</span><h3>Coaching <em class="s">1:1</em></h3></div></div>
-            <p class="promise">On construit ta marque avec toi, semaine après semaine, jusqu'à ce qu'elle tourne.</p>
-            <div class="fit"><b>Pour toi si</b><span>tu veux aller vite</span><span>tu as un budget à investir</span><span>tu veux éviter les erreurs coûteuses</span></div>
-            <ul class="incl two">
-              <li>Un coach dédié et un point chaque semaine</li>
-              <li>Ton plan d'action personnalisé</li>
-              <li>Analyses de ta boutique illimitées</li>
-              <li>Formation « Créer une marque à succès »</li>
-              <li>Toute la formation et les lives</li>
-              <li>Accompagnement privé à vie</li>
-            </ul>
-            <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel <span class="arr">→</span></a>
-          </div>
-          <div class="om-right">
-            <div class="tl"><span class="when">Semaine 1</span><div><b>Audit et plan d'action</b><span>On part de ta situation réelle</span></div></div>
-            <div class="tl"><span class="when">Mois 1</span><div><b>Tes premières ventes</b><span>Produit validé, boutique en ligne, pubs lancées</span></div></div>
-            <div class="tl"><span class="when">Mois 3</span><div><b>Une marque qui scale</b><span>Budgets, créas et sourcing optimisés</span></div></div>
-            <div class="coachs"><img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/Guillaume.webp" alt=""><img src="assets/made/team/TheoG.webp" alt=""><span><b>Hugo, Guillaume et Théo</b> et l'équipe</span></div>
-          </div>
-        </article>
-        <div class="offers-duo">
-          <article class="offer-alt glass tilt rv">
-            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/ampoule.webp" alt=""></span><div><span class="tag">En autonomie</span><h3>Formation</h3></div></div>
-            <p class="promise">La méthode complète, à ton rythme.</p>
-            <div class="fit"><b>Pour toi si</b><span>tu débutes</span><span>tu préfères avancer seul</span></div>
-            <ul class="incl">
-              <li>La formation complète, pas à pas</li>
-              <li>Lives chaque semaine et replays</li>
-              <li>Tips quotidiens et actus ecommerce</li>
-              <li>Accès à la communauté</li>
-            </ul>
-            <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
-          </article>
-          <article class="offer-alt glass tilt rv">
-            <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/laptop.webp" alt=""></span><div><span class="tag">Outils</span><h3>Plateforme</h3></div></div>
-            <p class="promise">Les bons outils pour piloter ta boutique.</p>
-            <div class="fit"><b>Pour toi si</b><span>tu as déjà une boutique</span><span>tu veux gagner du temps</span></div>
-            <ul class="incl">
-              <li>TrendTrack pour trouver ce qui marche</li>
-              <li>Notre SaaS MADE (bientôt)</li>
-              <li>Prompts IA prêts à l'emploi</li>
-              <li>Nouvelles fonctionnalités chaque mois</li>
-            </ul>
-            <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
-          </article>
-        </div>
-        <p class="offers-note rv">Pas de paiement en ligne. On t'appelle, on regarde ton projet, et on te dit franchement si on peut t'aider.</p>
-      </div>
-    </section>
-
     <!-- ═══ CHINE ═══ -->
     <section id="chine" style="padding-top:0">
       <div class="wrap">
@@ -1264,14 +1313,6 @@
             </div>
           </a>
         </div>
-        <div class="gallery">
-          <figure class="g-a rv"><video data-par src="assets/chine/entrepot-hugo.mp4" poster="assets/chine/entrepot-hugo.jpg" muted loop playsinline preload="none"></video><figcaption>Devant l'entrepôt</figcaption></figure>
-          <figure class="rv"><video data-par src="assets/chine/usine-skincare.mp4" poster="assets/chine/usine-skincare.jpg" muted loop playsinline preload="none"></video><figcaption>Usine skincare</figcaption></figure>
-          <figure class="rv"><video data-par src="assets/chine/ligne-production.mp4" poster="assets/chine/ligne-production.jpg" muted loop playsinline preload="none"></video><figcaption>Ligne de production</figcaption></figure>
-          <figure class="g-d rv"><video data-par src="assets/chine/fournisseurs-hugo.mp4" poster="assets/chine/fournisseurs-hugo.jpg" muted loop playsinline preload="none"></video><figcaption>Chez les fournisseurs</figcaption></figure>
-          <figure class="rv"><video data-par src="assets/chine/entrepot.mp4" poster="assets/chine/entrepot.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
-          <figure class="rv"><video data-par src="assets/chine/packaging.mp4" poster="assets/chine/packaging.jpg" muted loop playsinline preload="none"></video><figcaption>Packaging</figcaption></figure>
-        </div>
       </div>
     </section>
 
@@ -1285,10 +1326,8 @@
           <div class="rv" style="margin-top:28px"><a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a></div>
         </div>
         <div class="faq-list">
-          <details class="glass rv"><summary>Je pars de zéro, c'est pour moi ?</summary><p>Oui, c'est même là qu'on fait gagner le plus de temps. L'appel sert à vérifier que tu as le temps et le budget pour te lancer dans de bonnes conditions. Si ce n'est pas le cas, on te le dit.</p></details>
           <details class="glass rv"><summary>J'ai déjà une boutique, ça m'apporte quoi ?</summary><p>Un audit complet, un plan pour passer le palier suivant et l'accès à notre réseau sourcing pour transformer ta boutique en vraie marque, avec de meilleures marges.</p></details>
           <details class="glass rv"><summary>Formation ou coaching, je choisis quoi ?</summary><p>La formation, c'est la méthode en autonomie. Le coaching, c'est quelqu'un qui suit ta boutique chaque semaine et t'évite les erreurs qui coûtent cher. On t'oriente pendant l'appel.</p></details>
-          <details class="glass rv"><summary>Vous pouvez tout faire pour moi ?</summary><p>Oui, sur demande : recherche produit, branding, site Shopify et créas pub. C'est l'agence MADE qui s'en charge. Tu valides, on exécute.</p></details>
           <details class="glass rv"><summary>Pourquoi les prix ne sont pas affichés ?</summary><p>Parce qu'on ne vend pas le même parcours à tout le monde. L'appel est gratuit, sans engagement, et tu repars avec un tarif clair.</p></details>
           <details class="glass rv"><summary>C'est quoi le voyage en Chine ?</summary><p>Un séminaire de 10 jours à Canton pendant la foire internationale. Tu rencontres des fournisseurs, tu négocies avec nous et tu suis des cours chaque jour. La page dédiée arrive bientôt.</p></details>
         </div>
@@ -1297,6 +1336,7 @@
 
     <!-- ═══ CTA FINAL ═══ -->
     <section id="appel" style="padding-top:0">
+      <div class="ring" aria-hidden="true" style="width:1000px;left:50%;margin-left:-500px;top:-120px"></div>
       <div class="wrap">
         <div class="final glass rv">
           <img class="bgimg" data-par src="assets/salon.webp" alt="" aria-hidden="true" loading="lazy">
