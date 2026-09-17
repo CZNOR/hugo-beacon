@@ -15,7 +15,7 @@
   <link rel="icon" href="assets/globe/sac1.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Anton&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#050507; --ink:#f4f2fb; --muted:#aaa7bc; --line:rgba(255,255,255,.1);
@@ -503,6 +503,114 @@
       .after{grid-template-columns:1fr}
       .foot{flex-direction:column;align-items:flex-start}
     }
+    /* ═════════ DA v4 : typos agencemade + liquid glass ═════════ */
+    :root{--ink:#F1F0EA;--muted:rgba(241,240,234,.62);--line:rgba(241,240,234,.1);--sans:'Inter Tight',system-ui,-apple-system,sans-serif;--cond:'Barlow Condensed','Arial Narrow',sans-serif}
+    body{color:var(--ink);font-family:var(--sans);letter-spacing:-.01em}
+    h1,h2,h3,.display{font-family:var(--sans);font-weight:500;letter-spacing:-.045em}
+    h1{font-size:clamp(42px,4.6vw,74px);line-height:1.02}
+    h2{font-size:clamp(32px,3.5vw,54px);line-height:1.05}
+    h3{font-size:clamp(22px,1.9vw,28px);line-height:1.15;letter-spacing:-.035em}
+    em.s{font-style:normal;font-weight:300;color:var(--made)}
+    .eyebrow,.tag,.lvl,.team-label,.step .i,.stat .n,.metrics b,.pill b,.badge,.canton-points b,.pillar h3 small{font-family:var(--cond)}
+    .eyebrow{font-size:15px;font-weight:600;letter-spacing:.08em;color:rgba(241,240,234,.55)}
+    .eyebrow::before{color:var(--made)}
+    .sub{font-size:17px;color:var(--muted)}
+    .head{margin-bottom:44px}
+    .head h2{margin:10px 0 14px}
+    .head h2::after{display:none}
+    section{padding-block:clamp(80px,9vw,128px)}
+    .wrap{max-width:1200px}
+    .lead{font-size:18px;color:var(--muted)}
+    .stat .n{font-size:clamp(48px,4.8vw,72px);font-weight:600;letter-spacing:0;line-height:1}
+    .stat .n em.s{font-weight:500}
+    .stat p{font-size:15px}
+    .team-label{font-size:15px;font-weight:600;letter-spacing:.08em;color:rgba(241,240,234,.55)}
+    .member h4{font-family:var(--sans);font-weight:500;letter-spacing:-.03em;font-size:22px}
+    .crew h4{font-size:16px}
+    .bc-top h4{font-family:var(--cond);font-weight:600;font-size:30px;text-transform:uppercase;letter-spacing:.01em}
+    .metrics b{font-weight:600;letter-spacing:0}
+    .step .i{font-weight:600;-webkit-text-stroke:0;color:var(--made);font-size:clamp(46px,4vw,64px);line-height:1}
+    .step h4{font-family:var(--sans);font-weight:500;letter-spacing:-.03em;font-size:22px}
+    .tier h3{font-family:var(--sans);font-weight:500;font-size:clamp(30px,2.6vw,40px);letter-spacing:-.04em}
+    .tier .lvl{font-size:15px;font-weight:600;letter-spacing:.06em}
+    .canton h2{font-size:clamp(56px,7vw,112px);letter-spacing:-.05em;line-height:.95}
+    .canton-points b{font-weight:600;font-size:24px;text-transform:uppercase;letter-spacing:.02em}
+    .why blockquote{font-size:clamp(28px,2.8vw,42px);font-weight:500;letter-spacing:-.04em;line-height:1.12}
+    .scr .brand{font-family:var(--cond);font-weight:700;letter-spacing:.02em}
+    .tour-head h2{font-size:clamp(30px,3vw,46px)}
+
+    /* Liquid glass renforcé */
+    .lg{position:relative;isolation:isolate;overflow:hidden;border-radius:28px;
+      background:linear-gradient(155deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.03) 38%,rgba(182,145,254,.06) 100%);
+      backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(255,255,255,.06),inset 0 0 0 1px rgba(255,255,255,.08),0 30px 80px -40px rgba(0,0,0,.9)}
+    .lg::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+      background:radial-gradient(120% 60% at 0% 0%,rgba(255,255,255,.14),transparent 55%),radial-gradient(80% 60% at 100% 100%,rgba(182,145,254,.14),transparent 60%)}
+    .glass-lite{border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 30px 60px -30px rgba(0,0,0,.8)}
+
+    /* Piliers en cartes */
+    .pillars{gap:16px}
+    .pillar{padding:30px 28px;border-top:0;min-height:230px;display:flex;flex-direction:column}
+    .pillar .top{display:flex;flex-direction:column-reverse;align-items:flex-start;gap:0;margin-bottom:auto}
+    .pillar .ico3d{width:56px;height:56px}
+    .pillar h3{font-size:clamp(26px,2.2vw,32px);margin-top:28px}
+    .pillar h3 small{display:block;font-size:14px;font-weight:600;letter-spacing:.08em;margin-bottom:6px;color:var(--made)}
+    .pillar .line{font-size:16px;margin-top:10px;color:var(--muted)}
+
+    /* Grille des tableaux de ventes */
+    .dash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:6px}
+    .dash-grid figure{aspect-ratio:1;transition:transform .5s var(--ease)}
+    .dash-grid figure:hover{transform:translateY(-4px)}
+    .dash-grid img{width:100%;height:100%;object-fit:cover}
+    .dms{margin-bottom:14px}
+
+    /* Pourquoi MADE : vidéo verticale */
+    .why-video{aspect-ratio:4/5;max-width:440px;justify-self:center;width:100%}
+    .why-video figcaption{font-family:var(--sans);font-weight:500;letter-spacing:-.03em}
+
+    /* Terrain intégré au site */
+    .terrain{padding-block:clamp(40px,6vw,80px);background:none;overflow:visible}
+    .terrain::before,.terrain::after{display:none}
+    .terrain-card{position:relative;border-radius:40px;overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+    .terrain-card::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.45) 50%,rgba(0,0,0,.05) 100%)}
+    .terrain-grid{height:clamp(420px,46vw,620px)}
+    .terrain-grid video{filter:none}
+    .terrain-grid figcaption{z-index:4;transform:none;font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:0;text-transform:none;color:#fff;background:rgba(0,0,0,.5);border-radius:100px;padding:6px 12px;box-shadow:none;right:14px;left:auto;top:14px;bottom:auto}
+    .terrain-grid figure:first-child figcaption{display:none}
+    .terrain .stamp{z-index:4}
+    .terrain-copy{left:clamp(24px,5vw,70px);bottom:clamp(28px,5vw,64px);z-index:4}
+    .t-big{font-family:var(--sans);font-weight:500;text-transform:none;letter-spacing:-.05em;font-size:clamp(40px,4.4vw,68px);line-height:1.02;max-width:620px;margin-top:10px}
+    .t-big span{font-weight:300}
+
+    /* Visite : légende centrée sous la navigation, écran plus bas */
+    .tour-cap{left:50%;right:auto;top:150px;bottom:auto;transform:translateX(-50%);width:min(640px,90vw);padding:0;text-align:center;background:none;box-shadow:none;z-index:300}
+    .tour-cap .k{display:none}
+    .tour-cap h3{font-size:22px;margin:0}
+    .tour-cap p{font-size:15px;color:var(--muted)}
+    .tour-head{top:150px}
+    .panel{top:63%}
+    .thumb{background:#111}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .thumb::after{display:none}
+
+    @media (max-width:1080px){.dash-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){
+      h1{font-size:clamp(38px,11vw,48px)}
+      h2{font-size:clamp(30px,8.6vw,38px)}
+      .dash-grid{grid-template-columns:1fr 1fr;gap:8px}
+      .dash-grid figure:nth-child(n+5){display:none}
+      .glass-lite{border-radius:14px}
+      .pillar{min-height:0;padding:22px}
+      .pillar h3{margin-top:18px}
+      .why-video{max-width:none}
+      .terrain-card{border-radius:28px}
+      .terrain-card::after{background:linear-gradient(0deg,rgba(0,0,0,.9) 25%,rgba(0,0,0,.2) 80%)}
+      .terrain-grid figcaption{display:none}
+      .t-big{font-size:34px}
+      .canton h2{font-size:52px}
+      .lg{backdrop-filter:none;-webkit-backdrop-filter:none}
+    }
+
   </style>
 </head>
 <body>
@@ -589,7 +697,7 @@
           <figure class="dm rv"><img src="assets/avis/vente1.webp" alt="Première vente d'un élève" loading="lazy" width="750" height="900"></figure>
         </div>
       </div>
-      <div class="proof rv"><div class="track" id="proof"></div></div>
+      <div class="wrap"><div class="dash-grid" id="dashGrid"></div></div>
     </section>
 
     <!-- ═══ 5. POURQUOI MADE (la vidéo sert la confiance) ═══ -->
@@ -601,15 +709,15 @@
           <div class="sig rv"><div class="avatars"><img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/Guillaume.webp" alt=""><img src="assets/made/team/TheoG.webp" alt=""></div><p><strong>Hugo, Guillaume et Théo</strong><br>Cofondateurs de MADE</p></div>
         </div>
         <figure class="why-video rv">
-          <video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" muted loop playsinline preload="none"></video>
-          <span class="lb">EN DIRECT</span>
-          <figcaption>Hugo, cofondateur<span>En live avec les élèves depuis Canton</span></figcaption>
+          <video src="assets/chine/hugo-canton.mp4" poster="assets/chine/hugo-canton.jpg" muted loop playsinline preload="none"></video>
+          <figcaption>Hugo, cofondateur<span>À Canton, au pied de la tour</span></figcaption>
         </figure>
       </div>
     </section>
 
     <!-- ═══ 6. LOIN DES ÉCRANS ═══ -->
     <section class="terrain" aria-label="Sur le terrain">
+      <div class="wrap"><div class="terrain-card">
       <div class="terrain-grid">
         <figure><video src="assets/chine/packaging.mp4" poster="assets/chine/packaging.jpg" muted loop playsinline preload="none"></video><figcaption>Packaging</figcaption></figure>
         <figure><video src="assets/chine/entrepot.mp4" poster="assets/chine/entrepot.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
@@ -618,9 +726,9 @@
       <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampA" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampA">MADE ACADÉMIE ✦ ÉCOLE DE TERRAIN ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
       <div class="terrain-copy">
         <span class="eyebrow">Loin des écrans</span>
-        <p class="t-big">De vrais cartons.<br>De vraies usines.<br><span>De vraies commandes.</span></p>
-        
+        <p class="t-big">De vrais cartons. De vraies usines. <span>De vraies commandes.</span></p>
       </div>
+      </div></div>
     </section>
 
     <!-- ═══ 7. TOUT POUR LANCER ═══ -->
@@ -631,15 +739,15 @@
           <h2 class="rv">Tout pour lancer. <em class="s">Rien de superflu.</em></h2>
         </div>
         <div class="pillars">
-          <article class="pillar rv">
+          <article class="pillar lg rv">
             <div class="top"><h3><small>01</small>Apprendre</h3><img class="ico3d" src="assets/3d/ampoule.webp" alt=""></div>
             <p class="line">Formation, cas réels, lives.</p>
           </article>
-          <article class="pillar rv">
+          <article class="pillar lg rv">
             <div class="top"><h3><small>02</small>Exécuter</h3><img class="ico3d" src="assets/3d/fusee.webp" alt=""></div>
             <p class="line">Coaching, analyses, sourcing, outils.</p>
           </article>
-          <article class="pillar rv">
+          <article class="pillar lg rv">
             <div class="top"><h3><small>03</small>Être accompagné</h3><img class="ico3d" src="assets/3d/poignee.webp" alt=""></div>
             <p class="line">Équipe, communauté, suivi 3 mois.</p>
           </article>
@@ -665,7 +773,7 @@
             <main>
               <div><h5>Salut Karim, on reprend ?</h5><div class="muted">Tu as terminé 68 % de ton parcours</div></div>
               <div class="g2">
-                <div class="card"><div class="thumb" style="background:linear-gradient(135deg,#701a75,#312e81)"></div><b style="color:#fff">Module 4 · Lancement publicitaire</b><div class="muted">Leçon 3 : structurer ta première campagne</div><div class="pbar"><i style="width:45%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/02.8_Decouverte-Meta-Ads.webp" alt="" loading="lazy"></div><b style="color:#fff">Module 4 · Lancement publicitaire</b><div class="muted">Leçon 3 : structurer ta première campagne</div><div class="pbar"><i style="width:45%"></i></div></div>
                 <div class="card" style="display:flex;flex-direction:column;gap:8px"><span class="chip" style="align-self:flex-start">Prochain live</span><b style="color:#fff;font-size:15px">Analyse de boutiques en direct</b><div class="muted">Jeudi 18h · avec Hugo</div><div class="post" style="margin-top:auto;align-items:center"><img src="assets/made/team/HugoB.webp" alt=""><span class="muted">32 membres inscrits</span></div></div>
               </div>
               <div class="g3">
@@ -684,9 +792,9 @@
             <main>
               <div><h5>Formations</h5><div class="muted">Des modules courts, mis à jour en continu</div></div>
               <div class="g3">
-                <div class="card"><div class="thumb" style="background:linear-gradient(135deg,#4c1d95,#1e1b4b)"></div><span class="chip">Gratuit</span><b style="color:#fff;display:block">Les bases de l'ecommerce</b><div class="pbar"><i style="width:100%"></i></div></div>
-                <div class="card"><div class="thumb" style="background:linear-gradient(135deg,#701a75,#312e81)"></div><span class="chip">Premium</span><b style="color:#fff;display:block">Formation ecommerce A à Z</b><div class="pbar"><i style="width:72%"></i></div></div>
-                <div class="card"><div class="thumb" style="background:linear-gradient(135deg,#134e4a,#1e1b4b)"></div><span class="chip">Élite</span><b style="color:#fff;display:block">Créer une marque à succès</b><div class="pbar"><i style="width:18%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/02_Module_Introduction-Fondation.webp" alt="" loading="lazy"></div><span class="chip">Gratuit</span><b style="color:#fff;display:block">Les bases de l'ecommerce</b><div class="pbar"><i style="width:100%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/03_Module_Recherche-produit.webp" alt="" loading="lazy"></div><span class="chip">Premium</span><b style="color:#fff;display:block">Formation ecommerce A à Z</b><div class="pbar"><i style="width:72%"></i></div></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/02.9_Analyse-de-la-marque-Boku.webp" alt="" loading="lazy"></div><span class="chip">Élite</span><b style="color:#fff;display:block">Créer une marque à succès</b><div class="pbar"><i style="width:18%"></i></div></div>
               </div>
               <div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><b style="color:#fff">Recherche produit : la méthode complète</b><div class="muted">12 leçons · 2 h 40</div></div><span class="chip">Reprendre</span></div>
             </main>
@@ -741,7 +849,7 @@
 
         </div>
 
-        <div class="tour-cap glass blur" aria-live="polite">
+        <div class="tour-cap" aria-live="polite">
           <div class="fade" id="capText">
             <div class="k" id="capK">01 · Accueil</div>
             <h3 id="capH">Ton plan de la semaine</h3>
@@ -759,17 +867,17 @@
           <h2 class="rv">Ce qu'on fait <em class="s">avec de vraies marques.</em></h2>
         </div>
         <div class="brands">
-          <div class="bcard glass tilt rv">
+          <div class="bcard lg rv">
             <div class="browser"><div class="bb"><i></i><i></i><i></i><span>beautymarts.fr</span></div><img src="assets/made/sites/beautymarts.webp" alt="Site Beauty Mart's" loading="lazy"></div>
             <div class="bc-body"><div class="bc-top"><h4>Beauty Mart's</h4><span>Beauté</span></div>
               <div class="metrics"><div><b>+1&nbsp;M€</b><span>de CA généré</span></div><div><b>+50&nbsp;k€</b><span>en 7 jours au lancement</span></div><div><b>7&nbsp;%</b><span>de taux de conversion</span></div></div></div>
           </div>
-          <div class="bcard glass tilt rv">
+          <div class="bcard lg rv">
             <div class="browser"><div class="bb"><i></i><i></i><i></i><span>scorekeys.shop</span></div><img src="assets/made/sites/scorekeys.webp" alt="Site ScoreKeys" loading="lazy"></div>
             <div class="bc-body"><div class="bc-top"><h4>ScoreKeys</h4><span>Ecommerce</span></div>
               <div class="metrics"><div><b>+250&nbsp;%</b><span>de taux de conversion</span></div><div><b>+200&nbsp;%</b><span>de CA mensuel</span></div><div><b>x1,5</b><span>sur le panier moyen</span></div></div></div>
           </div>
-          <div class="bcard glass tilt rv">
+          <div class="bcard lg rv">
             <div class="browser"><div class="bb"><i></i><i></i><i></i><span>Unik Journal</span></div><img src="assets/made/projects/project5.webp" alt="Unik Journal" loading="lazy" style="object-position:center"></div>
             <div class="bc-body"><div class="bc-top"><h4>Unik Journal</h4><span>Marque</span></div>
               <div class="metrics"><div><b>300&nbsp;k</b><span>visiteurs par mois</span></div><div><b>100&nbsp;%</b><span>direction artistique sur mesure</span></div><div><b>Monde</b><span>lancement international</span></div></div></div>
@@ -858,7 +966,7 @@
       </div>
       <div class="canton-strip">
         <figure><video src="assets/chine/entrepot-exterieur.mp4" poster="assets/chine/entrepot-exterieur.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
-        <figure><video src="assets/chine/rdv-fabricant.mp4" poster="assets/chine/rdv-fabricant.jpg" muted loop playsinline preload="none"></video><figcaption>Chez le fabricant</figcaption></figure>
+        <figure><video src="assets/chine/showroom-parfum.mp4" poster="assets/chine/showroom-parfum.jpg" muted loop playsinline preload="none"></video><figcaption>Showroom parfums</figcaption></figure>
         <figure><video src="assets/chine/ligne-production.mp4" poster="assets/chine/ligne-production.jpg" muted loop playsinline preload="none"></video><figcaption>Ligne de production</figcaption></figure>
       </div>
       </div>
@@ -875,20 +983,20 @@
         </div>
         <!-- TODO: contenu des offres à finaliser (réunion offres) -->
         <div class="tiers">
-          <article class="tier glass rv">
+          <article class="tier lg rv">
             <span class="lvl">Niveau 1 · Apprendre</span>
             <h3>Formation</h3>
             <p class="promise">La méthode complète, à ton rythme.</p>
             <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
           </article>
-          <article class="tier glass feat rv">
+          <article class="tier lg feat rv">
             <span class="badge">Le plus choisi</span>
             <span class="lvl">Niveau 2 · Être accompagné</span>
             <h3>Coaching <em class="s">1:1</em></h3>
             <p class="promise">On construit ta marque avec toi pendant 3 mois, semaine après semaine.</p>
             <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel <span class="arr">→</span></a>
           </article>
-          <article class="tier glass rv">
+          <article class="tier lg rv">
             <span class="lvl">Niveau 3 · Exécuter</span>
             <h3>Plateforme</h3>
             <p class="promise">Les bons outils pour piloter ta boutique.</p>
@@ -1008,12 +1116,12 @@
       const total = r.height - vh();
       const p = Math.min(Math.max(-r.top / total, 0), 1);
       const t = p * (panels.length - .6) - .15;
-      const fit = Math.min(1.25, (window.innerWidth * .74) / 1000, (vh() * .74) / 580);
+      const fit = Math.min(1.05, (window.innerWidth * .62) / 1000, (vh() * .58) / 580);
       panels.forEach((el, i) => {
         const d = i - t;
         let z, y, op;
-        if (d >= 0) { z = -d * 1100 - 60; y = d * -40; op = d < .6 ? 1 : d < 1.4 ? 1 - (d - .6) / .8 * .75 : Math.max(0, .25 - (d - 1.4)); }
-        else { z = -60 + d * 200; y = d * 700; op = Math.max(0, 1 + d / .35); }
+        if (d >= 0) { z = -d * 900 - 60; y = d * 60; op = d < .45 ? 1 : Math.max(0, 1 - (d - .45) / .35); }
+        else { z = -60 + d * 120; y = d * 260; op = Math.max(0, 1 + d / .22); }
         const x = (+el.dataset.x) * Math.min(1, Math.abs(d)) * .6;
         const ry = (+el.dataset.ry) * Math.min(1, Math.abs(d));
         el.style.opacity = op.toFixed(3);
@@ -1023,7 +1131,7 @@
       });
       floor.style.setProperty('--fy', (t * 400).toFixed(1) + 'px');
       prog.style.width = (p * 100).toFixed(2) + '%';
-      head.style.opacity = Math.max(0, 1 - p * 7).toFixed(2);
+      const ho = Math.max(0, 1 - p * 7); head.style.opacity = ho.toFixed(2); capText.parentElement.style.opacity = (1 - ho).toFixed(2);
       const idx = Math.min(panels.length - 1, Math.max(0, Math.round(t)));
       if (idx !== capIdx) {
         capIdx = idx;
@@ -1060,8 +1168,8 @@
     });
 
     /* ─── Tableaux de ventes + logos ─── */
-    const shots = RESULTS.map(n => `<figure><img src="assets/resultats/${n}.webp" alt="Tableau de ventes Shopify d'un élève" loading="lazy" decoding="async" width="560" height="533"></figure>`).join('');
-    document.getElementById('proof').innerHTML = shots + shots;
+    const DASH = ['R5','R12','R3','R1','R15','R14','R8','R4'];
+    document.getElementById('dashGrid').innerHTML = DASH.map(n => `<figure class="glass-lite"><img src="assets/dash/${n}.webp" alt="Tableau de ventes Shopify d'un élève" loading="lazy" width="660" height="660"></figure>`).join('');
     const logos = [1,2,3,4,5,7,8,10,11].map(i => `<img src="assets/made/partners/p${i}.webp" alt="" loading="lazy" width="138" height="46">`).join('') + '<img src="assets/made/partners/beautymarts.webp" alt="Beauty Mart\'s" loading="lazy" style="height:24px">';
     document.getElementById('logos').innerHTML = logos + logos;
 
