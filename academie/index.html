@@ -63,8 +63,10 @@
       background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.1),transparent 45%)}
     .glass:hover::after{opacity:1}
     .glass>*{position:relative;z-index:1}
-    .blur{backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);background-color:rgba(14,11,24,.35)}
-    .tilt{will-change:transform}
+    .blur{backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);background-color:rgba(14,11,24,.35)}
+    .tilt{}
+    .glass{contain:paint}
+    .paused,.paused *{animation-play-state:paused!important}
 
     /* ─── NAV ─── */
     .nav{position:fixed;top:14px;left:0;right:0;z-index:50;display:flex;justify-content:center;padding-inline:16px}
@@ -122,7 +124,7 @@
     .avatars img{width:34px;height:34px;border-radius:50%;margin-left:-10px;border:2px solid var(--bg);object-fit:cover;background:#b691fe}
     .avatars img:first-child{margin-left:0}
     .trust strong{color:var(--ink);font-weight:600}
-    .fcard{position:absolute;z-index:4;padding:16px 18px;border-radius:20px;text-align:left;animation:float 7s ease-in-out infinite}
+    .fcard{position:absolute;z-index:4;padding:16px 18px;border-radius:20px;text-align:left;animation:float 7s ease-in-out infinite;background-color:rgba(18,14,30,.88)}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
     .fc-sales{left:max(3vw,calc(50% - 640px));bottom:150px;width:240px;animation-delay:-2s}
     .fc-sales .k{font-size:12px;color:var(--muted)}
@@ -379,6 +381,43 @@
     /* ─── GALERIE CHINE ─── */
     .gallery video{width:100%;height:116%;object-fit:cover;will-change:transform}
 
+    /* ─── SIGNATURES MADE ─── */
+    .fc-coach video{width:64px;height:64px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--made),0 0 24px rgba(182,145,254,.6)}
+    .human-live{position:relative;width:100%;aspect-ratio:16/10;border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+    .human-live video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .human-live .lb{position:absolute;left:12px;top:12px;background:#ef4444;color:#fff;font-weight:700;font-size:11px;padding:4px 8px;border-radius:6px}
+    .hl-foot{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:0;padding:26px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+    .hl-foot img{width:30px;height:30px;border-radius:50%;object-fit:cover;margin-right:-8px;border:2px solid #111;background:var(--made)}
+    .hl-foot span{margin-left:18px;font-size:13px;color:#fff;font-weight:500}
+    .stamp{position:relative;width:118px;height:118px;margin:26px auto 0;display:grid;place-items:center}
+    .stamp svg{position:absolute;inset:0;width:100%;height:100%;animation:spin-stamp 18s linear infinite}
+    .stamp text{font-family:var(--sans);font-size:15.5px;font-weight:700;letter-spacing:2.6px;fill:var(--made)}
+    .stamp img{width:46px;height:auto;filter:drop-shadow(0 8px 18px rgba(124,58,237,.6))}
+    @keyframes spin-stamp{to{transform:rotate(360deg)}}
+    .final .stamp{margin:0 auto 18px}
+    .stamp-terrain{position:absolute;right:clamp(20px,5vw,80px);top:clamp(20px,4vw,60px);z-index:2;margin:0}
+
+    .hero-points{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:880px;margin:26px auto 0;text-align:left}
+    .hero-points li{padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);font-size:14.5px;line-height:1.4;color:rgba(255,255,255,.88)}
+    .hero-points b{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--made);margin-bottom:4px}
+
+    .terrain{position:relative;padding:0;margin-block:clamp(60px,8vw,110px);background:#000;overflow:hidden}
+    .terrain-grid{display:grid;grid-template-columns:repeat(4,1fr);height:clamp(420px,62vw,720px)}
+    .terrain-grid figure{position:relative;overflow:hidden}
+    .terrain-grid video{width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.05)}
+    .terrain::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.15) 100%)}
+    .terrain-copy{position:absolute;left:clamp(20px,6vw,90px);bottom:clamp(30px,6vw,80px);z-index:1;max-width:640px}
+    .t-kicker{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--made)}
+    .t-big{font-family:var(--bebas);font-size:clamp(54px,6.6vw,98px);line-height:.9;letter-spacing:.5px;color:#fff;margin:12px 0 18px}
+    .t-big span{color:var(--made)}
+    .t-small{font-size:17px;color:rgba(255,255,255,.8);max-width:480px}
+
+    .after{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:760px;margin-top:34px;text-align:left}
+    .after li{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;background:rgba(5,4,8,.55);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+    .after b{flex:0 0 28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;background:linear-gradient(135deg,#a78bfa,#6d28d9)}
+    .after span{font-size:13.5px;color:rgba(255,255,255,.7);line-height:1.35}
+    .after strong{display:block;color:#fff;font-size:15px;font-weight:600}
+
     /* titres mot par mot */
     .w{display:inline-block;opacity:0;transform:translateY(.45em) rotate(3deg);transition:opacity .7s var(--ease),transform .9s var(--ease)}
     .in .w,.w.in{opacity:1;transform:none}
@@ -439,9 +478,10 @@
 
     /* ─── RÉSULTATS ─── */
     .proof{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-    .proof-track{display:flex;gap:16px;width:max-content;animation:mq 70s linear infinite;padding-block:10px}
+    .proof-track{display:flex;gap:16px;width:max-content;animation:mq 70s linear infinite;padding-block:10px;will-change:transform}
     .proof:hover .proof-track{animation-play-state:paused}
-    .proof figure{width:300px;flex:0 0 auto;padding:8px;border-radius:22px}
+    .proof figure{width:300px;flex:0 0 auto;padding:8px;border-radius:22px;contain:none}
+    .proof figure::before,.proof figure::after{display:none}
     .proof img{border-radius:16px;width:100%;height:auto}
     .proof-track.rev{animation-direction:reverse;margin-top:6px}
 
@@ -682,6 +722,18 @@
       .hero-3d{order:2;display:block;position:relative;z-index:1;width:100%;height:auto;max-width:420px;align-self:center;margin:-10px 0 -40px;-webkit-mask:radial-gradient(closest-side,#000 62%,transparent);mask:radial-gradient(closest-side,#000 62%,transparent)}
       .hero::after{height:80px}
 
+      .stamp-terrain{width:84px;height:84px}.stamp-terrain img{width:32px}
+      .final .stamp{width:92px;height:92px}.final .stamp img{width:36px}
+
+      .hero-points{grid-template-columns:1fr;gap:8px;margin-top:20px}
+      .hero-points li{padding:11px 14px;font-size:14.5px}
+      .terrain-grid{grid-template-columns:1fr 1fr;height:520px}
+      .terrain::after{background:linear-gradient(0deg,rgba(0,0,0,.92) 20%,rgba(0,0,0,.35) 75%)}
+      .terrain-copy{left:20px;right:20px;bottom:26px}
+      .t-big{font-size:52px}
+      .t-small{font-size:15.5px}
+      .after{grid-template-columns:1fr;margin-top:22px}
+
       /* moins d'infos */
       .marquee,.fc-sales,.fc-coach,.fc-step,.t-com,.t-live,.t-saas{display:none!important}
       .manifesto{padding-block:48px}
@@ -723,7 +775,6 @@
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="made-logo" viewBox="-2 0 550 180"><path d="M152.61,49.65c-9.52-3.24-20.29-3.6-30.77.15-9.23,3.31-18.1,9.78-25.86,20.01-7.11-10.81-18.46-19.27-31.65-21.99-13.41-2.72-28.28.59-42.2,12.73v-13.83H0v129.61h22.05v-93.57c5.93-9.42,19.49-12.51,33.04-8.61,13.7,3.9,25.57,14.49,26.89,29.86v72.38h22.05v-93.42c7.03-9.78,20.88-12.58,34.07-8.68,13.41,3.97,24.76,14.56,25.86,29.79v72.38h22.42v-83.93c0-18.83-15.02-36.41-33.85-42.74l.07-.15Z"/><path d="M280.31,59.66c-9.52-8.39-20.44-12.87-34.14-12.87-27.33,0-56.19,23.32-56.19,64.36,0,32.66,21.76,65.17,56.19,65.17,8.06,0,15.02-1.32,21.61-4.49,4.32-2.13,8.42-5,12.53-8.68v13.17h24.4V46.78h-24.4v12.87ZM279.29,103.5c2.93,5.74,4.54,12.06,5.42,20.89,0,7.65-2.35,13.53-5.94,17.8-3.66,4.27-8.79,7.06-14.95,8.02-12.23,1.99-28.35-3.38-41.91-18.61-15.97-18.02-17.14-33.32-12.24-44.72,4.25-9.78,13.41-14.27,24.1-14.2,10.84,0,22.71,4.78,31.06,12.95,6.96,6.69,11.36,12.14,14.36,17.87h.07Z"/><path d="M401.64,60.98c-9.89-8.46-21.17-12.87-35.39-12.87-28.06,0-57.88,22.95-57.88,63.78,0,32.44,22.64,64.58,57.88,64.58,8.28,0,15.46-1.25,22.2-4.41,4.54-2.13,8.87-5,13.19-8.83v13.24h24.98V0h-24.98v60.98ZM402.15,104.31c3.08,6.62,4.76,13.83,5.64,22.58,0,7.43-2.49,13.24-6.52,17.43-4.03,4.27-9.82,7.06-16.56,8.09-13.63,1.99-30.99-3.46-44.91-18.46-16.48-17.8-18.1-37.29-13.04-48.55,4.32-9.49,14.43-13.98,26.67-13.68,12.16.22,25.35,5.22,34,13.24,7.03,6.55,11.65,12.73,14.73,19.35Z"/><path d="M545.75,119.83h-15.53l-.29,3.31c-.95,11.69-4.4,19.64-9.31,24.64-4.83,5-11.36,7.43-19.12,7.43-21.76,0-42.35-17.88-51.73-40.46h93.85v-3.6c0-17.58-5.06-34.5-14.65-47.08-9.67-12.65-23.96-20.89-41.91-20.89-19.56,0-33.92,10.3-43.23,23.83-9.23,13.46-13.77,30.23-13.77,44.21,0,35.9,24.32,68.78,57.37,68.78,30.4,0,50.48-23.54,57.29-55.83l.88-4.34h.15ZM519.23,95.33h-72.75c.66-8.97,3.74-15.67,8.13-20.23,4.98-5.15,11.94-7.8,20.07-7.65h.07c16.27,0,31.8,9.34,44.47,27.88Z"/></symbol></svg>
 
@@ -733,7 +784,7 @@
       <a href="#top" class="logo" aria-label="MADE Académie"><svg viewBox="-2 0 550 180"><use href="#made-logo"/></svg><small>Académie</small></a>
       <nav class="nav-links">
         <a href="#ecosysteme">Programme</a>
-        <a href="#tour">Visite</a>
+        <a href="#tour">L'académie</a>
         <a href="#equipe">Équipe</a>
         <a href="#offres">Offres</a>
         <a href="#resultats">Résultats</a>
@@ -741,20 +792,20 @@
         <a href="#faq">FAQ</a>
       </nav>
       <a href="https://made-academie.vercel.app/login" class="btn btn-ghost btn-sm">Espace élève</a>
-      <a href="#appel" class="btn btn-neon btn-sm">Réserver un appel</a>
+      <a href="#appel" class="btn btn-neon btn-sm">Réserver mon appel</a>
       <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
   <div class="mmenu glass blur" id="mmenu">
     <a href="#ecosysteme">Programme</a>
-    <a href="#tour">Visite de l'académie</a>
+    <a href="#tour">L'académie de l'intérieur</a>
     <a href="#equipe">Équipe</a>
     <a href="#offres">Offres</a>
     <a href="#resultats">Résultats</a>
     <a href="#chine">Voyage en Chine</a>
     <a href="#faq">FAQ</a>
     <a href="https://made-academie.vercel.app/login">Espace élève</a>
-    <a href="#appel" class="btn btn-neon btn-lg">Réserver un appel</a>
+    <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel</a>
   </div>
 
   <main id="top">
@@ -769,10 +820,15 @@
       <div class="wrap hero-copy">
         <span class="pill glass blur rv"><b>Rentrée 2026</b> Nouvelle promo, places limitées</span>
         <h1 class="rv">Construis ta marque. <em class="s">Pas un dropshipping de plus.</em></h1>
-        <p class="lead rv">L'académie de l'équipe MADE : <strong>7 ans sur le terrain, +300 projets accompagnés et plus de 2 M€ générés.</strong> On t'aide à passer de ta première vente à ta propre marque.</p>
+        <p class="lead rv"><strong>Coaching 1:1, formation et outils</strong> pour lancer ou faire grandir ta marque ecommerce, avec l'équipe MADE : 7 ans de terrain, +300 projets, +2 M€ générés.</p>
+        <ul class="hero-points rv">
+          <li><b>Pour qui</b>Débutants motivés et ecommerçants qui veulent passer un cap</li>
+          <li><b>Ce que tu reçois</b>Un coach, une méthode, des outils et une communauté</li>
+          <li><b>L'objectif</b>Une marque rentable, pas une boutique de passage</li>
+        </ul>
         <div class="cta-row rv">
           <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel gratuit <span class="arr">→</span></a>
-          <a href="#tour" class="btn btn-ghost btn-lg">Visiter l'académie</a>
+          <a href="#resultats" class="btn btn-ghost btn-lg">Voir les résultats</a>
         </div>
         <div class="trust rv">
           <div class="avatars">
@@ -782,7 +838,7 @@
         </div>
       </div>
 
-      <div class="fcard glass blur fc-sales" aria-hidden="true">
+      <div class="fcard glass fc-sales" aria-hidden="true">
         <div class="k">Cas étudié · 48 h</div>
         <div class="v">53 000 €<small>ROAS 27</small></div>
         <svg viewBox="0 0 200 50" preserveAspectRatio="none">
@@ -791,11 +847,11 @@
           <path d="M0 45 L20 43 L40 44 L60 40 L80 36 L100 30 L115 27 L130 19 L145 23 L160 10 L175 16 L190 6 L200 12" fill="none" stroke="#c4b5fd" stroke-width="2"/>
         </svg>
       </div>
-      <div class="fcard glass blur fc-coach" aria-hidden="true">
-        <img src="assets/made/team/HugoB.webp" alt="">
-        <p><strong><span class="live"></span>Hugo est en ligne</strong>Point coaching · jeudi 18h</p>
+      <div class="fcard glass fc-coach" aria-hidden="true">
+        <video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" muted loop playsinline preload="none"></video>
+        <p><strong><span class="live"></span>Hugo, cofondateur</strong>En live depuis Canton</p>
       </div>
-      <div class="fcard glass blur fc-step" aria-hidden="true">
+      <div class="fcard glass fc-step" aria-hidden="true">
         <div class="row"><strong>Étape 4 · Lancement pub</strong><span>68 %</span></div>
         <div class="bar"><i></i></div>
       </div>
@@ -818,6 +874,21 @@
       </div>
     </section>
 
+    <!-- ═══ RÉSULTATS ═══ -->
+    <section id="resultats" style="padding-block:70px 20px">
+      <div class="wrap">
+        <div class="head-c">
+          <span class="eyebrow rv">Résultats élèves</span>
+          <h2 class="rv">Des captures, <em class="s">pas des promesses.</em></h2>
+          <p class="sub rv">Tableaux de ventes réels de boutiques accompagnées.</p>
+        </div>
+      </div>
+      <div class="proof rv">
+        <div class="proof-track" id="proof1"></div>
+        <div class="proof-track rev" id="proof2"></div>
+      </div>
+    </section>
+
     <!-- ═══ MANIFESTE ═══ -->
     <section class="manifesto">
       <img class="p3d" data-depth=".35" src="assets/globe/sac3.webp" alt="" style="width:170px;left:6%;top:18%">
@@ -826,6 +897,22 @@
         <span class="eyebrow rv">Pourquoi MADE</span>
         <blockquote class="rv">Les formations t'apprennent à regarder. <span class="dim">Nous, on accompagne des marques depuis 7 ans et on t'accompagne pareil,</span> <em class="s">sur ta boutique, chaque semaine.</em></blockquote>
         <p class="sig rv">Hugo, Guillaume et Théo, cofondateurs</p>
+      </div>
+    </section>
+
+    <!-- ═══ TERRAIN (rupture) ═══ -->
+    <section class="terrain" aria-label="Sur le terrain">
+      <div class="terrain-grid">
+        <figure><video src="assets/chine/packaging.mp4" poster="assets/chine/packaging.jpg" muted loop playsinline preload="none"></video></figure>
+        <figure><video src="assets/chine/entrepot.mp4" poster="assets/chine/entrepot.jpg" muted loop playsinline preload="none"></video></figure>
+        <figure><video src="assets/chine/usine-skincare.mp4" poster="assets/chine/usine-skincare.jpg" muted loop playsinline preload="none"></video></figure>
+        <figure><video src="assets/chine/fournisseurs-hugo.mp4" poster="assets/chine/fournisseurs-hugo.jpg" muted loop playsinline preload="none"></video></figure>
+      </div>
+        <div class="stamp stamp-terrain" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampCircle3" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampCircle3">MADE ACADÉMIE ✦ ÉCOLE DE TERRAIN ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
+      <div class="terrain-copy">
+        <p class="t-kicker">Loin des écrans</p>
+        <p class="t-big">De vrais cartons.<br>De vraies usines.<br><span>De vraies commandes.</span></p>
+        <p class="t-small">L'ecommerce, on le fait avec les mains. On va chez les fournisseurs, on négocie, on reçoit la marchandise. Et on t'emmène avec nous.</p>
       </div>
     </section>
 
@@ -865,19 +952,15 @@
           </article>
 
           <article class="tile glass tilt t-saas rv">
-            <span class="tag">Plateforme & outils</span>
+            <span class="tag">En direct</span>
             <div class="body">
-              <h3>Ton <em class="s">espace élève.</em></h3>
-              <p>Formations, analyses de site illimitées, boîte à outils et prompts prêts à l'emploi. Tout au même endroit.</p>
+              <h3>De vraies personnes <em class="s">qui répondent.</em></h3>
+              <p>Lives, visios et analyses de ta boutique avec Hugo, Guillaume, Théo et l'équipe. Pas un chatbot, pas un forum abandonné.</p>
             </div>
-            <div class="vis"><div class="app">
-              <div class="app-top"><i></i><i></i><i></i><span>MADE Académie</span></div>
-              <div class="kpis">
-                <div class="kpi"><span>Marge nette</span><b>31 %</b></div>
-                <div class="kpi"><span>ROAS</span><b>2,8</b></div>
-                <div class="kpi"><span>CPA</span><b>14 €</b></div>
-              </div>
-              <svg viewBox="0 0 200 70" preserveAspectRatio="none"><path d="M0 60 C30 55 40 40 70 42 S110 20 140 24 S180 6 200 10" fill="none" stroke="#5eead4" stroke-width="2"/><path d="M0 64 C40 62 70 55 100 52 S160 40 200 38" fill="none" stroke="#a78bfa" stroke-width="2" stroke-dasharray="4 4"/></svg>
+            <div class="vis"><div class="human-live">
+              <video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" muted loop playsinline preload="none"></video>
+              <span class="lb">EN DIRECT</span>
+              <div class="hl-foot"><img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/Guillaume.webp" alt=""><img src="assets/made/team/TheoG.webp" alt=""><span>+32 membres connectés</span></div>
             </div></div>
           </article>
 
@@ -907,6 +990,33 @@
       </div>
     </section>
 
+    <!-- ═══ ÉQUIPE ═══ -->
+    <section id="equipe" style="padding-top:0">
+      <img class="p3d" data-depth=".3" src="assets/globe/sac1.webp" alt="" style="width:150px;right:4%;top:0">
+      <div class="wrap">
+        <div class="head-c">
+          <span class="eyebrow rv">L'équipe</span>
+          <h2 class="rv">Ceux qui font. <em class="s">Et qui t'apprennent.</em></h2>
+          <p class="sub rv">Trois cofondateurs et une grande équipe qui gère chaque jour les pubs, les sites et les créas de marques. Ce sont eux qui te coachent.</p>
+        </div>
+        <div class="team-label rv">Les cofondateurs</div>
+        <div class="founders">
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/HugoB.webp" alt="Hugo" loading="lazy"></div><h4>Hugo</h4><p>Cofondateur · Acquisition & media buying</p></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Guillaume.webp" alt="Guillaume" loading="lazy"></div><h4>Guillaume</h4><p>Cofondateur · Site & conversion</p></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/TheoG.webp" alt="Théo" loading="lazy"></div><h4>Théo</h4><p>Cofondateur · Publicité & scale</p></div>
+        </div>
+        <div class="team-label rv">Toute l'équipe</div>
+        <div class="crew">
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Marvin.webp" alt="Marvin" loading="lazy" onerror="this.style.visibility='hidden'"></div><h4>Marvin</h4><p>Coach</p></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Mailis.webp" alt="Mailis" loading="lazy"></div><h4>Mailis</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lionel.webp" alt="Lionel" loading="lazy"></div><h4>Lionel</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Delphine.webp" alt="Delphine" loading="lazy"></div><h4>Delphine</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lola.webp" alt="Lola" loading="lazy"></div><h4>Lola</h4></div>
+          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/HugoM.webp" alt="Hugo M." loading="lazy"></div><h4>Hugo M.</h4></div>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══ ROOM TOUR 3D ═══ -->
     <section class="tour" id="tour" aria-label="Visite de l'académie">
       <div class="tour-sticky">
@@ -915,8 +1025,8 @@
         <div class="tour-prog" id="tourProg"></div>
         <div class="floor" aria-hidden="true"></div>
         <div class="tour-head" id="tourHead">
-          <span class="eyebrow">Visite guidée</span>
-          <h2>Entre dans <em class="s">l'académie.</em></h2>
+          <span class="eyebrow">Dans l'académie</span>
+          <h2>Ton quotidien <em class="s">avec l'équipe.</em></h2>
         </div>
 
         <div class="tour-stage">
@@ -1046,33 +1156,6 @@
       </div>
     </section>
 
-    <!-- ═══ ÉQUIPE ═══ -->
-    <section id="equipe" style="padding-top:0">
-      <img class="p3d" data-depth=".3" src="assets/globe/sac1.webp" alt="" style="width:150px;right:4%;top:0">
-      <div class="wrap">
-        <div class="head-c">
-          <span class="eyebrow rv">L'équipe</span>
-          <h2 class="rv">Ceux qui font. <em class="s">Et qui t'apprennent.</em></h2>
-          <p class="sub rv">Trois cofondateurs et une grande équipe qui gère chaque jour les pubs, les sites et les créas de marques. Ce sont eux qui te coachent.</p>
-        </div>
-        <div class="team-label rv">Les cofondateurs</div>
-        <div class="founders">
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/HugoB.webp" alt="Hugo" loading="lazy"></div><h4>Hugo</h4><p>Cofondateur · Acquisition & media buying</p></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Guillaume.webp" alt="Guillaume" loading="lazy"></div><h4>Guillaume</h4><p>Cofondateur · Site & conversion</p></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/TheoG.webp" alt="Théo" loading="lazy"></div><h4>Théo</h4><p>Cofondateur · Publicité & scale</p></div>
-        </div>
-        <div class="team-label rv">Toute l'équipe</div>
-        <div class="crew">
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Marvin.webp" alt="Marvin" loading="lazy" onerror="this.style.visibility='hidden'"></div><h4>Marvin</h4><p>Coach</p></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Mailis.webp" alt="Mailis" loading="lazy"></div><h4>Mailis</h4></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lionel.webp" alt="Lionel" loading="lazy"></div><h4>Lionel</h4></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Delphine.webp" alt="Delphine" loading="lazy"></div><h4>Delphine</h4></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/Lola.webp" alt="Lola" loading="lazy"></div><h4>Lola</h4></div>
-          <div class="member glass tilt rv"><div class="ph"><img src="assets/made/team/HugoM.webp" alt="Hugo M." loading="lazy"></div><h4>Hugo M.</h4></div>
-        </div>
-      </div>
-    </section>
-
     <!-- ═══ MARQUES MADE ═══ -->
     <section id="marques" style="padding-top:0">
       <div class="wrap">
@@ -1147,7 +1230,7 @@
               <li>Tips quotidiens et actus ecommerce</li>
               <li>Accès à la communauté</li>
             </ul>
-            <a href="#appel" class="btn btn-ghost btn-lg">Réserver un appel</a>
+            <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
           </article>
           <article class="offer-alt glass tilt rv">
             <div class="om-head"><span class="icon-tile"><img class="ico3d" src="assets/3d/laptop.webp" alt=""></span><div><span class="tag">Outils</span><h3>Plateforme</h3></div></div>
@@ -1159,25 +1242,10 @@
               <li>Prompts IA prêts à l'emploi</li>
               <li>Nouvelles fonctionnalités chaque mois</li>
             </ul>
-            <a href="#appel" class="btn btn-ghost btn-lg">Réserver un appel</a>
+            <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
           </article>
         </div>
         <p class="offers-note rv">Pas de paiement en ligne. On t'appelle, on regarde ton projet, et on te dit franchement si on peut t'aider.</p>
-      </div>
-    </section>
-
-    <!-- ═══ RÉSULTATS ═══ -->
-    <section id="resultats" style="padding-top:0">
-      <div class="wrap">
-        <div class="head-c">
-          <span class="eyebrow rv">Résultats élèves</span>
-          <h2 class="rv">Des captures, <em class="s">pas des promesses.</em></h2>
-          <p class="sub rv">Tableaux de ventes réels de boutiques accompagnées.</p>
-        </div>
-      </div>
-      <div class="proof rv">
-        <div class="proof-track" id="proof1"></div>
-        <div class="proof-track rev" id="proof2"></div>
       </div>
     </section>
 
@@ -1214,7 +1282,7 @@
           <span class="eyebrow rv">FAQ</span>
           <h2 class="rv">Les questions <em class="s">qu'on nous pose.</em></h2>
           <p class="sub rv">Il t'en reste une ? Pose la pendant l'appel.</p>
-          <div class="rv" style="margin-top:28px"><a href="#appel" class="btn btn-ghost btn-lg">Réserver un appel</a></div>
+          <div class="rv" style="margin-top:28px"><a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a></div>
         </div>
         <div class="faq-list">
           <details class="glass rv"><summary>Je pars de zéro, c'est pour moi ?</summary><p>Oui, c'est même là qu'on fait gagner le plus de temps. L'appel sert à vérifier que tu as le temps et le budget pour te lancer dans de bonnes conditions. Si ce n'est pas le cas, on te le dit.</p></details>
@@ -1234,9 +1302,15 @@
           <img class="bgimg" data-par src="assets/salon.webp" alt="" aria-hidden="true" loading="lazy">
           <div class="shade"></div>
           <div class="final-in">
+            <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampCircle2" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampCircle2">MADE ACADÉMIE ✦ ÉCOLE DE TERRAIN ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
             <span class="eyebrow">Prochaine étape</span>
             <h2>20 minutes pour savoir <em class="s">si on peut t'aider.</em></h2>
             <p class="sub">Gratuit, sans engagement. On regarde ton projet ensemble et tu repars avec un plan clair, que tu nous rejoignes ou non.</p>
+            <ol class="after">
+              <li><b>1</b><span><strong>Tu choisis ton créneau</strong>2 minutes, sans paiement</span></li>
+              <li><b>2</b><span><strong>On t'appelle 20 minutes</strong>On regarde ton projet, ton budget, ton temps</span></li>
+              <li><b>3</b><span><strong>Tu repars avec un plan</strong>Et une offre seulement si elle a du sens pour toi</span></li>
+            </ol>
             <div class="booking glass blur" id="booking">
               <a href="#" class="btn btn-neon btn-lg" id="book-btn">Choisir mon créneau <span class="arr">→</span></a>
               <small>Réponse sous 24 h · Places limitées chaque mois</small>
@@ -1251,7 +1325,7 @@
     <div class="wrap foot">
       <span>© 2026 MADE Académie</span>
       <nav>
-        <a href="#ecosysteme">Programme</a><a href="#tour">Visite</a><a href="#offres">Offres</a><a href="#faq">FAQ</a>
+        <a href="#ecosysteme">Programme</a><a href="#tour">L'académie</a><a href="#offres">Offres</a><a href="#faq">FAQ</a>
         <a href="https://made-academie.vercel.app/login">Espace élève</a>
         <a href="https://agencemade.com">Agence MADE</a>
       </nav>
@@ -1267,10 +1341,10 @@
     const EMBED_BOOKING = true;  // true = calendrier intégré
     const RESULTS = ['R12','R1','R3','R4','R5','R6','R7','R8','R9','R10','R11','R13','R14','R15','R16','R17','R18','R19','R20','R21','R2aniv'];
     const TOUR = [
-      ['Accueil', 'Ton tableau de bord', 'Tu sais toujours où tu en es et quoi faire ensuite.'],
+      ['Accueil', 'Ton plan de la semaine', 'Préparé avec ton coach, pour savoir exactement quoi faire.'],
       ['Formations', 'Pas à pas, dans l\'ordre', 'Des bases à ta propre marque, avec une action concrète à chaque module.'],
       ['Lives', 'En direct chaque semaine', 'Tes questions, ta boutique analysée, et tous les replays.'],
-      ['Communauté', '+230 membres', 'Pose tes questions, partage tes ventes, récupère les tips du jour.'],
+      ['Communauté', '+230 membres', 'Des gens qui vendent, qui partagent leurs chiffres et qui s\'entraident.'],
       ['Outils', 'TrendTrack et notre SaaS', 'TrendTrack pour trouver ce qui marche, et notre propre outil pour piloter ta boutique.']
     ];
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1279,7 +1353,7 @@
     /* ─── Scroll fluide ─── */
     const isMobile = matchMedia('(max-width: 640px)').matches;
     const isTouch = matchMedia('(hover: none)').matches;
-    const lenis = reduced || isTouch || isMobile || typeof Lenis === 'undefined' ? null : new Lenis({ lerp: .09, smoothWheel: true });
+    const lenis = reduced || isTouch || isMobile || typeof Lenis === 'undefined' ? null : new Lenis({ lerp: .11, smoothWheel: true, autoRaf: false });
     document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
       const id = a.getAttribute('href');
       if (id.length < 2) return;
@@ -1356,12 +1430,16 @@
     }
 
     /* ─── Parallaxe (objets 3D + photos) ─── */
+    const near = new Set();
+    const nio = new IntersectionObserver(es => es.forEach(en => en.isIntersecting ? near.add(en.target) : near.delete(en.target)), { rootMargin: '300px' });
     const p3d = [...document.querySelectorAll('.p3d')];
     const pars = [...document.querySelectorAll('[data-par]')];
+    [...p3d, ...pars].forEach(el => nio.observe(el.parentElement));
     function renderParallax() {
       if (isMobile || isTouch) return;
       const h = vh();
       p3d.forEach(el => {
+        if (!near.has(el.parentElement)) return;
         const r = el.parentElement.getBoundingClientRect();
         if (r.bottom < -200 || r.top > h + 200) return;
         const c = r.top + r.height / 2 - h / 2;
@@ -1369,6 +1447,7 @@
         el.style.transform = `translate3d(0, ${(c * dp).toFixed(1)}px, 0) rotate(${(c * dp * .04).toFixed(2)}deg)`;
       });
       pars.forEach(el => {
+        if (!near.has(el.parentElement)) return;
         const r = el.parentElement.getBoundingClientRect();
         if (r.bottom < 0 || r.top > h) return;
         const c = (r.top + r.height / 2 - h / 2) / h;
@@ -1376,13 +1455,28 @@
       });
     }
 
+    // Rendu seulement quand ça bouge : scroll, resize, ou Lenis en cours d'animation
+    let ticking = false;
+    const kick = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
     function frame(time) {
-      if (lenis) lenis.raf(time);
+      ticking = false;
       renderTour();
       renderParallax();
-      requestAnimationFrame(frame);
     }
-    if (!isMobile) requestAnimationFrame(frame);
+    if (lenis) {
+      lenis.on('scroll', kick);
+      const loop = t => { lenis.raf(t); requestAnimationFrame(loop); };
+      requestAnimationFrame(loop);
+    }
+    if (!isMobile) {
+      addEventListener('scroll', kick, { passive: true });
+      addEventListener('resize', kick, { passive: true });
+      kick();
+    }
+
+    // Met en pause les animations CSS des sections hors écran
+    const pio = new IntersectionObserver(es => es.forEach(en => en.target.classList.toggle('paused', !en.isIntersecting)), { rootMargin: '200px' });
+    document.querySelectorAll('main > section, .marquee').forEach(sec => pio.observe(sec));
 
     /* ─── Tilt 3D des cartes ─── */
     if (matchMedia('(hover:hover)').matches && !reduced) {
