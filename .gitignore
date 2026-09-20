@@ -1,0 +1,7 @@
+.DS_Store
+*.swift
+.env
+.env.*
+node_modules/
+academie/assets/made/team/src/
+.vercel/

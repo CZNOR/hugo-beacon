@@ -1,24 +1,32 @@
-// Planète MADE : code d'origine de hugo-bnls.fr, repris tel quel.
-// Seule l'intégration change : la planète est dessinée entière dans son conteneur
-// (taille calée sur la colonne du hero) et se met en pause hors écran.
-function MadeGlobeOriginal(c, bags) {
+/* ─── Garde-fous ─── */
+if (window.top !== window.self) { try { window.top.location = window.self.location; } catch (e) { document.documentElement.innerHTML = ''; } }
+
+// ── Globe mappemonde + arcs-traînée — style MADE ──
+(function() {
+  const c = document.getElementById('globe');
   const ctx = c.getContext('2d', { willReadFrequently: false });
-  const host = c.parentElement;
   let w, h;
   const dpr = window.devicePixelRatio || 1;
 
   const mob = window.innerWidth <= 480;
 
   function resize() {
-    w = host.offsetWidth;
-    h = host.offsetHeight;
+    if (mob) {
+      // Mobile : globe entier dans son conteneur
+      w = c.parentElement ? c.offsetWidth || window.innerWidth : window.innerWidth;
+      h = 440;
+    } else {
+      w = window.innerWidth;
+      h = window.innerHeight;
+    }
     c.width = w * dpr; c.height = h * dpr;
     c.style.width = w + 'px'; c.style.height = h + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   resize();
+  window.addEventListener('resize', resize);
 
-  let R = Math.min(w, h) * (mob ? 0.44 : 0.39);
+  const R = mob ? Math.min(w * 0.55, 200) : Math.min(w * 0.55, 680);
 
   // ── Données côtières réelles (Natural Earth 110m simplifié) ──
   // Format : chaque tableau = polygone, coordonnées [lat*10, lon*10, ...] en paires
@@ -49,9 +57,7 @@ function MadeGlobeOriginal(c, bags) {
 
   // ── Pré-calculer les points du globe avec sin/cos ──
   const globeDots = [];
-  // Même espacement visuel entre les points que l'original (rayon 680 px, pas de 0,7°), quelle que soit la taille
-  // Sur petit écran on resserre les points : les continents restent lisibles même en 150 px de rayon
-  const step = mob ? Math.min(1.9, Math.max(0.7, 0.7 * 680 / R / 1.9)) : Math.min(2.2, Math.max(0.7, 0.7 * 680 / R));
+  const step = mob ? 1.5 : 0.7;
   for (let lat = -90; lat <= 90; lat += step) {
     for (let lon = -180; lon < 180; lon += step) {
       if (isLand(lat, lon)) {
@@ -206,7 +212,7 @@ function MadeGlobeOriginal(c, bags) {
       const along = i / segments;
       const zFactor = Math.max(0.2 + pt.z * 0.8, 0.05);
       const op = along * along * zFactor * 0.85;
-      const dotR = mob ? 0.62 + along * 1.25 : 1 + along * 2;
+      const dotR = mob ? 0.8 + along * 1.5 : 1 + along * 2;
 
       ctx.globalAlpha = op;
       const x = cx + (pt.x - cx) * elev;
@@ -236,20 +242,13 @@ function MadeGlobeOriginal(c, bags) {
     }
   }
 
-  // Pré-calcul constantes draw (planète entière, centrée dans son conteneur)
+  // Pré-calcul constantes draw
   const PI2 = Math.PI * 2;
-  let cx = w / 2;
-  let cy = h / 2;
-  let R2 = R * 0.97;
-  let Rclip = R * 1.01;
-  window.addEventListener('resize', () => {
-    resize();
-    R = Math.min(w, h) * (mob ? 0.44 : 0.39); cx = w / 2; cy = h / 2; R2 = R * 0.97; Rclip = R * 1.01;
-    grid.length = 0;
-    if (!mob) for (let x = 0; x < w + 20; x += 20) for (let y = 0; y < h + 20; y += 20) grid.push([x, y]);
-  });
+  const cx = w / 2;
+  const cy = mob ? h * 0.5 : h + R * 0.08;
+  const R2 = R * 0.97; // rayon grille
+  const Rclip = R * 1.01;
 
-  let visible = true, running = false;
   function draw(ms) {
     const t = ms / 1000;
     ctx.clearRect(0, 0, w, h);
@@ -283,7 +282,6 @@ function MadeGlobeOriginal(c, bags) {
     // 3. Globe dots — batch par tranches d'opacité
     ctx.fillStyle = '#ccc';
     const cosRot = Math.cos(rotY), sinRot = Math.sin(rotY);
-    let lastA = -1;
     for (let i = 0, len = globeDots.length; i < len; i++) {
       const d = globeDots[i];
       const sp = d.sp, cp = d.cp, ct0 = d.ct, st0 = d.st;
@@ -300,20 +298,11 @@ function MadeGlobeOriginal(c, bags) {
 
       const zn = z2 > 0 ? z2 : 0;
       const falloff = zn * zn; // pow(zn, 2) — moins agressif, bords plus visibles
-      const px = cx + x * R, py = cy + y2 * R;
-      if (mob) {
-        // Mobile : carrés + opacité par paliers → beaucoup moins d'appels, scroll fluide
-        const qa = ((0.08 + falloff * 0.62) * 8 | 0) / 8;
-        if (qa !== lastA) { ctx.globalAlpha = qa; lastA = qa; }
-        const r = 0.5 + zn * 0.85;
-        ctx.fillRect(px - r * 0.5, py - r * 0.5, r, r);
-      } else {
-        ctx.globalAlpha = 0.08 + falloff * 0.62; // 0.08 aux bords → 0.70 au centre
-        const r = 0.4 + zn * 0.9;
-        ctx.beginPath();
-        ctx.arc(px, py, r, 0, PI2);
-        ctx.fill();
-      }
+      ctx.globalAlpha = 0.08 + falloff * 0.62; // 0.08 aux bords → 0.70 au centre
+      const r = 0.4 + zn * (mob ? 0.8 : 0.9);
+      ctx.beginPath();
+      ctx.arc(cx + x * R, cy + y2 * R, r, 0, PI2);
+      ctx.fill();
     }
 
     // 4. Arcs-traînée
@@ -321,44 +310,168 @@ function MadeGlobeOriginal(c, bags) {
 
     ctx.restore();
     ctx.globalAlpha = 1;
-    if (visible) requestAnimationFrame(draw); else running = false;
+    requestAnimationFrame(draw);
   }
-  new IntersectionObserver(e => {
-    visible = e[0].isIntersecting;
-    if (visible && !running) { running = true; requestAnimationFrame(draw); }
-  }).observe(host);
+  requestAnimationFrame(draw);
+})();
 
-  // ── Sacs orbitants — rotation douce autour du globe (code d'origine) ──
-  const orbits = (bags || []).slice(0, 3).map((el, i) => {
-    const cfg = [{ angle: 0, orbitR: 0.8, size: 140 }, { angle: 2.4, orbitR: 0.9, size: 170 }, { angle: 4.5, orbitR: 0.7, size: 100 }][i];
-    const k = Math.min(1, R / 340);
-    el.style.width = (cfg.size * k) + 'px';
-    return { el, angle: cfg.angle, orbitRk: cfg.orbitR, sz: cfg.size * k, speed: 0.06 };
+// ── Sacs flottants harmonisés ──
+(function() {
+  const mob = window.innerWidth <= 480;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const bags = document.querySelectorAll('.bag');
+
+  // Globe dimensions (doit matcher le globe canvas)
+  const gR = mob ? Math.min(vw * 0.55, 200) : Math.min(vw * 0.55, 680);
+  const gCX = vw / 2;
+  const gCY = mob ? vh + 200 : vh + gR * 0.08; // approx
+
+  // Layout — sacs répartis partout sur la page, tous visibles mobile
+  const configs = mob ? [
+    // Mobile : 8 sacs petits répartis partout
+    { idx: 0, left: -10, top: -2, size: 90, type:'float', depth: 0.8 },
+    { idx: 1, left: 68, top: 4, size: 72, type:'float', depth: 0.55 },
+    { idx: 2, left: 30, top: -1, size: 48, type:'float', depth: 0.3 },
+    { idx: 3, left: 80, top: 22, size: 55, type:'float', depth: 0.45 },
+    { idx: 4, left: -6, top: 18, size: 60, type:'float', depth: 0.4 },
+    { idx: 5, left: 62, top: 55, size: 50, type:'float', depth: 0.25 },
+    { idx: 6, left: -3, top: 50, size: 45, type:'float', depth: 0.35 },
+    { idx: 7, left: 35, top: 72, size: 48, type:'float', depth: 0.3 },
+  ] : [
+    // Desktop : flottants haut + orbitants bas
+    { idx: 0, left: -4, top: 3, size: 220, type:'float', depth: 0.8 },
+    { idx: 1, left: 72, top: 1, size: 190, type:'float', depth: 0.65 },
+    { idx: 5, left: 78, top: 18, size: 90, type:'float', depth: 0.35 },
+    { idx: 6, left: -2, top: 40, size: 100, type:'float', depth: 0.3 },
+    { idx: 7, left: 82, top: 55, size: 80, type:'float', depth: 0.25 },
+    { idx: 2, type:'orbit', angle: 0, orbitR: 0.8, speed: 0.06, size: 140 },
+    { idx: 3, type:'orbit', angle: 2.4, orbitR: 0.9, speed: 0.06, size: 170 },
+    { idx: 4, type:'orbit', angle: 4.5, orbitR: 0.7, speed: 0.06, size: 100 },
+  ];
+
+  const floats = [];
+  const orbits = [];
+
+  configs.forEach(cfg => {
+    const bag = bags[cfg.idx];
+    if (!bag || cfg.size <= 0) { if(bag) bag.style.display='none'; return; }
+
+    bag.style.width = cfg.size + 'px';
+
+    if (cfg.type === 'float') {
+      bag.style.left = cfg.left + '%';
+      bag.style.top = cfg.top + '%';
+      floats.push({
+        el: bag, depth: cfg.depth,
+        // Fréquences très lentes = mouvement doux et élégant
+        fx: [0.08 + Math.random()*0.12, 0.04 + Math.random()*0.06],
+        fy: [0.06 + Math.random()*0.10, 0.03 + Math.random()*0.05],
+        fr: [0.03 + Math.random()*0.04], // rotation lente
+        fz: [0.05 + Math.random()*0.07], // respiration scale
+        // Amplitudes douces
+        ax: [8 + Math.random()*12, 5 + Math.random()*8],
+        ay: [6 + Math.random()*10, 4 + Math.random()*7],
+        ar: [3 + Math.random()*5], // degrés de rotation
+        az: [0.03 + Math.random()*0.05], // scale amplitude
+        // Phases
+        px: [Math.random()*6.28, Math.random()*6.28],
+        py: [Math.random()*6.28, Math.random()*6.28],
+        pr: [Math.random()*6.28],
+        pz: [Math.random()*6.28],
+      });
+    } else {
+      bag.style.position = 'absolute';
+      bag.style.left = '0'; bag.style.top = '0';
+      orbits.push({
+        el: bag, angle: cfg.angle, sz: cfg.size,
+        orbitR: cfg.orbitR * gR,
+        speed: cfg.speed,
+      });
+    }
   });
-  (bags || []).slice(3).forEach(el => el.style.display = 'none');
+
+  // Parallaxe souris douce
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX / vw - 0.5;
+    my = e.clientY / vh - 0.5;
+  });
+
   const t0 = performance.now();
+
   function tick(now) {
-    if (!visible) { requestAnimationFrame(tick); return; }
     const t = (now - t0) / 1000;
+
+    // ── Sacs flottants — mouvement lent, organique, subtil ──
+    floats.forEach(s => {
+      let dx = 0, dy = 0;
+      for (let j = 0; j < s.fx.length; j++) {
+        dx += Math.sin(t * s.fx[j] + s.px[j]) * s.ax[j];
+        dy += Math.sin(t * s.fy[j] + s.py[j]) * s.ay[j];
+      }
+      const rot = Math.sin(t * s.fr[0] + s.pr[0]) * s.ar[0];
+      const sc = 1 + Math.sin(t * s.fz[0] + s.pz[0]) * s.az[0];
+
+      // Parallaxe souris
+      dx += mx * 15 * s.depth;
+      dy += my * 10 * s.depth;
+
+      // Opacité subtile qui respire
+      const breathe = 0.5 + 0.5 * Math.sin(t * 0.4 + s.pz[0]);
+      const op = (0.18 + s.depth * 0.25) * (0.8 + breathe * 0.2);
+      const blur = (1 - s.depth) * 2.5;
+
+      s.el.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) rotate(${rot.toFixed(1)}deg) scale(${sc.toFixed(3)})`;
+      s.el.style.filter = blur > 0.5 ? `blur(${blur.toFixed(1)}px)` : 'none';
+      s.el.style.opacity = op.toFixed(3);
+    });
+
+    // ── Sacs orbitants — rotation douce autour du globe ──
     orbits.forEach(s => {
       const a = s.angle + t * s.speed;
-      const orbitR = s.orbitRk * R;
-      const ox = Math.cos(a) * orbitR;
-      const oy = Math.sin(a) * orbitR * 0.3;
-      const zDepth = Math.sin(a);
+      const ox = Math.cos(a) * s.orbitR;
+      const oy = Math.sin(a) * s.orbitR * 0.3;
+
+      // Profondeur 3D
+      const zDepth = Math.sin(a); // -1=devant, +1=derrière
       const sc = 0.55 + (1 - zDepth) * 0.2;
       const op = zDepth > 0.15 ? 0.05 + (1 - zDepth) * 0.15 : 0.25 + (-zDepth) * 0.18;
       const blur = zDepth > 0.15 ? 2.5 + zDepth * 2 : 0;
       const zIdx = zDepth > 0.15 ? -1 : 5;
-      const px = cx + ox - s.sz / 2;
-      const py = cy + oy - s.sz / 2;
-      const rot = Math.sin(a * 0.5) * 8;
+
+      const px = gCX + ox - s.sz / 2;
+      const py = gCY + oy - s.sz / 2;
+      const rot = Math.sin(a * 0.5) * 8; // légère rotation en orbite
+
       s.el.style.transform = `translate(${px.toFixed(0)}px, ${py.toFixed(0)}px) rotate(${rot.toFixed(1)}deg) scale(${sc.toFixed(3)})`;
       s.el.style.opacity = Math.max(0.04, Math.min(op, 0.45)).toFixed(3);
       s.el.style.zIndex = zIdx;
       s.el.style.filter = blur > 0.5 ? `blur(${blur.toFixed(1)}px)` : 'none';
     });
+
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
-}
+})();
+
+// ── Cleanup intro splash ──
+setTimeout(function() {
+  var s = document.getElementById('introSplash');
+  if (s) s.remove();
+}, 1600);
+
+// ── Count-up animation on proof stats ──
+setTimeout(function() {
+  document.querySelectorAll('[data-count]').forEach(function(el) {
+    var target = parseInt(el.dataset.count, 10);
+    var dur = 1200, start = performance.now();
+    function step(now) {
+      var p = Math.min((now - start) / dur, 1);
+      // ease-out cubic
+      var ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(ease * target);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}, 1600);

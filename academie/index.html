@@ -11,12 +11,18 @@
   <meta property="og:image" content="https://hugo-bnls.fr/academie/assets/og.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#050507" />
-  <meta name="robots" content="noindex" /><!-- TODO: passer en index au lancement -->
+  <meta name="format-detection" content="telephone=no,address=no,email=no" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="robots" content="noindex, noimageindex, noarchive" />
   <link rel="icon" href="assets/globe/sac1.webp" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/InterTight-var.woff2" crossorigin>
   <style>
+    @font-face{font-family:'Inter Tight';font-style:normal;font-weight:300 700;font-display:swap;src:url(assets/fonts/InterTight-var.woff2) format('woff2')}
+    @font-face{font-family:'Inter Tight';font-style:italic;font-weight:300;font-display:swap;src:url(assets/fonts/InterTight-300i.woff2) format('woff2')}
+    @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/BarlowCondensed-500.woff2) format('woff2')}
+    @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/BarlowCondensed-600.woff2) format('woff2')}
+    @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/BarlowCondensed-700.woff2) format('woff2')}
     :root{
       --bg:#050507; --ink:#f4f2fb; --muted:#aaa7bc; --line:rgba(255,255,255,.1);
       --v2:#c4b5fd; --made:#B691FE;
@@ -1207,9 +1213,45 @@
       footer{padding-bottom:120px}
     }
 
+    /* ═════════ FOND « GLASS ECOM » ═════════ */
+    .bg-fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;contain:strict}
+    .bg-fx i{position:absolute;display:block;border-radius:50%;filter:blur(90px);opacity:.5;will-change:transform}
+    .bg-fx i:nth-child(1){width:52vw;height:52vw;left:-14vw;top:-16vw;background:radial-gradient(circle,rgba(139,92,246,.42),transparent 68%);animation:drift1 34s ease-in-out infinite alternate}
+    .bg-fx i:nth-child(2){width:46vw;height:46vw;right:-12vw;top:24vh;background:radial-gradient(circle,rgba(182,145,254,.3),transparent 70%);animation:drift2 42s ease-in-out infinite alternate}
+    .bg-fx i:nth-child(3){width:60vw;height:60vw;left:18vw;bottom:-26vw;background:radial-gradient(circle,rgba(56,189,248,.14),transparent 70%);animation:drift3 50s ease-in-out infinite alternate}
+    .bg-fx u{position:absolute;inset:0;display:block;
+      background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+      background-size:72px 72px;
+      -webkit-mask:radial-gradient(75% 60% at 50% 35%,#000,transparent 85%);mask:radial-gradient(75% 60% at 50% 35%,#000,transparent 85%)}
+    .bg-fx s{position:absolute;inset:0;display:block;opacity:.05;mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+    @keyframes drift1{to{transform:translate3d(6vw,4vh,0) scale(1.12)}}
+    @keyframes drift2{to{transform:translate3d(-5vw,-6vh,0) scale(1.08)}}
+    @keyframes drift3{to{transform:translate3d(4vw,-5vh,0) scale(1.1)}}
+
+    /* halo de la planète */
+    .planet::before{content:'';position:absolute;left:50%;top:50%;width:86%;height:86%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+      background:radial-gradient(circle,rgba(182,145,254,.26),rgba(139,92,246,.12) 45%,transparent 70%);filter:blur(28px);z-index:-1}
+
+    @media (max-width:640px){
+      .bg-fx i{filter:blur(64px);opacity:.42;animation:none!important}
+      .bg-fx i:nth-child(1){width:90vw;height:90vw;left:-26vw;top:-18vh}
+      .bg-fx i:nth-child(2){width:80vw;height:80vw;right:-30vw;top:30vh}
+      .bg-fx i:nth-child(3){width:96vw;height:96vw;left:-10vw;bottom:-30vh}
+      .bg-fx u{background-size:56px 56px}
+      .bg-fx s{display:none}
+      /* planète plus présente, posée sur son halo */
+      .hero .planet{max-width:min(94vw,430px)!important;margin:12px auto 2px!important}
+      .planet::before{width:96%;height:96%;filter:blur(34px);background:radial-gradient(circle,rgba(182,145,254,.3),rgba(139,92,246,.14) 46%,transparent 72%)}
+      .planet::after{content:'';position:absolute;left:50%;bottom:-2%;width:62%;height:16%;transform:translateX(-50%);border-radius:50%;
+        background:radial-gradient(ellipse at center,rgba(182,145,254,.22),transparent 70%);filter:blur(12px);pointer-events:none}
+    }
+    @media (prefers-reduced-motion:reduce){.bg-fx i{animation:none!important}}
+
   </style>
 </head>
 <body>
+  <div class="bg-fx" aria-hidden="true"><i></i><i></i><i></i><u></u><s></s></div>
   <div class="ambient" aria-hidden="true"></div>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="made-logo" viewBox="-2 0 550 180"><path d="M152.61,49.65c-9.52-3.24-20.29-3.6-30.77.15-9.23,3.31-18.1,9.78-25.86,20.01-7.11-10.81-18.46-19.27-31.65-21.99-13.41-2.72-28.28.59-42.2,12.73v-13.83H0v129.61h22.05v-93.57c5.93-9.42,19.49-12.51,33.04-8.61,13.7,3.9,25.57,14.49,26.89,29.86v72.38h22.05v-93.42c7.03-9.78,20.88-12.58,34.07-8.68,13.41,3.97,24.76,14.56,25.86,29.79v72.38h22.42v-83.93c0-18.83-15.02-36.41-33.85-42.74l.07-.15Z"/><path d="M280.31,59.66c-9.52-8.39-20.44-12.87-34.14-12.87-27.33,0-56.19,23.32-56.19,64.36,0,32.66,21.76,65.17,56.19,65.17,8.06,0,15.02-1.32,21.61-4.49,4.32-2.13,8.42-5,12.53-8.68v13.17h24.4V46.78h-24.4v12.87ZM279.29,103.5c2.93,5.74,4.54,12.06,5.42,20.89,0,7.65-2.35,13.53-5.94,17.8-3.66,4.27-8.79,7.06-14.95,8.02-12.23,1.99-28.35-3.38-41.91-18.61-15.97-18.02-17.14-33.32-12.24-44.72,4.25-9.78,13.41-14.27,24.1-14.2,10.84,0,22.71,4.78,31.06,12.95,6.96,6.69,11.36,12.14,14.36,17.87h.07Z"/><path d="M401.64,60.98c-9.89-8.46-21.17-12.87-35.39-12.87-28.06,0-57.88,22.95-57.88,63.78,0,32.44,22.64,64.58,57.88,64.58,8.28,0,15.46-1.25,22.2-4.41,4.54-2.13,8.87-5,13.19-8.83v13.24h24.98V0h-24.98v60.98ZM402.15,104.31c3.08,6.62,4.76,13.83,5.64,22.58,0,7.43-2.49,13.24-6.52,17.43-4.03,4.27-9.82,7.06-16.56,8.09-13.63,1.99-30.99-3.46-44.91-18.46-16.48-17.8-18.1-37.29-13.04-48.55,4.32-9.49,14.43-13.98,26.67-13.68,12.16.22,25.35,5.22,34,13.24,7.03,6.55,11.65,12.73,14.73,19.35Z"/><path d="M545.75,119.83h-15.53l-.29,3.31c-.95,11.69-4.4,19.64-9.31,24.64-4.83,5-11.36,7.43-19.12,7.43-21.76,0-42.35-17.88-51.73-40.46h93.85v-3.6c0-17.58-5.06-34.5-14.65-47.08-9.67-12.65-23.96-20.89-41.91-20.89-19.56,0-33.92,10.3-43.23,23.83-9.23,13.46-13.77,30.23-13.77,44.21,0,35.9,24.32,68.78,57.37,68.78,30.4,0,50.48-23.54,57.29-55.83l.88-4.34h.15ZM519.23,95.33h-72.75c.66-8.97,3.74-15.67,8.13-20.23,4.98-5.15,11.94-7.8,20.07-7.65h.07c16.27,0,31.8,9.34,44.47,27.88Z"/></symbol></svg>
 
@@ -1296,7 +1338,7 @@
         <div><div class="rb-track" id="rb1"></div></div>
         <div class="rev"><div class="rb-track" id="rb2"></div></div>
       </div>
-      <p class="rb-cap rv">Les ventes de nos élèves. <b>De vraies captures.</b></p>
+      <p class="rb-cap rv">Boutiques MADE et élèves accompagnés. <b>De vraies captures.</b></p>
       <div class="wrap"><div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Obtenir ces résultats <span class="arr">→</span></a><span>Appel gratuit · 20 min</span></div></div>
     </section>
 
@@ -1327,10 +1369,10 @@
           <h2 class="rv">Moins de doutes. <em class="s">Plus d'ambition.</em></h2>
         </div>
         <div class="emo-grid">
-          <article class="emo-card sheen rv"><video src="assets/chine/gz-nuit.mp4" poster="assets/chine/gz-nuit.jpg" muted loop playsinline preload="none"></video><div><span>01</span><h3>Voir plus grand.</h3><p>Ta marque, ton produit, ton usine.</p></div></article>
-          <article class="emo-card sheen rv"><video src="assets/chine/packaging.mp4" poster="assets/chine/packaging.jpg" muted loop playsinline preload="none"></video><div><span>02</span><h3>Tes premiers colis. Ta marque.</h3><p>Un vrai produit, choisi avec méthode.</p></div></article>
-          <article class="emo-card sheen rv"><video src="assets/chine/fournisseur-textile.mp4" poster="assets/chine/fournisseur-textile.jpg" muted loop playsinline preload="none"></video><div><span>03</span><h3>Négocier en face à face.</h3><p>De meilleures marges, sans intermédiaire.</p></div></article>
-          <article class="emo-card sheen rv"><video src="assets/chine/canton-nuit.mp4" poster="assets/chine/canton-nuit.jpg" muted loop playsinline preload="none"></video><div><span>04</span><h3>Plus jamais seul.</h3><p>Un coach chaque semaine, jusqu'au bout.</p></div></article>
+          <article class="emo-card sheen rv"><video src="assets/chine/carte-nuit.mp4" poster="assets/chine/carte-nuit.jpg" muted loop playsinline preload="none"></video><div><span>01</span><h3>Voir plus grand.</h3><p>Ta marque, ton produit, ton usine.</p></div></article>
+          <article class="emo-card sheen rv"><video src="assets/chine/carte-produit.mp4" poster="assets/chine/carte-produit.jpg" muted loop playsinline preload="none"></video><div><span>02</span><h3>Tes premiers colis. Ta marque.</h3><p>Un vrai produit, choisi avec méthode.</p></div></article>
+          <article class="emo-card sheen rv"><video src="assets/chine/showroom-vetement.mp4" poster="assets/chine/showroom-vetement.jpg" muted loop playsinline preload="none"></video><div><span>03</span><h3>Choisir ton produit sur place.</h3><p>Chez le fabricant, sans intermédiaire.</p></div></article>
+          <article class="emo-card sheen rv"><video src="assets/chine/carte-equipe.mp4" poster="assets/chine/carte-equipe.jpg" muted loop playsinline preload="none"></video><div><span>04</span><h3>Plus jamais seul.</h3><p>Un coach chaque semaine, jusqu'au bout.</p></div></article>
         </div>
         <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Je veux ça pour ma marque <span class="arr">→</span></a><span>Appel gratuit · 20 min · sans engagement</span></div>
       </div>
@@ -1394,11 +1436,11 @@
         </div>
         <div class="phases" id="road-deb">
           <article class="phase sheen rv"><div class="ph-media"><img src="assets/photos/marque-flatlay.webp" alt="" loading="lazy" decoding="async"><span>01 à 03</span></div><div class="ph-body"><h3>Construire</h3><ol><li><b>Recherche produit</b><span>Un produit qui répond à un vrai manque</span></li><li><b>Validation</b><span>Testé avant d'acheter du stock</span></li><li><b>Branding</b><span>Un nom, une identité, une histoire</span></li></ol></div></article>
-          <article class="phase sheen rv"><div class="ph-media"><video src="assets/chine/usine-skincare.mp4" poster="assets/chine/usine-skincare.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Lancer</h3><ol><li><b>Sourcing</b><span>Le bon fournisseur, la bonne marge</span></li><li><b>Boutique Shopify</b><span>Une boutique qui convertit</span></li><li><b>Créas et contenu</b><span>Des pubs qui arrêtent le scroll</span></li></ol></div></article>
+          <article class="phase sheen rv"><div class="ph-media"><video src="assets/chine/usine-skincare2.mp4" poster="assets/chine/usine-skincare2.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Lancer</h3><ol><li><b>Sourcing</b><span>Le bon fournisseur, la bonne marge</span></li><li><b>Boutique Shopify</b><span>Une boutique qui convertit</span></li><li><b>Créas et contenu</b><span>Des pubs qui arrêtent le scroll</span></li></ol></div></article>
           <article class="phase sheen rv"><div class="ph-media"><img src="assets/dash/R5.webp" alt="" loading="lazy" decoding="async"><span>07 à 09</span></div><div class="ph-body"><h3>Scaler</h3><ol><li><b>Meta, TikTok et TikTok Shop</b><span>Les canaux qui rapportent</span></li><li><b>Email et CRM</b><span>Des clients qui reviennent</span></li><li><b>Scale</b><span>Automatiser et déléguer</span></li></ol></div></article>
         </div>
         <div class="phases" id="road-conf" hidden>
-          <article class="phase sheen rv"><div class="ph-media"><img src="assets/chine/showroom-parfum.jpg" alt="" loading="lazy" decoding="async"><span>01 à 03</span></div><div class="ph-body"><h3>Optimiser</h3><ol><li><b>Audit de ta marque</b><span>Boutique, pubs et marges passées au crible</span></li><li><b>Conversion</b><span>Pages et offres retravaillées</span></li><li><b>Machine à créas</b><span>De nouvelles créas chaque semaine</span></li></ol></div></article>
+          <article class="phase sheen rv"><div class="ph-media"><img src="assets/chine/showroom-parfum2.jpg" alt="" loading="lazy" decoding="async"><span>01 à 03</span></div><div class="ph-body"><h3>Optimiser</h3><ol><li><b>Audit de ta marque</b><span>Boutique, pubs et marges passées au crible</span></li><li><b>Conversion</b><span>Pages et offres retravaillées</span></li><li><b>Machine à créas</b><span>De nouvelles créas chaque semaine</span></li></ol></div></article>
           <article class="phase sheen rv"><div class="ph-media"><video src="assets/chine/camion.mp4" poster="assets/chine/camion.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Accélérer</h3><ol><li><b>Nouveaux canaux</b><span>TikTok, TikTok Shop et organique</span></li><li><b>Marque propre</b><span>Sourcing direct et packaging</span></li><li><b>Automatisation</b><span>Scaler sans t'épuiser</span></li></ol></div></article>
         </div>
         <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Construire ma marque <span class="arr">→</span></a><span>On fait le point sur ton projet en 20 min</span></div>
@@ -1469,7 +1511,7 @@
               <div class="tools3">
                 <div class="t3 t3-storia"><svg class="st-ico"><use href="#st-face"/></svg><b>Storia</b><span>Ta marque en 7 chapitres</span></div>
                 <div class="t3 t3-trend"><svg viewBox="0 0 120 40" preserveAspectRatio="none"><path d="M0 34 L15 30 L30 32 L45 22 L60 25 L75 14 L90 16 L105 6 L120 4" fill="none" stroke="#6ee7b7" stroke-width="2.5"/></svg><b>TrendTrack</b><span>Les produits qui décollent</span></div>
-                <div class="t3 t3-chine"><img src="assets/chine/fournisseur-textile.jpg" alt="" loading="lazy" decoding="async"><b>Agents Chine</b><span>Nos contacts sur place</span></div>
+                <div class="t3 t3-chine"><img src="assets/chine/textile.jpg" alt="" loading="lazy" decoding="async"><b>Agents Chine</b><span>Nos contacts sur place</span></div>
               </div>
             </main>
           </div>
@@ -1510,11 +1552,11 @@
     <section class="terrain" aria-label="Sur le terrain">
       <div class="wrap"><div class="terrain-card rv grow pz sheen">
       <div class="terrain-grid t5">
-        <figure><video src="assets/chine/packaging.mp4" poster="assets/chine/packaging.jpg" muted loop playsinline preload="none"></video><figcaption>Packaging</figcaption></figure>
-        <figure><video src="assets/chine/entrepot.mp4" poster="assets/chine/entrepot.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
-        <figure><video src="assets/chine/usine-skincare.mp4" poster="assets/chine/usine-skincare.jpg" muted loop playsinline preload="none"></video><figcaption>Usine skincare</figcaption></figure>
+        <figure><video src="assets/chine/usine-ligne.mp4" poster="assets/chine/usine-ligne.jpg" muted loop playsinline preload="none"></video><figcaption>Ligne de production</figcaption></figure>
+        <figure><video src="assets/chine/entrepot2.mp4" poster="assets/chine/entrepot2.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
+        <figure><video src="assets/chine/usine-skincare2.mp4" poster="assets/chine/usine-skincare2.jpg" muted loop playsinline preload="none"></video><figcaption>Usine cosmétique</figcaption></figure>
         <figure><video src="assets/chine/camion.mp4" poster="assets/chine/camion.jpg" muted loop playsinline preload="none"></video><figcaption>Expédition</figcaption></figure>
-        <figure><video src="assets/chine/fournisseur-textile.mp4" poster="assets/chine/fournisseur-textile.jpg" muted loop playsinline preload="none"></video><figcaption>Fournisseur</figcaption></figure>
+        <figure><video src="assets/chine/textile.mp4" poster="assets/chine/textile.jpg" muted loop playsinline preload="none"></video><figcaption>Fournisseur textile</figcaption></figure>
       </div>
       <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampA" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampA">MADE ACADÉMIE ✦ ÉCOLE DE TERRAIN ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
       <div class="terrain-copy">
@@ -1579,7 +1621,7 @@
     <section class="canton" id="chine">
       <div class="wrap">
       <div class="canton-hero rv grow pz">
-        <video src="assets/chine/canton-nuit.mp4" poster="assets/chine/canton-nuit.jpg" muted loop playsinline preload="none"></video>
+        <video src="assets/chine/canton-hero.mp4" poster="assets/chine/canton-hero.jpg" muted loop playsinline preload="none"></video>
         <div class="canton-in" style="padding-inline:clamp(22px,5vw,70px)">
           <span class="eyebrow rv">Séminaire · Canton</span>
           <h2 class="rv">Voyage <em class="s">en Chine.</em></h2>
@@ -1593,10 +1635,10 @@
         </div>
       </div>
       <div class="canton-strip c4">
-        <figure><video src="assets/chine/entrepot-exterieur.mp4" poster="assets/chine/entrepot-exterieur.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
-        <figure><video src="assets/chine/showroom-parfum.mp4" poster="assets/chine/showroom-parfum.jpg" muted loop playsinline preload="none"></video><figcaption>Showroom parfums</figcaption></figure>
-        <figure><video src="assets/chine/bureau-fournisseur.mp4" poster="assets/chine/bureau-fournisseur.jpg" muted loop playsinline preload="none"></video><figcaption>Bureau fournisseur</figcaption></figure>
-        <figure><video src="assets/chine/ligne-production.mp4" poster="assets/chine/ligne-production.jpg" muted loop playsinline preload="none"></video><figcaption>Ligne de production</figcaption></figure>
+        <figure><video src="assets/chine/showroom-parfum2.mp4" poster="assets/chine/showroom-parfum2.jpg" muted loop playsinline preload="none"></video><figcaption>Showroom parfums</figcaption></figure>
+        <figure><video src="assets/chine/mall.mp4" poster="assets/chine/mall.jpg" muted loop playsinline preload="none"></video><figcaption>Mall fournisseurs</figcaption></figure>
+        <figure><video src="assets/chine/showroom-vetement.mp4" poster="assets/chine/showroom-vetement.jpg" muted loop playsinline preload="none"></video><figcaption>Showroom textile</figcaption></figure>
+        <figure><video src="assets/chine/entrepot2.mp4" poster="assets/chine/entrepot2.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
       </div>
       </div>
     </section>
@@ -1693,218 +1735,8 @@
   </footer>
 
 
-  <script src="assets/vendor/lenis.min.js"></script>
-  <script src="assets/globe/planete.js"></script>
-  <script>
-    /* ─── CONFIG ─── */
-    const BOOKING_URL = '';      // lien Calendly / Cal.com
-    const EMBED_BOOKING = true;
-    const RESULTS = ['R12','R1','R3','R4','R5','R6','R7','R8','R9','R10','R11','R13','R14','R15','R16','R17','R18','R19','R20','R21','R2aniv'];
-    const TOUR = [
-      ['Accueil', 'Tu sais quoi faire chaque semaine', 'Tes chiffres et le prochain pas, validé avec ton coach.'],
-      ['Formations', 'Tout le parcours, toujours à jour', 'De la recherche produit au scale, en vidéos courtes.'],
-      ['Lives', 'Tes questions, en direct', 'Chaque semaine, on analyse vos boutiques et vos pubs.'],
-      ['Storia', 'Ta marque prend forme', 'Boutique et pubs prêtes, avec tes vraies photos.'],
-      ['Outils', 'Les outils des pros', 'Storia, TrendTrack et nos agents en Chine.']
-    ];
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = matchMedia('(max-width: 640px)').matches;
-    const isTouch = matchMedia('(hover: none)').matches;
-    const vh = () => window.innerHeight;
-
-    /* ─── Scroll fluide (desktop souris uniquement) ─── */
-    const lenis = reduced || isTouch || isMobile || typeof Lenis === 'undefined' ? null : new Lenis({ lerp: .12, smoothWheel: true, autoRaf: false });
-    if (lenis) { const loop = t => { lenis.raf(t); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
-    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
-      const id = a.getAttribute('href');
-      if (id.length < 2) return;
-      const t = document.querySelector(id);
-      if (!t) return;
-      e.preventDefault();
-      lenis ? lenis.scrollTo(t, { offset: id === '#tour' ? 0 : -90, duration: 1.1 }) : t.scrollIntoView({ behavior: 'smooth' });
-    }));
-
-    /* ─── Planète d'origine ─── */
-    MadeGlobeOriginal(document.getElementById('globe'), [...document.querySelectorAll('.planet .bags img')]);
-
-    /* ─── Visite de l'académie ─── */
-    const tour = document.getElementById('tour');
-    const panels = [...tour.querySelectorAll('.panel')];
-    const head = document.getElementById('tourHead');
-    const floor = tour.querySelector('.floor');
-    const navBtns = [...document.querySelectorAll('#tourNav button')], prog = document.getElementById('tourProg');
-    const capText = document.getElementById('capText');
-    navBtns.forEach((b, i) => b.addEventListener('click', () => {
-      const total = tour.offsetHeight - vh();
-      const y = tour.offsetTop + total * Math.min(1, (i + .15) / (panels.length - .6));
-      lenis ? lenis.scrollTo(y, { duration: .9 }) : window.scrollTo({ top: y, behavior: 'smooth' });
-    }));
-    let capIdx = 0;
-    function renderTour() {
-      if (isMobile) return;
-      const r = tour.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > vh()) return;
-      const total = r.height - vh();
-      const p = Math.min(Math.max(-r.top / total, 0), 1);
-      const t = p * (panels.length - .6) - .15;
-      const fit = Math.min(1.05, (window.innerWidth * .62) / 1000, (vh() * .58) / 580);
-      panels.forEach((el, i) => {
-        const d = i - t;
-        let z, y, op;
-        if (d >= 0) { z = -d * 900 - 60; y = d * 60; op = d < .45 ? 1 : Math.max(0, 1 - (d - .45) / .35); }
-        else { z = -60 + d * 120; y = d * 260; op = Math.max(0, 1 + d / .22); }
-        const x = (+el.dataset.x) * Math.min(1, Math.abs(d)) * .6;
-        const ry = (+el.dataset.ry) * Math.min(1, Math.abs(d));
-        el.style.opacity = op.toFixed(3);
-        el.style.visibility = op < .01 ? 'hidden' : 'visible';
-        el.style.zIndex = Math.round(100 - d * 10);
-        el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, ${z.toFixed(1)}px) rotateY(${ry.toFixed(2)}deg) rotateX(${(d * 4).toFixed(2)}deg) scale(${fit.toFixed(3)})`;
-      });
-      floor.style.setProperty('--fy', (t * 400).toFixed(1) + 'px');
-      prog.style.width = (p * 100).toFixed(2) + '%';
-      prog.style.opacity = p > .97 || p < .01 ? 0 : 1;
-      const ho = Math.max(0, 1 - p * 7); head.style.opacity = ho.toFixed(2); capText.parentElement.style.opacity = (1 - ho).toFixed(2);
-      const idx = Math.min(panels.length - 1, Math.max(0, Math.round(t)));
-      if (idx !== capIdx) {
-        capIdx = idx;
-        capText.style.opacity = 0;
-        setTimeout(() => {
-          const [k, h, d] = TOUR[capIdx];
-          document.getElementById('capK').textContent = `0${capIdx + 1} · ${k}`;
-          document.getElementById('capH').textContent = h;
-          document.getElementById('capP').textContent = d;
-          capText.style.opacity = 1;
-        }, 120);
-        navBtns.forEach((b, j) => b.classList.toggle('on', j === idx));
-      }
-    }
-    let ticking = false;
-    const kick = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; renderTour(); }); } };
-    if (!isMobile) { addEventListener('scroll', kick, { passive: true }); addEventListener('resize', kick, { passive: true }); if (lenis) lenis.on('scroll', kick); kick(); }
-
-
-    /* ─── Storia : démo en 3 étapes ─── */
-    const stApp = document.getElementById('stApp');
-    if (stApp) {
-      const steps = [...stApp.querySelectorAll('.sto-steps li')], views = [...stApp.querySelectorAll('.sto-v')];
-      let cur = 0, timer = null, manual = false, visible = false;
-      const show = i => {
-        cur = i;
-        steps.forEach((s, j) => { s.classList.remove('on'); void s.offsetWidth; s.classList.toggle('on', j === i); });
-        views.forEach((v, j) => v.classList.toggle('on', j === i));
-        clearTimeout(timer);
-        if (!manual && visible && !reduced) timer = setTimeout(() => show((cur + 1) % views.length), 4500);
-      };
-      steps.forEach((s, i) => s.querySelector('button').addEventListener('click', () => { manual = true; stApp.classList.add('manual'); show(i); }));
-      new IntersectionObserver(e => { visible = e[0].isIntersecting; if (visible) show(cur); else clearTimeout(timer); }, { threshold: .35 }).observe(stApp);
-      show(0);
-    }
-
-    /* ─── Ruban résultats ─── */
-    const fig = (c, inner) => `<figure class="${c}">${inner}</figure>`;
-    const r1 = ['R5','R12','R3','R1','R15','R14','R8','R4'].map(n => fig('sq', `<img src="assets/dash/${n}.webp" alt="" loading="lazy" decoding="async">`)).join('');
-    const r2 = [
-      fig('pt', '<img src="assets/avis/roas10.webp" alt="" loading="lazy" decoding="async">'),
-      fig('pt', '<video src="assets/chine/packaging.mp4" muted loop playsinline preload="none"></video>'),
-      fig('pt', '<img src="assets/avis/avis.webp" alt="" loading="lazy" decoding="async">'),
-      fig('pt', '<img src="assets/avis/vente1.webp" alt="" loading="lazy" decoding="async">'),
-      fig('pt', '<video src="assets/chine/showroom-parfum.mp4" muted loop playsinline preload="none"></video>'),
-      fig('pt', '<img src="assets/avis/accomp2.webp" alt="" loading="lazy" decoding="async">'),
-      fig('pt', '<img src="assets/avis/rayan.webp" alt="" loading="lazy" decoding="async">'),
-      fig('pt', '<img src="assets/avis/accomp1.webp" alt="" loading="lazy" decoding="async">')
-    ].join('');
-    document.getElementById('rb1').innerHTML = r1 + r1;
-    document.getElementById('rb2').innerHTML = r2 + r2;
-
-    /* ─── Zoom des vidéos au scroll ─── */
-    const pzEls = [...document.querySelectorAll('.pz')];
-    let pzT = false;
-    const pz = () => { pzT = false; pzEls.forEach(el => { const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh()) return; const k = Math.min(Math.max((vh() - r.top) / (vh() + r.height), 0), 1); el.style.setProperty('--z', (1.18 - k * .18).toFixed(3)); }); };
-    if (!isMobile) addEventListener('scroll', () => { if (!pzT) { pzT = true; requestAnimationFrame(pz); } }, { passive: true });
-
-    /* ─── Barre d'appel mobile ─── */
-    const mCta = document.getElementById('mCta');
-    if (mCta) {
-      let pastHero = false, atEnd = false;
-      const upd = () => mCta.classList.toggle('show', pastHero && !atEnd);
-      new IntersectionObserver(e => { pastHero = !e[0].isIntersecting; upd(); }).observe(document.querySelector('.hero .cta-row'));
-      new IntersectionObserver(e => { atEnd = e[0].isIntersecting; upd(); }, { rootMargin: '0px 0px -30% 0px' }).observe(document.getElementById('appel'));
-    }
-
-    /* ─── Vidéos : lecture seulement à l'écran ─── */
-    const vio = new IntersectionObserver(es => es.forEach(en => en.isIntersecting ? en.target.play().catch(() => {}) : en.target.pause()), { rootMargin: isMobile ? '0px' : '150px', threshold: isMobile ? .2 : 0 });
-    document.querySelectorAll('video').forEach(v => vio.observe(v));
-
-    /* ─── Animations CSS en pause hors écran ─── */
-    const pio = new IntersectionObserver(es => es.forEach(en => en.target.classList.toggle('paused', !en.isIntersecting)), { rootMargin: '200px' });
-    document.querySelectorAll('main > section, .ticker').forEach(sec => pio.observe(sec));
-
-    /* ─── Réservation ─── */
-    const bookBtn = document.getElementById('book-btn');
-    bookBtn.addEventListener('click', e => {
-      e.preventDefault();
-      if (!BOOKING_URL) { bookBtn.textContent = 'Calendrier bientôt disponible'; return; }
-      if (EMBED_BOOKING) document.getElementById('booking').innerHTML = `<iframe src="${BOOKING_URL}" title="Réserver un appel" loading="lazy" decoding="async" data-lenis-prevent></iframe>`;
-      else window.open(BOOKING_URL, '_blank', 'noopener');
-    });
-
-    /* ─── Tableaux de ventes + logos ─── */
-    const DASH = ['R5','R12','R3','R1','R15','R14','R8','R4'];
-    const logos = [1,2,3,4,5,7,8,10,11].map(i => `<img src="assets/made/partners/p${i}.webp" alt="" loading="lazy" decoding="async" width="138" height="46">`).join('') + '<img src="assets/made/partners/beautymarts.webp" alt="Beauty Mart\'s" loading="lazy" decoding="async" style="height:24px">';
-    document.getElementById('logos').innerHTML = logos + logos;
-
-    /* ─── Menu mobile ─── */
-    const burger = document.querySelector('.burger'), mmenu = document.getElementById('mmenu');
-    const toggle = open => { burger.classList.toggle('open', open); mmenu.classList.toggle('open', open); burger.setAttribute('aria-expanded', open); };
-    burger.addEventListener('click', () => toggle(!mmenu.classList.contains('open')));
-    mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
-
-    /* ─── Onglets méthode ─── */
-    document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
-      document.querySelectorAll('.tabs button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', x === b); });
-      document.getElementById('road-deb').hidden = b.dataset.tab !== 'deb';
-      const conf = document.getElementById('road-conf');
-      conf.hidden = b.dataset.tab !== 'conf';
-      conf.querySelectorAll('.rv').forEach(el => el.classList.add('in'));
-    }));
-
-    /* ─── Compteurs ─── */
-    const cio = new IntersectionObserver(es => es.forEach(en => {
-      if (!en.isIntersecting) return;
-      const el = en.target, to = +el.dataset.count, t0 = performance.now();
-      const tick = now => { const k = Math.min((now - t0) / 1400, 1); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 4))); if (k < 1) requestAnimationFrame(tick); };
-      requestAnimationFrame(tick); cio.unobserve(el);
-    }), { threshold: .6 });
-    document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
-
-    /* ─── Titres mot par mot ─── */
-    document.querySelectorAll('h2.rv').forEach(h => {
-      let i = 0;
-      const wrap = node => [...node.childNodes].forEach(n => {
-        if (n.nodeType === 3) {
-          const frag = document.createDocumentFragment();
-          n.textContent.split(/(\s+)/).forEach(part => {
-            if (!part) return;
-            if (/^\s+$/.test(part)) return frag.append(part);
-            const sp = document.createElement('span'); sp.className = 'w'; sp.textContent = part;
-            sp.style.transitionDelay = (i++ * 45) + 'ms'; frag.append(sp);
-          });
-          n.replaceWith(frag);
-        } else if (n.nodeType === 1) wrap(n);
-      });
-      wrap(h);
-    });
-
-    /* ─── Apparition au scroll ─── */
-    const io = new IntersectionObserver(entries => entries.forEach(en => {
-      if (!en.isIntersecting) return;
-      const sibs = [...en.target.parentElement.children].filter(c => c.classList.contains('rv'));
-      en.target.style.transitionDelay = Math.min(sibs.indexOf(en.target), 5) * 60 + 'ms';
-      en.target.classList.add('in');
-      setTimeout(() => { en.target.style.transitionDelay = ''; }, 1400);
-      io.unobserve(en.target);
-    }), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.rv').forEach(el => io.observe(el));
-  </script>
+  <script src="assets/vendor/lenis.min.js" defer></script>
+  <script src="assets/globe/planete.js" defer></script>
+  <script src="assets/app.js" defer></script>
 </body>
 </html>
