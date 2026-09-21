@@ -18,6 +18,15 @@
     const isTouch = matchMedia('(hover: none)').matches;
     const vh = () => window.innerHeight;
 
+    /* ─── Tous les boutons d'appel ouvrent directement la réservation ─── */
+    if (BOOKING_URL) {
+      document.querySelectorAll('a[href="#appel"]').forEach(a => {
+        a.href = BOOKING_URL;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+      });
+    }
+
     /* ─── Scroll fluide (desktop souris uniquement) ─── */
     const lenis = reduced || isTouch || isMobile || typeof Lenis === 'undefined' ? null : new Lenis({ lerp: .12, smoothWheel: true, autoRaf: false });
     if (lenis) { const loop = t => { lenis.raf(t); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
