@@ -3,7 +3,7 @@
     document.querySelectorAll('a[href^="http"]').forEach(a => { a.rel = 'noopener noreferrer'; a.target = '_blank'; });
 
     /* ─── CONFIG ─── */
-    const BOOKING_URL = 'https://cal.com/agence-made/decouverte';
+    const BOOKING_URL = 'https://cal.com/team/made-academie/appel-coaching-academie';
     const EMBED_BOOKING = false;
     const RESULTS = ['R12','R1','R3','R4','R5','R6','R7','R8','R9','R10','R11','R13','R14','R15','R16','R17','R18','R19','R20','R21','R2aniv'];
     const TOUR = [
