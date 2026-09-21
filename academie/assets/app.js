@@ -18,6 +18,50 @@
     const isTouch = matchMedia('(hover: none)').matches;
     const vh = () => window.innerHeight;
 
+    /* ─── Statistiques ───────────────────────────────────────────────────────
+       Aucun traqueur tiers n'est chargé tant que PROVIDER est vide.
+       Pour activer : renseigner PROVIDER ('plausible' | 'umami' | 'ga4') et KEY,
+       puis autoriser le domaine du script dans la balise Content-Security-Policy.
+       Sans fournisseur, les événements restent comptés en local (window.MADE_STATS)
+       et la profondeur de lecture est transmise dans le lien de réservation. */
+    const STATS = { provider: '', key: '', host: '' };
+    const counters = Object.create(null);
+    let deepest = 0;
+
+    (function loadStats() {
+      if (!STATS.provider || !STATS.key) return;
+      const sc = document.createElement('script');
+      sc.defer = true;
+      if (STATS.provider === 'plausible') { sc.src = (STATS.host || 'https://plausible.io') + '/js/script.tagged-events.js'; sc.dataset.domain = STATS.key; }
+      else if (STATS.provider === 'umami') { sc.src = (STATS.host || 'https://cloud.umami.is') + '/script.js'; sc.dataset.websiteId = STATS.key; }
+      else if (STATS.provider === 'ga4') { sc.src = 'https://www.googletagmanager.com/gtag/js?id=' + STATS.key; window.dataLayer = window.dataLayer || []; window.gtag = function () { dataLayer.push(arguments); }; gtag('js', new Date()); gtag('config', STATS.key); }
+      document.head.appendChild(sc);
+    })();
+
+    const track = (name, props = {}) => {
+      counters[name] = (counters[name] || 0) + 1;
+      window.MADE_STATS = counters;
+      try {
+        if (STATS.provider === 'plausible' && window.plausible) window.plausible(name, { props });
+        else if (STATS.provider === 'umami' && window.umami) window.umami.track(name, props);
+        else if (STATS.provider === 'ga4' && window.gtag) window.gtag('event', name, props);
+      } catch (e) {}
+    };
+
+    /* profondeur de lecture : 25 / 50 / 75 / 100 % */
+    (function readDepth() {
+      const marks = [25, 50, 75, 100];
+      let done = 0;
+      const onScroll = () => {
+        const h = document.documentElement.scrollHeight - innerHeight;
+        const pct = h > 0 ? Math.round((scrollY / h) * 100) : 0;
+        if (pct > deepest) deepest = pct;
+        while (done < marks.length && pct >= marks[done]) { track('lecture', { profondeur: marks[done] + ' %' }); done++; }
+      };
+      addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
     /* ─── Tous les boutons d'appel ouvrent directement la réservation ─── */
     /* Chaque bouton porte sa provenance : sur cal.com tu vois quel bloc a déclenché la réservation. */
     const zoneOf = el => {
@@ -45,6 +89,10 @@
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
         a.dataset.zone = zone;
+        a.addEventListener('click', () => {
+          track('reservation', { zone });
+          try { const u = new URL(a.href); u.searchParams.set('utm_content', 'lecture-' + deepest); a.href = u.toString(); } catch (e) {}
+        });
       });
     }
 
@@ -185,7 +233,7 @@
       e.preventDefault();
       if (!BOOKING_URL) { bookBtn.textContent = 'Calendrier bientôt disponible'; return; }
       if (EMBED_BOOKING) document.getElementById('booking').innerHTML = `<iframe src="${BOOKING_URL}" title="Réserver un appel" loading="lazy" decoding="async" data-lenis-prevent></iframe>`;
-      else window.open(withSource(BOOKING_URL, 'bloc-final'), '_blank', 'noopener');
+      else { track('reservation', { zone: 'bloc-final' }); window.open(withSource(BOOKING_URL, 'bloc-final') + '&utm_content=lecture-' + deepest, '_blank', 'noopener'); }
     });
 
     /* ─── Tableaux de ventes + logos ─── */
