@@ -89,20 +89,24 @@
     if (!isMobile) { addEventListener('scroll', kick, { passive: true }); addEventListener('resize', kick, { passive: true }); if (lenis) lenis.on('scroll', kick); kick(); }
 
 
-    /* ─── Storia : démo en 3 étapes ─── */
+    /* ─── Storia : chapitres qui défilent ─── */
     const stApp = document.getElementById('stApp');
-    if (stApp) {
-      const steps = [...stApp.querySelectorAll('.sto-steps li')], views = [...stApp.querySelectorAll('.sto-v')];
-      let cur = 0, timer = null, manual = false, visible = false;
+    const stoChap = document.getElementById('stoChap');
+    if (stApp && stoChap) {
+      const items = [...stoChap.querySelectorAll('li[data-v]')];
+      const views = [...stApp.querySelectorAll('.sto-v')];
+      const tag = document.getElementById('stoTag');
+      let cur = 0, timer = null, visible = false, manual = false;
       const show = i => {
         cur = i;
-        steps.forEach((s, j) => { s.classList.remove('on'); void s.offsetWidth; s.classList.toggle('on', j === i); });
+        items.forEach((el, j) => el.classList.toggle('on', j === i));
         views.forEach((v, j) => v.classList.toggle('on', j === i));
+        if (tag) tag.textContent = 'Chapitre 0' + (i + 1);
         clearTimeout(timer);
-        if (!manual && visible && !reduced) timer = setTimeout(() => show((cur + 1) % views.length), 4500);
+        if (!manual && visible && !reduced) timer = setTimeout(() => show((cur + 1) % views.length), 4200);
       };
-      steps.forEach((s, i) => s.querySelector('button').addEventListener('click', () => { manual = true; stApp.classList.add('manual'); show(i); }));
-      new IntersectionObserver(e => { visible = e[0].isIntersecting; if (visible) show(cur); else clearTimeout(timer); }, { threshold: .35 }).observe(stApp);
+      items.forEach((el, i) => el.addEventListener('click', () => { manual = true; show(i); }));
+      new IntersectionObserver(e => { visible = e[0].isIntersecting; if (visible) show(cur); else clearTimeout(timer); }, { threshold: .3 }).observe(stApp);
       show(0);
     }
 

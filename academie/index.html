@@ -1026,12 +1026,7 @@
     .cta-band{padding-block:10px 60px!important}
 
     /* reflets liquides */
-    .sheen{isolation:isolate}
     .phase,.sto-win{position:relative}
-    .sheen::before{content:'';position:absolute;top:-10%;bottom:-10%;left:0;width:45%;will-change:transform;transform:translateX(-160%) skewX(-20deg);z-index:5;pointer-events:none;background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.08) 35%,rgba(255,255,255,.28) 50%,rgba(255,255,255,.08) 65%,transparent 100%)}
-    .sheen.in::before,.in .sheen::before{animation:sheen 1.8s .4s var(--ease) both}
-    .sheen:hover::before{animation:sheen 1.3s var(--ease)}
-    @keyframes sheen{from{transform:translateX(-160%) skewX(-20deg)}to{transform:translateX(320%) skewX(-20deg)}}
     .emo-card,.phase,.offer,.sto-win,.canton-hero,.terrain-card{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(255,255,255,.08)}
     .emo-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.6s var(--ease)}
     .emo-card.in video{transform:scale(1)}
@@ -1082,7 +1077,7 @@
 
 
     @media (max-width:640px){
-      .emo-card.sheen,.phase.sheen{position:sticky}
+      .emo-card,.phase{position:sticky}
       .emo-card,.phase,.panel{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 0 1px rgba(255,255,255,.1)!important}
       .emo-card+.emo-card,.phase+.phase{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 0 1px rgba(255,255,255,.1),0 -18px 30px -18px rgba(0,0,0,.9)!important}
       .pz video{transform:none!important}
@@ -1213,7 +1208,6 @@
     .bg-fx i:nth-child(1){width:52vw;height:52vw;left:-14vw;top:-16vw;background:radial-gradient(circle,rgba(139,92,246,.42),transparent 68%);animation:drift1 34s ease-in-out infinite alternate}
     .bg-fx i:nth-child(2){width:46vw;height:46vw;right:-12vw;top:24vh;background:radial-gradient(circle,rgba(182,145,254,.3),transparent 70%);animation:drift2 42s ease-in-out infinite alternate}
     .bg-fx i:nth-child(3){width:60vw;height:60vw;left:18vw;bottom:-26vw;background:radial-gradient(circle,rgba(56,189,248,.14),transparent 70%);animation:drift3 50s ease-in-out infinite alternate}
-    .bg-fx u{position:absolute;inset:0;display:block;opacity:.028;
       background-image:url(assets/icons/m.webp);background-size:200px;background-repeat:repeat;
       -webkit-mask:radial-gradient(80% 65% at 50% 30%,#000,transparent 88%);mask:radial-gradient(80% 65% at 50% 30%,#000,transparent 88%)}
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -1230,7 +1224,6 @@
       .bg-fx i:nth-child(1){width:90vw;height:90vw;left:-26vw;top:-18vh}
       .bg-fx i:nth-child(2){width:80vw;height:80vw;right:-30vw;top:30vh}
       .bg-fx i:nth-child(3){width:96vw;height:96vw;left:-10vw;bottom:-30vh}
-      .bg-fx u{background-size:56px 56px}
       /* planète plus présente, posée sur son halo */
       .hero .planet{max-width:min(94vw,430px)!important;margin:6px auto -18px!important}
       .planet::before{width:96%;height:96%;filter:blur(34px);background:radial-gradient(circle,rgba(182,145,254,.3),rgba(139,92,246,.14) 46%,transparent 72%)}
@@ -1269,13 +1262,78 @@
     /* si le navigateur ne sait pas masquer une image, on n'affiche pas de carré violet */
     @supports not ((-webkit-mask-image: url(assets/icons/m.webp)) or (mask-image: url(assets/icons/m.webp))){
       .eyebrow::before,.mi,.o-list li::before,.sto-promise li::before,.track span::after,.st-badge i{display:none}
-      .bg-fx u{display:none}
+    }
+    /* ═════════ STORIA V3 : bloc éditorial MADE ═════════ */
+    #storia{overflow:hidden}
+    .sto2{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(30px,5vw,70px);align-items:center}
+    .sto2-copy h2{margin:16px 0 14px}
+    .sto2-chap{margin-top:28px;border-top:1px solid var(--line)}
+    .sto2-chap li{display:grid;grid-template-columns:auto 1fr;column-gap:16px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line);opacity:.5;transition:opacity .4s var(--ease),padding .4s var(--ease)}
+    .sto2-chap li b{font-family:var(--cond);font-weight:600;font-size:15px;letter-spacing:.06em;color:var(--made)}
+    .sto2-chap li span{font-weight:500;font-size:17px;letter-spacing:-.02em}
+    .sto2-chap li em{grid-column:2;font-style:normal;font-size:14px;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .45s var(--ease),margin .45s var(--ease)}
+    .sto2-chap li.on{opacity:1}
+    .sto2-chap li.on em{max-height:40px;margin-top:4px}
+    .sto2-chap li[data-v]{cursor:pointer}
+    .sto2-app{position:relative}
+    .sto2-app::after{content:'';position:absolute;inset:8% -6% -12% -6%;z-index:-1;background:radial-gradient(60% 55% at 50% 60%,rgba(139,92,246,.45),transparent 70%);filter:blur(46px)}
+    .sto2-frame{border-radius:20px;overflow:hidden;background:#faf7f2;color:#15131a;box-shadow:0 0 0 1px rgba(255,255,255,.16),0 50px 90px -40px rgba(0,0,0,.9)}
+    .sto2-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;background:#efeae2;border-bottom:1px solid #e6e0d6;font-size:13px}
+    .sto2-dot{width:9px;height:9px;border-radius:50%;background:#d9d2c6}
+    .sto2-bar b{margin-left:6px;font-style:italic;font-weight:600;letter-spacing:-.03em;font-size:15px}
+    .sto2-bar i{margin-left:auto;font-style:normal;font-family:var(--cond);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#8a8479}
+    .sto2-stage{position:relative;height:430px}
+    .sto2-stage .sto-v{position:absolute;inset:22px;display:flex;flex-direction:column;gap:14px;justify-content:center;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .45s var(--ease),transform .6s var(--ease)}
+    .sto2-stage .sto-v.on{opacity:1;transform:none;pointer-events:auto}
+    .sto2-brand{display:flex;flex-direction:column;gap:14px}
+    .sto2-names{display:flex;gap:8px}
+    .sto2-names span{padding:10px 16px;border-radius:8px;background:#fff;box-shadow:0 0 0 1px #ece6dc;font-weight:600;font-size:16px}
+    .sto2-names span.on{box-shadow:0 0 0 2px #7b5ea7}
+    .sto2-tone{font-size:14.5px;color:#6b655b}
+    @media (max-width:1080px){.sto2{grid-template-columns:1fr}}
+    @media (max-width:640px){
+      .sto2{gap:24px}
+      .sto2-chap li span{font-size:16px}
+      .sto2-chap li em{font-size:13px}
+      .sto2-stage{height:390px}
+      .sto2-stage .sto-v{inset:16px}
+      .cta-inline .btn{width:100%}
+    }
+
+    .bg-liquid{position:absolute;inset:-10%;width:120%;height:120%;object-fit:cover;opacity:.28;filter:blur(26px) saturate(150%) brightness(.9);mix-blend-mode:screen;pointer-events:none}
+    @media (max-width:640px){.bg-liquid{opacity:.22;filter:blur(22px) saturate(140%) brightness(.85)}}
+    @media (prefers-reduced-motion:reduce){.bg-liquid{display:none}}
+
+    /* boutons MADE : angles nets, label condensé */
+    .btn{border-radius:12px;font-family:var(--cond);font-weight:600;letter-spacing:.07em;text-transform:uppercase;font-size:16px}
+    .btn-lg{font-size:18px;padding:17px 26px}
+    .btn-sm{font-size:14px;letter-spacing:.06em}
+    .btn-neon{background:linear-gradient(180deg,#9b6bfb,#6d28d9);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 14px 34px -14px rgba(139,92,246,.9)}
+    .btn-neon:hover{background:linear-gradient(180deg,#a97bff,#7a35e8)}
+    .btn-ghost{box-shadow:inset 0 0 0 1px rgba(182,145,254,.45);background:rgba(182,145,254,.06)}
+    .btn-red{border-radius:12px}
+    .m-cta .btn{border-radius:14px}
+    .cta-inline span{font-family:var(--sans);text-transform:none;letter-spacing:0}
+
+    /* séparation discrète entre les grands blocs */
+    main > section + section::before{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:min(1100px,86vw);height:1px;
+      background:linear-gradient(90deg,transparent,rgba(182,145,254,.35),transparent);opacity:.7}
+    main > section.hero::before,main > section.ribbon::before,main > section.tour::before,main > section.cta-band::before,main > section.terrain::before{display:none}
+
+    /* rayons harmonisés : moins arrondi, plus « studio » */
+    .offer,.phase,.emo-card,.bcard,.evolve,.final,.ia-card{border-radius:20px}
+    .terrain-card,.canton-hero{border-radius:26px}
+    .dash-grid figure,.rb-track figure,.ph-media,.member .ph,.browser{border-radius:14px}
+    .glass-lite{border-radius:14px}
+    @media (max-width:640px){
+      .offer,.phase,.emo-card,.bcard{border-radius:18px}
+      .terrain-card,.canton-hero{border-radius:22px}
     }
 
   </style>
 </head>
 <body>
-  <div class="bg-fx" aria-hidden="true"><i></i><i></i><i></i><u></u></div>
+  <div class="bg-fx" aria-hidden="true"><video class="bg-liquid" src="assets/bg-liquid.mp4" poster="assets/bg-liquid.webp" muted loop playsinline autoplay preload="none"></video><i></i><i></i><i></i></div>
   <div class="ambient" aria-hidden="true"></div>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="made-logo" viewBox="-2 0 550 180"><path d="M152.61,49.65c-9.52-3.24-20.29-3.6-30.77.15-9.23,3.31-18.1,9.78-25.86,20.01-7.11-10.81-18.46-19.27-31.65-21.99-13.41-2.72-28.28.59-42.2,12.73v-13.83H0v129.61h22.05v-93.57c5.93-9.42,19.49-12.51,33.04-8.61,13.7,3.9,25.57,14.49,26.89,29.86v72.38h22.05v-93.42c7.03-9.78,20.88-12.58,34.07-8.68,13.41,3.97,24.76,14.56,25.86,29.79v72.38h22.42v-83.93c0-18.83-15.02-36.41-33.85-42.74l.07-.15Z"/><path d="M280.31,59.66c-9.52-8.39-20.44-12.87-34.14-12.87-27.33,0-56.19,23.32-56.19,64.36,0,32.66,21.76,65.17,56.19,65.17,8.06,0,15.02-1.32,21.61-4.49,4.32-2.13,8.42-5,12.53-8.68v13.17h24.4V46.78h-24.4v12.87ZM279.29,103.5c2.93,5.74,4.54,12.06,5.42,20.89,0,7.65-2.35,13.53-5.94,17.8-3.66,4.27-8.79,7.06-14.95,8.02-12.23,1.99-28.35-3.38-41.91-18.61-15.97-18.02-17.14-33.32-12.24-44.72,4.25-9.78,13.41-14.27,24.1-14.2,10.84,0,22.71,4.78,31.06,12.95,6.96,6.69,11.36,12.14,14.36,17.87h.07Z"/><path d="M401.64,60.98c-9.89-8.46-21.17-12.87-35.39-12.87-28.06,0-57.88,22.95-57.88,63.78,0,32.44,22.64,64.58,57.88,64.58,8.28,0,15.46-1.25,22.2-4.41,4.54-2.13,8.87-5,13.19-8.83v13.24h24.98V0h-24.98v60.98ZM402.15,104.31c3.08,6.62,4.76,13.83,5.64,22.58,0,7.43-2.49,13.24-6.52,17.43-4.03,4.27-9.82,7.06-16.56,8.09-13.63,1.99-30.99-3.46-44.91-18.46-16.48-17.8-18.1-37.29-13.04-48.55,4.32-9.49,14.43-13.98,26.67-13.68,12.16.22,25.35,5.22,34,13.24,7.03,6.55,11.65,12.73,14.73,19.35Z"/><path d="M545.75,119.83h-15.53l-.29,3.31c-.95,11.69-4.4,19.64-9.31,24.64-4.83,5-11.36,7.43-19.12,7.43-21.76,0-42.35-17.88-51.73-40.46h93.85v-3.6c0-17.58-5.06-34.5-14.65-47.08-9.67-12.65-23.96-20.89-41.91-20.89-19.56,0-33.92,10.3-43.23,23.83-9.23,13.46-13.77,30.23-13.77,44.21,0,35.9,24.32,68.78,57.37,68.78,30.4,0,50.48-23.54,57.29-55.83l.88-4.34h.15ZM519.23,95.33h-72.75c.66-8.97,3.74-15.67,8.13-20.23,4.98-5.15,11.94-7.8,20.07-7.65h.07c16.27,0,31.8,9.34,44.47,27.88Z"/></symbol></svg>
 
@@ -1393,10 +1451,10 @@
           <h2 class="rv">Moins de doutes. <em class="s">Plus d'ambition.</em></h2>
         </div>
         <div class="emo-grid">
-          <article class="emo-card sheen rv"><video src="assets/chine/carte-nuit.mp4" poster="assets/chine/carte-nuit.jpg" muted loop playsinline preload="none"></video><div><span>01</span><h3>Voir plus grand.</h3><p>Ta marque, ton produit, ton usine.</p></div></article>
-          <article class="emo-card sheen rv"><video src="assets/chine/carte-produit.mp4" poster="assets/chine/carte-produit.jpg" muted loop playsinline preload="none"></video><div><span>02</span><h3>Tes premiers colis. Ta marque.</h3><p>Un vrai produit, choisi avec méthode.</p></div></article>
-          <article class="emo-card sheen rv"><video src="assets/chine/showroom-vetement.mp4" poster="assets/chine/showroom-vetement.jpg" muted loop playsinline preload="none"></video><div><span>03</span><h3>Choisir ton produit sur place.</h3><p>Chez le fabricant, sans intermédiaire.</p></div></article>
-          <article class="emo-card sheen rv"><video src="assets/chine/carte-equipe.mp4" poster="assets/chine/carte-equipe.jpg" muted loop playsinline preload="none"></video><div><span>04</span><h3>Plus jamais seul.</h3><p>Un coach chaque semaine, jusqu'au bout.</p></div></article>
+          <article class="emo-card rv"><video src="assets/chine/carte-nuit.mp4" poster="assets/chine/carte-nuit.jpg" muted loop playsinline preload="none"></video><div><span>01</span><h3>Voir plus grand.</h3><p>Ta marque, ton produit, ton usine.</p></div></article>
+          <article class="emo-card rv"><video src="assets/chine/carte-produit.mp4" poster="assets/chine/carte-produit.jpg" muted loop playsinline preload="none"></video><div><span>02</span><h3>Tes premiers colis. Ta marque.</h3><p>Un vrai produit, choisi avec méthode.</p></div></article>
+          <article class="emo-card rv"><video src="assets/chine/mall-fournisseurs.mp4" poster="assets/chine/mall-fournisseurs.jpg" muted loop playsinline preload="none"></video><div><span>03</span><h3>Choisir ton produit sur place.</h3><p>Chez le fabricant, sans intermédiaire.</p></div></article>
+          <article class="emo-card rv"><video src="assets/chine/carte-equipe.mp4" poster="assets/chine/carte-equipe.jpg" muted loop playsinline preload="none"></video><div><span>04</span><h3>Plus jamais seul.</h3><p>Un coach chaque semaine, jusqu'au bout.</p></div></article>
         </div>
         <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Je veux ça pour ma marque <span class="arr">→</span></a><span>Appel gratuit · 20 min · sans engagement</span></div>
       </div>
@@ -1405,45 +1463,61 @@
     <!-- ═══ STORIA : L'OUTIL MADE ═══ -->
     <section id="storia">
       <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="st-face" viewBox="0 0 64 64"><rect x="4" y="6" width="56" height="52" rx="18" fill="currentColor"/><circle cx="23" cy="28" r="8" fill="#fff"/><circle cx="41" cy="28" r="8" fill="#fff"/><circle cx="25" cy="29" r="4" fill="#15131a"/><circle cx="43" cy="29" r="4" fill="#15131a"/><path d="M24 42c4 4 12 4 16 0" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="14" cy="40" r="3.5" fill="#fff" opacity=".22"/><circle cx="50" cy="40" r="3.5" fill="#fff" opacity=".22"/></symbol></svg>
-      <div class="wrap">
-        <div class="head c">
+      <div class="wrap sto2">
+        <div class="sto2-copy">
           <span class="st-badge rv"><i></i>Inclus dans l'Académie</span>
-          <h2 class="rv">Tu as une idée. <em class="s">Storia en fait une marque.</em></h2>
-          <p class="sub rv">Colle un lien produit. Storia te guide jusqu'à ta première vente, étape par étape.</p>
+          <h2 class="rv">Storia écrit ta marque <em class="s">avec toi.</em></h2>
+          <p class="sub rv">Tu colles un lien produit. Chaque chapitre te sort le travail fini : l'angle, l'identité, les fournisseurs, la boutique, les pubs.</p>
+          <ol class="sto2-chap rv" id="stoChap">
+            <li data-v="0"><b>01</b><span>Produit</span><em>Avis et concurrents analysés</em></li>
+            <li data-v="1"><b>02</b><span>Marque</span><em>Nom, identité, ton de voix</em></li>
+            <li data-v="2"><b>03</b><span>Fournisseurs</span><em>Prix, délais, marge par vente</em></li>
+            <li data-v="3"><b>04</b><span>Boutique</span><em>Page produit prête à vendre</em></li>
+            <li data-v="4"><b>05</b><span>Pubs</span><em>Visuels et scripts déclinés</em></li>
+            <li><b>06</b><span>Emails</span><em>Séquences de relance</em></li>
+            <li><b>07</b><span>Campagnes</span><em>Budget et lancement</em></li>
+          </ol>
+          <div class="cta-inline rv" style="align-items:flex-start;margin-top:30px"><a href="#appel" class="btn btn-neon btn-lg">Voir Storia en vrai <span class="arr">→</span></a><span>Inclus dans la Formation et le Coaching</span></div>
         </div>
 
-        <div class="sto rv" id="stApp">
-          <ol class="sto-steps">
-            <li><button><b>1</b><span><strong>Tu colles un lien</strong><small>Storia analyse le produit et les avis</small></span><i></i></button></li>
-            <li><button><b>2</b><span><strong>Ta marque prend forme</strong><small>Nom, identité, boutique prête à vendre</small></span><i></i></button></li>
-            <li><button><b>3</b><span><strong>Tes pubs sont prêtes</strong><small>Des visuels qui donnent envie de cliquer</small></span><i></i></button></li>
-          </ol>
-          <div class="sto-win sheen">
-            <div class="st-bar"><i></i><i></i><i></i><span><svg class="st-ico" style="color:#15131a;width:16px;height:16px;vertical-align:-3px"><use href="#st-face"/></svg> storia</span></div>
-            <div class="sto-stage">
+        <div class="sto2-app rv" id="stApp">
+          <div class="sto2-frame">
+            <div class="sto2-bar"><span class="sto2-dot"></span><span class="sto2-dot"></span><span class="sto2-dot"></span><b>storia</b><i id="stoTag">Chapitre 01</i></div>
+            <div class="sto2-stage">
               <div class="sto-v">
                 <div class="sto-input"><span>aliexpress.com/item/100500648</span><i>↑</i></div>
                 <div class="sto-msg"><svg class="st-ico" style="color:#f2a33a"><use href="#st-face"/></svg><div><small>Storia</small><p><b>1 240 avis analysés.</b> Les clientes veulent une peau hydratée sans effet gras.</p><div class="sto-angle"><small>Ton angle</small>« Hydratée en 3 secondes. Zéro film gras. »</div><div class="sto-kpi"><span><small>Marge</small><b>21 €</b></span><span><small>Concurrence</small><b>Faible</b></span><span><small>Potentiel</small><b>Fort</b></span></div></div></div>
               </div>
               <div class="sto-v">
+                <div class="sto2-brand">
+                  <div class="sto2-names"><span class="on">Hydra</span><span>Nuvo</span><span>Tidal</span></div>
+                  <div class="st-palette"><i style="background:#c9b8e8"></i><i style="background:#7b5ea7"></i><i style="background:#f6f2ea"></i><i style="background:#2b2233"></i></div>
+                  <p class="sto2-tone">Ton de voix : direct, sensoriel, sans promesse médicale.</p>
+                </div>
+              </div>
+              <div class="sto-v">
+                <ul class="st-list">
+                  <li><b>Fournisseur A · Shenzhen</b><span>4,20 € · 8 jours</span><em>+18 €</em></li>
+                  <li><b>Fournisseur B · Yiwu</b><span>3,80 € · 12 jours</span><em>+17 €</em></li>
+                  <li><b>Fournisseur C · Canton</b><span>5,10 € · 6 jours</span><em>+16 €</em></li>
+                </ul>
+              </div>
+              <div class="sto-v">
                 <div class="sto-shop">
                   <div class="sto-shop-bar"><b>TA MARQUE</b><span>Soins · À propos · Panier</span></div>
-                  <div class="sto-shop-hero"><img src="assets/photos/marque-gamme.webp" alt="" loading="lazy" decoding="async"><div><small>★★★★★ 1 240 avis</small><b>La brume qui hydrate en 3 secondes.</b><span>32 €</span><i>Ajouter au panier</i></div></div>
+                  <div class="sto-shop-hero"><img src="assets/photos/marque-packshot.webp" alt="" loading="lazy" decoding="async"><div><small>★★★★★ 1 240 avis</small><b>La brume qui hydrate en 3 secondes.</b><span>32 €</span><i>Ajouter au panier</i></div></div>
                 </div>
               </div>
               <div class="sto-v">
                 <div class="sto-ads">
                   <figure><img src="assets/photos/marque-ugc.webp" alt="" loading="lazy" decoding="async"><span>UGC</span></figure>
-                  <figure><img src="assets/photos/marque-boites.webp" alt="" loading="lazy" decoding="async"><span>Lifestyle</span></figure>
-                  <figure><img src="assets/photos/marque-packshot.webp" alt="" loading="lazy" decoding="async"><span>Visuel</span></figure>
+                  <figure><img src="assets/photos/marque-boites.webp" alt="" loading="lazy" decoding="async"><span>Packaging</span></figure>
+                  <figure><img src="assets/photos/marque-lifestyle.webp" alt="" loading="lazy" decoding="async"><span>Visuel</span></figure>
                 </div>
-                <div class="sto-ready">✓ 5 pubs prêtes à lancer</div>
               </div>
             </div>
           </div>
         </div>
-        <ul class="sto-promise rv"><li>Fini la page blanche</li><li>Fini les semaines perdues</li><li>Tu avances chaque soir</li></ul>
-        <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Accéder à Storia <span class="arr">→</span></a><span>Inclus dans la Formation et le Coaching</span></div>
       </div>
     </section>
 
@@ -1459,13 +1533,13 @@
           </div>
         </div>
         <div class="phases" id="road-deb">
-          <article class="phase sheen rv"><div class="ph-media"><img src="assets/photos/marque-gamme.webp" alt="" loading="lazy" decoding="async"><span>01 à 03</span></div><div class="ph-body"><h3>Construire</h3><ol><li><b>Recherche produit</b><span>Un produit qui répond à un vrai manque</span></li><li><b>Validation</b><span>Testé avant d'acheter du stock</span></li><li><b>Branding</b><span>Un nom, une identité, une histoire</span></li></ol></div></article>
-          <article class="phase sheen rv"><div class="ph-media"><video src="assets/chine/usine-skincare2.mp4" poster="assets/chine/usine-skincare2.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Lancer</h3><ol><li><b>Sourcing</b><span>Le bon fournisseur, la bonne marge</span></li><li><b>Boutique Shopify</b><span>Une boutique qui convertit</span></li><li><b>Créas et contenu</b><span>Des pubs qui arrêtent le scroll</span></li></ol></div></article>
-          <article class="phase sheen rv"><div class="ph-media"><img src="assets/dash/R5.webp" alt="" loading="lazy" decoding="async"><span>07 à 09</span></div><div class="ph-body"><h3>Scaler</h3><ol><li><b>Meta, TikTok et TikTok Shop</b><span>Les canaux qui rapportent</span></li><li><b>Email et CRM</b><span>Des clients qui reviennent</span></li><li><b>Scale</b><span>Automatiser et déléguer</span></li></ol></div></article>
+          <article class="phase rv"><div class="ph-media"><video src="assets/chine/carte-produit.mp4" poster="assets/chine/carte-produit.jpg" muted loop playsinline preload="none"></video><span>01 à 03</span></div><div class="ph-body"><h3>Construire</h3><ol><li><b>Recherche produit</b><span>Un produit qui répond à un vrai manque</span></li><li><b>Validation</b><span>Testé avant d'acheter du stock</span></li><li><b>Branding</b><span>Un nom, une identité, une histoire</span></li></ol></div></article>
+          <article class="phase rv"><div class="ph-media"><video src="assets/chine/usine-skincare2.mp4" poster="assets/chine/usine-skincare2.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Lancer</h3><ol><li><b>Sourcing</b><span>Le bon fournisseur, la bonne marge</span></li><li><b>Boutique Shopify</b><span>Une boutique qui convertit</span></li><li><b>Créas et contenu</b><span>Des pubs qui arrêtent le scroll</span></li></ol></div></article>
+          <article class="phase rv"><div class="ph-media"><img src="assets/dash/R5.webp" alt="" loading="lazy" decoding="async"><span>07 à 09</span></div><div class="ph-body"><h3>Scaler</h3><ol><li><b>Meta, TikTok et TikTok Shop</b><span>Les canaux qui rapportent</span></li><li><b>Email et CRM</b><span>Des clients qui reviennent</span></li><li><b>Scale</b><span>Automatiser et déléguer</span></li></ol></div></article>
         </div>
         <div class="phases" id="road-conf" hidden>
-          <article class="phase sheen rv"><div class="ph-media"><img src="assets/chine/showroom-parfum2.jpg" alt="" loading="lazy" decoding="async"><span>01 à 03</span></div><div class="ph-body"><h3>Optimiser</h3><ol><li><b>Audit de ta marque</b><span>Boutique, pubs et marges passées au crible</span></li><li><b>Conversion</b><span>Pages et offres retravaillées</span></li><li><b>Machine à créas</b><span>De nouvelles créas chaque semaine</span></li></ol></div></article>
-          <article class="phase sheen rv"><div class="ph-media"><video src="assets/chine/camion.mp4" poster="assets/chine/camion.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Accélérer</h3><ol><li><b>Nouveaux canaux</b><span>TikTok, TikTok Shop et organique</span></li><li><b>Marque propre</b><span>Sourcing direct et packaging</span></li><li><b>Automatisation</b><span>Scaler sans t'épuiser</span></li></ol></div></article>
+          <article class="phase rv"><div class="ph-media"><img src="assets/chine/showroom-parfum2.jpg" alt="" loading="lazy" decoding="async"><span>01 à 03</span></div><div class="ph-body"><h3>Optimiser</h3><ol><li><b>Audit de ta marque</b><span>Boutique, pubs et marges passées au crible</span></li><li><b>Conversion</b><span>Pages et offres retravaillées</span></li><li><b>Machine à créas</b><span>De nouvelles créas chaque semaine</span></li></ol></div></article>
+          <article class="phase rv"><div class="ph-media"><video src="assets/chine/camion.mp4" poster="assets/chine/camion.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Accélérer</h3><ol><li><b>Nouveaux canaux</b><span>TikTok, TikTok Shop et organique</span></li><li><b>Marque propre</b><span>Sourcing direct et packaging</span></li><li><b>Automatisation</b><span>Scaler sans t'épuiser</span></li></ol></div></article>
         </div>
         <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Construire ma marque <span class="arr">→</span></a><span>On fait le point sur ton projet en 20 min</span></div>
       </div>
@@ -1521,7 +1595,7 @@
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a class="on"><i></i>Storia</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
             <main class="mini-st">
               <div class="ms-top"><svg class="st-ico" style="color:#3b6fe0"><use href="#st-face"/></svg><div><small>Chapitre 4 · Boutique</small><h5>Ta boutique est prête</h5></div><span class="ms-steps"><i class="d"></i><i class="d"></i><i class="d"></i><i class="o"></i><i></i><i></i><i></i></span></div>
-              <div class="ms-shop"><img src="assets/photos/marque-gamme.webp" alt="" loading="lazy" decoding="async"><div><small>★★★★★ 1 240 avis</small><b>La brume qui hydrate en 3 secondes.</b><span>32 €</span><i>Ajouter au panier</i></div></div>
+              <div class="ms-shop"><img src="assets/photos/marque-packshot.webp" alt="" loading="lazy" decoding="async"><div><small>★★★★★ 1 240 avis</small><b>La brume qui hydrate en 3 secondes.</b><span>32 €</span><i>Ajouter au panier</i></div></div>
               <div class="ms-ads"><img src="assets/photos/marque-ugc.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-boites.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-lifestyle.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-packshot.webp" alt="" loading="lazy" decoding="async"></div>
             </main>
           </div>
@@ -1574,7 +1648,7 @@
 
     <!-- ═══ 9. LOIN DES ÉCRANS ═══ -->
     <section class="terrain" aria-label="Sur le terrain">
-      <div class="wrap"><div class="terrain-card rv grow pz sheen">
+      <div class="wrap"><div class="terrain-card rv grow pz">
       <div class="terrain-grid t5">
         <figure><video src="assets/chine/entrepot.mp4" poster="assets/chine/entrepot.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
         <figure><video src="assets/chine/ligne-production.mp4" poster="assets/chine/ligne-production.jpg" muted loop playsinline preload="none"></video><figcaption>Chaîne de production</figcaption></figure>
@@ -1662,7 +1736,7 @@
         <figure><img src="assets/chine/fournisseur.webp" alt="Chez une fournisseuse à Canton" loading="lazy" decoding="async"><figcaption>Chez la fournisseuse</figcaption></figure>
         <figure><video src="assets/chine/showroom-parfum2.mp4" poster="assets/chine/showroom-parfum2.jpg" muted loop playsinline preload="none"></video><figcaption>Showroom parfums</figcaption></figure>
         <figure><video src="assets/chine/mall.mp4" poster="assets/chine/mall.jpg" muted loop playsinline preload="none"></video><figcaption>Mall fournisseurs</figcaption></figure>
-        <figure><video src="assets/chine/showroom-vetement.mp4" poster="assets/chine/showroom-vetement.jpg" muted loop playsinline preload="none"></video><figcaption>Showroom textile</figcaption></figure>
+        <figure><video src="assets/chine/packaging-showroom.mp4" poster="assets/chine/packaging-showroom.jpg" muted loop playsinline preload="none"></video><figcaption>Showroom packaging</figcaption></figure>
       </div>
       </div>
     </section>
@@ -1676,7 +1750,7 @@
         </div>
         <!-- TODO: contenu des offres à finaliser (réunion offres) -->
         <div class="offers">
-          <article class="offer sheen rv">
+          <article class="offer rv">
             <header><span class="o-lvl">En autonomie</span><h3>Formation</h3><p>La méthode et les outils. Tu avances à ton rythme.</p></header>
             <div class="o-chips"><span>Storia inclus</span><span>Lives chaque semaine</span></div>
             <ul class="o-list">
