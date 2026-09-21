@@ -51,7 +51,8 @@
     h1 em.s{display:block}
     h2{font-size:clamp(40px,5.2vw,74px);line-height:1}
     .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--made)}
-    .eyebrow::before{content:'✦';font-size:11px;letter-spacing:0}
+    .eyebrow::before{content:'';width:15px;height:15px;flex:none;background:var(--made);-webkit-mask:var(--ic,url(assets/icons/m.webp)) center/contain no-repeat;mask:var(--ic,url(assets/icons/m.webp)) center/contain no-repeat}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px}
     .sub{font-size:18px;color:var(--muted);max-width:600px;line-height:1.6}
     .head{margin-bottom:56px}
     .head h2{margin:14px 0 16px}
@@ -122,7 +123,7 @@
     .track{display:flex;gap:48px;width:max-content;animation:mq 45s linear infinite}
     .track span{font-family:var(--display);font-size:clamp(20px,2vw,28px);letter-spacing:.5px;white-space:nowrap;display:flex;align-items:center;gap:48px;color:#fff}
     .track span b{color:var(--made);font-weight:400}
-    .track span::after{content:'✦';font-size:14px;color:rgba(182,145,254,.55)}
+    .track span::after{content:'';display:inline-block;width:13px;height:13px;background:rgba(182,145,254,.6);-webkit-mask:url(assets/icons/m.webp) center/contain no-repeat;mask:url(assets/icons/m.webp) center/contain no-repeat}
     @keyframes mq{to{transform:translateX(-50%)}}
 
     /* ═══ 3. Chiffres ═══ */
@@ -519,7 +520,7 @@
     em.s{font-style:normal;font-weight:300;color:var(--made)}
     .eyebrow,.tag,.lvl,.team-label,.step .i,.stat .n,.metrics b,.pill b,.badge,.canton-points b,.pillar h3 small{font-family:var(--cond)}
     .eyebrow{font-size:15px;font-weight:600;letter-spacing:.08em;color:rgba(241,240,234,.55)}
-    .eyebrow::before{color:var(--made)}
+    
     .sub{font-size:17px;color:var(--muted)}
     .head{margin-bottom:44px}
     .head h2{margin:10px 0 14px}
@@ -772,13 +773,8 @@
     @media (max-width:1080px){.st-grid{grid-template-columns:1fr}}
 
     /* ═════════ STORIA V2 ═════════ */
-    @property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
-    @keyframes rot{to{--a:360deg}}
-    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.7)}100%{box-shadow:0 0 0 10px rgba(52,211,153,0)}}
-    .st-badge{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:100px;font-weight:600;font-size:15px;letter-spacing:-.01em}
-    .st-badge::before{content:'';position:absolute;inset:-1.5px;border-radius:inherit;z-index:-2;background:conic-gradient(from var(--a),#ff5a1f,#B691FE,#1f8a80,#f2a33a,#ff5a1f);animation:rot 4s linear infinite}
-    .st-badge::after{content:'';position:absolute;inset:0;border-radius:inherit;z-index:-1;background:#0d0b14}
-    .st-badge i{width:8px;height:8px;border-radius:50%;background:#34d399;animation:pulse 1.6s infinite}
+    .st-badge{display:inline-flex;align-items:center;gap:10px;padding:11px 18px;border-radius:10px;font-weight:600;font-size:15px;letter-spacing:-.01em;background:rgba(182,145,254,.1);box-shadow:inset 0 0 0 1px rgba(182,145,254,.45)}
+    .st-badge i{width:17px;height:17px;background:var(--made);-webkit-mask:url(assets/icons/cap.webp) center/contain no-repeat;mask:url(assets/icons/cap.webp) center/contain no-repeat}
     #storia .st-app{max-width:1040px;margin:0 auto}
     .st-side button span{flex:1}
     .st-side button.on{box-shadow:inset 0 0 0 2px var(--c)}
@@ -931,11 +927,11 @@
     .o-coach img:first-child{margin-left:0}
     .o-list{display:flex;flex-direction:column;margin:14px 0 28px}
     .o-list li{display:flex;align-items:center;gap:12px;padding:11px 0;font-size:15.5px}
-    .o-list li::before{content:'';flex:0 0 20px;height:20px;border-radius:50%;background:rgba(182,145,254,.16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' stroke='%23B691FE' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+    .o-list li::before{content:'';flex:0 0 18px;height:18px;background:var(--made);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M3 10h4l2 3 8-10h4L11 18H7z' fill='%23fff'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M3 10h4l2 3 8-10h4L11 18H7z' fill='%23fff'/%3E%3C/svg%3E") center/contain no-repeat}
     .o-list b{font-weight:600}
     .offer .btn{margin-top:auto;width:100%}
     .offer.feat{background:radial-gradient(120% 80% at 100% 0%,rgba(139,92,246,.28),transparent 60%),#0f0b19;box-shadow:0 40px 100px -40px rgba(139,92,246,.6)}
-    .offer.feat::before{content:'';position:absolute;inset:-1px;border-radius:inherit;z-index:-2;background:conic-gradient(from var(--a),rgba(182,145,254,.1),#B691FE,rgba(182,145,254,.1) 40%,rgba(182,145,254,.1));animation:rot 6s linear infinite}
+    .offer.feat::before{content:'';position:absolute;inset:-1px;border-radius:inherit;z-index:-2;background:linear-gradient(180deg,#B691FE,rgba(182,145,254,.25) 55%,rgba(182,145,254,.1))}
     .offer.feat::after{content:'';position:absolute;inset:1px;border-radius:31px;z-index:-1;background:radial-gradient(120% 80% at 100% 0%,rgba(139,92,246,.22),transparent 60%),#0f0b19}
     .o-badge{position:absolute;top:30px;right:30px;font-family:var(--cond);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:100px;background:var(--made);color:#140d24}
     .o-trust{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 28px;margin-top:26px;font-size:14px;color:var(--muted)}
@@ -1023,7 +1019,7 @@
     .sto-v.on figure:nth-child(2),.sto-v.on .sto-kpi{transition-delay:.15s}.sto-v.on figure:nth-child(3){transition-delay:.3s}
     .sto-promise{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px;margin-top:26px;font-size:15px;color:rgba(241,240,234,.8)}
     .sto-promise li{display:flex;align-items:center;gap:8px}
-    .sto-promise li::before{content:'✓';color:#ff8a5c;font-weight:700}
+    .sto-promise li::before{content:'';width:15px;height:15px;flex:none;background:var(--made);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M3 10h4l2 3 8-10h4L11 18H7z' fill='%23fff'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M3 10h4l2 3 8-10h4L11 18H7z' fill='%23fff'/%3E%3C/svg%3E") center/contain no-repeat}
 
     .cta-inline{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:34px;text-align:center}
     .cta-inline span{font-size:13.5px;color:var(--muted)}
@@ -1036,8 +1032,6 @@
     .sheen.in::before,.in .sheen::before{animation:sheen 1.8s .4s var(--ease) both}
     .sheen:hover::before{animation:sheen 1.3s var(--ease)}
     @keyframes sheen{from{transform:translateX(-160%) skewX(-20deg)}to{transform:translateX(320%) skewX(-20deg)}}
-    .btn-neon::after{content:'';position:absolute;top:0;bottom:0;left:0;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-160%) skewX(-20deg);animation:btnSheen 4.5s ease-in-out infinite;pointer-events:none;will-change:transform}
-    @keyframes btnSheen{0%,70%{transform:translateX(-160%) skewX(-20deg)}100%{transform:translateX(360%) skewX(-20deg)}}
     .emo-card,.phase,.offer,.sto-win,.canton-hero,.terrain-card{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(255,255,255,.08)}
     .emo-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.6s var(--ease)}
     .emo-card.in video{transform:scale(1)}
@@ -1219,11 +1213,9 @@
     .bg-fx i:nth-child(1){width:52vw;height:52vw;left:-14vw;top:-16vw;background:radial-gradient(circle,rgba(139,92,246,.42),transparent 68%);animation:drift1 34s ease-in-out infinite alternate}
     .bg-fx i:nth-child(2){width:46vw;height:46vw;right:-12vw;top:24vh;background:radial-gradient(circle,rgba(182,145,254,.3),transparent 70%);animation:drift2 42s ease-in-out infinite alternate}
     .bg-fx i:nth-child(3){width:60vw;height:60vw;left:18vw;bottom:-26vw;background:radial-gradient(circle,rgba(56,189,248,.14),transparent 70%);animation:drift3 50s ease-in-out infinite alternate}
-    .bg-fx u{position:absolute;inset:0;display:block;
-      background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
-      background-size:72px 72px;
-      -webkit-mask:radial-gradient(75% 60% at 50% 35%,#000,transparent 85%);mask:radial-gradient(75% 60% at 50% 35%,#000,transparent 85%)}
-    .bg-fx s{position:absolute;inset:0;display:block;opacity:.05;mix-blend-mode:overlay;
+    .bg-fx u{position:absolute;inset:0;display:block;opacity:.028;
+      background-image:url(assets/icons/m.webp);background-size:200px;background-repeat:repeat;
+      -webkit-mask:radial-gradient(80% 65% at 50% 30%,#000,transparent 88%);mask:radial-gradient(80% 65% at 50% 30%,#000,transparent 88%)}
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
     @keyframes drift1{to{transform:translate3d(6vw,4vh,0) scale(1.12)}}
     @keyframes drift2{to{transform:translate3d(-5vw,-6vh,0) scale(1.08)}}
@@ -1239,7 +1231,6 @@
       .bg-fx i:nth-child(2){width:80vw;height:80vw;right:-30vw;top:30vh}
       .bg-fx i:nth-child(3){width:96vw;height:96vw;left:-10vw;bottom:-30vh}
       .bg-fx u{background-size:56px 56px}
-      .bg-fx s{display:none}
       /* planète plus présente, posée sur son halo */
       .hero .planet{max-width:min(94vw,430px)!important;margin:6px auto -18px!important}
       .planet::before{width:96%;height:96%;filter:blur(34px);background:radial-gradient(circle,rgba(182,145,254,.3),rgba(139,92,246,.14) 46%,transparent 72%)}
@@ -1248,10 +1239,34 @@
     }
     @media (prefers-reduced-motion:reduce){.bg-fx i{animation:none!important}}
 
+    /* ═════════ SIGNATURE MADE : angles nets, icônes maison ═════════ */
+    .pill,.hero-tags li,.o-chips span,.chip,.tier .badge,.o-badge,.tool .soon-b,.sto-steps button,.tabs,.tabs button{border-radius:8px!important}
+    .canton-points li{border-radius:8px!important}
+    .pill{box-shadow:inset 0 0 0 1px rgba(182,145,254,.35);background:rgba(182,145,254,.08)}
+    .pill b{color:var(--made)}
+    .eyebrow{font-family:var(--cond);text-transform:uppercase}
+    .ia-label,.o-lvl,.rb-cap{letter-spacing:.09em}
+    .sec-ic{width:26px;height:26px;background:var(--made);display:inline-block;flex:none}
+
+    #resultats .eyebrow{--ic:url(assets/icons/chart.webp)}
+    #ia .eyebrow{--ic:url(assets/icons/crown.webp)}
+    #storia .eyebrow{--ic:url(assets/icons/cap.webp)}
+    #roadmap .eyebrow{--ic:url(assets/icons/layers.webp)}
+    #tour .eyebrow{--ic:url(assets/icons/window.webp)}
+    #evolue .eyebrow{--ic:url(assets/icons/bubble.webp)}
+    #marques .eyebrow{--ic:url(assets/icons/trophy.webp)}
+    #equipe .eyebrow{--ic:url(assets/icons/m.webp)}
+    #chine .eyebrow{--ic:url(assets/icons/layers.webp)}
+    #offres .eyebrow{--ic:url(assets/icons/trophy.webp)}
+    #faq .eyebrow{--ic:url(assets/icons/question.webp)}
+    #appel .eyebrow{--ic:url(assets/icons/megaphone.webp)}
+    #pourquoi-ia .eyebrow{--ic:url(assets/icons/crown.webp)}
+    .terrain .eyebrow{--ic:url(assets/icons/layers.webp)}
+
   </style>
 </head>
 <body>
-  <div class="bg-fx" aria-hidden="true"><i></i><i></i><i></i><u></u><s></s></div>
+  <div class="bg-fx" aria-hidden="true"><i></i><i></i><i></i><u></u></div>
   <div class="ambient" aria-hidden="true"></div>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="made-logo" viewBox="-2 0 550 180"><path d="M152.61,49.65c-9.52-3.24-20.29-3.6-30.77.15-9.23,3.31-18.1,9.78-25.86,20.01-7.11-10.81-18.46-19.27-31.65-21.99-13.41-2.72-28.28.59-42.2,12.73v-13.83H0v129.61h22.05v-93.57c5.93-9.42,19.49-12.51,33.04-8.61,13.7,3.9,25.57,14.49,26.89,29.86v72.38h22.05v-93.42c7.03-9.78,20.88-12.58,34.07-8.68,13.41,3.97,24.76,14.56,25.86,29.79v72.38h22.42v-83.93c0-18.83-15.02-36.41-33.85-42.74l.07-.15Z"/><path d="M280.31,59.66c-9.52-8.39-20.44-12.87-34.14-12.87-27.33,0-56.19,23.32-56.19,64.36,0,32.66,21.76,65.17,56.19,65.17,8.06,0,15.02-1.32,21.61-4.49,4.32-2.13,8.42-5,12.53-8.68v13.17h24.4V46.78h-24.4v12.87ZM279.29,103.5c2.93,5.74,4.54,12.06,5.42,20.89,0,7.65-2.35,13.53-5.94,17.8-3.66,4.27-8.79,7.06-14.95,8.02-12.23,1.99-28.35-3.38-41.91-18.61-15.97-18.02-17.14-33.32-12.24-44.72,4.25-9.78,13.41-14.27,24.1-14.2,10.84,0,22.71,4.78,31.06,12.95,6.96,6.69,11.36,12.14,14.36,17.87h.07Z"/><path d="M401.64,60.98c-9.89-8.46-21.17-12.87-35.39-12.87-28.06,0-57.88,22.95-57.88,63.78,0,32.44,22.64,64.58,57.88,64.58,8.28,0,15.46-1.25,22.2-4.41,4.54-2.13,8.87-5,13.19-8.83v13.24h24.98V0h-24.98v60.98ZM402.15,104.31c3.08,6.62,4.76,13.83,5.64,22.58,0,7.43-2.49,13.24-6.52,17.43-4.03,4.27-9.82,7.06-16.56,8.09-13.63,1.99-30.99-3.46-44.91-18.46-16.48-17.8-18.1-37.29-13.04-48.55,4.32-9.49,14.43-13.98,26.67-13.68,12.16.22,25.35,5.22,34,13.24,7.03,6.55,11.65,12.73,14.73,19.35Z"/><path d="M545.75,119.83h-15.53l-.29,3.31c-.95,11.69-4.4,19.64-9.31,24.64-4.83,5-11.36,7.43-19.12,7.43-21.76,0-42.35-17.88-51.73-40.46h93.85v-3.6c0-17.58-5.06-34.5-14.65-47.08-9.67-12.65-23.96-20.89-41.91-20.89-19.56,0-33.92,10.3-43.23,23.83-9.23,13.46-13.77,30.23-13.77,44.21,0,35.9,24.32,68.78,57.37,68.78,30.4,0,50.48-23.54,57.29-55.83l.88-4.34h.15ZM519.23,95.33h-72.75c.66-8.97,3.74-15.67,8.13-20.23,4.98-5.15,11.94-7.8,20.07-7.65h.07c16.27,0,31.8,9.34,44.47,27.88Z"/></symbol></svg>
 
@@ -1404,14 +1419,14 @@
               <div class="sto-v">
                 <div class="sto-shop">
                   <div class="sto-shop-bar"><b>TA MARQUE</b><span>Soins · À propos · Panier</span></div>
-                  <div class="sto-shop-hero"><img src="assets/photos/marque-flatlay.webp" alt="" loading="lazy" decoding="async"><div><small>★★★★★ 1 240 avis</small><b>La brume qui hydrate en 3 secondes.</b><span>32 €</span><i>Ajouter au panier</i></div></div>
+                  <div class="sto-shop-hero"><img src="assets/photos/marque-gamme.webp" alt="" loading="lazy" decoding="async"><div><small>★★★★★ 1 240 avis</small><b>La brume qui hydrate en 3 secondes.</b><span>32 €</span><i>Ajouter au panier</i></div></div>
                 </div>
               </div>
               <div class="sto-v">
                 <div class="sto-ads">
                   <figure><img src="assets/photos/marque-ugc.webp" alt="" loading="lazy" decoding="async"><span>UGC</span></figure>
-                  <figure><img src="assets/photos/marque-duo.webp" alt="" loading="lazy" decoding="async"><span>Lifestyle</span></figure>
-                  <figure><img src="assets/photos/marque-brume.webp" alt="" loading="lazy" decoding="async"><span>Visuel</span></figure>
+                  <figure><img src="assets/photos/marque-boites.webp" alt="" loading="lazy" decoding="async"><span>Lifestyle</span></figure>
+                  <figure><img src="assets/photos/marque-packshot.webp" alt="" loading="lazy" decoding="async"><span>Visuel</span></figure>
                 </div>
                 <div class="sto-ready">✓ 5 pubs prêtes à lancer</div>
               </div>
@@ -1435,7 +1450,7 @@
           </div>
         </div>
         <div class="phases" id="road-deb">
-          <article class="phase sheen rv"><div class="ph-media"><img src="assets/photos/marque-flatlay.webp" alt="" loading="lazy" decoding="async"><span>01 à 03</span></div><div class="ph-body"><h3>Construire</h3><ol><li><b>Recherche produit</b><span>Un produit qui répond à un vrai manque</span></li><li><b>Validation</b><span>Testé avant d'acheter du stock</span></li><li><b>Branding</b><span>Un nom, une identité, une histoire</span></li></ol></div></article>
+          <article class="phase sheen rv"><div class="ph-media"><img src="assets/photos/marque-gamme.webp" alt="" loading="lazy" decoding="async"><span>01 à 03</span></div><div class="ph-body"><h3>Construire</h3><ol><li><b>Recherche produit</b><span>Un produit qui répond à un vrai manque</span></li><li><b>Validation</b><span>Testé avant d'acheter du stock</span></li><li><b>Branding</b><span>Un nom, une identité, une histoire</span></li></ol></div></article>
           <article class="phase sheen rv"><div class="ph-media"><video src="assets/chine/usine-skincare2.mp4" poster="assets/chine/usine-skincare2.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Lancer</h3><ol><li><b>Sourcing</b><span>Le bon fournisseur, la bonne marge</span></li><li><b>Boutique Shopify</b><span>Une boutique qui convertit</span></li><li><b>Créas et contenu</b><span>Des pubs qui arrêtent le scroll</span></li></ol></div></article>
           <article class="phase sheen rv"><div class="ph-media"><img src="assets/dash/R5.webp" alt="" loading="lazy" decoding="async"><span>07 à 09</span></div><div class="ph-body"><h3>Scaler</h3><ol><li><b>Meta, TikTok et TikTok Shop</b><span>Les canaux qui rapportent</span></li><li><b>Email et CRM</b><span>Des clients qui reviennent</span></li><li><b>Scale</b><span>Automatiser et déléguer</span></li></ol></div></article>
         </div>
@@ -1497,8 +1512,8 @@
             <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a class="on"><i></i>Storia</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
             <main class="mini-st">
               <div class="ms-top"><svg class="st-ico" style="color:#3b6fe0"><use href="#st-face"/></svg><div><small>Chapitre 4 · Boutique</small><h5>Ta boutique est prête</h5></div><span class="ms-steps"><i class="d"></i><i class="d"></i><i class="d"></i><i class="o"></i><i></i><i></i><i></i></span></div>
-              <div class="ms-shop"><img src="assets/photos/marque-flatlay.webp" alt="" loading="lazy" decoding="async"><div><small>★★★★★ 1 240 avis</small><b>La brume qui hydrate en 3 secondes.</b><span>32 €</span><i>Ajouter au panier</i></div></div>
-              <div class="ms-ads"><img src="assets/photos/marque-ugc.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-duo.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-lifestyle.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-brume.webp" alt="" loading="lazy" decoding="async"></div>
+              <div class="ms-shop"><img src="assets/photos/marque-gamme.webp" alt="" loading="lazy" decoding="async"><div><small>★★★★★ 1 240 avis</small><b>La brume qui hydrate en 3 secondes.</b><span>32 €</span><i>Ajouter au panier</i></div></div>
+              <div class="ms-ads"><img src="assets/photos/marque-ugc.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-boites.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-lifestyle.webp" alt="" loading="lazy" decoding="async"><img src="assets/photos/marque-packshot.webp" alt="" loading="lazy" decoding="async"></div>
             </main>
           </div>
         </div>
@@ -1552,9 +1567,9 @@
     <section class="terrain" aria-label="Sur le terrain">
       <div class="wrap"><div class="terrain-card rv grow pz sheen">
       <div class="terrain-grid t5">
-        <figure><video src="assets/chine/usine-ligne.mp4" poster="assets/chine/usine-ligne.jpg" muted loop playsinline preload="none"></video><figcaption>Ligne de production</figcaption></figure>
-        <figure><video src="assets/chine/entrepot2.mp4" poster="assets/chine/entrepot2.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
-        <figure><video src="assets/chine/usine-skincare2.mp4" poster="assets/chine/usine-skincare2.jpg" muted loop playsinline preload="none"></video><figcaption>Usine cosmétique</figcaption></figure>
+        <figure><video src="assets/chine/entrepot.mp4" poster="assets/chine/entrepot.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
+        <figure><video src="assets/chine/ligne-production.mp4" poster="assets/chine/ligne-production.jpg" muted loop playsinline preload="none"></video><figcaption>Chaîne de production</figcaption></figure>
+        <figure><video src="assets/chine/packaging.mp4" poster="assets/chine/packaging.jpg" muted loop playsinline preload="none"></video><figcaption>Packaging</figcaption></figure>
         <figure><video src="assets/chine/quai.mp4" poster="assets/chine/quai.jpg" muted loop playsinline preload="none"></video><figcaption>Expédition</figcaption></figure>
         <figure><video src="assets/chine/textile.mp4" poster="assets/chine/textile.jpg" muted loop playsinline preload="none"></video><figcaption>Fournisseur textile</figcaption></figure>
       </div>
@@ -1635,10 +1650,10 @@
         </div>
       </div>
       <div class="canton-strip c4">
+        <figure><img src="assets/chine/fournisseur.webp" alt="Chez une fournisseuse à Canton" loading="lazy" decoding="async"><figcaption>Chez la fournisseuse</figcaption></figure>
         <figure><video src="assets/chine/showroom-parfum2.mp4" poster="assets/chine/showroom-parfum2.jpg" muted loop playsinline preload="none"></video><figcaption>Showroom parfums</figcaption></figure>
         <figure><video src="assets/chine/mall.mp4" poster="assets/chine/mall.jpg" muted loop playsinline preload="none"></video><figcaption>Mall fournisseurs</figcaption></figure>
         <figure><video src="assets/chine/showroom-vetement.mp4" poster="assets/chine/showroom-vetement.jpg" muted loop playsinline preload="none"></video><figcaption>Showroom textile</figcaption></figure>
-        <figure><video src="assets/chine/panneau.mp4" poster="assets/chine/panneau.jpg" muted loop playsinline preload="none"></video><figcaption>Fournisseurs</figcaption></figure>
       </div>
       </div>
     </section>
