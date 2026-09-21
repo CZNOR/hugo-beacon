@@ -1300,8 +1300,9 @@
       .cta-inline .btn{width:100%}
     }
 
-    .bg-liquid{position:absolute;inset:-10%;width:120%;height:120%;object-fit:cover;opacity:.28;filter:blur(26px) saturate(150%) brightness(.9);mix-blend-mode:screen;pointer-events:none}
-    @media (max-width:640px){.bg-liquid{opacity:.22;filter:blur(22px) saturate(140%) brightness(.85)}}
+    .bg-liquid{position:absolute;inset:-10%;width:120%;height:120%;object-fit:cover;opacity:.2;filter:blur(30px) saturate(150%) brightness(.8);mix-blend-mode:screen;pointer-events:none}
+    .bg-fx::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 50% 40%,rgba(5,5,7,.55),rgba(5,5,7,.86) 75%)}
+    @media (max-width:640px){.bg-liquid{opacity:.17;filter:blur(24px) saturate(140%) brightness(.8)}}
     @media (prefers-reduced-motion:reduce){.bg-liquid{display:none}}
 
     /* boutons MADE : angles nets, label condensé */
