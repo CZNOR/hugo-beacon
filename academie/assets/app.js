@@ -116,7 +116,7 @@
       fig('pt', '<img src="assets/avis/vente1.webp" alt="" loading="lazy" decoding="async">'),
       fig('pt', '<video src="assets/chine/showroom-parfum2.mp4" muted loop playsinline preload="none"></video>'),
       fig('pt', '<img src="assets/avis/accomp2.webp" alt="" loading="lazy" decoding="async">'),
-      fig('pt', '<img src="assets/avis/rayan.webp" alt="" loading="lazy" decoding="async">'),
+      fig('pt', '<img src="assets/avis/eleve4.webp" alt="" loading="lazy" decoding="async">'),
       fig('pt', '<img src="assets/avis/accomp1.webp" alt="" loading="lazy" decoding="async">')
     ].join('');
     document.getElementById('rb1').innerHTML = r1 + r1;
