@@ -19,11 +19,32 @@
     const vh = () => window.innerHeight;
 
     /* ─── Tous les boutons d'appel ouvrent directement la réservation ─── */
+    /* Chaque bouton porte sa provenance : sur cal.com tu vois quel bloc a déclenché la réservation. */
+    const zoneOf = el => {
+      if (el.closest('.m-cta')) return 'barre-mobile';
+      if (el.closest('.nav')) return 'menu';
+      if (el.closest('.mmenu')) return 'menu-mobile';
+      if (el.closest('.hero')) return 'haut-de-page';
+      if (el.closest('#offres')) return el.closest('.feat') ? 'offre-coaching' : 'offre-formation';
+      const sec = el.closest('section');
+      return (sec && (sec.id || sec.className.split(' ')[0])) || 'page';
+    };
+    const withSource = (url, zone) => {
+      try {
+        const u = new URL(url);
+        u.searchParams.set('utm_source', 'academie');
+        u.searchParams.set('utm_medium', zone);
+        u.searchParams.set('utm_campaign', 'landing');
+        return u.toString();
+      } catch (e) { return url; }
+    };
     if (BOOKING_URL) {
       document.querySelectorAll('a[href="#appel"]').forEach(a => {
-        a.href = BOOKING_URL;
+        const zone = zoneOf(a);
+        a.href = withSource(BOOKING_URL, zone);
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
+        a.dataset.zone = zone;
       });
     }
 
@@ -123,14 +144,14 @@
     const fig = (c, inner) => `<figure class="${c}">${inner}</figure>`;
     const r1 = ['R5','R12','R3','R1','R15','R14','R8','R4'].map(n => fig('sq', `<img src="assets/dash/${n}.webp" alt="" loading="lazy" decoding="async">`)).join('');
     const r2 = [
-      fig('pt', '<img src="assets/avis/roas10.webp" alt="" loading="lazy" decoding="async">'),
+      fig('pt', '<img src="assets/avis/roas10.webp" alt="" loading="lazy" decoding="async"><figcaption>Ilias · 10 de ROAS</figcaption>'),
       fig('pt', '<video src="assets/chine/carte-produit.mp4" muted loop playsinline preload="none"></video>'),
-      fig('pt', '<img src="assets/avis/avis.webp" alt="" loading="lazy" decoding="async">'),
-      fig('pt', '<img src="assets/avis/vente1.webp" alt="" loading="lazy" decoding="async">'),
+      fig('pt', '<img src="assets/avis/avis.webp" alt="" loading="lazy" decoding="async"><figcaption>Son retour sur la formation</figcaption>'),
+      fig('pt', '<img src="assets/avis/vente1.webp" alt="" loading="lazy" decoding="async"><figcaption>Sa première vente</figcaption>'),
       fig('pt', '<video src="assets/chine/showroom-parfum2.mp4" muted loop playsinline preload="none"></video>'),
-      fig('pt', '<img src="assets/avis/accomp2.webp" alt="" loading="lazy" decoding="async">'),
-      fig('pt', '<img src="assets/avis/eleve4.webp" alt="" loading="lazy" decoding="async">'),
-      fig('pt', '<img src="assets/avis/accomp1.webp" alt="" loading="lazy" decoding="async">')
+      fig('pt', '<img src="assets/avis/accomp2.webp" alt="" loading="lazy" decoding="async"><figcaption>1 000 € par jour, stabilisés</figcaption>'),
+      fig('pt', '<img src="assets/avis/eleve4.webp" alt="" loading="lazy" decoding="async"><figcaption>Rayan · sa première journée</figcaption>'),
+      fig('pt', '<img src="assets/avis/accomp1.webp" alt="" loading="lazy" decoding="async"><figcaption>Suivi avec son coach</figcaption>')
     ].join('');
     document.getElementById('rb1').innerHTML = r1 + r1;
     document.getElementById('rb2').innerHTML = r2 + r2;
@@ -164,7 +185,7 @@
       e.preventDefault();
       if (!BOOKING_URL) { bookBtn.textContent = 'Calendrier bientôt disponible'; return; }
       if (EMBED_BOOKING) document.getElementById('booking').innerHTML = `<iframe src="${BOOKING_URL}" title="Réserver un appel" loading="lazy" decoding="async" data-lenis-prevent></iframe>`;
-      else window.open(BOOKING_URL, '_blank', 'noopener');
+      else window.open(withSource(BOOKING_URL, 'bloc-final'), '_blank', 'noopener');
     });
 
     /* ─── Tableaux de ventes + logos ─── */
