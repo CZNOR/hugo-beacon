@@ -1336,6 +1336,33 @@
       background:linear-gradient(0deg,rgba(6,4,12,.92),transparent);text-align:center}
     @media (max-width:640px){.rb-track figcaption{font-size:11px;padding:12px 6px 6px}}
 
+    /* écrans de la plateforme : calés sur l'interface réelle */
+    .stats3 .card small,.lessons .card small,.tools5 .card small{display:block;color:rgba(255,255,255,.45);font-size:11px;letter-spacing:.04em;text-transform:uppercase;font-family:var(--cond)}
+    .stats3 .card b{display:block;color:#fff;font-size:26px;font-weight:600;letter-spacing:-.04em;margin-top:4px}
+    .resume{display:flex;gap:14px;align-items:center}
+    .resume .thumb{flex:0 0 150px;height:84px;border-radius:10px;overflow:hidden}
+    .mod-hero{position:relative;border-radius:14px;overflow:hidden;min-height:150px;display:flex;align-items:flex-end;padding:16px}
+    .mod-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+    .mod-hero>div{position:relative;z-index:2}
+    .mod-hero h5{margin-top:6px}
+    .mod-meta{display:flex;gap:14px;margin-top:8px;font-size:11.5px;color:rgba(255,255,255,.55)}
+    .lessons .thumb{position:relative;height:74px;border-radius:10px;overflow:hidden;margin-bottom:8px}
+    .lessons .play{position:absolute;left:50%;top:50%;width:26px;height:26px;transform:translate(-50%,-50%);border-radius:50%;background:rgba(255,255,255,.92)}
+    .lessons .play::after{content:'';position:absolute;left:10px;top:7px;border-style:solid;border-width:6px 0 6px 9px;border-color:transparent transparent transparent #15131a}
+    .tools5{grid-template-columns:1fr 1fr}
+    .tools5 .card{display:flex;flex-direction:column;gap:3px}
+    .tools5 .card b{font-size:13.5px}
+    .tools5 .card .muted{font-size:11px}
+    .st-tool{box-shadow:inset 0 0 0 1px rgba(255,90,31,.5)}
+    @media (max-width:640px){
+      .stats3{grid-template-columns:repeat(3,1fr)!important}
+      .stats3 .card b{font-size:18px}
+      .resume .thumb{flex:0 0 110px;height:64px}
+      .mod-hero{min-height:120px}
+      .tools5{grid-template-columns:1fr 1fr!important}
+      .scr .g3.lessons>.card:nth-child(3){display:none}
+    }
+
   </style>
 </head>
 <body>
@@ -1375,7 +1402,7 @@
   </div>
 
 
-  <div class="m-cta" id="mCta" aria-hidden="true"><a href="#appel" class="btn btn-neon">Réserver mon appel gratuit <span class="arr">→</span></a><small>20 min · sans engagement</small></div>
+  <div class="m-cta" id="mCta" aria-hidden="true"><a href="#appel" class="btn btn-neon">Réserver mon appel gratuit <span class="arr">→</span></a><small>30 min · sans engagement</small></div>
   <main id="top">
     <!-- ═══ 1. HERO : ECOMMERCE + IA + MARQUE + ACCOMPAGNEMENT ═══ -->
     <section class="hero">
@@ -1427,7 +1454,7 @@
         <div class="rev"><div class="rb-track" id="rb2"></div></div>
       </div>
       <p class="rb-cap rv">Boutiques MADE et élèves accompagnés. <b>De vraies captures.</b></p>
-      <div class="wrap"><div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Obtenir ces résultats <span class="arr">→</span></a><span>Appel gratuit · 20 min</span></div></div>
+      <div class="wrap"><div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Obtenir ces résultats <span class="arr">→</span></a><span>Appel gratuit · 30 min</span></div></div>
     </section>
 
     <!-- ═══ 3. CE QUI A CHANGÉ ═══ -->
@@ -1462,7 +1489,7 @@
           <article class="emo-card rv"><video src="assets/chine/mall-fournisseurs.mp4" poster="assets/chine/mall-fournisseurs.jpg" muted loop playsinline preload="none"></video><div><span>03</span><h3>Choisir ton produit sur place.</h3><p>Chez le fabricant, sans intermédiaire.</p></div></article>
           <article class="emo-card rv"><video src="assets/chine/carte-equipe.mp4" poster="assets/chine/carte-equipe.jpg" muted loop playsinline preload="none"></video><div><span>04</span><h3>Plus jamais seul.</h3><p>Un coach chaque semaine, jusqu'au bout.</p></div></article>
         </div>
-        <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Je veux ça pour ma marque <span class="arr">→</span></a><span>Appel gratuit · 20 min · sans engagement</span></div>
+        <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Je veux ça pour ma marque <span class="arr">→</span></a><span>Appel gratuit · 30 min · sans engagement</span></div>
       </div>
     </section>
 
@@ -1547,7 +1574,7 @@
           <article class="phase rv"><div class="ph-media"><img src="assets/chine/showroom-parfum2.jpg" alt="" loading="lazy" decoding="async"><span>01 à 03</span></div><div class="ph-body"><h3>Optimiser</h3><ol><li><b>Audit de ta marque</b><span>Boutique, pubs et marges passées au crible</span></li><li><b>Conversion</b><span>Pages et offres retravaillées</span></li><li><b>Machine à créas</b><span>De nouvelles créas chaque semaine</span></li></ol></div></article>
           <article class="phase rv"><div class="ph-media"><video src="assets/chine/camion.mp4" poster="assets/chine/camion.jpg" muted loop playsinline preload="none"></video><span>04 à 06</span></div><div class="ph-body"><h3>Accélérer</h3><ol><li><b>Nouveaux canaux</b><span>TikTok, TikTok Shop et organique</span></li><li><b>Marque propre</b><span>Sourcing direct et packaging</span></li><li><b>Automatisation</b><span>Scaler sans t'épuiser</span></li></ol></div></article>
         </div>
-        <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Construire ma marque <span class="arr">→</span></a><span>On fait le point sur ton projet en 20 min</span></div>
+        <div class="cta-inline rv"><a href="#appel" class="btn btn-neon btn-lg">Construire ma marque <span class="arr">→</span></a><span>On fait le point sur ton projet en 30 min</span></div>
       </div>
     </section>
 
@@ -1555,50 +1582,59 @@
     <section class="tour" id="tour" aria-label="Visite de l'académie">
       <div class="tour-sticky">
         <div class="floor" aria-hidden="true"></div>
-        <div class="tour-nav glass blur" id="tourNav"><button class="on"><b>01</b>Accueil</button><button><b>02</b>Formations</button><button><b>03</b>Lives</button><button><b>04</b>Storia</button><button><b>05</b>Outils</button></div>
+        <div class="tour-nav glass blur" id="tourNav"><button class="on"><b>01</b>Dashboard</button><button><b>02</b>Formation</button><button><b>03</b>Coaching</button><button><b>04</b>Storia</button><button><b>05</b>Outils</button></div>
         <div class="tour-prog" id="tourProg"></div>
         <div class="tour-head" id="tourHead">
           <span class="eyebrow">Dans l'académie</span>
           <h2>Ton espace de travail <em class="s">MADE.</em></h2>
         </div>
         <div class="tour-stage">
-        <div class="panel" data-label="01 · Ton plan de la semaine" data-x="-120" data-ry="10">
+        <div class="panel" data-label="01 · Ton tableau de bord" data-x="-120" data-ry="10">
           <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a class="on"><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Storia</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a class="on"><i></i>Dashboard</a><a><i></i>Formation</a><a><i></i>Outils</a><a><i></i>Coaching 1:1</a><a><i></i>Agence</a><div class="me"><b>K</b>Karim</div></aside>
             <main class="clean">
-              <div><h5>Salut Karim, on reprend ?</h5><div class="muted">Semaine 6 de ton coaching</div></div>
-              <div class="big-kpi"><div><small>CA du mois</small><b>6 240 €</b><div class="pbar"><i style="width:62%"></i></div></div><div><small>ROAS</small><b>2,9</b><div class="pbar"><i style="width:58%"></i></div></div></div>
-              <div class="card ai-sug"><span class="chip">Note de ton coach</span><b style="color:#fff;display:block;margin-top:8px;font-size:15px">Ta meilleure créa tient un CPA de 11 €. On la décline jeudi.</b></div>
+              <div><h5>Bonjour Karim</h5><div class="muted">9 modules · 62 leçons · reprends où tu t'es arrêté</div></div>
+              <div class="g3 stats3">
+                <div class="card"><small>Progression</small><b>34 %</b></div>
+                <div class="card"><small>Temps passé</small><b>4 h 12</b></div>
+                <div class="card"><small>Série</small><b>6 jours</b></div>
+              </div>
+              <div class="card resume"><div class="thumb"><img src="assets/formation/02.8_Decouverte-Meta-Ads.webp" alt="" loading="lazy" decoding="async"></div><div><span class="chip">Module 7</span><b style="color:#fff;display:block;margin-top:6px">Découverte Meta Ads</b><div class="pbar"><i style="width:45%"></i></div></div></div>
             </main>
           </div>
         </div>
 
-        <div class="panel" data-label="02 · Les formations" data-x="140" data-ry="-12">
+        <div class="panel" data-label="02 · La formation" data-x="140" data-ry="-12">
           <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a class="on"><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Storia</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Dashboard</a><a class="on"><i></i>Formation</a><a><i></i>Outils</a><a><i></i>Coaching 1:1</a><a><i></i>Agence</a><div class="me"><b>K</b>Karim</div></aside>
             <main class="clean">
-              <div><h5>Formations</h5><div class="muted">Nouveaux modules chaque mois</div></div>
-              <div class="g3">
-                <div class="card"><div class="thumb"><img src="assets/formation/03_Module_Recherche-produit.webp" alt="" loading="lazy" decoding="async"></div><b style="color:#fff;display:block">Recherche produit</b><div class="pbar"><i style="width:100%"></i></div></div>
-                <div class="card"><div class="thumb"><img src="assets/formation/05_Module_Shopify.webp" alt="" loading="lazy" decoding="async"></div><b style="color:#fff;display:block">Boutique Shopify</b><div class="pbar"><i style="width:72%"></i></div></div>
-                <div class="card"><div class="thumb"><img src="assets/formation/02.8_Decouverte-Meta-Ads.webp" alt="" loading="lazy" decoding="async"></div><b style="color:#fff;display:block">Meta Ads</b><div class="pbar"><i style="width:18%"></i></div></div>
+              <div class="mod-hero"><img src="assets/formation/03_Module_Recherche-produit.webp" alt="" loading="lazy" decoding="async"><div><span class="chip">Module 3</span><h5>Rechercher un produit</h5><div class="mod-meta"><span>9 vidéos</span><span>1 h 20</span><span>Théo G. · Guillaume B.</span></div></div></div>
+              <div class="g3 lessons">
+                <div class="card"><div class="thumb"><img src="assets/formation/02.9_Analyse-de-la-marque-Boku.webp" alt="" loading="lazy" decoding="async"><i class="play"></i></div><small>Leçon 1</small><b style="color:#fff">Analyser une marque qui marche</b></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/05_Module_Shopify.webp" alt="" loading="lazy" decoding="async"><i class="play"></i></div><small>Leçon 2</small><b style="color:#fff">Monter la boutique</b></div>
+                <div class="card"><div class="thumb"><img src="assets/formation/03.5_Choisir-un-fournisseur-Bonus.webp" alt="" loading="lazy" decoding="async"><i class="play"></i></div><small>Leçon 3</small><b style="color:#fff">Choisir son fournisseur</b></div>
               </div>
             </main>
           </div>
         </div>
 
-        <div class="panel" data-label="03 · Les lives" data-x="-140" data-ry="12">
+        <div class="panel" data-label="03 · Le coaching" data-x="-140" data-ry="12">
           <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a class="on"><i></i>Lives</a><a><i></i>Storia</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Dashboard</a><a><i></i>Formation</a><a><i></i>Outils</a><a class="on"><i></i>Coaching 1:1</a><a><i></i>Agence</a><div class="me"><b>K</b>Karim</div></aside>
             <main class="clean">
-              <div class="player"><video src="assets/chine/live-hugo.mp4" poster="assets/chine/live-hugo.jpg" muted loop playsinline preload="none"></video><span class="lb">EN DIRECT</span><span class="pt">On analyse vos boutiques en direct</span></div>
+              <div><h5>Coaching 1:1</h5><div class="muted">Semaine 6 sur 12</div></div>
+              <div class="card ai-sug"><span class="chip">Note de ton coach</span><b style="color:#fff;display:block;margin-top:8px;font-size:15px">Ta meilleure créa tient un CPA de 11 €. On la décline jeudi.</b></div>
+              <div class="g2">
+                <div class="card"><small>Prochain point</small><b style="color:#fff;display:block">Jeudi 18 h</b><span class="muted">Visio · 45 min</span></div>
+                <div class="card"><small>À faire d'ici là</small><b style="color:#fff;display:block">3 nouvelles accroches</b><span class="muted">Sur l'angle qui performe</span></div>
+              </div>
             </main>
           </div>
         </div>
 
         <div class="panel" data-label="04 · Storia" data-x="140" data-ry="-10">
           <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a class="on"><i></i>Storia</a><a><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Dashboard</a><a><i></i>Formation</a><a class="on"><i></i>Storia</a><a><i></i>Coaching 1:1</a><a><i></i>Agence</a><div class="me"><b>K</b>Karim</div></aside>
             <main class="mini-st">
               <div class="ms-top"><svg class="st-ico" style="color:#3b6fe0"><use href="#st-face"/></svg><div><small>Chapitre 4 · Boutique</small><h5>Ta boutique est prête</h5></div><span class="ms-steps"><i class="d"></i><i class="d"></i><i class="d"></i><i class="o"></i><i></i><i></i><i></i></span></div>
               <div class="ms-shop"><img src="assets/photos/marque-packshot.webp" alt="" loading="lazy" decoding="async"><div><small>★★★★★ 1 240 avis</small><b>La brume qui hydrate en 3 secondes.</b><span>32 €</span><i>Ajouter au panier</i></div></div>
@@ -1609,13 +1645,16 @@
 
         <div class="panel" data-label="05 · Les outils" data-x="0" data-ry="0">
           <div class="scr">
-            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Accueil</a><a><i></i>Formations</a><a><i></i>Lives</a><a><i></i>Storia</a><a class="on"><i></i>Outils</a><div class="me"><b>K</b>Karim · Coaching</div></aside>
+            <aside><div class="brand">MADE <span>ACADÉMIE</span></div><a><i></i>Dashboard</a><a><i></i>Formation</a><a class="on"><i></i>Outils</a><a><i></i>Coaching 1:1</a><a><i></i>Agence</a><div class="me"><b>K</b>Karim</div></aside>
             <main class="clean">
-              <div><h5>Tes outils</h5><div class="muted">Inclus dans ton accès</div></div>
-              <div class="tools3">
-                <div class="t3 t3-storia"><svg class="st-ico"><use href="#st-face"/></svg><b>Storia</b><span>Ta marque en 7 chapitres</span></div>
-                <div class="t3 t3-trend"><svg viewBox="0 0 120 40" preserveAspectRatio="none"><path d="M0 34 L15 30 L30 32 L45 22 L60 25 L75 14 L90 16 L105 6 L120 4" fill="none" stroke="#6ee7b7" stroke-width="2.5"/></svg><b>TrendTrack</b><span>Les produits qui décollent</span></div>
-                <div class="t3 t3-chine"><img src="assets/chine/textile.jpg" alt="" loading="lazy" decoding="async"><b>Agents Chine</b><span>Nos contacts sur place</span></div>
+              <div><h5>Outils</h5><div class="muted">Les calculs que tu refais dix fois par semaine, centralisés</div></div>
+              <div class="g2 tools5">
+                <div class="card tool"><b style="color:#fff">Calculateur de marge</b><span class="muted">Prix de vente recommandé, marge par vente</span></div>
+                <div class="card tool"><b style="color:#fff">ROAS break even</b><span class="muted">Le ROAS minimum pour ne pas perdre</span></div>
+                <div class="card tool"><b style="color:#fff">Calculateur ROAS</b><span class="muted">Objectif de profit, CPA max</span></div>
+                <div class="card tool"><b style="color:#fff">Simulateur de scaling</b><span class="muted">Profit en doublant ton budget pub</span></div>
+                <div class="card tool"><b style="color:#fff">Charges et TVA</b><span class="muted">Net après URSSAF et impôts</span></div>
+                <div class="card tool st-tool"><svg class="st-ico" style="color:#ff5a1f;width:26px;height:26px"><use href="#st-face"/></svg><b style="color:#fff">Storia</b><span class="muted">Ta marque en 7 chapitres</span></div>
               </div>
             </main>
           </div>
@@ -1624,9 +1663,9 @@
         </div>
         <div class="tour-cap" aria-live="polite">
           <div class="fade" id="capText">
-            <div class="k" id="capK">01 · Accueil</div>
-            <h3 id="capH">Ton plan de la semaine</h3>
-            <p id="capP">Tes chiffres, tes actions et les suggestions de l'assistant MADE.</p>
+            <div class="k" id="capK">01 · Dashboard</div>
+            <h3 id="capH">Tu sais où tu en es</h3>
+            <p id="capP">9 modules, 62 leçons, et le prochain pas déjà choisi.</p>
           </div>
         </div>
       </div>
@@ -1780,7 +1819,7 @@
             <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel <span class="arr">→</span></a>
           </article>
         </div>
-        <ul class="o-trust rv"><li>Appel gratuit de 20 min</li><li>Pas de paiement en ligne</li><li>Places limitées chaque mois</li></ul>
+        <ul class="o-trust rv"><li>Appel gratuit de 30 min</li><li>Pas de paiement en ligne</li><li>Places limitées chaque mois</li></ul>
       </div>
     </section>
 
@@ -1809,11 +1848,11 @@
           <div class="final-in">
             <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="stampB" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampB">MADE ACADÉMIE ✦ ECOM IA ✦ DEPUIS 7 ANS ✦ </textPath></text></svg><img src="assets/globe/sac1.webp" alt=""></div>
             <span class="eyebrow">Prochaine étape</span>
-            <h2>20 minutes pour savoir <em class="s">si on peut t'aider.</em></h2>
-            <p class="sub">On regarde ton projet ensemble. Gratuit et sans engagement.</p>
+            <h2>30 minutes pour savoir <em class="s">si on peut t'aider.</em></h2>
+            <p class="sub">On fait le point sur ton projet, ton objectif, et si on est la bonne solution. Gratuit et sans engagement.</p>
             <ol class="after">
               <li><b>1</b><span><strong>Tu choisis ton créneau</strong></span></li>
-              <li><b>2</b><span><strong>On échange 20 minutes</strong></span></li>
+              <li><b>2</b><span><strong>On échange 30 minutes</strong></span></li>
               <li><b>3</b><span><strong>Tu repars avec un plan</strong></span></li>
             </ol>
             <div class="booking" id="booking">
