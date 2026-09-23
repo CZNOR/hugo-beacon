@@ -1363,6 +1363,17 @@
       .scr .g3.lessons>.card:nth-child(3){display:none}
     }
 
+    /* le site offert dans l'offre coaching */
+    .o-star{align-items:center}
+    .o-star em{font-style:normal;margin-left:auto;font-family:var(--cond);font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:7px;background:var(--made);color:#140d24}
+    .o-sites{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:-10px 0 24px}
+    .o-sites figure{border-radius:10px;overflow:hidden;aspect-ratio:16/11;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+    .o-sites img{width:100%;height:100%;object-fit:cover;object-position:top}
+    .o-sites span{grid-column:1 / -1;font-size:13px;color:var(--muted);margin-top:2px}
+    @media (max-width:640px){.o-sites{margin-bottom:20px}.o-sites span{font-size:12.5px}}
+
+    .o-note{font-size:14px;line-height:1.45;color:var(--muted);margin:-6px 0 24px;padding-top:16px;border-top:1px solid var(--line)}
+
   </style>
 </head>
 <body>
@@ -1716,6 +1727,7 @@
         <div class="head">
           <span class="eyebrow rv">Marques accompagnées</span>
           <h2 class="rv">Ce qu'on fait <em class="s">avec de vraies marques.</em></h2>
+          <p class="sub rv">Ces boutiques sortent du studio MADE. En coaching, la tienne aussi.</p>
         </div>
         <div class="brands">
           <div class="bcard lg rv">
@@ -1804,18 +1816,26 @@
               <li>Tous les replays</li>
               <li>La communauté MADE</li>
             </ul>
+            <p class="o-note">Ta boutique, tu la montes toi-même en suivant les modules. En coaching, c'est l'agence qui la construit.</p>
             <a href="#appel" class="btn btn-ghost btn-lg">Réserver mon appel</a>
           </article>
           <article class="offer feat rv">
             <span class="o-badge">Recommandé</span>
-            <header><span class="o-lvl">Accompagné · 3 mois</span><h3>Coaching</h3><p>Un coach construit ta marque avec toi, chaque semaine.</p></header>
+            <header><span class="o-lvl">Accompagné · 3 mois</span><h3>Coaching</h3><p>Un coach construit ta marque avec toi, chaque semaine. Et l'agence te crée ta boutique.</p></header>
             <div class="o-coach"><div class="avatars"><img src="assets/made/team/Marvin.webp" alt=""><img src="assets/made/team/HugoB.webp" alt=""><img src="assets/made/team/TheoG.webp" alt=""></div><span>Un coach dédié et toute l'équipe MADE</span></div>
             <ul class="o-list">
+              <li class="o-star"><b>Ta boutique premium créée par l'agence</b><em>Offert</em></li>
               <li><b>Tout le contenu de la Formation</b></li>
               <li>Un point individuel chaque semaine</li>
               <li>Audit de ta boutique et de tes pubs</li>
               <li>Mise en place de tes outils</li>
             </ul>
+            <div class="o-sites">
+              <figure><img src="assets/made/sites/beautymarts.webp" alt="Boutique Beauty Mart's créée par MADE" loading="lazy" decoding="async"></figure>
+              <figure><img src="assets/made/sites/scorekeys.webp" alt="Boutique ScoreKeys créée par MADE" loading="lazy" decoding="async"></figure>
+              <figure><img src="assets/made/projects/project5.webp" alt="Boutique Unik Journal créée par MADE" loading="lazy" decoding="async"></figure>
+              <span>Le même studio qui a fait ces boutiques fait la tienne</span>
+            </div>
             <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel <span class="arr">→</span></a>
           </article>
         </div>
@@ -1834,6 +1854,7 @@
           <details class="glass rv"><summary>C'est une formation ChatGPT ?</summary><p>Non. C'est une formation ecommerce complète, du produit au scale. L'IA sert à aller plus vite, pas à remplacer la méthode.</p></details>
           <details class="glass rv"><summary>Je dois déjà maîtriser l'IA ?</summary><p>Non. On part de zéro, directement sur ta marque.</p></details>
           <details class="glass rv"><summary>Les outils changent vite, la formation suit ?</summary><p>Oui. Nouveaux modules chaque mois, et on retire ce qui ne marche plus.</p></details>
+          <details class="glass rv"><summary>La boutique est vraiment créée par vous ?</summary><p>Oui, en coaching. Le studio qui réalise les sites de nos clients construit la tienne : design, intégration, fiches produit et tunnel de vente. Ensuite elle est à toi, tu gardes la main dessus.</p></details>
           <details class="glass rv"><summary>C'est quoi le voyage en Chine ?</summary><p>10 jours à Canton pendant la foire : fournisseurs, usines et négociation avec l'équipe.</p></details>
         </div>
       </div>
