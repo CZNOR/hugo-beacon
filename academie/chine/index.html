@@ -2,13 +2,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Le voyage MADE · Canton</title>
-  <meta name="description" content="Dix jours en Chine avec l'équipe MADE et les membres de l'Académie : foire de Canton, usines, rencontres fournisseurs, conférences, coaching sur place et découverte de la ville." />
-  <meta property="og:title" content="Le voyage MADE · Canton" />
-  <meta property="og:description" content="Dix jours en Chine avec les membres de l'Académie. Places ouvertes au printemps, 10 à 20 personnes." />
+  <title>Voyage Canton · MADE Académie</title>
+  <meta name="description" content="Dix jours en Chine avec l'équipe MADE. Réservé aux membres de l'Académie, places ouvertes au printemps, 10 à 20 personnes." />
+  <meta property="og:title" content="Voyage Canton · MADE Académie" />
+  <meta property="og:description" content="Dix jours en Chine avec les membres de l'Académie. Places ouvertes au printemps." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://hugo-bnls.fr/academie/assets/og.jpg" />
-  <meta name="theme-color" content="#F7F1E6" />
+  <meta name="theme-color" content="#050507" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests" />
   <meta name="referrer" content="no-referrer" />
   <meta name="robots" content="noindex, noimageindex, noarchive" />
@@ -22,156 +22,148 @@
     @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/BarlowCondensed-700.woff2) format('woff2')}
 
     :root{
-      color-scheme: light;
-      --sable:#F7F1E6; --sable2:#EFE5D4; --creme:#FFFBF4;
-      --encre:#1E1712; --encre2:rgba(30,23,18,.66); --trait:rgba(30,23,18,.14);
-      --ocre:#C9772F; --brique:#A8442A; --olive:#5F6B45; --nuit:#141019;
+      color-scheme: dark;
+      --bg:#050507; --ink:#F1F0EA; --muted:rgba(241,240,234,.62); --line:rgba(241,240,234,.1);
+      --made:#B691FE; --ocre:#E09B4B; --brique:#D2673C;
       --ease:cubic-bezier(.22,1,.36,1);
       --sans:'Inter Tight',system-ui,-apple-system,sans-serif;
       --cond:'Barlow Condensed','Arial Narrow',sans-serif;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{background:var(--sable);color:var(--encre);font-family:var(--sans);letter-spacing:-.012em;line-height:1.55;overflow-x:hidden}
+    body{background:var(--bg);color:var(--ink);font-family:var(--sans);letter-spacing:-.01em;line-height:1.55;overflow-x:hidden}
     img,video{max-width:100%;display:block}
     a{color:inherit;text-decoration:none}
-    h1,h2,h3{font-weight:500;letter-spacing:-.045em;line-height:1.05;text-wrap:balance}
-    h1{font-size:clamp(40px,6.2vw,80px)}
-    h2{font-size:clamp(28px,3.4vw,46px)}
-    h3{font-size:clamp(19px,1.8vw,24px);letter-spacing:-.03em}
-    em.o{font-style:normal;font-weight:300;color:var(--brique)}
-    p{font-size:17px;color:var(--encre2)}
-    .wrap{max-width:1160px;margin:0 auto;padding-inline:clamp(20px,4vw,40px);position:relative;z-index:2}
-    section{padding-block:clamp(54px,7vw,96px);position:relative}
-    .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--cond);font-weight:600;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--brique)}
-    .eyebrow::before{content:'';width:8px;height:8px;background:var(--ocre);transform:rotate(45deg)}
-    .head{display:flex;flex-direction:column;gap:14px;margin-bottom:34px;max-width:780px}
+    h1,h2,h3{font-weight:500;letter-spacing:-.045em;line-height:1.04;text-wrap:balance}
+    h1{font-size:clamp(42px,6.4vw,82px)}
+    h2{font-size:clamp(30px,3.5vw,50px)}
+    h3{font-size:clamp(19px,1.7vw,23px);letter-spacing:-.03em}
+    em.s{font-style:normal;font-weight:300;color:var(--ocre)}
+    p{font-size:17px;color:var(--muted)}
+    .wrap{max-width:1200px;margin:0 auto;padding-inline:clamp(20px,4vw,40px);position:relative;z-index:2}
+    section{padding-block:clamp(56px,7vw,104px);position:relative}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--cond);font-weight:600;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:rgba(241,240,234,.55)}
+    .eyebrow::before{content:'';width:15px;height:15px;background:var(--ocre);
+      -webkit-mask:url(../assets/icons/layers.webp) center/contain no-repeat;mask:url(../assets/icons/layers.webp) center/contain no-repeat}
+    .head{display:flex;flex-direction:column;gap:12px;margin-bottom:34px;max-width:760px}
 
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:10px;padding:14px 20px;
+    .bg-fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .bg-fx video{position:absolute;inset:-10%;width:120%;height:120%;object-fit:cover;opacity:.2;filter:blur(30px) saturate(150%) brightness(.8);mix-blend-mode:screen}
+    .bg-fx::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 40%,rgba(5,5,7,.55),rgba(5,5,7,.86) 75%)}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:12px;padding:14px 20px;
       font-family:var(--cond);font-weight:600;font-size:15.5px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:transform .3s var(--ease),background .3s}
     .btn:hover{transform:translateY(-1px)}
-    .btn-plein{background:var(--brique);color:var(--creme)}
-    .btn-plein:hover{background:#95371f}
-    .btn-clair{background:rgba(255,251,244,.9);color:var(--encre);box-shadow:inset 0 0 0 1px var(--trait)}
-    .btn-lg{padding:16px 24px;font-size:17px}
+    .btn-neon{color:#fff;background:linear-gradient(180deg,#9b6bfb,#6d28d9);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 14px 34px -14px rgba(139,92,246,.9)}
+    .btn-ghost{box-shadow:inset 0 0 0 1px rgba(224,155,75,.45);background:rgba(224,155,75,.08)}
+    .btn-lg{padding:16px 22px;font-size:17px}
 
-    /* nav */
-    .nav{position:sticky;top:0;z-index:50;background:rgba(247,241,230,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--trait)}
-    .nav-in{display:flex;align-items:center;gap:16px;padding-block:12px}
+    .nav{position:fixed;top:14px;left:0;right:0;z-index:60}
+    .nav-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:11px 14px;border-radius:100px;
+      background:rgba(12,10,20,.82);backdrop-filter:blur(18px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
     .logo{font-family:var(--cond);font-weight:700;font-size:20px;letter-spacing:.06em;text-transform:uppercase}
-    .logo i{font-style:normal;color:var(--brique)}
-    .nav .back{font-family:var(--cond);font-size:14.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre2)}
+    .logo i{font-style:normal;color:var(--made)}
+    .nav a.lien{font-size:14.5px;color:var(--muted)}
     .nav .sp{margin-left:auto}
     .nav .btn{padding:10px 15px;font-size:14px}
 
-    /* hero */
-    .hero{padding-top:clamp(30px,5vw,54px)}
-    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:center}
-    .hero h1{margin:14px 0 16px}
-    .hero p.intro{font-size:19px;max-width:540px}
+    .hero{min-height:min(88vh,820px);display:flex;align-items:flex-end;padding-block:150px 54px;overflow:hidden}
+    .hero-media{position:absolute;inset:0;z-index:0}
+    .hero-media video{width:100%;height:100%;object-fit:cover;opacity:.55}
+    .hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,5,7,.96) 10%,rgba(5,5,7,.35) 62%,rgba(5,5,7,.75))}
+    .hero h1{margin:14px 0 14px}
+    .hero p{font-size:19px;max-width:520px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+    .chips li{list-style:none;font-size:13.5px;padding:8px 13px;border-radius:8px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(224,155,75,.3)}
     .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-    .hero-note{margin-top:16px;font-size:14.5px;color:var(--encre2)}
-    .hero-media{position:relative}
-    .hero-media video{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:22px;box-shadow:0 30px 60px -30px rgba(30,23,18,.5)}
-    .hero-media .tampon{position:absolute;left:-18px;bottom:-18px;width:120px;height:120px;border-radius:50%;background:var(--brique);color:var(--creme);
-      display:grid;place-items:center;text-align:center;font-family:var(--cond);font-size:15px;letter-spacing:.1em;text-transform:uppercase;line-height:1.2;padding:12px;transform:rotate(-8deg)}
 
-    /* acces */
-    .acces{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .carte{background:var(--creme);border-radius:18px;padding:24px;box-shadow:inset 0 0 0 1px var(--trait);display:flex;flex-direction:column;gap:9px}
-    .carte b{font-family:var(--cond);font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--ocre)}
-    .carte h3{margin-bottom:2px}
+    .cartes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .carte{padding:24px;border-radius:20px;background:rgba(255,255,255,.035);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 0 1px var(--line);display:flex;flex-direction:column;gap:8px}
+    .carte b{font-family:var(--cond);font-size:14.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ocre)}
     .carte p{font-size:15.5px}
-    .carte.fort{background:var(--nuit);color:var(--creme);box-shadow:none}
-    .carte.fort p{color:rgba(255,251,244,.72)}
-    .carte.fort b{color:#F0B562}
+    .carte.fort{background:radial-gradient(120% 90% at 100% 0%,rgba(210,103,60,.28),transparent 60%),rgba(255,255,255,.04)}
 
-    /* vécu */
-    .vecu{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-    .v{position:relative;border-radius:20px;overflow:hidden;min-height:230px;display:flex;align-items:flex-end;padding:20px;color:var(--creme)}
-    .v video,.v img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-    .v::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,16,25,.88) 6%,rgba(20,16,25,.25) 55%,rgba(20,16,25,.12))}
-    .v div{position:relative;z-index:2}
-    .v h3{font-size:22px;margin-bottom:4px}
-    .v p{font-size:14.5px;color:rgba(255,251,244,.78)}
-    .v.large{grid-column:span 7;min-height:320px}
-    .v.moyen{grid-column:span 5;min-height:320px}
-    .v.tiers{grid-column:span 4}
-    .v.demi{grid-column:span 6}
+    .vecu{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .v{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;display:flex;align-items:flex-end;padding:18px}
+    .v video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .v::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,5,7,.9) 8%,rgba(5,5,7,.15) 60%)}
+    .v span{position:relative;z-index:2;font-size:17px;font-weight:500;letter-spacing:-.02em}
+    .v.large{grid-column:span 2;aspect-ratio:auto}
 
-    /* cadre */
     .cadre{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .c{background:var(--creme);border-radius:16px;padding:20px;box-shadow:inset 0 0 0 1px var(--trait)}
-    .c b{display:block;font-family:var(--cond);font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive);margin-bottom:6px}
-    .c span{font-size:15px;color:var(--encre2)}
+    .c{padding:18px 20px;border-radius:16px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 0 1px var(--line)}
+    .c b{display:block;font-family:var(--cond);font-size:14.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ocre);margin-bottom:4px}
+    .c span{font-size:15px;color:var(--muted)}
 
-    /* bandeau */
-    .bandeau{background:var(--nuit);color:var(--creme);border-radius:24px;padding:clamp(28px,4vw,52px);display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
-    .bandeau h2{color:var(--creme)}
-    .bandeau p{color:rgba(255,251,244,.72);margin-top:12px}
-    .places{display:flex;flex-direction:column;gap:10px}
-    .place{display:flex;gap:12px;align-items:baseline;padding:14px 16px;border-radius:12px;background:rgba(255,251,244,.07)}
-    .place b{font-family:var(--cond);font-size:26px;color:#F0B562;min-width:52px}
-    .place span{font-size:14.5px;color:rgba(255,251,244,.78)}
+    .places{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;padding:clamp(26px,4vw,48px);border-radius:26px;
+      background:radial-gradient(110% 90% at 0% 0%,rgba(210,103,60,.22),transparent 60%),rgba(255,255,255,.03);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 0 1px var(--line)}
+    .places ul{display:flex;flex-direction:column;gap:10px}
+    .places li{list-style:none;display:flex;align-items:baseline;gap:14px;padding:13px 16px;border-radius:12px;background:rgba(255,255,255,.05)}
+    .places li b{font-family:var(--cond);font-size:28px;color:var(--ocre);min-width:64px}
+    .places li span{font-size:14.5px;color:var(--muted)}
 
-    /* faq */
-    details{border-top:1px solid var(--trait);padding:16px 0}
-    summary{cursor:pointer;font-size:17px;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:16px}
+    details{border-top:1px solid var(--line);padding:15px 0}
+    summary{cursor:pointer;font-size:16.5px;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:16px}
     summary::-webkit-details-marker{display:none}
-    summary::after{content:'+';color:var(--brique);font-size:20px;line-height:1}
+    summary::after{content:'+';color:var(--ocre);font-size:20px;line-height:1}
     details[open] summary::after{content:'−'}
-    details p{margin-top:10px;font-size:15.5px;max-width:74ch}
+    details p{margin-top:8px;font-size:15.5px;max-width:70ch}
 
-    .final{text-align:center;background:var(--creme);border-radius:24px;padding:clamp(30px,5vw,60px);box-shadow:inset 0 0 0 1px var(--trait)}
-    .final p{margin:14px auto 24px;max-width:54ch}
-    footer{border-top:1px solid var(--trait);padding-block:24px 36px}
-    .foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:14px;color:var(--encre2)}
+    .final{text-align:center;border-radius:26px;padding:clamp(30px,5vw,60px);
+      background:radial-gradient(120% 90% at 50% 0%,rgba(139,92,246,.25),transparent 65%),#0C0917;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px var(--line)}
+    .final p{margin:12px auto 24px;max-width:48ch}
+    footer{border-top:1px solid var(--line);padding-block:24px 36px}
+    .foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:14px;color:var(--muted)}
     .foot .sp{margin-left:auto}
 
     @media (max-width:980px){
-      .hero-grid{grid-template-columns:1fr}
-      .hero-media{order:-1}
-      .hero-media video{aspect-ratio:16/11}
-      .acces{grid-template-columns:1fr}
+      .cartes{grid-template-columns:1fr}
+      .vecu{grid-template-columns:1fr 1fr}
+      .v.large{grid-column:span 2;aspect-ratio:16/10}
       .cadre{grid-template-columns:1fr 1fr}
-      .bandeau{grid-template-columns:1fr}
-      .v.large,.v.moyen,.v.tiers,.v.demi{grid-column:span 12;min-height:250px}
+      .places{grid-template-columns:1fr}
     }
     @media (max-width:640px){
       .cadre{grid-template-columns:1fr}
+      .vecu{grid-template-columns:1fr}
+      .v.large{grid-column:span 1}
+      .nav a.lien{display:none}
+      .hero{min-height:0;padding-block:118px 40px}
       .btn{width:100%}
       .nav .btn{width:auto}
-      .nav .back{display:none}
-      .hero-media .tampon{width:96px;height:96px;font-size:13px;left:-10px;bottom:-12px}
     }
     @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
   </style>
 </head>
 <body>
+  <div class="bg-fx" aria-hidden="true"><video src="../assets/bg-liquid.mp4" poster="../assets/bg-liquid.webp" muted loop playsinline autoplay preload="none"></video></div>
+
   <header class="nav">
-    <div class="wrap nav-in">
+    <div class="nav-in wrap">
       <a href="../" class="logo">made<i>•</i> Académie</a>
-      <a href="../" class="back">Retour au site</a>
+      <a href="../" class="lien">La formation</a>
+      <a href="../#offres" class="lien">Les offres</a>
       <span class="sp"></span>
-      <a href="#appel" class="btn btn-plein">Réserver mon appel</a>
+      <a href="#appel" class="btn btn-neon">Réserver mon appel</a>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="wrap hero-grid">
-        <div>
-          <span class="eyebrow">Le voyage MADE · Canton</span>
-          <h1>Dix jours en Chine, <em class="o">avec ceux qui la connaissent.</em></h1>
-          <p class="intro">La foire, les usines, les fournisseurs, les soirées, la ville. Un voyage de groupe réservé aux membres de l'Académie, encadré par l'équipe, entre gens qui construisent la même chose.</p>
-          <div class="hero-cta">
-            <a href="#appel" class="btn btn-plein btn-lg">Réserver mon appel</a>
-            <a href="#acces" class="btn btn-clair btn-lg">Comment on y accède</a>
-          </div>
-          <p class="hero-note">Prochaine édition au printemps. Entre 10 et 20 personnes, pas une de plus.</p>
-        </div>
-        <div class="hero-media">
-          <video src="../assets/chine/canton-hero.mp4" poster="../assets/chine/canton-hero.jpg" muted loop playsinline preload="none"></video>
-          <div class="tampon">Édition<br>printemps</div>
+      <div class="hero-media" aria-hidden="true">
+        <video src="../assets/chine/ville-nuit.mp4" poster="../assets/chine/ville-nuit.jpg" muted loop playsinline preload="none"></video>
+      </div>
+      <div class="wrap">
+        <span class="eyebrow">Voyage Canton</span>
+        <h1>Dix jours en Chine. <em class="s">Avec ceux qui la connaissent.</em></h1>
+        <p>Usines, fournisseurs, foire, soirées. Un voyage de groupe réservé aux membres de l'Académie.</p>
+        <ul class="chips">
+          <li>Prochaine édition au printemps</li>
+          <li>10 à 20 places</li>
+          <li>Réservé aux membres</li>
+        </ul>
+        <div class="hero-cta">
+          <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel</a>
+          <a href="#acces" class="btn btn-ghost btn-lg">Comment y accéder</a>
         </div>
       </div>
     </section>
@@ -180,25 +172,12 @@
       <div class="wrap">
         <div class="head">
           <span class="eyebrow">L'accès</span>
-          <h2>On ne vend pas de billets. <em class="o">On invite des membres.</em></h2>
-          <p>Le voyage se prépare à plusieurs mois. Voilà comment les places se distribuent, pour que ce soit clair dès maintenant.</p>
+          <h2>On ne vend pas de billets. <em class="s">On invite des membres.</em></h2>
         </div>
-        <div class="acces">
-          <div class="carte">
-            <b>Condition</b>
-            <h3>Être membre de l'Académie</h3>
-            <p>Le voyage est réservé aux membres, formation ou coaching. On part avec des gens qui ont déjà la méthode et un projet en cours, pas avec des curieux.</p>
-          </div>
-          <div class="carte">
-            <b>Ouverture</b>
-            <h3>Les places ouvrent au printemps</h3>
-            <p>Entre 10 et 20 personnes par édition. Au delà, le groupe ne tient plus et les visites perdent tout leur intérêt.</p>
-          </div>
-          <div class="carte fort">
-            <b>La place offerte</b>
-            <h3>Une place gagnée, les autres en supplément</h3>
-            <p>Chaque édition, une place est offerte à un membre. Pour les autres, le voyage est un supplément à l'accompagnement, présenté pendant l'appel.</p>
-          </div>
+        <div class="cartes">
+          <div class="carte"><b>Condition</b><h3>Être membre</h3><p>Formation ou coaching. On part avec des gens qui ont déjà un projet en cours.</p></div>
+          <div class="carte"><b>Ouverture</b><h3>Au printemps</h3><p>Entre 10 et 20 personnes. Au delà, les visites perdent tout leur intérêt.</p></div>
+          <div class="carte fort"><b>La place offerte</b><h3>Une place à gagner</h3><p>Une par édition. Pour les autres, le voyage est un supplément vu pendant l'appel.</p></div>
         </div>
       </div>
     </section>
@@ -206,38 +185,18 @@
     <section id="vecu">
       <div class="wrap">
         <div class="head">
-          <span class="eyebrow">Ce qu'on y vit</span>
-          <h2>Ce n'est pas un séjour. <em class="o">Ce n'est pas un cours non plus.</em></h2>
+          <span class="eyebrow">Sur place</span>
+          <h2>Ce n'est pas un séjour. <em class="s">Ce n'est pas un cours non plus.</em></h2>
         </div>
         <div class="vecu">
-          <figure class="v large">
-            <video src="../assets/chine/mall.mp4" poster="../assets/chine/mall.jpg" muted loop playsinline preload="none"></video>
-            <div><h3>La foire et les malls</h3><p>Des kilomètres de produits, parcourus avec quelqu'un qui sait où aller et quoi demander.</p></div>
-          </figure>
-          <figure class="v moyen">
-            <video src="../assets/chine/usine-ligne.mp4" poster="../assets/chine/usine-ligne.jpg" muted loop playsinline preload="none"></video>
-            <div><h3>Les visites d'usines</h3><p>On entre là où les produits se fabriquent vraiment.</p></div>
-          </figure>
-          <figure class="v tiers">
-            <video src="../assets/chine/showroom-parfum2.mp4" poster="../assets/chine/showroom-parfum2.jpg" muted loop playsinline preload="none"></video>
-            <div><h3>Les rencontres fournisseurs</h3><p>Des échanges en direct, traduits par nos agents sur place.</p></div>
-          </figure>
-          <figure class="v tiers">
-            <video src="../assets/chine/carte-nuit.mp4" poster="../assets/chine/carte-nuit.jpg" muted loop playsinline preload="none"></video>
-            <div><h3>Les soirées</h3><p>Restaurants, rooftops, la ville la nuit. C'est là que les meilleures idées sortent.</p></div>
-          </figure>
-          <figure class="v tiers">
-            <video src="../assets/chine/packaging-showroom.mp4" poster="../assets/chine/packaging-showroom.jpg" muted loop playsinline preload="none"></video>
-            <div><h3>Les interventions</h3><p>Des conférences courtes avec des gens qui opèrent sur place.</p></div>
-          </figure>
-          <figure class="v demi">
-            <video src="../assets/chine/carte-equipe.mp4" poster="../assets/chine/carte-equipe.jpg" muted loop playsinline preload="none"></video>
-            <div><h3>Le coaching sur place</h3><p>Ton projet avancé avec l'équipe, entre deux visites, sans salle de classe.</p></div>
-          </figure>
-          <figure class="v demi">
-            <video src="../assets/chine/textile.mp4" poster="../assets/chine/textile.jpg" muted loop playsinline preload="none"></video>
-            <div><h3>La découverte</h3><p>Quartiers, marchés, culture locale. On ne traverse pas Canton en taxi.</p></div>
-          </figure>
+          <figure class="v large"><video src="../assets/chine/mall.mp4" poster="../assets/chine/mall.jpg" muted loop playsinline preload="none"></video><span>La foire et les malls</span></figure>
+          <figure class="v"><video src="../assets/chine/usine-ligne.mp4" poster="../assets/chine/usine-ligne.jpg" muted loop playsinline preload="none"></video><span>Les usines</span></figure>
+          <figure class="v"><video src="../assets/chine/showroom-parfum2.mp4" poster="../assets/chine/showroom-parfum2.jpg" muted loop playsinline preload="none"></video><span>Les fournisseurs</span></figure>
+          <figure class="v"><video src="../assets/chine/port.mp4" poster="../assets/chine/port.jpg" muted loop playsinline preload="none"></video><span>L'expédition</span></figure>
+          <figure class="v"><video src="../assets/chine/rue-nuit.mp4" poster="../assets/chine/rue-nuit.jpg" muted loop playsinline preload="none"></video><span>Les soirées</span></figure>
+          <figure class="v"><video src="../assets/chine/carte-equipe.mp4" poster="../assets/chine/carte-equipe.jpg" muted loop playsinline preload="none"></video><span>Le coaching sur place</span></figure>
+          <figure class="v"><video src="../assets/chine/packaging-showroom.mp4" poster="../assets/chine/packaging-showroom.jpg" muted loop playsinline preload="none"></video><span>Les interventions</span></figure>
+          <figure class="v"><video src="../assets/chine/textile.mp4" poster="../assets/chine/textile.jpg" muted loop playsinline preload="none"></video><span>La découverte</span></figure>
         </div>
       </div>
     </section>
@@ -246,45 +205,44 @@
       <div class="wrap">
         <div class="head">
           <span class="eyebrow">Le cadre</span>
-          <h2>Bien logés, bien nourris, <em class="o">bien entourés.</em></h2>
+          <h2>Bien logés, bien nourris, <em class="s">bien entourés.</em></h2>
         </div>
         <div class="cadre">
-          <div class="c"><b>Hôtel</b><span>Un bon standing, tout le groupe au même endroit, à côté des zones qu'on visite.</span></div>
-          <div class="c"><b>Restaurants</b><span>On mange ensemble, on teste la vraie cuisine locale, pas les chaînes de l'aéroport.</span></div>
-          <div class="c"><b>Activités</b><span>Des sorties prévues pour couper : culture, quartiers, moments qui font le voyage.</span></div>
-          <div class="c"><b>Encadrement</b><span>L'équipe MADE et nos agents sur place, du premier jour au dernier.</span></div>
+          <div class="c"><b>Hôtel</b><span>Tout le groupe au même endroit.</span></div>
+          <div class="c"><b>Restaurants</b><span>On mange ensemble, local.</span></div>
+          <div class="c"><b>Activités</b><span>Des sorties prévues pour couper.</span></div>
+          <div class="c"><b>Encadrement</b><span>L'équipe et nos agents sur place.</span></div>
         </div>
       </div>
     </section>
 
     <section>
       <div class="wrap">
-        <div class="bandeau">
+        <div class="places">
           <div>
-            <span class="eyebrow" style="color:#F0B562">Les places</span>
-            <h2 style="margin-top:12px">Quelques personnes par an. <em class="o" style="color:#F0B562">C'est le principe.</em></h2>
-            <p>On refuse des gens à chaque édition, et c'est ce qui fait que le voyage vaut quelque chose. Le meilleur moyen d'en être est déjà d'être membre et d'avancer sur son projet.</p>
+            <span class="eyebrow">Les places</span>
+            <h2 style="margin-top:12px">Quelques personnes par an. <em class="s">C'est le principe.</em></h2>
+            <p style="margin-top:12px">Le meilleur moyen d'en être : être membre et avancer sur son projet.</p>
           </div>
-          <div class="places">
-            <div class="place"><b>10 à 20</b><span>participants par édition</span></div>
-            <div class="place"><b>1</b><span>place offerte à gagner par édition</span></div>
-            <div class="place"><b>10</b><span>places de coaching ouvertes chaque mois</span></div>
-          </div>
+          <ul>
+            <li><b>10 à 20</b><span>participants par édition</span></li>
+            <li><b>1</b><span>place offerte à gagner</span></li>
+            <li><b>10</b><span>places de coaching par mois</span></li>
+          </ul>
         </div>
       </div>
     </section>
 
     <section id="faq">
-      <div class="wrap" style="max-width:900px">
+      <div class="wrap" style="max-width:880px">
         <div class="head">
-          <span class="eyebrow">Les questions qu'on nous pose</span>
-          <h2>Ce qu'il faut savoir avant l'appel.</h2>
+          <span class="eyebrow">Questions</span>
+          <h2>Avant l'appel.</h2>
         </div>
-        <details><summary>Je peux venir sans être membre ?</summary><p>Non. Le voyage est réservé aux membres de l'Académie, formation ou coaching. C'est ce qui garantit que tout le monde parle le même langage sur place.</p></details>
-        <details><summary>Comment on gagne la place offerte ?</summary><p>Une place est offerte à un membre à chaque édition. Les conditions sont annoncées à la communauté quelques semaines avant l'ouverture.</p></details>
-        <details><summary>C'est compris dans le coaching ?</summary><p>Le voyage est un supplément à l'accompagnement. Le montant et ce qu'il couvre sont donnés pendant l'appel, il n'y a pas de paiement en ligne.</p></details>
-        <details><summary>Je ne parle ni chinois ni anglais.</summary><p>Ce n'est pas un problème. L'équipe est avec toi et nos agents traduisent les échanges avec les fournisseurs.</p></details>
-        <details><summary>Quand exactement au printemps ?</summary><p>Les dates suivent la foire de Canton. Elles sont annoncées aux membres en premier, avec les places disponibles.</p></details>
+        <details><summary>Je peux venir sans être membre ?</summary><p>Non. Le voyage est réservé aux membres de l'Académie.</p></details>
+        <details><summary>Comment on gagne la place offerte ?</summary><p>Une place par édition, annoncée à la communauté avant l'ouverture.</p></details>
+        <details><summary>C'est compris dans le coaching ?</summary><p>Non, c'est un supplément. Le montant est donné pendant l'appel.</p></details>
+        <details><summary>Je ne parle pas chinois.</summary><p>Nos agents traduisent, l'équipe est avec toi du premier au dernier jour.</p></details>
       </div>
     </section>
 
@@ -292,9 +250,9 @@
       <div class="wrap">
         <div class="final">
           <span class="eyebrow" style="justify-content:center">La première étape</span>
-          <h2 style="margin-top:12px">D'abord l'Académie. <em class="o">Le voyage vient après.</em></h2>
-          <p>On regarde ton projet en 30 minutes, on te dit si l'accompagnement a du sens pour toi, et on te place sur la liste des membres informés en premier pour l'édition du printemps.</p>
-          <a href="#appel" class="btn btn-plein btn-lg" id="book">Réserver mon appel</a>
+          <h2 style="margin-top:12px">D'abord l'Académie. <em class="s">Le voyage vient après.</em></h2>
+          <p>30 minutes pour voir ton projet, et ta place sur la liste des membres prévenus en premier.</p>
+          <a href="#appel" class="btn btn-neon btn-lg" id="book">Réserver mon appel</a>
         </div>
       </div>
     </section>
