@@ -132,6 +132,43 @@
       .nav .btn{width:auto}
     }
     @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+    /* ── signature visuelle du voyage ── */
+    .cjk{position:absolute;right:-2vw;top:8%;font-size:min(34vw,440px);line-height:.8;font-weight:700;color:transparent;
+      -webkit-text-stroke:1px rgba(224,155,75,.22);pointer-events:none;user-select:none;z-index:1;letter-spacing:-.02em}
+    .stamp{position:relative;width:132px;height:132px;flex:none}
+    .stamp svg{position:absolute;inset:0;width:100%;height:100%;animation:tourne 26s linear infinite}
+    .stamp text{font-family:var(--cond);font-size:15.5px;letter-spacing:.24em;text-transform:uppercase;fill:var(--ocre)}
+    .stamp i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;background:var(--ocre);
+      -webkit-mask:url(../assets/icons/layers.webp) center/contain no-repeat;mask:url(../assets/icons/layers.webp) center/contain no-repeat}
+    @keyframes tourne{to{transform:rotate(360deg)}}
+
+    .bande{overflow:hidden;border-block:1px solid var(--line);padding-block:14px;background:rgba(224,155,75,.05)}
+    .bande .piste{display:flex;gap:34px;width:max-content;animation:defile 38s linear infinite;align-items:center}
+    .bande span{font-family:var(--cond);font-size:17px;letter-spacing:.18em;text-transform:uppercase;color:rgba(241,240,234,.62);white-space:nowrap}
+    .bande b{color:var(--ocre);font-weight:600}
+    @keyframes defile{to{transform:translateX(-50%)}}
+
+    .ticket{position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,rgba(224,155,75,.14),rgba(210,103,60,.06) 40%,rgba(255,255,255,.03));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 0 1px var(--line);display:grid;grid-template-columns:1fr 1fr 1fr}
+    .ticket > div{padding:26px 24px;position:relative}
+    .ticket > div + div::before{content:'';position:absolute;left:0;top:18px;bottom:18px;border-left:1px dashed rgba(241,240,234,.22)}
+    .ticket .num{font-family:var(--cond);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--ocre)}
+    .ticket h3{margin:8px 0 6px}
+    .ticket p{font-size:15px}
+    .ticket .talon{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px 24px;border-top:1px dashed rgba(241,240,234,.22);
+      font-family:var(--cond);font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:rgba(241,240,234,.6)}
+    .ticket .talon b{color:var(--ocre)}
+    .ticket .talon .sp{margin-left:auto}
+
+    .v video{filter:saturate(.92) contrast(1.04)}
+    .v::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(200deg,rgba(224,155,75,.16),transparent 55%);mix-blend-mode:overlay}
+    .v span{font-family:var(--cond);font-size:16px;letter-spacing:.1em;text-transform:uppercase}
+    .v .n{position:absolute;top:14px;left:16px;z-index:2;font-family:var(--cond);font-size:13px;letter-spacing:.14em;color:var(--ocre)}
+
+    .hero-in{display:flex;gap:30px;align-items:flex-end}
+    .hero-in > div:first-child{flex:1;min-width:0}
+    @media (max-width:860px){.hero-in{flex-direction:column;align-items:flex-start;gap:20px}.stamp{width:104px;height:104px}.stamp text{font-size:17px}.cjk{font-size:46vw;top:auto;bottom:-4%;opacity:.7}}
+
   </style>
 </head>
 <body>
@@ -152,21 +189,32 @@
       <div class="hero-media" aria-hidden="true">
         <video src="../assets/chine/ville-nuit.mp4" poster="../assets/chine/ville-nuit.jpg" muted loop playsinline preload="none"></video>
       </div>
-      <div class="wrap">
-        <span class="eyebrow">Voyage Canton</span>
-        <h1>Dix jours en Chine. <em class="s">Avec ceux qui la connaissent.</em></h1>
-        <p>Usines, fournisseurs, foire, soirées. Un voyage de groupe réservé aux membres de l'Académie.</p>
-        <ul class="chips">
-          <li>Prochaine édition au printemps</li>
-          <li>10 à 20 places</li>
-          <li>Réservé aux membres</li>
-        </ul>
-        <div class="hero-cta">
-          <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel</a>
-          <a href="#acces" class="btn btn-ghost btn-lg">Comment y accéder</a>
+      <div class="cjk" aria-hidden="true">广州</div>
+      <div class="wrap hero-in">
+        <div>
+          <span class="eyebrow">Voyage Canton</span>
+          <h1>Dix jours en Chine. <em class="s">Avec ceux qui la connaissent.</em></h1>
+          <p>Usines, fournisseurs, foire, soirées. Un voyage de groupe réservé aux membres de l'Académie.</p>
+          <ul class="chips">
+            <li>Prochaine édition au printemps</li>
+            <li>10 à 20 places</li>
+            <li>Réservé aux membres</li>
+          </ul>
+          <div class="hero-cta">
+            <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel</a>
+            <a href="#acces" class="btn btn-ghost btn-lg">Comment y accéder</a>
+          </div>
+        </div>
+        <div class="stamp" aria-hidden="true">
+          <svg viewBox="0 0 200 200"><defs><path id="cercle" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><text><textPath href="#cercle">Voyage MADE ✦ Canton ✦ Édition printemps ✦ </textPath></text></svg>
+          <i></i>
         </div>
       </div>
     </section>
+
+    <div class="bande" aria-hidden="true">
+      <div class="piste" id="piste"></div>
+    </div>
 
     <section id="acces">
       <div class="wrap">
@@ -174,10 +222,11 @@
           <span class="eyebrow">L'accès</span>
           <h2>On ne vend pas de billets. <em class="s">On invite des membres.</em></h2>
         </div>
-        <div class="cartes">
-          <div class="carte"><b>Condition</b><h3>Être membre</h3><p>Formation ou coaching. On part avec des gens qui ont déjà un projet en cours.</p></div>
-          <div class="carte"><b>Ouverture</b><h3>Au printemps</h3><p>Entre 10 et 20 personnes. Au delà, les visites perdent tout leur intérêt.</p></div>
-          <div class="carte fort"><b>La place offerte</b><h3>Une place à gagner</h3><p>Une par édition. Pour les autres, le voyage est un supplément vu pendant l'appel.</p></div>
+        <div class="ticket">
+          <div><span class="num">01 · Condition</span><h3>Être membre</h3><p>Formation ou coaching. On part avec des gens qui ont déjà un projet en cours.</p></div>
+          <div><span class="num">02 · Ouverture</span><h3>Au printemps</h3><p>Entre 10 et 20 personnes. Au delà, les visites perdent tout leur intérêt.</p></div>
+          <div><span class="num">03 · La place offerte</span><h3>Une place à gagner</h3><p>Une par édition. Pour les autres, c'est un supplément vu pendant l'appel.</p></div>
+          <div class="talon"><span>Guangzhou · 广州</span><span><b>10 jours</b></span><span class="sp"></span><span>Groupe de <b>10 à 20</b></span></div>
         </div>
       </div>
     </section>
@@ -189,14 +238,14 @@
           <h2>Ce n'est pas un séjour. <em class="s">Ce n'est pas un cours non plus.</em></h2>
         </div>
         <div class="vecu">
-          <figure class="v large"><video src="../assets/chine/mall.mp4" poster="../assets/chine/mall.jpg" muted loop playsinline preload="none"></video><span>La foire et les malls</span></figure>
-          <figure class="v"><video src="../assets/chine/usine-ligne.mp4" poster="../assets/chine/usine-ligne.jpg" muted loop playsinline preload="none"></video><span>Les usines</span></figure>
-          <figure class="v"><video src="../assets/chine/showroom-parfum2.mp4" poster="../assets/chine/showroom-parfum2.jpg" muted loop playsinline preload="none"></video><span>Les fournisseurs</span></figure>
-          <figure class="v"><video src="../assets/chine/port.mp4" poster="../assets/chine/port.jpg" muted loop playsinline preload="none"></video><span>L'expédition</span></figure>
-          <figure class="v"><video src="../assets/chine/rue-nuit.mp4" poster="../assets/chine/rue-nuit.jpg" muted loop playsinline preload="none"></video><span>Les soirées</span></figure>
-          <figure class="v"><video src="../assets/chine/carte-equipe.mp4" poster="../assets/chine/carte-equipe.jpg" muted loop playsinline preload="none"></video><span>Le coaching sur place</span></figure>
-          <figure class="v"><video src="../assets/chine/packaging-showroom.mp4" poster="../assets/chine/packaging-showroom.jpg" muted loop playsinline preload="none"></video><span>Les interventions</span></figure>
-          <figure class="v"><video src="../assets/chine/textile.mp4" poster="../assets/chine/textile.jpg" muted loop playsinline preload="none"></video><span>La découverte</span></figure>
+          <figure class="v large"><video src="../assets/chine/mall.mp4" poster="../assets/chine/mall.jpg" muted loop playsinline preload="none"></video><span class="n">01</span><span>La foire et les malls</span></figure>
+          <figure class="v"><video src="../assets/chine/usine-ligne.mp4" poster="../assets/chine/usine-ligne.jpg" muted loop playsinline preload="none"></video><span class="n">02</span><span>Les usines</span></figure>
+          <figure class="v"><video src="../assets/chine/showroom-parfum2.mp4" poster="../assets/chine/showroom-parfum2.jpg" muted loop playsinline preload="none"></video><span class="n">03</span><span>Les fournisseurs</span></figure>
+          <figure class="v"><video src="../assets/chine/port.mp4" poster="../assets/chine/port.jpg" muted loop playsinline preload="none"></video><span class="n">04</span><span>L'expédition</span></figure>
+          <figure class="v"><video src="../assets/chine/rue-nuit.mp4" poster="../assets/chine/rue-nuit.jpg" muted loop playsinline preload="none"></video><span class="n">05</span><span>Les soirées</span></figure>
+          <figure class="v"><video src="../assets/chine/carte-equipe.mp4" poster="../assets/chine/carte-equipe.jpg" muted loop playsinline preload="none"></video><span class="n">06</span><span>Le coaching sur place</span></figure>
+          <figure class="v"><video src="../assets/chine/packaging-showroom.mp4" poster="../assets/chine/packaging-showroom.jpg" muted loop playsinline preload="none"></video><span class="n">07</span><span>Les interventions</span></figure>
+          <figure class="v"><video src="../assets/chine/textile.mp4" poster="../assets/chine/textile.jpg" muted loop playsinline preload="none"></video><span class="n">08</span><span>La découverte</span></figure>
         </div>
       </div>
     </section>

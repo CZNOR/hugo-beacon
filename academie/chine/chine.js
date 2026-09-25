@@ -34,3 +34,12 @@ if (!reduced) {
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .1, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
 }
+
+
+/* Bande défilante */
+var piste = document.getElementById('piste');
+if (piste) {
+  var mots = ['Guangzhou', '广州', 'Foire de Canton', 'Usines', 'Sourcing', 'Fournisseurs', 'Packaging', 'Négociation', 'Nuits blanches', '10 jours'];
+  var bloc = mots.map(function (m, i) { return '<span>' + (i % 3 === 0 ? '<b>' + m + '</b>' : m) + '</span>'; }).join('');
+  piste.innerHTML = bloc + bloc;
+}
