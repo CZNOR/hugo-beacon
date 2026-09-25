@@ -2,13 +2,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Séminaire Canton · MADE Académie</title>
-  <meta name="description" content="Dix jours à Canton avec l'équipe MADE : foire, usines, fournisseurs, négociation et cours chaque jour. L'école de commerce qu'on aurait voulu faire." />
-  <meta property="og:title" content="Séminaire Canton · MADE Académie" />
-  <meta property="og:description" content="Dix jours à Canton : foire, usines, fournisseurs, négociation et cours chaque jour." />
+  <title>Le voyage MADE · Canton</title>
+  <meta name="description" content="Dix jours en Chine avec l'équipe MADE et les membres de l'Académie : foire de Canton, usines, rencontres fournisseurs, conférences, coaching sur place et découverte de la ville." />
+  <meta property="og:title" content="Le voyage MADE · Canton" />
+  <meta property="og:description" content="Dix jours en Chine avec les membres de l'Académie. Places ouvertes au printemps, 10 à 20 personnes." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://hugo-bnls.fr/academie/assets/og.jpg" />
-  <meta name="theme-color" content="#050507" />
+  <meta name="theme-color" content="#F7F1E6" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests" />
   <meta name="referrer" content="no-referrer" />
   <meta name="robots" content="noindex, noimageindex, noarchive" />
@@ -21,304 +21,254 @@
     @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url(../assets/fonts/BarlowCondensed-600.woff2) format('woff2')}
     @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/BarlowCondensed-700.woff2) format('woff2')}
 
-    :root{--bg:#050507;--ink:#F1F0EA;--muted:rgba(241,240,234,.62);--line:rgba(241,240,234,.1);
-      --made:#B691FE;--rouge:#F87171;--ease:cubic-bezier(.22,1,.36,1);
-      --sans:'Inter Tight',system-ui,-apple-system,sans-serif;--cond:'Barlow Condensed','Arial Narrow',sans-serif}
+    :root{
+      color-scheme: light;
+      --sable:#F7F1E6; --sable2:#EFE5D4; --creme:#FFFBF4;
+      --encre:#1E1712; --encre2:rgba(30,23,18,.66); --trait:rgba(30,23,18,.14);
+      --ocre:#C9772F; --brique:#A8442A; --olive:#5F6B45; --nuit:#141019;
+      --ease:cubic-bezier(.22,1,.36,1);
+      --sans:'Inter Tight',system-ui,-apple-system,sans-serif;
+      --cond:'Barlow Condensed','Arial Narrow',sans-serif;
+    }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{background:var(--bg);color:var(--ink);font-family:var(--sans);letter-spacing:-.01em;line-height:1.55;overflow-x:hidden}
+    body{background:var(--sable);color:var(--encre);font-family:var(--sans);letter-spacing:-.012em;line-height:1.55;overflow-x:hidden}
     img,video{max-width:100%;display:block}
     a{color:inherit;text-decoration:none}
-    h1,h2,h3{font-weight:500;letter-spacing:-.045em;line-height:1.04;text-wrap:balance}
-    h1{font-size:clamp(42px,6.4vw,84px)}
-    h2{font-size:clamp(30px,3.6vw,50px)}
-    h3{font-size:clamp(20px,1.9vw,26px);letter-spacing:-.035em}
-    em.s{font-style:normal;font-weight:300;color:var(--made)}
-    p{font-size:17px;color:var(--muted)}
-    .wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(20px,4vw,40px);position:relative;z-index:2}
-    section{padding-block:clamp(60px,8vw,110px);position:relative}
-    .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--cond);font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:rgba(241,240,234,.55)}
-    .eyebrow::before{content:'';width:15px;height:15px;background:var(--made);
-      -webkit-mask:url(../assets/icons/layers.webp) center/contain no-repeat;mask:url(../assets/icons/layers.webp) center/contain no-repeat}
-    .head{display:flex;flex-direction:column;gap:14px;margin-bottom:38px;max-width:820px}
+    h1,h2,h3{font-weight:500;letter-spacing:-.045em;line-height:1.05;text-wrap:balance}
+    h1{font-size:clamp(40px,6.2vw,80px)}
+    h2{font-size:clamp(28px,3.4vw,46px)}
+    h3{font-size:clamp(19px,1.8vw,24px);letter-spacing:-.03em}
+    em.o{font-style:normal;font-weight:300;color:var(--brique)}
+    p{font-size:17px;color:var(--encre2)}
+    .wrap{max-width:1160px;margin:0 auto;padding-inline:clamp(20px,4vw,40px);position:relative;z-index:2}
+    section{padding-block:clamp(54px,7vw,96px);position:relative}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--cond);font-weight:600;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--brique)}
+    .eyebrow::before{content:'';width:8px;height:8px;background:var(--ocre);transform:rotate(45deg)}
+    .head{display:flex;flex-direction:column;gap:14px;margin-bottom:34px;max-width:780px}
 
-    /* fond liquide */
-    .bg-fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-    .bg-fx video{position:absolute;inset:-10%;width:120%;height:120%;object-fit:cover;opacity:.18;filter:blur(30px) saturate(150%) brightness(.8);mix-blend-mode:screen}
-    .bg-fx::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 35%,rgba(5,5,7,.55),rgba(5,5,7,.88) 75%)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:10px;padding:14px 20px;
+      font-family:var(--cond);font-weight:600;font-size:15.5px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:transform .3s var(--ease),background .3s}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-plein{background:var(--brique);color:var(--creme)}
+    .btn-plein:hover{background:#95371f}
+    .btn-clair{background:rgba(255,251,244,.9);color:var(--encre);box-shadow:inset 0 0 0 1px var(--trait)}
+    .btn-lg{padding:16px 24px;font-size:17px}
 
     /* nav */
-    .nav{position:fixed;top:14px;left:0;right:0;z-index:50}
-    .nav-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 16px;border-radius:100px;
-      background:rgba(12,10,20,.8);backdrop-filter:blur(18px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
-    .nav a.back{font-family:var(--cond);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-    .nav .logo{font-family:var(--cond);font-weight:700;font-size:20px;letter-spacing:.06em;text-transform:uppercase}
-    .nav .logo i{font-style:normal;color:var(--made)}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:12px;padding:14px 20px;
-      font-family:var(--cond);font-weight:600;font-size:15.5px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
-      transition:transform .3s var(--ease),background .3s}
-    .btn:hover{transform:translateY(-1px)}
-    .btn-neon{background:linear-gradient(180deg,#9b6bfb,#6d28d9);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 14px 34px -14px rgba(139,92,246,.9)}
-    .btn-ghost{box-shadow:inset 0 0 0 1px rgba(182,145,254,.45);background:rgba(182,145,254,.06)}
-    .btn-lg{padding:17px 24px;font-size:17px}
-    .nav .btn{padding:10px 16px;font-size:14px}
-    .nav-sp{margin-left:auto}
+    .nav{position:sticky;top:0;z-index:50;background:rgba(247,241,230,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--trait)}
+    .nav-in{display:flex;align-items:center;gap:16px;padding-block:12px}
+    .logo{font-family:var(--cond);font-weight:700;font-size:20px;letter-spacing:.06em;text-transform:uppercase}
+    .logo i{font-style:normal;color:var(--brique)}
+    .nav .back{font-family:var(--cond);font-size:14.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre2)}
+    .nav .sp{margin-left:auto}
+    .nav .btn{padding:10px 15px;font-size:14px}
 
     /* hero */
-    .hero{min-height:min(92vh,880px);display:flex;align-items:flex-end;padding-block:140px 60px;overflow:hidden}
-    .hero-media{position:absolute;inset:0;z-index:0}
-    .hero-media video{width:100%;height:100%;object-fit:cover;opacity:.5}
-    .hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,5,7,.96) 8%,rgba(5,5,7,.45) 60%,rgba(5,5,7,.8))}
-    .hero h1{margin:16px 0 18px}
-    .hero p{font-size:19px;max-width:620px}
-    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-    .hero-facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-    .hero-facts li{list-style:none;font-size:13.5px;padding:8px 13px;border-radius:8px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(182,145,254,.25)}
+    .hero{padding-top:clamp(30px,5vw,54px)}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:center}
+    .hero h1{margin:14px 0 16px}
+    .hero p.intro{font-size:19px;max-width:540px}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+    .hero-note{margin-top:16px;font-size:14.5px;color:var(--encre2)}
+    .hero-media{position:relative}
+    .hero-media video{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:22px;box-shadow:0 30px 60px -30px rgba(30,23,18,.5)}
+    .hero-media .tampon{position:absolute;left:-18px;bottom:-18px;width:120px;height:120px;border-radius:50%;background:var(--brique);color:var(--creme);
+      display:grid;place-items:center;text-align:center;font-family:var(--cond);font-size:15px;letter-spacing:.1em;text-transform:uppercase;line-height:1.2;padding:12px;transform:rotate(-8deg)}
 
-    /* objectif */
-    .manifeste{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,60px);align-items:start}
-    .manifeste p{font-size:18.5px;color:var(--ink)}
-    .manifeste p + p{margin-top:16px}
-    .promesses{display:flex;flex-direction:column;gap:14px}
-    .promesse{padding:18px 20px;border-radius:16px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 0 1px var(--line)}
-    .promesse b{display:block;font-family:var(--cond);font-size:17px;letter-spacing:.06em;text-transform:uppercase;color:var(--made);margin-bottom:5px}
-    .promesse span{font-size:15px;color:var(--muted)}
+    /* acces */
+    .acces{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .carte{background:var(--creme);border-radius:18px;padding:24px;box-shadow:inset 0 0 0 1px var(--trait);display:flex;flex-direction:column;gap:9px}
+    .carte b{font-family:var(--cond);font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--ocre)}
+    .carte h3{margin-bottom:2px}
+    .carte p{font-size:15.5px}
+    .carte.fort{background:var(--nuit);color:var(--creme);box-shadow:none}
+    .carte.fort p{color:rgba(255,251,244,.72)}
+    .carte.fort b{color:#F0B562}
 
-    /* comparaison */
-    .compare{border-radius:20px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
-    .crow{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:0;border-top:1px solid var(--line)}
-    .crow:first-child{border-top:0}
-    .crow>div{padding:16px 18px;font-size:15.5px}
-    .crow>div:first-child{color:var(--ink);font-weight:500}
-    .crow.h>div{font-family:var(--cond);font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.03)}
-    .crow.h .made{color:var(--made)}
-    .crow .ecole{color:rgba(241,240,234,.45)}
-    .crow .made{color:var(--ink);background:rgba(182,145,254,.05)}
+    /* vécu */
+    .vecu{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .v{position:relative;border-radius:20px;overflow:hidden;min-height:230px;display:flex;align-items:flex-end;padding:20px;color:var(--creme)}
+    .v video,.v img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .v::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,16,25,.88) 6%,rgba(20,16,25,.25) 55%,rgba(20,16,25,.12))}
+    .v div{position:relative;z-index:2}
+    .v h3{font-size:22px;margin-bottom:4px}
+    .v p{font-size:14.5px;color:rgba(255,251,244,.78)}
+    .v.large{grid-column:span 7;min-height:320px}
+    .v.moyen{grid-column:span 5;min-height:320px}
+    .v.tiers{grid-column:span 4}
+    .v.demi{grid-column:span 6}
 
-    /* programme */
-    .prog{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .jour{padding:20px;border-radius:18px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column;gap:8px}
-    .jour b{font-family:var(--cond);font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--made)}
-    .jour h3{font-size:21px}
-    .jour p{font-size:15px}
+    /* cadre */
+    .cadre{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .c{background:var(--creme);border-radius:16px;padding:20px;box-shadow:inset 0 0 0 1px var(--trait)}
+    .c b{display:block;font-family:var(--cond);font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive);margin-bottom:6px}
+    .c span{font-size:15px;color:var(--encre2)}
 
-    /* inclus */
-    .inclus{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .inclus li{list-style:none;display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.03);font-size:15.5px}
-    .inclus li::before{content:'';flex:0 0 18px;height:18px;margin-top:3px;background:var(--made);
-      -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M3 10h4l2 3 8-10h4L11 18H7z' fill='%23fff'/%3E%3C/svg%3E") center/contain no-repeat;
-      mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M3 10h4l2 3 8-10h4L11 18H7z' fill='%23fff'/%3E%3C/svg%3E") center/contain no-repeat}
+    /* bandeau */
+    .bandeau{background:var(--nuit);color:var(--creme);border-radius:24px;padding:clamp(28px,4vw,52px);display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+    .bandeau h2{color:var(--creme)}
+    .bandeau p{color:rgba(255,251,244,.72);margin-top:12px}
+    .places{display:flex;flex-direction:column;gap:10px}
+    .place{display:flex;gap:12px;align-items:baseline;padding:14px 16px;border-radius:12px;background:rgba(255,251,244,.07)}
+    .place b{font-family:var(--cond);font-size:26px;color:#F0B562;min-width:52px}
+    .place span{font-size:14.5px;color:rgba(255,251,244,.78)}
 
-    /* galerie */
-    .gal{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .gal figure{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#111}
-    .gal video{width:100%;height:100%;object-fit:cover}
-    .gal figcaption{position:absolute;left:10px;bottom:10px;font-family:var(--cond);font-size:13px;letter-spacing:.06em;text-transform:uppercase;
-      padding:5px 10px;border-radius:7px;background:rgba(6,4,12,.72)}
-
-    /* pour qui */
-    .qui{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .qui>div{padding:24px;border-radius:18px;box-shadow:inset 0 0 0 1px var(--line)}
-    .qui h3{margin-bottom:14px}
-    .qui ul{display:flex;flex-direction:column;gap:10px}
-    .qui li{list-style:none;font-size:15.5px;display:flex;gap:10px}
-    .qui li::before{content:'';flex:0 0 7px;height:7px;margin-top:9px;border-radius:2px;background:var(--made)}
-    .qui .non li::before{background:var(--rouge)}
-    .qui .non li{color:var(--muted)}
-
-    /* faq + final */
-    details{border-top:1px solid var(--line);padding:16px 0}
+    /* faq */
+    details{border-top:1px solid var(--trait);padding:16px 0}
     summary{cursor:pointer;font-size:17px;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:16px}
     summary::-webkit-details-marker{display:none}
-    summary::after{content:'+';color:var(--made);font-size:20px;line-height:1}
+    summary::after{content:'+';color:var(--brique);font-size:20px;line-height:1}
     details[open] summary::after{content:'−'}
     details p{margin-top:10px;font-size:15.5px;max-width:74ch}
-    .final{border-radius:26px;padding:clamp(34px,5vw,64px);text-align:center;background:radial-gradient(120% 90% at 50% 0%,rgba(139,92,246,.25),transparent 65%),#0C0917;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(255,255,255,.08)}
-    .final p{margin:14px auto 26px;max-width:56ch}
-    footer{border-top:1px solid var(--line);padding-block:26px 40px;margin-top:40px}
-    .foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:14px;color:var(--muted)}
-    .foot a{color:var(--muted)}
+
+    .final{text-align:center;background:var(--creme);border-radius:24px;padding:clamp(30px,5vw,60px);box-shadow:inset 0 0 0 1px var(--trait)}
+    .final p{margin:14px auto 24px;max-width:54ch}
+    footer{border-top:1px solid var(--trait);padding-block:24px 36px}
+    .foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:14px;color:var(--encre2)}
     .foot .sp{margin-left:auto}
 
     @media (max-width:980px){
-      .manifeste{grid-template-columns:1fr}
-      .prog{grid-template-columns:1fr 1fr}
-      .gal{grid-template-columns:1fr 1fr}
-      .qui{grid-template-columns:1fr}
-      .crow{grid-template-columns:1fr}
-      .crow>div{border-top:1px solid var(--line)}
-      .crow>div:first-child{border-top:0}
-      .crow.h{display:none}
-      .crow .ecole::before{content:'École de commerce · ';font-family:var(--cond);letter-spacing:.08em;text-transform:uppercase;font-size:12.5px}
-      .crow .made::before{content:'MADE · ';font-family:var(--cond);letter-spacing:.08em;text-transform:uppercase;font-size:12.5px;color:var(--made)}
+      .hero-grid{grid-template-columns:1fr}
+      .hero-media{order:-1}
+      .hero-media video{aspect-ratio:16/11}
+      .acces{grid-template-columns:1fr}
+      .cadre{grid-template-columns:1fr 1fr}
+      .bandeau{grid-template-columns:1fr}
+      .v.large,.v.moyen,.v.tiers,.v.demi{grid-column:span 12;min-height:250px}
     }
     @media (max-width:640px){
-      .prog,.inclus{grid-template-columns:1fr}
-      .nav a.back{display:none}
-      .hero{min-height:0;padding-block:120px 44px}
-      .hero p{font-size:17px}
+      .cadre{grid-template-columns:1fr}
       .btn{width:100%}
       .nav .btn{width:auto}
+      .nav .back{display:none}
+      .hero-media .tampon{width:96px;height:96px;font-size:13px;left:-10px;bottom:-12px}
     }
     @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
   </style>
 </head>
 <body>
-  <div class="bg-fx" aria-hidden="true"><video src="../assets/bg-liquid.mp4" poster="../assets/bg-liquid.webp" muted loop playsinline autoplay preload="none"></video></div>
-
   <header class="nav">
-    <div class="nav-in wrap">
+    <div class="wrap nav-in">
       <a href="../" class="logo">made<i>•</i> Académie</a>
       <a href="../" class="back">Retour au site</a>
-      <span class="nav-sp"></span>
-      <a href="#appel" class="btn btn-neon">Réserver mon appel</a>
+      <span class="sp"></span>
+      <a href="#appel" class="btn btn-plein">Réserver mon appel</a>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="hero-media" aria-hidden="true">
-        <video src="../assets/chine/canton-hero.mp4" poster="../assets/chine/canton-hero.jpg" muted loop playsinline preload="none"></video>
-      </div>
-      <div class="wrap">
-        <span class="eyebrow">Séminaire · Canton</span>
-        <h1>Dix jours en Chine. <em class="s">Là où ta marque commence vraiment.</em></h1>
-        <p>La foire de Canton, les usines, les showrooms, les fournisseurs. Tu pars avec ton produit, tes prix négociés et tes contacts. Pas avec des notes de cours.</p>
-        <ul class="hero-facts">
-          <li>10 jours à Guangzhou</li>
-          <li>15 à 25 participants</li>
-          <li>Cours chaque jour</li>
-          <li>Salle de travail sur place</li>
-          <li>Encadré par les 3 cofondateurs</li>
-        </ul>
-        <div class="hero-cta">
-          <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel</a>
-          <a href="#comparaison" class="btn btn-ghost btn-lg">Pourquoi pas une école</a>
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Le voyage MADE · Canton</span>
+          <h1>Dix jours en Chine, <em class="o">avec ceux qui la connaissent.</em></h1>
+          <p class="intro">La foire, les usines, les fournisseurs, les soirées, la ville. Un voyage de groupe réservé aux membres de l'Académie, encadré par l'équipe, entre gens qui construisent la même chose.</p>
+          <div class="hero-cta">
+            <a href="#appel" class="btn btn-plein btn-lg">Réserver mon appel</a>
+            <a href="#acces" class="btn btn-clair btn-lg">Comment on y accède</a>
+          </div>
+          <p class="hero-note">Prochaine édition au printemps. Entre 10 et 20 personnes, pas une de plus.</p>
+        </div>
+        <div class="hero-media">
+          <video src="../assets/chine/canton-hero.mp4" poster="../assets/chine/canton-hero.jpg" muted loop playsinline preload="none"></video>
+          <div class="tampon">Édition<br>printemps</div>
         </div>
       </div>
     </section>
 
-    <section id="objectif">
+    <section id="acces">
       <div class="wrap">
         <div class="head">
-          <span class="eyebrow">Notre objectif</span>
-          <h2>On construit l'école qu'on aurait voulu faire. <em class="s">En dix fois moins de temps.</em></h2>
+          <span class="eyebrow">L'accès</span>
+          <h2>On ne vend pas de billets. <em class="o">On invite des membres.</em></h2>
+          <p>Le voyage se prépare à plusieurs mois. Voilà comment les places se distribuent, pour que ce soit clair dès maintenant.</p>
         </div>
-        <div class="manifeste">
+        <div class="acces">
+          <div class="carte">
+            <b>Condition</b>
+            <h3>Être membre de l'Académie</h3>
+            <p>Le voyage est réservé aux membres, formation ou coaching. On part avec des gens qui ont déjà la méthode et un projet en cours, pas avec des curieux.</p>
+          </div>
+          <div class="carte">
+            <b>Ouverture</b>
+            <h3>Les places ouvrent au printemps</h3>
+            <p>Entre 10 et 20 personnes par édition. Au delà, le groupe ne tient plus et les visites perdent tout leur intérêt.</p>
+          </div>
+          <div class="carte fort">
+            <b>La place offerte</b>
+            <h3>Une place gagnée, les autres en supplément</h3>
+            <p>Chaque édition, une place est offerte à un membre. Pour les autres, le voyage est un supplément à l'accompagnement, présenté pendant l'appel.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="vecu">
+      <div class="wrap">
+        <div class="head">
+          <span class="eyebrow">Ce qu'on y vit</span>
+          <h2>Ce n'est pas un séjour. <em class="o">Ce n'est pas un cours non plus.</em></h2>
+        </div>
+        <div class="vecu">
+          <figure class="v large">
+            <video src="../assets/chine/mall.mp4" poster="../assets/chine/mall.jpg" muted loop playsinline preload="none"></video>
+            <div><h3>La foire et les malls</h3><p>Des kilomètres de produits, parcourus avec quelqu'un qui sait où aller et quoi demander.</p></div>
+          </figure>
+          <figure class="v moyen">
+            <video src="../assets/chine/usine-ligne.mp4" poster="../assets/chine/usine-ligne.jpg" muted loop playsinline preload="none"></video>
+            <div><h3>Les visites d'usines</h3><p>On entre là où les produits se fabriquent vraiment.</p></div>
+          </figure>
+          <figure class="v tiers">
+            <video src="../assets/chine/showroom-parfum2.mp4" poster="../assets/chine/showroom-parfum2.jpg" muted loop playsinline preload="none"></video>
+            <div><h3>Les rencontres fournisseurs</h3><p>Des échanges en direct, traduits par nos agents sur place.</p></div>
+          </figure>
+          <figure class="v tiers">
+            <video src="../assets/chine/carte-nuit.mp4" poster="../assets/chine/carte-nuit.jpg" muted loop playsinline preload="none"></video>
+            <div><h3>Les soirées</h3><p>Restaurants, rooftops, la ville la nuit. C'est là que les meilleures idées sortent.</p></div>
+          </figure>
+          <figure class="v tiers">
+            <video src="../assets/chine/packaging-showroom.mp4" poster="../assets/chine/packaging-showroom.jpg" muted loop playsinline preload="none"></video>
+            <div><h3>Les interventions</h3><p>Des conférences courtes avec des gens qui opèrent sur place.</p></div>
+          </figure>
+          <figure class="v demi">
+            <video src="../assets/chine/carte-equipe.mp4" poster="../assets/chine/carte-equipe.jpg" muted loop playsinline preload="none"></video>
+            <div><h3>Le coaching sur place</h3><p>Ton projet avancé avec l'équipe, entre deux visites, sans salle de classe.</p></div>
+          </figure>
+          <figure class="v demi">
+            <video src="../assets/chine/textile.mp4" poster="../assets/chine/textile.jpg" muted loop playsinline preload="none"></video>
+            <div><h3>La découverte</h3><p>Quartiers, marchés, culture locale. On ne traverse pas Canton en taxi.</p></div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="cadre">
+      <div class="wrap">
+        <div class="head">
+          <span class="eyebrow">Le cadre</span>
+          <h2>Bien logés, bien nourris, <em class="o">bien entourés.</em></h2>
+        </div>
+        <div class="cadre">
+          <div class="c"><b>Hôtel</b><span>Un bon standing, tout le groupe au même endroit, à côté des zones qu'on visite.</span></div>
+          <div class="c"><b>Restaurants</b><span>On mange ensemble, on teste la vraie cuisine locale, pas les chaînes de l'aéroport.</span></div>
+          <div class="c"><b>Activités</b><span>Des sorties prévues pour couper : culture, quartiers, moments qui font le voyage.</span></div>
+          <div class="c"><b>Encadrement</b><span>L'équipe MADE et nos agents sur place, du premier jour au dernier.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="bandeau">
           <div>
-            <p>MADE existe depuis 7 ans. On lance nos marques, on gère celles de nos clients, et on a vu passer assez de projets pour savoir ce qui fait la différence entre quelqu'un qui vend et quelqu'un qui raconte qu'il va vendre.</p>
-            <p>Notre objectif avec l'Académie est simple : que tu repartes avec une marque qui tourne, pas avec un diplôme. Une boutique en ligne, un produit validé, un fournisseur qui répond, des campagnes qui tiennent, et de vraies compétences qui restent quand la mode change.</p>
-            <p>Le séminaire de Canton est le moment où tout devient concret. Tu serres la main du fabricant, tu touches ton produit, tu négocies ton prix. C'est ce qu'aucune salle de classe ne peut donner.</p>
+            <span class="eyebrow" style="color:#F0B562">Les places</span>
+            <h2 style="margin-top:12px">Quelques personnes par an. <em class="o" style="color:#F0B562">C'est le principe.</em></h2>
+            <p>On refuse des gens à chaque édition, et c'est ce qui fait que le voyage vaut quelque chose. Le meilleur moyen d'en être est déjà d'être membre et d'avancer sur son projet.</p>
           </div>
-          <div class="promesses">
-            <div class="promesse"><b>Ce qu'on vise</b><span>Que chaque personne accompagnée ait une boutique en ligne qui vend, et sache pourquoi elle vend.</span></div>
-            <div class="promesse"><b>Ce qu'on refuse</b><span>Les promesses de revenus, les copier coller AliExpress, et les méthodes qui marchent seulement le temps d'une vidéo.</span></div>
-            <div class="promesse"><b>Ce qui nous différencie</b><span>Une agence qui tourne derrière l'école. Ce qu'on enseigne, on le fait la même semaine pour de vrais clients.</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="comparaison">
-      <div class="wrap">
-        <div class="head">
-          <span class="eyebrow">La comparaison qu'on assume</span>
-          <h2>Une école de commerce coûte trois ans et une fortune. <em class="s">Nous, trois mois et un produit qui vend.</em></h2>
-        </div>
-        <div class="compare">
-          <div class="crow h"><div></div><div>École de commerce</div><div class="made">MADE Académie</div></div>
-          <div class="crow"><div>Durée</div><div class="ecole">3 à 5 ans avant de rentrer sur le marché</div><div class="made">3 mois de coaching, ta boutique en ligne avant la fin</div></div>
-          <div class="crow"><div>Qui enseigne</div><div class="ecole">Des professeurs qui n'ont jamais lancé de marque</div><div class="made">Des opérateurs qui gèrent des budgets pub et des marques toutes les semaines</div></div>
-          <div class="crow"><div>Ce que tu produis</div><div class="ecole">Des dossiers, des études de cas, une soutenance</div><div class="made">Une boutique, des créas, des campagnes, des ventes</div></div>
-          <div class="crow"><div>Les fournisseurs</div><div class="ecole">Un chapitre de cours sur la supply chain</div><div class="made">Dix jours dans les usines et les showrooms de Canton</div></div>
-          <div class="crow"><div>Le réseau</div><div class="ecole">Un annuaire d'anciens</div><div class="made">Une communauté d'opérateurs qui vendent en ce moment</div></div>
-          <div class="crow"><div>Les outils</div><div class="ecole">Excel et des modèles théoriques</div><div class="made">Shopify, Meta, TikTok Shop, Storia et nos calculateurs</div></div>
-          <div class="crow"><div>Après</div><div class="ecole">Tu cherches un stage</div><div class="made">Tu as une marque à toi, et on t'aide à la faire grossir</div></div>
-        </div>
-        <p style="margin-top:18px;font-size:14.5px">On ne dit pas qu'une école de commerce ne sert à rien. On dit qu'elle ne t'apprendra pas à vendre un produit en ligne cette année.</p>
-      </div>
-    </section>
-
-    <section id="programme">
-      <div class="wrap">
-        <div class="head">
-          <span class="eyebrow">Le déroulé</span>
-          <h2>Dix jours, une méthode. <em class="s">Rien n'est laissé au hasard.</em></h2>
-        </div>
-        <div class="prog">
-          <div class="jour"><b>Jours 1 et 2</b><h3>Arrivée et cadrage</h3><p>Installation, plan de la semaine, objectifs de chacun. On sait ce que tu cherches avant d'entrer dans la foire.</p></div>
-          <div class="jour"><b>Jours 3 à 5</b><h3>La foire de Canton</h3><p>Le plus grand salon de produits au monde. On te montre comment le parcourir sans t'y noyer, quoi demander, quoi refuser.</p></div>
-          <div class="jour"><b>Jours 6 et 7</b><h3>Usines et showrooms</h3><p>Visites chez les fabricants, échantillons, packaging, contrôle qualité. Tu vois d'où sort ton produit.</p></div>
-          <div class="jour"><b>Jour 8</b><h3>Négociation</h3><p>Prix, quantités minimales, délais, conditions. On prépare l'échange le matin, tu négoces l'après midi.</p></div>
-          <div class="jour"><b>Jour 9</b><h3>Cours et mise en ligne</h3><p>Salle de travail réservée. Fiches produit, visuels, boutique, première campagne. On travaille ensemble.</p></div>
-          <div class="jour"><b>Jour 10</b><h3>Plan de retour</h3><p>Ton plan des 90 jours suivants, validé avec ton coach. Tu rentres avec une feuille de route, pas des souvenirs.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="inclus">
-      <div class="wrap">
-        <div class="head">
-          <span class="eyebrow">Ce que tu as</span>
-          <h2>Le voyage n'est qu'une partie. <em class="s">Le reste dure trois mois.</em></h2>
-        </div>
-        <ul class="inclus">
-          <li>Le coaching 3 mois avec ton coach dédié</li>
-          <li>Ta boutique premium construite par l'agence</li>
-          <li>Les dix jours à Canton avec l'équipe</li>
-          <li>L'hôtel et la salle de travail sur place</li>
-          <li>L'accès complet à la formation et aux mises à jour</li>
-          <li>Storia et les outils de l'Académie</li>
-          <li>Nos contacts fournisseurs et agents sur place</li>
-          <li>Le contenu filmé pendant le voyage pour ta marque</li>
-        </ul>
-        <p style="margin-top:18px;font-size:14.5px">Les détails, les dates et le tarif se voient pendant l'appel. Les places sont limitées par la taille du groupe.</p>
-      </div>
-    </section>
-
-    <section id="terrain">
-      <div class="wrap">
-        <div class="head">
-          <span class="eyebrow">Sur place</span>
-          <h2>Ce que tu verras. <em class="s">Filmé sur nos derniers voyages.</em></h2>
-        </div>
-        <div class="gal">
-          <figure><video src="../assets/chine/mall.mp4" poster="../assets/chine/mall.jpg" muted loop playsinline preload="none"></video><figcaption>Mall fournisseurs</figcaption></figure>
-          <figure><video src="../assets/chine/usine-ligne.mp4" poster="../assets/chine/usine-ligne.jpg" muted loop playsinline preload="none"></video><figcaption>Chaîne de production</figcaption></figure>
-          <figure><video src="../assets/chine/showroom-parfum2.mp4" poster="../assets/chine/showroom-parfum2.jpg" muted loop playsinline preload="none"></video><figcaption>Showroom parfums</figcaption></figure>
-          <figure><video src="../assets/chine/packaging-showroom.mp4" poster="../assets/chine/packaging-showroom.jpg" muted loop playsinline preload="none"></video><figcaption>Showroom packaging</figcaption></figure>
-          <figure><video src="../assets/chine/entrepot.mp4" poster="../assets/chine/entrepot.jpg" muted loop playsinline preload="none"></video><figcaption>Entrepôt</figcaption></figure>
-          <figure><video src="../assets/chine/quai.mp4" poster="../assets/chine/quai.jpg" muted loop playsinline preload="none"></video><figcaption>Expédition</figcaption></figure>
-          <figure><video src="../assets/chine/textile.mp4" poster="../assets/chine/textile.jpg" muted loop playsinline preload="none"></video><figcaption>Fournisseur textile</figcaption></figure>
-          <figure><video src="../assets/chine/panneau.mp4" poster="../assets/chine/panneau.jpg" muted loop playsinline preload="none"></video><figcaption>Zone industrielle</figcaption></figure>
-        </div>
-      </div>
-    </section>
-
-    <section id="pourqui">
-      <div class="wrap">
-        <div class="head">
-          <span class="eyebrow">Franchement</span>
-          <h2>Ce n'est pas pour tout le monde. <em class="s">Autant le dire avant l'appel.</em></h2>
-        </div>
-        <div class="qui">
-          <div>
-            <h3>C'est pour toi si</h3>
-            <ul>
-              <li>Tu veux construire une marque, pas tester un produit pendant deux semaines</li>
-              <li>Tu es prêt à travailler pendant le voyage, pas à visiter</li>
-              <li>Tu as déjà un budget produit, ou tu peux en dégager un</li>
-              <li>Tu veux des fournisseurs en direct plutôt qu'un intermédiaire</li>
-            </ul>
-          </div>
-          <div class="non">
-            <h3>Ce n'est pas pour toi si</h3>
-            <ul>
-              <li>Tu cherches un revenu passif sans rien faire</li>
-              <li>Tu veux qu'on lance la boutique à ta place et que tu regardes</li>
-              <li>Tu comptes sur ce voyage pour te motiver, sans rien avoir commencé</li>
-              <li>Tu veux surtout du contenu pour ton Instagram</li>
-            </ul>
+          <div class="places">
+            <div class="place"><b>10 à 20</b><span>participants par édition</span></div>
+            <div class="place"><b>1</b><span>place offerte à gagner par édition</span></div>
+            <div class="place"><b>10</b><span>places de coaching ouvertes chaque mois</span></div>
           </div>
         </div>
       </div>
@@ -328,23 +278,23 @@
       <div class="wrap" style="max-width:900px">
         <div class="head">
           <span class="eyebrow">Les questions qu'on nous pose</span>
-          <h2>Avant de réserver ton appel.</h2>
+          <h2>Ce qu'il faut savoir avant l'appel.</h2>
         </div>
-        <details><summary>Je dois parler chinois ou anglais ?</summary><p>Non. On est sur place avec toi et nos agents traduisent. Les échanges avec les fournisseurs passent par nous quand il faut.</p></details>
-        <details><summary>Je pars sans produit, ça vaut le coup ?</summary><p>Oui, c'est même le meilleur moment. La foire sert d'abord à trouver, comparer et valider. Le coaching en amont te donne les critères avant de partir.</p></details>
-        <details><summary>Le voyage remplace le coaching ?</summary><p>Non, il en fait partie. Le coaching de trois mois continue avant et après, avec ton coach et ta boutique.</p></details>
-        <details><summary>Quelles dates ?</summary><p>On cale les éditions sur la foire de Canton, au printemps et à l'automne. Les dates exactes et les places restantes se voient pendant l'appel.</p></details>
-        <details><summary>Et si je ne peux pas partir ?</summary><p>Le coaching et la formation existent sans le voyage. On en parle pendant l'appel pour voir ce qui a du sens pour toi.</p></details>
+        <details><summary>Je peux venir sans être membre ?</summary><p>Non. Le voyage est réservé aux membres de l'Académie, formation ou coaching. C'est ce qui garantit que tout le monde parle le même langage sur place.</p></details>
+        <details><summary>Comment on gagne la place offerte ?</summary><p>Une place est offerte à un membre à chaque édition. Les conditions sont annoncées à la communauté quelques semaines avant l'ouverture.</p></details>
+        <details><summary>C'est compris dans le coaching ?</summary><p>Le voyage est un supplément à l'accompagnement. Le montant et ce qu'il couvre sont donnés pendant l'appel, il n'y a pas de paiement en ligne.</p></details>
+        <details><summary>Je ne parle ni chinois ni anglais.</summary><p>Ce n'est pas un problème. L'équipe est avec toi et nos agents traduisent les échanges avec les fournisseurs.</p></details>
+        <details><summary>Quand exactement au printemps ?</summary><p>Les dates suivent la foire de Canton. Elles sont annoncées aux membres en premier, avec les places disponibles.</p></details>
       </div>
     </section>
 
     <section id="appel">
       <div class="wrap">
         <div class="final">
-          <span class="eyebrow" style="justify-content:center">Prochaine étape</span>
-          <h2 style="margin-top:14px">30 minutes pour savoir <em class="s">si tu es fait pour ce voyage.</em></h2>
-          <p>On regarde ton projet, ton budget et ton objectif. Si le séminaire n'est pas la bonne étape pour toi, on te le dit et on te propose autre chose.</p>
-          <a href="#appel" class="btn btn-neon btn-lg" id="book">Réserver mon appel <span>→</span></a>
+          <span class="eyebrow" style="justify-content:center">La première étape</span>
+          <h2 style="margin-top:12px">D'abord l'Académie. <em class="o">Le voyage vient après.</em></h2>
+          <p>On regarde ton projet en 30 minutes, on te dit si l'accompagnement a du sens pour toi, et on te place sur la liste des membres informés en premier pour l'édition du printemps.</p>
+          <a href="#appel" class="btn btn-plein btn-lg" id="book">Réserver mon appel</a>
         </div>
       </div>
     </section>
