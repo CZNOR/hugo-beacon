@@ -275,10 +275,16 @@
     /* ─── Réservation ─── */
     const bookBtn = document.getElementById('book-btn');
     bookBtn.addEventListener('click', e => {
-      e.preventDefault();
-      if (!BOOKING_URL) { bookBtn.textContent = 'Calendrier bientôt disponible'; return; }
-      if (EMBED_BOOKING) document.getElementById('booking').innerHTML = `<iframe src="${BOOKING_URL}" title="Réserver un appel" loading="lazy" decoding="async" data-lenis-prevent></iframe>`;
-      else { track('reservation', { zone: 'bloc-final' }); window.open(withSource(BOOKING_URL, 'bloc-final') + '&utm_content=lecture-' + deepest, '_blank', 'noopener'); }
+      if (!BOOKING_URL) { e.preventDefault(); bookBtn.textContent = 'Calendrier bientôt disponible'; return; }
+      if (EMBED_BOOKING) {
+        e.preventDefault();
+        document.getElementById('booking').innerHTML = `<iframe src="${BOOKING_URL}" title="Réserver un appel" loading="lazy" decoding="async" data-lenis-prevent></iframe>`;
+        return;
+      }
+      /* Le lien part tout seul : il reste bon même si le script casse ou si une
+         popup est bloquée dans un navigateur intégré. On ajoute juste la source. */
+      track('reservation', { zone: 'bloc-final' });
+      try { bookBtn.href = withSource(BOOKING_URL, 'bloc-final') + '&utm_content=lecture-' + deepest; } catch (err) {}
     });
 
     /* ─── Tableaux de ventes + logos ─── */
