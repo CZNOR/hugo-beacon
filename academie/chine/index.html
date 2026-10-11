@@ -169,10 +169,16 @@
     .hero-in > div:first-child{flex:1;min-width:0}
     @media (max-width:860px){.hero-in{flex-direction:column;align-items:flex-start;gap:20px}.stamp{width:104px;height:104px}.stamp text{font-size:17px}.cjk{font-size:46vw;top:auto;bottom:-4%;opacity:.7}}
 
-  </style>
+  
+    /* ─── Anti plein écran dans les navigateurs intégrés (TikTok, Instagram) ─── */
+    img,video{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+    video{pointer-events:none}
+    video::-webkit-media-controls,video::-webkit-media-controls-enclosure,
+    video::-webkit-media-controls-start-playback-button,video::-webkit-media-controls-panel{display:none!important;-webkit-appearance:none}
+</style>
 </head>
 <body>
-  <div class="bg-fx" aria-hidden="true"><video src="../assets/bg-liquid.mp4" poster="../assets/bg-liquid.webp" muted loop playsinline autoplay preload="none"></video></div>
+  <div class="bg-fx" aria-hidden="true"><video src="../assets/bg-liquid.mp4" poster="../assets/bg-liquid.webp" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video></div>
 
   <header class="nav">
     <div class="nav-in wrap">
@@ -187,7 +193,7 @@
   <main>
     <section class="hero">
       <div class="hero-media" aria-hidden="true">
-        <video src="../assets/chine/ville-nuit.mp4" poster="../assets/chine/ville-nuit.jpg" muted loop playsinline preload="none"></video>
+        <video src="../assets/chine/ville-nuit.mp4" poster="../assets/chine/ville-nuit.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video>
       </div>
       <div class="cjk" aria-hidden="true">广州</div>
       <div class="wrap hero-in">
@@ -238,14 +244,14 @@
           <h2>Ce n'est pas un séjour. <em class="s">Ce n'est pas un cours non plus.</em></h2>
         </div>
         <div class="vecu">
-          <figure class="v large"><video src="../assets/chine/mall.mp4" poster="../assets/chine/mall.jpg" muted loop playsinline preload="none"></video><span class="n">01</span><span>La foire et les malls</span></figure>
-          <figure class="v"><video src="../assets/chine/usine-ligne.mp4" poster="../assets/chine/usine-ligne.jpg" muted loop playsinline preload="none"></video><span class="n">02</span><span>Les usines</span></figure>
-          <figure class="v"><video src="../assets/chine/showroom-parfum2.mp4" poster="../assets/chine/showroom-parfum2.jpg" muted loop playsinline preload="none"></video><span class="n">03</span><span>Les fournisseurs</span></figure>
-          <figure class="v"><video src="../assets/chine/port.mp4" poster="../assets/chine/port.jpg" muted loop playsinline preload="none"></video><span class="n">04</span><span>L'expédition</span></figure>
-          <figure class="v"><video src="../assets/chine/rue-nuit.mp4" poster="../assets/chine/rue-nuit.jpg" muted loop playsinline preload="none"></video><span class="n">05</span><span>Les soirées</span></figure>
-          <figure class="v"><video src="../assets/chine/carte-equipe.mp4" poster="../assets/chine/carte-equipe.jpg" muted loop playsinline preload="none"></video><span class="n">06</span><span>Le coaching sur place</span></figure>
-          <figure class="v"><video src="../assets/chine/packaging-showroom.mp4" poster="../assets/chine/packaging-showroom.jpg" muted loop playsinline preload="none"></video><span class="n">07</span><span>Les interventions</span></figure>
-          <figure class="v"><video src="../assets/chine/textile.mp4" poster="../assets/chine/textile.jpg" muted loop playsinline preload="none"></video><span class="n">08</span><span>La découverte</span></figure>
+          <figure class="v large"><video src="../assets/chine/mall.mp4" poster="../assets/chine/mall.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">01</span><span>La foire et les malls</span></figure>
+          <figure class="v"><video src="../assets/chine/usine-ligne.mp4" poster="../assets/chine/usine-ligne.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">02</span><span>Les usines</span></figure>
+          <figure class="v"><video src="../assets/chine/showroom-parfum2.mp4" poster="../assets/chine/showroom-parfum2.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">03</span><span>Les fournisseurs</span></figure>
+          <figure class="v"><video src="../assets/chine/port.mp4" poster="../assets/chine/port.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">04</span><span>L'expédition</span></figure>
+          <figure class="v"><video src="../assets/chine/rue-nuit.mp4" poster="../assets/chine/rue-nuit.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">05</span><span>Les soirées</span></figure>
+          <figure class="v"><video src="../assets/chine/carte-equipe.mp4" poster="../assets/chine/carte-equipe.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">06</span><span>Le coaching sur place</span></figure>
+          <figure class="v"><video src="../assets/chine/packaging-showroom.mp4" poster="../assets/chine/packaging-showroom.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">07</span><span>Les interventions</span></figure>
+          <figure class="v"><video src="../assets/chine/textile.mp4" poster="../assets/chine/textile.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">08</span><span>La découverte</span></figure>
         </div>
       </div>
     </section>

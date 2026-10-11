@@ -21,9 +21,54 @@ document.querySelectorAll('a[href="#appel"]').forEach(a => {
 
 document.querySelectorAll('a[href^="http"]').forEach(a => { a.rel = 'noopener noreferrer'; a.target = '_blank'; });
 
-/* Vidéos : lecture seulement à l'écran */
-const vio = new IntersectionObserver(es => es.forEach(en => en.isIntersecting ? en.target.play().catch(() => {}) : en.target.pause()), { rootMargin: isMobile ? '0px' : '150px', threshold: isMobile ? .2 : 0 });
-document.querySelectorAll('video').forEach(v => vio.observe(v));
+/* ─── Vidéos : toujours en ligne, jamais en plein écran ─── */
+/* Certains navigateurs intégrés (TikTok, Instagram) ignorent playsinline et ouvrent
+   la vidéo en plein écran toutes seules. On le détecte, on referme, et on bascule
+   la page en mode images pour que ça n'arrive plus. */
+var videos = [].slice.call(document.querySelectorAll('video'));
+var modeImages = false;
+function refermer(v) {
+  try { if (v.webkitDisplayingFullscreen && v.webkitExitFullscreen) v.webkitExitFullscreen(); } catch (e) {}
+  try { if (document.fullscreenElement === v && document.exitFullscreen) document.exitFullscreen(); } catch (e) {}
+  try { if (document.webkitFullscreenElement === v && document.webkitExitFullscreen) document.webkitExitFullscreen(); } catch (e) {}
+}
+function basculerImages(v) {
+  if (modeImages) { refermer(v); return; }
+  modeImages = true;
+  videos.forEach(function (x) { refermer(x); try { x.pause(); x.removeAttribute('autoplay'); x.load(); } catch (e) {} });
+  try { vio.disconnect(); } catch (e) {}
+}
+videos.forEach(function (v) {
+  v.muted = true; v.playsInline = true; v.controls = false;
+  v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
+  v.setAttribute('disablepictureinpicture', ''); v.setAttribute('disableremoteplayback', '');
+  v.removeAttribute('controls');
+  v.addEventListener('webkitbeginfullscreen', function () { basculerImages(v); });
+  v.addEventListener('enterpictureinpicture', function () { try { document.exitPictureInPicture(); } catch (e) {} });
+});
+document.addEventListener('fullscreenchange', function () {
+  var el = document.fullscreenElement;
+  if (el && el.tagName === 'VIDEO') basculerImages(el);
+});
+document.addEventListener('webkitfullscreenchange', function () {
+  var el = document.webkitFullscreenElement;
+  if (el && el.tagName === 'VIDEO') basculerImages(el);
+});
+
+/* ─── Vidéos : lecture seulement à l'écran ─── */
+var vio = new IntersectionObserver(function (es) {
+  es.forEach(function (en) {
+    if (modeImages) return;
+    if (en.isIntersecting) { var p = en.target.play(); if (p && p.catch) p.catch(function () {}); }
+    else en.target.pause();
+  });
+}, { rootMargin: isMobile ? '0px' : '150px', threshold: isMobile ? .2 : 0 });
+videos.forEach(function (v) { vio.observe(v); });
+
+/* Le fond liquide n'a pas de hauteur mesurable : on le lance à la main. */
+var fond = document.querySelector('.bg-fx video');
+if (fond && !reduced) { var pf = fond.play(); if (pf && pf.catch) pf.catch(function () {}); }
+
 
 /* Apparition au scroll */
 if (!reduced) {

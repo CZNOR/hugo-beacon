@@ -193,10 +193,10 @@
     const r1 = ['R5','R12','R3','R1','R15','R14','R8','R4'].map(n => fig('sq', `<img src="assets/dash/${n}.webp" alt="" loading="lazy" decoding="async">`)).join('');
     const r2 = [
       fig('pt', '<img src="assets/avis/roas10.webp" alt="" loading="lazy" decoding="async"><figcaption>Ilias · 10 de ROAS</figcaption>'),
-      fig('pt', '<video src="assets/chine/carte-produit.mp4" muted loop playsinline preload="none"></video>'),
+      fig('pt', '<video src="assets/chine/carte-produit.mp4" poster="assets/chine/carte-produit.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture preload="none"></video>'),
       fig('pt', '<img src="assets/avis/avis.webp" alt="" loading="lazy" decoding="async"><figcaption>Son retour sur la formation</figcaption>'),
       fig('pt', '<img src="assets/avis/vente1.webp" alt="" loading="lazy" decoding="async"><figcaption>Sa première vente</figcaption>'),
-      fig('pt', '<video src="assets/chine/showroom-parfum2.mp4" muted loop playsinline preload="none"></video>'),
+      fig('pt', '<video src="assets/chine/showroom-parfum2.mp4" poster="assets/chine/showroom-parfum2.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture preload="none"></video>'),
       fig('pt', '<img src="assets/avis/accomp2.webp" alt="" loading="lazy" decoding="async"><figcaption>1 000 € par jour, stabilisés</figcaption>'),
       fig('pt', '<img src="assets/avis/eleve4.webp" alt="" loading="lazy" decoding="async"><figcaption>Rayan · sa première journée</figcaption>'),
       fig('pt', '<img src="assets/avis/accomp1.webp" alt="" loading="lazy" decoding="async"><figcaption>Suivi avec son coach</figcaption>')
@@ -219,9 +219,54 @@
       new IntersectionObserver(e => { atEnd = e[0].isIntersecting; upd(); }, { rootMargin: '0px 0px -30% 0px' }).observe(document.getElementById('appel'));
     }
 
+    /* ─── Vidéos : toujours en ligne, jamais en plein écran ─── */
+    /* Certains navigateurs intégrés (TikTok, Instagram) ignorent playsinline et ouvrent
+       la vidéo en plein écran toutes seules. On le détecte, on referme, et on bascule
+       la page en mode images pour que ça n'arrive plus. */
+    var videos = [].slice.call(document.querySelectorAll('video'));
+    var modeImages = false;
+    function refermer(v) {
+      try { if (v.webkitDisplayingFullscreen && v.webkitExitFullscreen) v.webkitExitFullscreen(); } catch (e) {}
+      try { if (document.fullscreenElement === v && document.exitFullscreen) document.exitFullscreen(); } catch (e) {}
+      try { if (document.webkitFullscreenElement === v && document.webkitExitFullscreen) document.webkitExitFullscreen(); } catch (e) {}
+    }
+    function basculerImages(v) {
+      if (modeImages) { refermer(v); return; }
+      modeImages = true;
+      videos.forEach(function (x) { refermer(x); try { x.pause(); x.removeAttribute('autoplay'); x.load(); } catch (e) {} });
+      try { vio.disconnect(); } catch (e) {}
+    }
+    videos.forEach(function (v) {
+      v.muted = true; v.playsInline = true; v.controls = false;
+      v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
+      v.setAttribute('disablepictureinpicture', ''); v.setAttribute('disableremoteplayback', '');
+      v.removeAttribute('controls');
+      v.addEventListener('webkitbeginfullscreen', function () { basculerImages(v); });
+      v.addEventListener('enterpictureinpicture', function () { try { document.exitPictureInPicture(); } catch (e) {} });
+    });
+    document.addEventListener('fullscreenchange', function () {
+      var el = document.fullscreenElement;
+      if (el && el.tagName === 'VIDEO') basculerImages(el);
+    });
+    document.addEventListener('webkitfullscreenchange', function () {
+      var el = document.webkitFullscreenElement;
+      if (el && el.tagName === 'VIDEO') basculerImages(el);
+    });
+
     /* ─── Vidéos : lecture seulement à l'écran ─── */
-    const vio = new IntersectionObserver(es => es.forEach(en => en.isIntersecting ? en.target.play().catch(() => {}) : en.target.pause()), { rootMargin: isMobile ? '0px' : '150px', threshold: isMobile ? .2 : 0 });
-    document.querySelectorAll('video').forEach(v => vio.observe(v));
+    var vio = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (modeImages) return;
+        if (en.isIntersecting) { var p = en.target.play(); if (p && p.catch) p.catch(function () {}); }
+        else en.target.pause();
+      });
+    }, { rootMargin: isMobile ? '0px' : '150px', threshold: isMobile ? .2 : 0 });
+    videos.forEach(function (v) { vio.observe(v); });
+
+    /* Le fond liquide n'a pas de hauteur mesurable : on le lance à la main. */
+    var fond = document.querySelector('.bg-fx video');
+    if (fond && !reduced) { var pf = fond.play(); if (pf && pf.catch) pf.catch(function () {}); }
+
 
     /* ─── Animations CSS en pause hors écran ─── */
     const pio = new IntersectionObserver(es => es.forEach(en => en.target.classList.toggle('paused', !en.isIntersecting)), { rootMargin: '200px' });
