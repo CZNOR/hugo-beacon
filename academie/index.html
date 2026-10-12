@@ -12,7 +12,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#050507" />
   <meta name="format-detection" content="telephone=no,address=no,email=no" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://cloud.umami.is; connect-src 'self' https://cloud.umami.is https://gateway.umami.is; manifest-src 'self'; upgrade-insecure-requests" />
   <meta name="referrer" content="no-referrer" />
   <meta name="robots" content="noindex, noimageindex, noarchive" />
   <link rel="icon" href="assets/globe/sac1.webp" />
@@ -1905,6 +1905,7 @@
   </footer>
 
 
+  <script src="assets/stats.js" defer></script>
   <script src="assets/vendor/lenis.min.js" defer></script>
   <script src="assets/globe/planete.js" defer></script>
   <script src="assets/app.js" defer></script>

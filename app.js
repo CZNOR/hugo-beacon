@@ -475,3 +475,12 @@ setTimeout(function() {
     requestAnimationFrame(step);
   });
 }, 1600);
+
+// ── Statistiques : voir /academie/assets/stats.js ──
+(function () {
+  var track = function (nom, props) { try { window.MADE.track(nom, props || {}); } catch (e) {} };
+  document.querySelectorAll('a.cta').forEach(function (a) {
+    var dest = /cal\.com/.test(a.href) ? 'appel' : /academie/.test(a.href) ? 'academie' : 'autre';
+    a.addEventListener('click', function () { track('clic-accueil', { destination: dest }); });
+  });
+})();

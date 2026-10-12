@@ -21,6 +21,19 @@ document.querySelectorAll('a[href="#appel"]').forEach(a => {
 
 document.querySelectorAll('a[href^="http"]').forEach(a => { a.rel = 'noopener noreferrer'; a.target = '_blank'; });
 
+/* Statistiques : voir assets/stats.js, un seul endroit à renseigner */
+var track = function (nom, props) { try { window.MADE.track(nom, props || {}); } catch (e) {} };
+document.querySelectorAll('a[href*="cal.com"]').forEach(function (a) {
+  var zone = a.closest('.nav') ? 'chine-menu' : a.closest('.hero') ? 'chine-haut' : 'chine-final';
+  a.addEventListener('click', function () {
+    track('reservation', { zone: zone, page: 'chine' });
+    try { var u = new URL(a.href); u.searchParams.set('utm_content', 'lecture-' + window.MADE.profondeur()); a.href = u.toString(); } catch (e) {}
+  });
+});
+document.querySelectorAll('a[href$="/academie/"], a[href="../"], a[href^="../#"]').forEach(function (a) {
+  a.addEventListener('click', function () { track('retour-academie', { page: 'chine' }); });
+});
+
 /* ─── Vidéos : toujours en ligne, jamais en plein écran ─── */
 /* Certains navigateurs intégrés (TikTok, Instagram) ignorent playsinline et ouvrent
    la vidéo en plein écran toutes seules. On le détecte, on referme, et on bascule
