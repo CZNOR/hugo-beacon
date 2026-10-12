@@ -17,7 +17,7 @@
 (function (w, d) {
   'use strict';
 
-  var CLE = '';                              /* ← le Website ID Umami */
+  var CLE = 'c03e119c-1552-4474-9eb0-45488fb6d723';                              /* ← le Website ID Umami */
   var FOURNISSEUR = 'umami';                 /* 'umami' | 'plausible' | 'ga4' */
   var HOTE = 'https://cloud.umami.is';       /* instance Umami (cloud ou perso) */
 
