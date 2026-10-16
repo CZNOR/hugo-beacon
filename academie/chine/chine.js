@@ -34,41 +34,29 @@ document.querySelectorAll('a[href$="/academie/"], a[href="../"], a[href^="../#"]
   a.addEventListener('click', function () { track('retour-academie', { page: 'chine' }); });
 });
 
-/* ─── Vidéos : toujours en ligne, jamais en plein écran ─── */
-/* Certains navigateurs intégrés (TikTok, Instagram) ignorent playsinline et ouvrent
-   la vidéo en plein écran toutes seules. On le détecte, on referme, et on bascule
-   la page en mode images pour que ça n'arrive plus. */
+/* ─── Vidéos : jamais de plein écran ─────────────────────────────────────
+   Les navigateurs intégrés des applis (TikTok, Instagram, Facebook) sont des
+   WKWebView où la lecture en ligne est désactivée côté application : playsinline
+   y est ignoré et toute lecture bascule en plein écran. On ne peut que refermer
+   après coup, l'utilisateur voit quand même l'écran noir. La seule solution
+   fiable est de ne jamais lancer de vidéo là bas : on retire la source, le poster
+   reste affiché, et plus rien ne peut s'ouvrir. Ailleurs, rien ne change. */
 var videos = [].slice.call(document.querySelectorAll('video'));
-var modeImages = false;
+var ua = navigator.userAgent || '';
+var appliIntegree = /FBAN|FBAV|FB_IAB|FBIOS|Instagram|BytedanceWebview|musical_ly|Trill|TikTok|aweme|Snapchat|LinkedInApp|Line\/|Pinterest|Twitter|MicroMessenger|GSA\//i.test(ua);
+var iOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+/* Sur iOS, un WKWebView d'appli n'a pas "Safari/" dans sa signature, Safari et
+   les vrais navigateurs si. C'est le filet pour les applis non listées. */
+var horsSafari = iOS && !/Safari\//.test(ua);
+/* Le bridage est propre à iOS : sur Android la lecture en ligne marche, on garde les vidéos. */
+var modeImages = iOS && (appliIntegree || horsSafari);
+
 function refermer(v) {
   try { if (v.webkitDisplayingFullscreen && v.webkitExitFullscreen) v.webkitExitFullscreen(); } catch (e) {}
   try { if (document.fullscreenElement === v && document.exitFullscreen) document.exitFullscreen(); } catch (e) {}
   try { if (document.webkitFullscreenElement === v && document.webkitExitFullscreen) document.webkitExitFullscreen(); } catch (e) {}
 }
-function basculerImages(v) {
-  if (modeImages) { refermer(v); return; }
-  modeImages = true;
-  videos.forEach(function (x) { refermer(x); try { x.pause(); x.removeAttribute('autoplay'); x.load(); } catch (e) {} });
-  try { vio.disconnect(); } catch (e) {}
-}
-videos.forEach(function (v) {
-  v.muted = true; v.playsInline = true; v.controls = false;
-  v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
-  v.setAttribute('disablepictureinpicture', ''); v.setAttribute('disableremoteplayback', '');
-  v.removeAttribute('controls');
-  v.addEventListener('webkitbeginfullscreen', function () { basculerImages(v); });
-  v.addEventListener('enterpictureinpicture', function () { try { document.exitPictureInPicture(); } catch (e) {} });
-});
-document.addEventListener('fullscreenchange', function () {
-  var el = document.fullscreenElement;
-  if (el && el.tagName === 'VIDEO') basculerImages(el);
-});
-document.addEventListener('webkitfullscreenchange', function () {
-  var el = document.webkitFullscreenElement;
-  if (el && el.tagName === 'VIDEO') basculerImages(el);
-});
 
-/* ─── Vidéos : lecture seulement à l'écran ─── */
 var vio = new IntersectionObserver(function (es) {
   es.forEach(function (en) {
     if (modeImages) return;
@@ -76,11 +64,47 @@ var vio = new IntersectionObserver(function (es) {
     else en.target.pause();
   });
 }, { rootMargin: isMobile ? '0px' : '150px', threshold: isMobile ? .2 : 0 });
-videos.forEach(function (v) { vio.observe(v); });
 
-/* Le fond liquide n'a pas de hauteur mesurable : on le lance à la main. */
-var fond = document.querySelector('.bg-fx video');
-if (fond && !reduced) { var pf = fond.play(); if (pf && pf.catch) pf.catch(function () {}); }
+function passerEnImages() {
+  modeImages = true;
+  document.documentElement.classList.add('sans-video');
+  try { vio.disconnect(); } catch (e) {}
+  videos.forEach(function (v) {
+    try {
+      refermer(v);
+      v.pause();
+      v.removeAttribute('autoplay');
+      if (v.getAttribute('src')) { v.setAttribute('data-src', v.getAttribute('src')); v.removeAttribute('src'); }
+      v.load();           /* sans source, le poster reste affiché et rien ne peut démarrer */
+    } catch (e) {}
+  });
+}
+
+videos.forEach(function (v) {
+  v.muted = true; v.playsInline = true; v.controls = false;
+  v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
+  v.setAttribute('disablepictureinpicture', ''); v.setAttribute('disableremoteplayback', '');
+  v.removeAttribute('controls');
+  /* filet de sécurité si une appli inconnue force quand même le plein écran */
+  v.addEventListener('webkitbeginfullscreen', function () { refermer(v); if (!modeImages) passerEnImages(); });
+  v.addEventListener('enterpictureinpicture', function () { try { document.exitPictureInPicture(); } catch (e) {} });
+});
+document.addEventListener('fullscreenchange', function () {
+  var el = document.fullscreenElement;
+  if (el && el.tagName === 'VIDEO') { refermer(el); if (!modeImages) passerEnImages(); }
+});
+document.addEventListener('webkitfullscreenchange', function () {
+  var el = document.webkitFullscreenElement;
+  if (el && el.tagName === 'VIDEO') { refermer(el); if (!modeImages) passerEnImages(); }
+});
+
+if (modeImages) passerEnImages();
+else {
+  videos.forEach(function (v) { vio.observe(v); });
+  /* Le fond liquide n'a pas de hauteur mesurable : on le lance à la main. */
+  var fond = document.querySelector('.bg-fx video');
+  if (fond && !reduced) { var pf = fond.play(); if (pf && pf.catch) pf.catch(function () {}); }
+}
 
 
 /* Apparition au scroll */
