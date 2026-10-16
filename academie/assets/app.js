@@ -221,10 +221,33 @@
       });
     }, { rootMargin: isMobile ? '0px' : '150px', threshold: isMobile ? .2 : 0 });
 
+    /* Chaque vidéo a une version animée en WebP, à côté du mp4. Pour le navigateur
+       c'est une image : elle bouge, et elle ne peut pas ouvrir de plein écran.
+       Elle ne se télécharge qu'à l'approche de l'écran, et si elle manque le
+       poster reste affiché. */
+    function animer(v) {
+      var src = v.getAttribute('data-src') || '';
+      if (!/\.mp4$/.test(src)) return;
+      var poster = v.getAttribute('poster') || '';
+      var anim = src.replace(/\.mp4$/, '.anim.webp');
+      var img = new Image();
+      img.onload = function () {
+        v.style.backgroundImage = "url('" + anim + "')" + (poster ? ", url('" + poster + "')" : '');
+        v.style.backgroundSize = 'cover';
+        v.style.backgroundPosition = 'center';
+        v.style.backgroundRepeat = 'no-repeat';
+        v.removeAttribute('poster');   /* sinon le poster recouvrirait l'animation */
+      };
+      img.src = anim;
+    }
+
     function passerEnImages() {
       modeImages = true;
       document.documentElement.classList.add('sans-video');
       try { vio.disconnect(); } catch (e) {}
+      var aio = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+        es.forEach(function (en) { if (en.isIntersecting) { animer(en.target); aio.unobserve(en.target); } });
+      }, { rootMargin: '300px' }) : null;
       videos.forEach(function (v) {
         try {
           refermer(v);
@@ -232,6 +255,7 @@
           v.removeAttribute('autoplay');
           if (v.getAttribute('src')) { v.setAttribute('data-src', v.getAttribute('src')); v.removeAttribute('src'); }
           v.load();           /* sans source, le poster reste affiché et rien ne peut démarrer */
+          if (aio) aio.observe(v); else animer(v);
         } catch (e) {}
       });
     }
