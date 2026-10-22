@@ -108,6 +108,82 @@
     w.addEventListener('pagehide', partir);
   }
 
+  /* ── Journal de visite pour Dring (l'app d'appels d'Hugo) ───────────────────
+     Au clic sur un lien de réservation Cal, on envoie un résumé anonyme de la
+     visite : pages vues et part lue, temps passé, questions de FAQ ouvertes,
+     provenance, appareil. Dring le rattache à la réservation par l'heure et
+     l'affiche sur la fiche du prospect. Aucun cookie, aucune donnée personnelle. */
+  var DRING = 'https://hugo-s-command-center-99.vercel.app/api/visite';
+  var page0 = Date.now();
+
+  function lire(store, cle) { try { return JSON.parse(store.getItem(cle) || 'null'); } catch (e) { return null; } }
+  function ecrire(store, cle, v) { try { store.setItem(cle, JSON.stringify(v)); } catch (e) {} }
+
+  function appareil() {
+    var ua = navigator.userAgent;
+    var os = /iPhone|iPad/.test(ua) ? 'iPhone' : /Android/.test(ua) ? 'Android' : /Mac/.test(ua) ? 'Mac' : /Windows/.test(ua) ? 'PC' : 'autre';
+    var app = /musical_ly|BytedanceWebview|TikTok/i.test(ua) ? 'TikTok' : /Instagram/.test(ua) ? 'Instagram' : /FBAN|FBAV/.test(ua) ? 'Facebook' : '';
+    return app ? os + ' (dans ' + app + ')' : os;
+  }
+
+  /* Journal de la session : gardé d'une page à l'autre du site */
+  var j = lire(sessionStorage, 'made_j');
+  if (!j) {
+    var utm = {};
+    try { new URL(location.href).searchParams.forEach(function (v, k) { if (/^utm_/.test(k)) utm[k] = v; }); } catch (e) {}
+    var ref = '';
+    try { ref = d.referrer ? new URL(d.referrer).hostname.replace(/^www\./, '') : ''; } catch (e) {}
+    if (ref === location.hostname) ref = '';
+    var ua = navigator.userAgent;
+    j = { debut: Date.now(), utm: utm, faq: [], pages: [],
+          provenance: ref || (/musical_ly|BytedanceWebview|TikTok/i.test(ua) ? 'tiktok.com' : /Instagram/.test(ua) ? 'instagram.com' : 'direct') };
+    var v = lire(localStorage, 'made_v') || { premiere: new Date().toISOString().slice(0, 10), visites: 0 };
+    v.visites++;
+    ecrire(localStorage, 'made_v', v);
+  }
+  var nomPage = location.pathname.replace(/\/index\.html$/, '/').replace(/^\/$/, 'accueil').replace(/^\/|\/$/g, '') || 'accueil';
+  var ici = { page: nomPage, lu: 0, s: 0 };
+  j.pages.push(ici);
+  if (j.pages.length > 8) j.pages.shift();
+
+  function maj() {
+    ici.lu = Math.max(ici.lu, profondeur);
+    ici.s = Math.round((Date.now() - page0) / 1000);
+    ecrire(sessionStorage, 'made_j', j);
+  }
+  w.addEventListener('pagehide', maj);
+  d.addEventListener('visibilitychange', function () { if (d.visibilityState === 'hidden') maj(); });
+
+  function envoyerVisite(bouton) {
+    maj();
+    var v = lire(localStorage, 'made_v') || {};
+    var corps = JSON.stringify({
+      bouton: bouton, pages: j.pages, faq: j.faq, provenance: j.provenance, utm: j.utm,
+      duree_s: Math.round((Date.now() - j.debut) / 1000), appareil: appareil(),
+      visites: v.visites || 1, premiere: v.premiere || ''
+    });
+    try {
+      if (!(navigator.sendBeacon && navigator.sendBeacon(DRING, new Blob([corps], { type: 'text/plain' }))))
+        fetch(DRING, { method: 'POST', body: corps, keepalive: true, mode: 'no-cors' });
+    } catch (e) {}
+  }
+
+  /* Tout clic vers Cal (quel que soit le bouton) envoie le journal */
+  d.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="cal.com"]') : null;
+    if (a) envoyerVisite(a.dataset.zone || (a.closest('section') && a.closest('section').id) || nomPage);
+  }, true);
+
+  /* Les questions de FAQ ouvertes vont aussi dans le journal */
+  var trackBrut = track;
+  track = function (nom, props) {
+    if (nom === 'faq' && props) {
+      var q = props.question || props.titre || props.q || '';
+      if (q && j.faq.indexOf(q) < 0) { j.faq.push(String(q).slice(0, 80)); if (j.faq.length > 6) j.faq.shift(); }
+    }
+    trackBrut(nom, props);
+  };
+
   w.MADE = {
     track: track,
     profondeur: function () { return profondeur; },
