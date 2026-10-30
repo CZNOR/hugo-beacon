@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notre histoire, MADE Académie</title>
+  <meta name="description" content="Le trio de MADE, son histoire et ce qu'il veut démontrer sur YouTube." />
+  <meta property="og:title" content="Notre histoire, MADE Académie" />
+  <meta property="og:description" content="Le terrain plutôt que le personal branding." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://hugo-bnls.fr/academie/assets/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#050507" />
+  <meta name="format-detection" content="telephone=no,address=no,email=no" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://cloud.umami.is; connect-src 'self' https://cloud.umami.is https://gateway.umami.is https://hugo-s-command-center-99.vercel.app; manifest-src 'self'; upgrade-insecure-requests" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="robots" content="noindex, noimageindex, noarchive" />
+  <link rel="icon" href="../assets/globe/sac1.webp" />
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/InterTight-var.woff2" crossorigin>
+  <style>
+    @font-face{font-family:'Inter Tight';font-style:normal;font-weight:300 700;font-display:swap;src:url(../assets/fonts/InterTight-var.woff2) format('woff2')}
+    @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url(../assets/fonts/BarlowCondensed-600.woff2) format('woff2')}
+    @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/BarlowCondensed-700.woff2) format('woff2')}
+    :root{--bg:#050507;--ink:#F1F0EA;--muted:#B9B7B1;--line:#29282D;--made:#B691FE;
+      --sans:'Inter Tight',system-ui,-apple-system,sans-serif;--cond:'Barlow Condensed','Arial Narrow',sans-serif}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{overflow-x:clip}
+    body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+    ::selection{background:#4A3A73;color:#fff}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    em{font-style:normal;color:var(--made)}
+    .wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(20px,4vw,40px)}
+
+    .top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:24px}
+    .top svg{display:block;height:20px;width:auto;fill:#fff}
+    .top a:last-child{font-size:15px}
+    .top a:last-child:hover{color:#fff}
+
+    h1,h2{font-family:var(--sans);font-weight:500;letter-spacing:-.045em}
+    h1{font-size:clamp(46px,7.4vw,92px);line-height:1}
+    h1 em{display:block}
+    h2{font-size:clamp(34px,3.9vw,50px);line-height:1.05}
+
+    .hero{margin-block:clamp(36px,6vw,76px) clamp(56px,7vw,92px)}
+    .trio{display:flex;margin-bottom:30px}
+    .trio img{width:clamp(92px,11vw,132px);aspect-ratio:1;border-radius:50%;object-fit:cover;background:var(--made);margin-left:-18px;border:4px solid var(--bg)}
+    .trio img:first-child{margin-left:0}
+    .hero p{margin-top:26px;max-width:32em;font-size:clamp(19px,1.8vw,22px);color:var(--muted);line-height:1.45}
+
+    .bloc{display:grid;grid-template-columns:5fr 7fr;gap:clamp(24px,5vw,72px);padding-block:clamp(48px,6vw,80px);border-top:1px solid var(--line)}
+    .txt p{color:var(--muted)}
+    .txt p+p{margin-top:18px}
+    .txt strong{color:var(--ink);font-weight:600}
+    .tc{color:#E8B04A}
+
+    .chiffres{margin-top:34px;border-top:1px solid var(--line)}
+    .chiffres div{display:flex;align-items:baseline;gap:18px;padding-block:13px;border-bottom:1px solid var(--line)}
+    .chiffres b{flex:0 0 3.1em;font-family:var(--cond);font-weight:700;font-size:44px;line-height:1;color:var(--made)}
+    .chiffres span{color:var(--ink)}
+
+    .format{padding-block:20px;border-bottom:1px solid var(--line)}
+    .format:first-child{padding-top:0}
+    .format h3{font-family:var(--cond);font-weight:700;font-size:30px;line-height:1.1;text-transform:uppercase;margin-bottom:6px}
+    .format p{color:var(--muted)}
+
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 26px;border-radius:12px;font-family:var(--cond);font-weight:700;font-size:20px;text-transform:uppercase;transition:background-color .2s,color .2s,border-color .2s}
+    .btn-yt{background:var(--made);color:#0a0612;border:1px solid var(--made)}
+    .btn-yt:hover{background:#c8abff;border-color:#c8abff}
+    .btn-cal{border:1px solid rgba(182,145,254,.5);color:var(--ink)}
+    .btn-cal:hover{border-color:var(--made);color:var(--made)}
+    .btn:focus-visible,.top a:focus-visible,.foot a:focus-visible{outline:2px solid var(--made);outline-offset:3px}
+
+    .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-block:32px;border-top:1px solid var(--line);font-size:15px}
+    .foot a:hover{color:#fff}
+    .made-xl{padding-inline:clamp(16px,3vw,40px);margin-bottom:-2.2vw;overflow:hidden}
+    .made-xl svg{display:block;width:100%;height:auto;fill:var(--made)}
+
+    @media (max-width:760px){
+      body{font-size:17px}
+      .bloc{grid-template-columns:1fr}
+      .chiffres b{font-size:38px}
+      .actions .btn{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="made-logo" viewBox="-2 0 550 180"><path d="M152.61,49.65c-9.52-3.24-20.29-3.6-30.77.15-9.23,3.31-18.1,9.78-25.86,20.01-7.11-10.81-18.46-19.27-31.65-21.99-13.41-2.72-28.28.59-42.2,12.73v-13.83H0v129.61h22.05v-93.57c5.93-9.42,19.49-12.51,33.04-8.61,13.7,3.9,25.57,14.49,26.89,29.86v72.38h22.05v-93.42c7.03-9.78,20.88-12.58,34.07-8.68,13.41,3.97,24.76,14.56,25.86,29.79v72.38h22.42v-83.93c0-18.83-15.02-36.41-33.85-42.74l.07-.15Z"/><path d="M280.31,59.66c-9.52-8.39-20.44-12.87-34.14-12.87-27.33,0-56.19,23.32-56.19,64.36,0,32.66,21.76,65.17,56.19,65.17,8.06,0,15.02-1.32,21.61-4.49,4.32-2.13,8.42-5,12.53-8.68v13.17h24.4V46.78h-24.4v12.87ZM279.29,103.5c2.93,5.74,4.54,12.06,5.42,20.89,0,7.65-2.35,13.53-5.94,17.8-3.66,4.27-8.79,7.06-14.95,8.02-12.23,1.99-28.35-3.38-41.91-18.61-15.97-18.02-17.14-33.32-12.24-44.72,4.25-9.78,13.41-14.27,24.1-14.2,10.84,0,22.71,4.78,31.06,12.95,6.96,6.69,11.36,12.14,14.36,17.87h.07Z"/><path d="M401.64,60.98c-9.89-8.46-21.17-12.87-35.39-12.87-28.06,0-57.88,22.95-57.88,63.78,0,32.44,22.64,64.58,57.88,64.58,8.28,0,15.46-1.25,22.2-4.41,4.54-2.13,8.87-5,13.19-8.83v13.24h24.98V0h-24.98v60.98ZM402.15,104.31c3.08,6.62,4.76,13.83,5.64,22.58,0,7.43-2.49,13.24-6.52,17.43-4.03,4.27-9.82,7.06-16.56,8.09-13.63,1.99-30.99-3.46-44.91-18.46-16.48-17.8-18.1-37.29-13.04-48.55,4.32-9.49,14.43-13.98,26.67-13.68,12.16.22,25.35,5.22,34,13.24,7.03,6.55,11.65,12.73,14.73,19.35Z"/><path d="M545.75,119.83h-15.53l-.29,3.31c-.95,11.69-4.4,19.64-9.31,24.64-4.83,5-11.36,7.43-19.12,7.43-21.76,0-42.35-17.88-51.73-40.46h93.85v-3.6c0-17.58-5.06-34.5-14.65-47.08-9.67-12.65-23.96-20.89-41.91-20.89-19.56,0-33.92,10.3-43.23,23.83-9.23,13.46-13.77,30.23-13.77,44.21,0,35.9,24.32,68.78,57.37,68.78,30.4,0,50.48-23.54,57.29-55.83l.88-4.34h.15ZM519.23,95.33h-72.75c.66-8.97,3.74-15.67,8.13-20.23,4.98-5.15,11.94-7.8,20.07-7.65h.07c16.27,0,31.8,9.34,44.47,27.88Z"/></symbol></svg>
+
+  <header class="wrap top">
+    <a href="/academie/" aria-label="MADE Académie"><svg viewBox="-2 0 550 180"><use href="#made-logo"/></svg></a>
+    <a href="/academie/">Retour à l'académie</a>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div class="trio">
+        <img src="../assets/made/team/HugoB.webp" alt="Hugo">
+        <img src="../assets/made/team/Guillaume.webp" alt="Guillaume">
+        <img src="../assets/made/team/TheoG.webp" alt="Théo">
+      </div>
+      <h1>Hugo, Guillaume, Théo. <em>Ce qu'on a appris sur le terrain.</em></h1>
+      <p>Trois cofondateurs, une agence, une académie. Et maintenant une chaîne YouTube pour montrer comment les marques se construisent vraiment.</p>
+    </section>
+
+    <div class="wrap">
+      <section class="bloc">
+        <h2>Notre histoire</h2>
+        <div class="txt">
+          <p><strong>Hugo commence l'e-commerce à 18 ans.</strong> Ancien graphiste, il vend des boutiques Shopify : 8 heures de travail par site. Il copie les plus gros shops de sa niche, et l'agence lui apprend ce qui convertit.</p>
+          <p><strong>Guillaume</strong> et <strong>Théo</strong> sont cofondateurs de MADE. Le SaaS de Théo : créateur de boutique et générateur de créatives.</p>
+          <p>Ça fait 7 ans qu'on fait de l'e-commerce, 4 ans qu'on en vit. L'e-com est devenu une routine pour Hugo. Ce qui le motive maintenant, c'est de transmettre : c'est pour ça que l'Académie existe.</p>
+        </div>
+      </section>
+
+      <section class="bloc">
+        <h2>Notre expérience</h2>
+        <div class="txt">
+          <p>Des boutiques sorties du studio MADE, comme Beauty Mart's, ScoreKeys ou Unik Journal. De vrais cartons, de vraies usines, de vraies commandes.</p>
+          <div class="chiffres">
+            <div><b>+120</b><span>projets accompagnés</span></div>
+            <div><b>7 ans</b><span>d'expérience ecommerce</span></div>
+            <div><b>+2 M€</b><span>générés par nos clients</span></div>
+            <div><b>+300</b><span>élèves accompagnés</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bloc">
+        <h2>Ce qu'on veut <em>démontrer</em></h2>
+        <div class="txt">
+          <p><strong>Le terrain plutôt que le personal branding.</strong> On ne cherche pas à vendre une image. On veut montrer comment les marques se construisent vraiment : leurs choix, leurs erreurs, ce qui se passe derrière.</p>
+          <p>Aucune promesse de gains. Ce qu'on raconte, on l'a testé chez nous avant de l'enseigner.</p>
+        </div>
+      </section>
+
+      <section class="bloc" id="chaine">
+        <h2>Sur la chaîne</h2>
+        <div class="txt">
+          <div class="format">
+            <h3>Les docus</h3>
+            <p>L'histoire d'une marque et les choix qui l'ont construite. Le premier, sur Liquid Death, sort le mardi 3 novembre.</p>
+          </div>
+          <div class="format">
+            <h3>Les vidéos de Théo</h3>
+            <p>Des vidéos explicatives et concrètes sur l'e-commerce.</p>
+          </div>
+          <div class="actions">
+            <a class="btn btn-yt" href="https://www.youtube.com/@Made-ecom" target="_blank" rel="noopener noreferrer">Voir la chaîne YouTube</a>
+            <a class="btn btn-cal" href="https://cal.com/team/made-academie/appel-coaching-academie" target="_blank" rel="noopener noreferrer">Réserver un appel</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <span>© 2026 MADE Académie</span>
+        <a href="/academie/">Retour à l'académie</a>
+      </div>
+    </div>
+    <div class="made-xl" aria-hidden="true"><svg viewBox="-2 0 550 180"><use href="#made-logo"/></svg></div>
+  </footer>
+
+  <script src="/academie/assets/stats.js" defer></script>
+</body>
+</html>
