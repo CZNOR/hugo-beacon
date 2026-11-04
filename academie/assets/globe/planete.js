@@ -1,7 +1,9 @@
 // Planète MADE : code d'origine de hugo-bnls.fr, repris tel quel.
 // Seule l'intégration change : la planète est dessinée entière dans son conteneur
 // (taille calée sur la colonne du hero) et se met en pause hors écran.
-function MadeGlobeOriginal(c, bags) {
+function MadeGlobeOriginal(c, bags, opts) {
+  // opts.hold : une seule image dessinée, l'animation attend release() (utilisé sur mobile)
+  let hold = !!(opts && opts.hold);
   const ctx = c.getContext('2d', { willReadFrequently: false });
   const host = c.parentElement;
   let w, h;
@@ -321,7 +323,7 @@ function MadeGlobeOriginal(c, bags) {
 
     ctx.restore();
     ctx.globalAlpha = 1;
-    if (visible) requestAnimationFrame(draw); else running = false;
+    if (visible && !hold) requestAnimationFrame(draw); else running = false;
   }
   new IntersectionObserver(e => {
     visible = e[0].isIntersecting;
@@ -358,7 +360,17 @@ function MadeGlobeOriginal(c, bags) {
       s.el.style.zIndex = zIdx;
       s.el.style.filter = blur > 0.5 ? `blur(${blur.toFixed(1)}px)` : 'none';
     });
+    if (hold) { tickHeld = true; return; }
     requestAnimationFrame(tick);
   }
+  let tickHeld = false;
   requestAnimationFrame(tick);
+  return {
+    release() {
+      if (!hold) return;
+      hold = false;
+      if (visible && !running) { running = true; requestAnimationFrame(draw); }
+      if (tickHeld) { tickHeld = false; requestAnimationFrame(tick); }
+    }
+  };
 }

@@ -1,20 +1,26 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Voyage Canton · MADE Académie</title>
-  <meta name="description" content="Dix jours en Chine avec l'équipe MADE. Réservé aux membres de l'Académie, places ouvertes au printemps, 10 à 20 personnes." />
-  <meta property="og:title" content="Voyage Canton · MADE Académie" />
-  <meta property="og:description" content="Dix jours en Chine avec les membres de l'Académie. Places ouvertes au printemps." />
+  <title>Séminaire Canton · MADE Académie</title>
+  <meta name="description" content="Dix jours à Canton pendant la Foire de Canton, au printemps 2027 : usines, fournisseurs, négociation avec l'équipe MADE. Réservé aux membres de l'Académie, 10 à 20 places." />
+  <meta property="og:title" content="Séminaire Canton · MADE Académie" />
+  <meta property="og:description" content="Dix jours en Chine chez les fabricants, avec l'équipe MADE. Réservé aux membres de l'Académie, printemps 2027." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hugo-bnls.fr/academie/chine/" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="MADE Académie" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:image" content="https://hugo-bnls.fr/academie/assets/og.jpg" />
   <meta name="theme-color" content="#050507" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://cloud.umami.is; connect-src 'self' https://cloud.umami.is https://gateway.umami.is https://hugo-s-command-center-99.vercel.app; manifest-src 'self'; upgrade-insecure-requests" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://cloud.umami.is; connect-src 'self' https://cloud.umami.is https://gateway.umami.is https://hugo-s-command-center-99.vercel.app; manifest-src 'self'; upgrade-insecure-requests" />
   <meta name="referrer" content="no-referrer" />
   <meta name="robots" content="noindex, noimageindex, noarchive" />
   <meta name="format-detection" content="telephone=no,address=no,email=no" />
   <link rel="icon" href="../assets/globe/sac1.webp" />
   <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/InterTight-var.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/BarlowCondensed-600.woff2" crossorigin>
   <style>
     @font-face{font-family:'Inter Tight';font-style:normal;font-weight:300 700;font-display:swap;src:url(../assets/fonts/InterTight-var.woff2) format('woff2')}
     @font-face{font-family:'Inter Tight';font-style:italic;font-weight:300;font-display:swap;src:url(../assets/fonts/InterTight-300i.woff2) format('woff2')}
@@ -175,6 +181,24 @@
     video{pointer-events:none}
     video::-webkit-media-controls,video::-webkit-media-controls-enclosure,
     video::-webkit-media-controls-start-playback-button,video::-webkit-media-controls-panel{display:none!important;-webkit-appearance:none}
+
+    /* ─── Funnel nov. 2026 ─── */
+    .note,.hero .note{margin-top:12px;font-size:13.5px;color:var(--muted)}
+    .final .note{margin:12px auto 0}
+    .v span small{display:block;margin-top:4px;font-family:var(--sans);font-size:14px;letter-spacing:-.01em;text-transform:none;color:rgba(241,240,234,.78);font-weight:400}
+    .nav .btn{min-height:44px}
+    summary{padding-block:12px;align-items:center}
+    details{padding:4px 0}
+    details[open]{padding-bottom:14px}
+    .foot a{display:inline-block;padding:11px 0}
+    @media (max-width:640px){
+      .ticket{grid-template-columns:1fr}
+      .ticket > div + div::before{left:24px;right:24px;top:0;bottom:auto;border-left:0;border-top:1px dashed rgba(241,240,234,.22)}
+      .ticket > div{padding:22px 22px}
+      .ticket .talon{padding:14px 22px}
+      .ticket .talon .sp{display:none}
+      .nav .btn{padding:10px 13px;font-size:13.5px}
+    }
 </style>
 </head>
 <body>
@@ -193,16 +217,16 @@
   <main>
     <section class="hero">
       <div class="hero-media" aria-hidden="true">
-        <video src="../assets/chine/ville-nuit.mp4" poster="../assets/chine/ville-nuit.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video>
+        <video src="../assets/chine/ville-nuit.mp4" data-src-m="../assets/chine/ville-nuit-m.mp4" poster="../assets/chine/ville-nuit.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video>
       </div>
       <div class="cjk" aria-hidden="true">广州</div>
       <div class="wrap hero-in">
         <div>
-          <span class="eyebrow">Voyage Canton</span>
+          <span class="eyebrow">Séminaire Canton · Printemps 2027</span>
           <h1>Dix jours en Chine. <em class="s">Avec ceux qui la connaissent.</em></h1>
-          <p>Usines, fournisseurs, foire, soirées. Un voyage de groupe réservé aux membres de l'Académie.</p>
+          <p>La Foire de Canton, les usines, les fournisseurs, la négociation. Un séminaire de groupe réservé aux membres de l'Académie, avec l'équipe MADE et nos agents sur place.</p>
           <ul class="chips">
-            <li>Prochaine édition au printemps</li>
+            <li>Printemps 2027, pendant la Foire de Canton</li>
             <li>10 à 20 places</li>
             <li>Réservé aux membres</li>
           </ul>
@@ -210,6 +234,7 @@
             <a href="#appel" class="btn btn-neon btn-lg">Réserver mon appel</a>
             <a href="#acces" class="btn btn-ghost btn-lg">Comment y accéder</a>
           </div>
+          <p class="note">30 min avec l'équipe · gratuit · sans engagement</p>
         </div>
         <div class="stamp" aria-hidden="true">
           <svg viewBox="0 0 200 200"><defs><path id="cercle" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><text><textPath href="#cercle">Voyage MADE ✦ Canton ✦ Édition printemps ✦ </textPath></text></svg>
@@ -244,14 +269,14 @@
           <h2>Ce n'est pas un séjour. <em class="s">Ce n'est pas un cours non plus.</em></h2>
         </div>
         <div class="vecu">
-          <figure class="v large"><video src="../assets/chine/mall.mp4" poster="../assets/chine/mall.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">01</span><span>La foire et les malls</span></figure>
-          <figure class="v"><video src="../assets/chine/usine-ligne.mp4" poster="../assets/chine/usine-ligne.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">02</span><span>Les usines</span></figure>
-          <figure class="v"><video src="../assets/chine/showroom-parfum2.mp4" poster="../assets/chine/showroom-parfum2.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">03</span><span>Les fournisseurs</span></figure>
-          <figure class="v"><video src="../assets/chine/port.mp4" poster="../assets/chine/port.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">04</span><span>L'expédition</span></figure>
-          <figure class="v"><video src="../assets/chine/rue-nuit.mp4" poster="../assets/chine/rue-nuit.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">05</span><span>Les soirées</span></figure>
-          <figure class="v"><video src="../assets/chine/carte-equipe.mp4" poster="../assets/chine/carte-equipe.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">06</span><span>Le coaching sur place</span></figure>
+          <figure class="v large"><video src="../assets/chine/mall.mp4" poster="../assets/chine/mall.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">01</span><span>La foire et les malls<small>Les halls de la Foire de Canton et les marchés de gros.</small></span></figure>
+          <figure class="v"><video src="../assets/chine/usine-ligne.mp4" poster="../assets/chine/usine-ligne.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">02</span><span>Les usines<small>Tu vois une production en vrai, pas sur une fiche.</small></span></figure>
+          <figure class="v"><video src="../assets/chine/showroom-parfum2.mp4" poster="../assets/chine/showroom-parfum2.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">03</span><span>Les fournisseurs<small>Prix, minimum de commande, délais&nbsp;: tu poses les questions en face.</small></span></figure>
+          <figure class="v"><video src="../assets/chine/port.mp4" poster="../assets/chine/port.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">04</span><span>L'expédition<small>Emballage et transport jusqu'en France, vus depuis le port.</small></span></figure>
+          <figure class="v"><video src="../assets/chine/rue-nuit.mp4" poster="../assets/chine/rue-nuit.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">05</span><span>Les soirées<small>Le groupe dîne ensemble, local.</small></span></figure>
+          <figure class="v"><video src="../assets/chine/carte-equipe.mp4" poster="../assets/chine/carte-equipe.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">06</span><span>Le coaching sur place<small>Ton projet avance avec l'équipe pendant le séjour.</small></span></figure>
           <figure class="v"><video src="../assets/chine/packaging-showroom.mp4" poster="../assets/chine/packaging-showroom.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">07</span><span>Les interventions</span></figure>
-          <figure class="v"><video src="../assets/chine/textile.mp4" poster="../assets/chine/textile.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">08</span><span>La découverte</span></figure>
+          <figure class="v"><video src="../assets/chine/textile.mp4" poster="../assets/chine/textile.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="none"></video><span class="n">08</span><span>La découverte<small>Guangzhou en dehors des usines.</small></span></figure>
         </div>
       </div>
     </section>
@@ -277,12 +302,12 @@
           <div>
             <span class="eyebrow">Les places</span>
             <h2 style="margin-top:12px">Quelques personnes par an. <em class="s">C'est le principe.</em></h2>
-            <p style="margin-top:12px">Le meilleur moyen d'en être : être membre et avancer sur son projet.</p>
+            <p style="margin-top:12px">Le meilleur moyen d'en être&nbsp;: être membre et avancer sur son projet.</p>
           </div>
           <ul>
             <li><b>10 à 20</b><span>participants par édition</span></li>
             <li><b>1</b><span>place offerte à gagner</span></li>
-            <li><b>10</b><span>places de coaching par mois</span></li>
+            <li><b>10</b><span>jours sur place</span></li>
           </ul>
         </div>
       </div>
@@ -294,10 +319,14 @@
           <span class="eyebrow">Questions</span>
           <h2>Avant l'appel.</h2>
         </div>
-        <details><summary>Je peux venir sans être membre ?</summary><p>Non. Le voyage est réservé aux membres de l'Académie.</p></details>
-        <details><summary>Comment on gagne la place offerte ?</summary><p>Une place par édition, annoncée à la communauté avant l'ouverture.</p></details>
-        <details><summary>C'est compris dans le coaching ?</summary><p>Non, c'est un supplément. Le montant est donné pendant l'appel.</p></details>
+        <details><summary>C'est pour qui&nbsp;?</summary><p>Pour les membres de l'Académie qui ont un projet en cours et veulent rencontrer leurs fabricants. Si tu cherches un voyage touristique, ce n'est pas ça.</p></details>
+        <details><summary>Je peux venir sans être membre&nbsp;?</summary><p>Non. Le voyage est réservé aux membres de l'Académie. L'appel sert d'abord à voir si l'Académie est faite pour toi.</p></details>
+        <details><summary>Quelles sont les dates&nbsp;?</summary><p>Au printemps 2027, pendant la Foire de Canton. Les dates exactes sont annoncées aux membres en premier.</p></details>
+        <details><summary>Comment on gagne la place offerte&nbsp;?</summary><p>Une place par édition, annoncée à la communauté avant l'ouverture.</p></details>
+        <details><summary>C'est compris dans le coaching&nbsp;?</summary><p>Non, c'est un supplément. Le montant est donné pendant l'appel.</p></details>
         <details><summary>Je ne parle pas chinois.</summary><p>Nos agents traduisent, l'équipe est avec toi du premier au dernier jour.</p></details>
+        <details><summary>Le vol et le visa sont compris&nbsp;?</summary><p>Le détail de ce qui est compris, et de ce qui ne l'est pas comme le vol ou le visa, est donné pendant l'appel.</p></details>
+        <details><summary>Comment se passe l'appel&nbsp;?</summary><p>30 minutes avec l'équipe pour voir ton projet et ton objectif. Si tu n'es pas encore membre, on regarde ensemble si l'Académie est faite pour toi. Si on peut t'aider, on te présente l'offre et son prix, et tu prends le temps de réfléchir.</p></details>
       </div>
     </section>
 
@@ -306,8 +335,9 @@
         <div class="final">
           <span class="eyebrow" style="justify-content:center">La première étape</span>
           <h2 style="margin-top:12px">D'abord l'Académie. <em class="s">Le voyage vient après.</em></h2>
-          <p>30 minutes pour voir ton projet, et ta place sur la liste des membres prévenus en premier.</p>
-          <a href="#appel" class="btn btn-neon btn-lg" id="book">Réserver mon appel</a>
+          <p>30 minutes pour voir ton projet. Si tu rejoins l'Académie, tu es sur la liste des membres prévenus en premier pour Canton.</p>
+          <a href="https://cal.com/team/made-academie/appel-coaching-academie?utm_source=academie&amp;utm_medium=chine-final&amp;utm_campaign=chine" target="_blank" rel="noopener noreferrer" class="btn btn-neon btn-lg" id="book" data-zone="chine-final">Réserver mon appel</a>
+          <p class="note">Gratuit · sans engagement · rien à payer pour réserver</p>
         </div>
       </div>
     </section>

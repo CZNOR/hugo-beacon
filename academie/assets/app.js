@@ -25,6 +25,35 @@
     const track = (name, props = {}) => { try { window.MADE.track(name, props); } catch (e) {} };
     const deep = () => { try { return window.MADE.profondeur(); } catch (e) { return 0; } };
 
+    /* ─── Titres mot par mot ─── */
+    document.querySelectorAll('h2.rv').forEach(h => {
+      let i = 0;
+      const wrap = node => [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) return frag.append(part);
+            const sp = document.createElement('span'); sp.className = 'w'; sp.textContent = part;
+            sp.style.transitionDelay = (i++ * 45) + 'ms'; frag.append(sp);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1) wrap(n);
+      });
+      wrap(h);
+    });
+
+    /* ─── Apparition au scroll ─── */
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const sibs = [...en.target.parentElement.children].filter(c => c.classList.contains('rv'));
+      en.target.style.transitionDelay = Math.min(sibs.indexOf(en.target), 5) * 60 + 'ms';
+      en.target.classList.add('in');
+      setTimeout(() => { en.target.style.transitionDelay = ''; }, 1400);
+      io.unobserve(en.target);
+    }), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
     /* ─── Tous les boutons d'appel ouvrent directement la réservation ─── */
     /* Chaque bouton porte sa provenance : sur cal.com tu vois quel bloc a déclenché la réservation. */
     const zoneOf = el => {
@@ -79,8 +108,21 @@
       lenis ? lenis.scrollTo(t, { offset: id === '#tour' ? 0 : -90, duration: 1.1 }) : t.scrollIntoView({ behavior: 'smooth' });
     }));
 
-    /* ─── Planète d'origine ─── */
-    MadeGlobeOriginal(document.getElementById('globe'), [...document.querySelectorAll('.planet .bags img')]);
+    /* ─── Planète d'origine ───────────────────────────────────────────────────
+       Sur mobile, une seule image est dessinée au chargement, l'animation démarre
+       au premier geste (scroll, toucher). Le chargement reste léger (le globe
+       coûtait plus de 4 s de calcul sur un téléphone simulé) et rien ne change
+       pour le visiteur, qui fait défiler la page tout de suite. */
+    try {
+      const planetEl = document.querySelector('.planet');
+      const globe = MadeGlobeOriginal(document.getElementById('globe'), [...document.querySelectorAll('.planet .bags img')], { hold: isMobile && !reduced });
+      requestAnimationFrame(() => requestAnimationFrame(() => planetEl && planetEl.classList.add('on')));
+      if (isMobile && !reduced && globe && globe.release) {
+        const gestes = ['scroll', 'touchstart', 'pointerdown', 'keydown', 'wheel'];
+        const go = () => { gestes.forEach(ev => removeEventListener(ev, go)); globe.release(); };
+        gestes.forEach(ev => addEventListener(ev, go, { passive: true }));
+      }
+    } catch (e) {}
 
     /* ─── Visite de l'académie ─── */
     const tour = document.getElementById('tour');
@@ -161,16 +203,15 @@
 
     /* ─── Ruban résultats ─── */
     const fig = (c, inner) => `<figure class="${c}">${inner}</figure>`;
-    const r1 = ['R5','R12','R3','R1','R15','R14','R8','R4'].map(n => fig('sq', `<img src="assets/dash/${n}.webp" alt="" loading="lazy" decoding="async">`)).join('');
+    const r1 = ['R5','R12','R3','R1','R15','R8','R4'].map(n => fig('sq', `<img src="assets/dash/${n}.webp" alt="Capture d'un tableau de ventes Shopify" width="220" height="220" loading="lazy" decoding="async">`)).join('');
     const r2 = [
-      fig('pt', '<img src="assets/avis/roas10.webp" alt="" loading="lazy" decoding="async"><figcaption>Ilias · 10 de ROAS</figcaption>'),
+      fig('pt', '<img src="assets/avis/roas10.webp" alt="Échange entre Ilias et son coach" loading="lazy" decoding="async"><figcaption>Ilias · ses stats au coach</figcaption>'),
       fig('pt', '<video src="assets/chine/carte-produit.mp4" poster="assets/chine/carte-produit.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture preload="none"></video>'),
-      fig('pt', '<img src="assets/avis/avis.webp" alt="" loading="lazy" decoding="async"><figcaption>Son retour sur la formation</figcaption>'),
-      fig('pt', '<img src="assets/avis/vente1.webp" alt="" loading="lazy" decoding="async"><figcaption>Sa première vente</figcaption>'),
+      fig('pt', '<img src="assets/avis/avis.webp" alt="Message d\'un élève sur la formation" loading="lazy" decoding="async"><figcaption>Avis d\'un élève · mars 2025</figcaption>'),
+      fig('pt', '<img src="assets/avis/vente1.webp" alt="Notification Shopify de première vente d\'un élève" loading="lazy" decoding="async"><figcaption>Première vente · mars 2025</figcaption>'),
       fig('pt', '<video src="assets/chine/showroom-parfum2.mp4" poster="assets/chine/showroom-parfum2.jpg" muted loop playsinline webkit-playsinline disablepictureinpicture preload="none"></video>'),
-      fig('pt', '<img src="assets/avis/accomp2.webp" alt="" loading="lazy" decoding="async"><figcaption>1 000 € par jour, stabilisés</figcaption>'),
-      fig('pt', '<img src="assets/avis/eleve4.webp" alt="" loading="lazy" decoding="async"><figcaption>Rayan · sa première journée</figcaption>'),
-      fig('pt', '<img src="assets/avis/accomp1.webp" alt="" loading="lazy" decoding="async"><figcaption>Suivi avec son coach</figcaption>')
+      fig('pt', '<img src="assets/avis/accomp2.webp" alt="Tableau Shopify d\'un élève du 1er au 22 février 2025" loading="lazy" decoding="async"><figcaption>Ventes brutes · 1er au 22 févr. 2025</figcaption>'),
+      fig('pt', '<img src="assets/avis/accomp1.webp" alt="Échange WhatsApp entre un élève et son coach" loading="lazy" decoding="async"><figcaption>Suivi avec son coach · févr. 2025</figcaption>')
     ].join('');
     document.getElementById('rb1').innerHTML = r1 + r1;
     document.getElementById('rb2').innerHTML = r2 + r2;
@@ -182,12 +223,26 @@
     if (!isMobile) addEventListener('scroll', () => { if (!pzT) { pzT = true; requestAnimationFrame(pz); } }, { passive: true });
 
     /* ─── Barre d'appel mobile ─── */
+    /* Elle s'efface quand un autre bouton d'appel est déjà à l'écran (plus de
+       doublon de boutons violets) et n'est lisible au clavier que visible. */
     const mCta = document.getElementById('mCta');
     if (mCta) {
+      const mLink = mCta.querySelector('a');
       let pastHero = false, atEnd = false;
-      const upd = () => mCta.classList.toggle('show', pastHero && !atEnd);
-      new IntersectionObserver(e => { pastHero = !e[0].isIntersecting; upd(); }).observe(document.querySelector('.hero .cta-row'));
-      new IntersectionObserver(e => { atEnd = e[0].isIntersecting; upd(); }, { rootMargin: '0px 0px -30% 0px' }).observe(document.getElementById('appel'));
+      const enVue = new Set();
+      const upd = () => {
+        const on = pastHero && !atEnd && enVue.size === 0;
+        mCta.classList.toggle('show', on);
+        if (on) { mCta.removeAttribute('aria-hidden'); mCta.removeAttribute('inert'); if (mLink) mLink.removeAttribute('tabindex'); }
+        else { mCta.setAttribute('aria-hidden', 'true'); mCta.setAttribute('inert', ''); if (mLink) mLink.setAttribute('tabindex', '-1'); }
+      };
+      const heroCta = document.querySelector('.hero .cta-row');
+      if (heroCta) new IntersectionObserver(e => { pastHero = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; upd(); }).observe(heroCta);
+      const fin = document.getElementById('appel');
+      if (fin) new IntersectionObserver(e => { atEnd = e[0].isIntersecting; upd(); }, { rootMargin: '0px 0px -30% 0px' }).observe(fin);
+      const autres = document.querySelectorAll('main .cta-inline .btn, main .offer .btn, main .canton .btn-red');
+      const oio = new IntersectionObserver(es => { es.forEach(en => en.isIntersecting ? enVue.add(en.target) : enVue.delete(en.target)); upd(); });
+      autres.forEach(el => oio.observe(el));
     }
 
     /* ─── Vidéos : jamais de plein écran ─────────────────────────────────────
@@ -206,6 +261,10 @@
     var horsSafari = iOS && !/Safari\//.test(ua);
     /* Le bridage est propre à iOS : sur Android la lecture en ligne marche, on garde les vidéos. */
     var modeImages = iOS && (appliIntegree || horsSafari);
+
+    /* Sur téléphone, les grandes vidéos d'ambiance ont une version verticale
+       allégée (data-src-m), recadrée sur ce qui est réellement visible. */
+    if (isMobile && !modeImages) videos.forEach(function (v) { var m = v.getAttribute('data-src-m'); if (m) v.setAttribute('src', m); });
 
     function refermer(v) {
       try { if (v.webkitDisplayingFullscreen && v.webkitExitFullscreen) v.webkitExitFullscreen(); } catch (e) {}
@@ -229,7 +288,7 @@
       var src = v.getAttribute('data-src') || '';
       if (!/\.mp4$/.test(src)) return;
       var poster = v.getAttribute('poster') || '';
-      var anim = src.replace(/\.mp4$/, '.anim.webp');
+      var anim = src.replace(/(-m)?\.mp4$/, '.anim.webp');
       var img = new Image();
       img.onload = function () {
         v.style.backgroundImage = "url('" + anim + "')" + (poster ? ", url('" + poster + "')" : '');
@@ -293,7 +352,7 @@
 
     /* ─── Réservation ─── */
     const bookBtn = document.getElementById('book-btn');
-    bookBtn.addEventListener('click', e => {
+    if (bookBtn) bookBtn.addEventListener('click', e => {
       if (!BOOKING_URL) { e.preventDefault(); bookBtn.textContent = 'Calendrier bientôt disponible'; return; }
       if (EMBED_BOOKING) {
         e.preventDefault();
@@ -303,7 +362,7 @@
       /* Le lien part tout seul : il reste bon même si le script casse ou si une
          popup est bloquée dans un navigateur intégré. On ajoute juste la source. */
       track('reservation', { zone: 'bloc-final' });
-      try { bookBtn.href = withSource(BOOKING_URL, 'bloc-final') + '&utm_content=lecture-' + deep(); } catch (err) {}
+      try { const u = new URL(withSource(BOOKING_URL, 'bloc-final')); u.searchParams.set('utm_content', 'lecture-' + deep()); bookBtn.href = u.toString(); } catch (err) {}
     });
 
     /* ─── Tableaux de ventes + logos ─── */
@@ -334,32 +393,3 @@
       requestAnimationFrame(tick); cio.unobserve(el);
     }), { threshold: .6 });
     document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
-
-    /* ─── Titres mot par mot ─── */
-    document.querySelectorAll('h2.rv').forEach(h => {
-      let i = 0;
-      const wrap = node => [...node.childNodes].forEach(n => {
-        if (n.nodeType === 3) {
-          const frag = document.createDocumentFragment();
-          n.textContent.split(/(\s+)/).forEach(part => {
-            if (!part) return;
-            if (/^\s+$/.test(part)) return frag.append(part);
-            const sp = document.createElement('span'); sp.className = 'w'; sp.textContent = part;
-            sp.style.transitionDelay = (i++ * 45) + 'ms'; frag.append(sp);
-          });
-          n.replaceWith(frag);
-        } else if (n.nodeType === 1) wrap(n);
-      });
-      wrap(h);
-    });
-
-    /* ─── Apparition au scroll ─── */
-    const io = new IntersectionObserver(entries => entries.forEach(en => {
-      if (!en.isIntersecting) return;
-      const sibs = [...en.target.parentElement.children].filter(c => c.classList.contains('rv'));
-      en.target.style.transitionDelay = Math.min(sibs.indexOf(en.target), 5) * 60 + 'ms';
-      en.target.classList.add('in');
-      setTimeout(() => { en.target.style.transitionDelay = ''; }, 1400);
-      io.unobserve(en.target);
-    }), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.rv').forEach(el => io.observe(el));

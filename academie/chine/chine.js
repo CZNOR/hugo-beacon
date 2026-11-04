@@ -17,6 +17,7 @@ document.querySelectorAll('a[href="#appel"]').forEach(a => {
   } catch (e) { a.href = BOOKING_URL; }
   a.target = '_blank';
   a.rel = 'noopener noreferrer';
+  a.dataset.zone = zone;
 });
 
 document.querySelectorAll('a[href^="http"]').forEach(a => { a.rel = 'noopener noreferrer'; a.target = '_blank'; });
@@ -51,6 +52,10 @@ var horsSafari = iOS && !/Safari\//.test(ua);
 /* Le bridage est propre à iOS : sur Android la lecture en ligne marche, on garde les vidéos. */
 var modeImages = iOS && (appliIntegree || horsSafari);
 
+/* Sur téléphone, la vidéo du haut a une version verticale allégée (data-src-m),
+   recadrée sur ce qui est réellement visible : 390 Ko au lieu de 1,5 Mo. */
+if (isMobile && !modeImages) videos.forEach(function (v) { var m = v.getAttribute('data-src-m'); if (m) v.setAttribute('src', m); });
+
 function refermer(v) {
   try { if (v.webkitDisplayingFullscreen && v.webkitExitFullscreen) v.webkitExitFullscreen(); } catch (e) {}
   try { if (document.fullscreenElement === v && document.exitFullscreen) document.exitFullscreen(); } catch (e) {}
@@ -73,7 +78,7 @@ function animer(v) {
   var src = v.getAttribute('data-src') || '';
   if (!/\.mp4$/.test(src)) return;
   var poster = v.getAttribute('poster') || '';
-  var anim = src.replace(/\.mp4$/, '.anim.webp');
+  var anim = src.replace(/(-m)?\.mp4$/, '.anim.webp');
   var img = new Image();
   img.onload = function () {
     v.style.backgroundImage = "url('" + anim + "')" + (poster ? ", url('" + poster + "')" : '');
